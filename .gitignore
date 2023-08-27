@@ -2,4 +2,7 @@ node_modules
 .DS_Store
 **/.DS_Store
 
-
+.gitignore
+package-lock.json
+package.json
+woocommerce-products-slider.zip
