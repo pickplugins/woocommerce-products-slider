@@ -3,8 +3,8 @@
 	Donate link: https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/?ref=wordpress.org
 	Tags: product slider, woocommerce slider, carousel slider, product category slider, woo slider, carousel slider,  woocommerce product slider
 	Requires at least: 3.8
-	Tested up to: 6.2
-	Stable tag: 1.13.45
+	Tested up to: 6.3
+	Stable tag: 1.13.46
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,8 +143,14 @@ then paste this shortcode anywhere in your page to display slider<br />
 
 
 
+    = 1.13.46 =
+    * 2023-08-27 fix - navigation icon single quotes issue fixed 
+    * 2023-08-27 fix - SEO optimized
+
     = 1.13.45 =
     * 2023-07-10 fix - Wrapper html output not dislaying when empty
+
+
 
     = 1.13.44 =
     * 2023-03-07 fix - Settings page conflict issue fixed.
