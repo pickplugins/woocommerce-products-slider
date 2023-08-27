@@ -941,8 +941,9 @@ function wcps_slider_main_scripts_slick($args)
                 gutter: <?php echo esc_attr($gutter); ?>,
                 arrows: <?php echo esc_attr($slider_navigation); ?>,
                 appendArrows: '.controlsWrap-<?php echo esc_attr($wcps_id); ?>',
-                prevArrow: '<div class="prev"><?php echo wp_specialchars_decode($navigation_text_prev, ENT_QUOTES); ?></div>',
-                nextArrow: '<div class="next"><?php echo wp_specialchars_decode($navigation_text_next, ENT_QUOTES); ?></div>',
+                prevArrow: `<div class="
+                prev "><?php echo wp_specialchars_decode($navigation_text_prev, ENT_QUOTES); ?></div>`,
+                nextArrow: `<div class="next"><?php echo wp_specialchars_decode($navigation_text_next, ENT_QUOTES); ?></div>`,
                 speed: <?php echo esc_attr($auto_play_speed); ?>,
                 autoplay: <?php echo esc_attr($slider_auto_play); ?>,
                 autoplaySpeed: <?php echo esc_attr($auto_play_timeout); ?>,
@@ -966,6 +967,8 @@ function wcps_slider_main_scripts_slick($args)
                 quantity = $(this).val();
                 $(this).next().attr('data-quantity', quantity);
             })
+
+
         });
     </script>
 
@@ -1539,6 +1542,8 @@ function wcps_slider_main_enqueue_scripts($args)
     //wp_enqueue_style('tiny-slider');
 
     wp_enqueue_script('slick');
+    //wp_enqueue_script('wcps_script');
+
     wp_enqueue_style('slick');
 
 

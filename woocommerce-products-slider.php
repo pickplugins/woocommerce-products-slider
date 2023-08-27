@@ -135,12 +135,13 @@ class WoocommerceProductsSlider
         wp_register_style('font-awesome-4', wcps_plugin_url . 'assets/global/css/font-awesome-4.css');
         wp_register_style('font-awesome-5', wcps_plugin_url . 'assets/global/css/font-awesome-5.css');
 
-        wp_register_script('owl.carousel', wcps_plugin_url . '/assets/front/js/owl.carousel.js', array('jquery'));
+        wp_register_script('owl.carousel', wcps_plugin_url . 'assets/front/js/owl.carousel.js', array('jquery'));
         wp_register_style('owl.carousel', wcps_plugin_url . 'assets/front/css/owl.carousel.css');
 
-        wp_register_script('slick', wcps_plugin_url . '/assets/front/js/slick.js', array('jquery'));
+        wp_register_script('slick', wcps_plugin_url . 'assets/front/js/slick.js', array('jquery'));
         wp_register_style('slick', wcps_plugin_url . 'assets/front/css/slick.css');
 
+        wp_register_script('wcps_script', wcps_plugin_url . 'assets/front/js/scripts.js', array('jquery'));
 
         // wp_register_script('tiny-slider', 'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js' , array( 'jquery' ));
         // wp_register_style('tiny-slider', wcps_plugin_url.'assets/front/css/tiny-slider.css');
