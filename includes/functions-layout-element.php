@@ -991,7 +991,7 @@ function wcps_layout_element_css_order_date($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1022,7 +1022,7 @@ function wcps_layout_element_css_order_total($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1052,7 +1052,7 @@ function wcps_layout_element_css_order_items($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1082,7 +1082,7 @@ function wcps_layout_element_css_order_discount_total($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1116,7 +1116,7 @@ function wcps_layout_element_css_custom_text($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1144,7 +1144,7 @@ function wcps_layout_element_css_order_customer_name($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1174,7 +1174,7 @@ function wcps_layout_element_css_order_customer_thumb($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($width)) : ?>width: <?php echo $width; ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1183,7 +1183,7 @@ function wcps_layout_element_css_order_customer_thumb($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' img'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . ' img'); ?> {
             height: auto;
         }
     </style>
@@ -1209,7 +1209,7 @@ function wcps_layout_element_css_order_country($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1241,7 +1241,7 @@ function wcps_layout_element_css_order_payment_method($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1281,14 +1281,14 @@ function wcps_layout_element_css_post_title($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . 'a'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . 'a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1317,13 +1317,13 @@ function wcps_layout_element_css_term_title($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . ' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1354,7 +1354,7 @@ function wcps_layout_element_css_term_description($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1387,7 +1387,7 @@ function wcps_layout_element_css_term_post_count($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('  .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1418,11 +1418,11 @@ function wcps_layout_element_css_product_category($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             margin: <?php echo $wrapper_margin; ?>;
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . ' a'); ?> {
             text-decoration: none;
             <?php if (!empty($link_color)) : ?>color: <?php echo $link_color; ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
@@ -1453,12 +1453,12 @@ function wcps_layout_element_css_product_tag($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($wrapper_margin)) : ?>margin: <?php echo $wrapper_margin; ?>;
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . ' a'); ?> {
             text-decoration: none;
             <?php if (!empty($link_color)) : ?>color: <?php echo $link_color; ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
@@ -1489,7 +1489,7 @@ function wcps_layout_element_css_sale_count($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?>
         }
@@ -1514,7 +1514,7 @@ function wcps_layout_element_css_on_sale_mark($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             line-height: normal;
             <?php if (!empty($background_color)) : ?>background-color: <?php echo $background_color; ?>;
             <?php endif; ?><?php if (!empty($text_color)) : ?>color: <?php echo $text_color; ?>;
@@ -1543,7 +1543,7 @@ function wcps_layout_element_css_featured_mark($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             line-height: normal;
             <?php if (!empty($background_color)) : ?>background-color: <?php echo $background_color; ?>;
             <?php endif; ?><?php if (!empty($text_color)) : ?>color: <?php echo $text_color; ?>;
@@ -1574,7 +1574,7 @@ function wcps_layout_element_css_product_id($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             line-height: normal;
             <?php if (!empty($background_color)) : ?>background-color: <?php echo $background_color; ?>;
             <?php endif; ?><?php if (!empty($text_color)) : ?>color: <?php echo $text_color; ?>;
@@ -1615,19 +1615,19 @@ function wcps_layout_element_css_add_to_cart($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . ' a'); ?> {
             <?php if (!empty($background_color)) : ?>background-color: <?php echo $background_color; ?>;
             <?php endif; ?><?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($padding)) : ?>padding: <?php echo $padding; ?>;
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' p'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . ' p'); ?> {
             border: none !important;
             margin: 0;
             padding: 0 !important;
@@ -1661,12 +1661,12 @@ function wcps_layout_element_css_rating($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' .star-rating'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . ' .star-rating'); ?> {
             float: none;
 
         }
@@ -1693,7 +1693,7 @@ function wcps_layout_element_css_product_price($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
@@ -1732,7 +1732,7 @@ function wcps_layout_element_css_content($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1741,7 +1741,7 @@ function wcps_layout_element_css_content($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index . ' a'); ?> {
             <?php if (!empty($read_more_color)) : ?>color: <?php echo $read_more_color; ?>;
             <?php endif; ?>
         }
@@ -1770,28 +1770,28 @@ function wcps_layout_element_css_thumbnail($args)
 
 ?>
     <style>
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
             overflow: hidden;
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?>
         }
 
         @media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
                 <?php if (!empty($thumb_height_large)) : ?>max-height: <?php echo $thumb_height_large; ?>;
                 <?php endif; ?>
             }
         }
 
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
                 <?php if (!empty($thumb_height_medium)) : ?>max-height: <?php echo $thumb_height_medium; ?>;
                 <?php endif; ?>
             }
         }
 
         @media only screen and (min-width: 0px) and (max-width: 767px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?> {
+            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element-' . $element_index); ?> {
                 <?php if (!empty($thumb_height_small)) : ?>max-height: <?php echo $thumb_height_small; ?>;
                 <?php endif; ?>
             }
