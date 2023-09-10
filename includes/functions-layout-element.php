@@ -422,7 +422,7 @@ function wcps_layout_element_add_to_cart($args)
 
     $product_id = isset($args['product_id']) ? $args['product_id'] : '';
     $elementData = isset($args['elementData']) ? $args['elementData'] : array();
-    $wrapper_html = isset($elementData['cart_text']) ? $elementData['cart_text'] : '';
+    //$wrapper_html = isset($elementData['cart_text']) ? $elementData['cart_text'] : '';
 
     $product = wc_get_product($product_id);
 
@@ -1183,7 +1183,7 @@ function wcps_layout_element_css_order_customer_thumb($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>img {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' img'); ?> {
             height: auto;
         }
     </style>
@@ -1288,7 +1288,7 @@ function wcps_layout_element_css_post_title($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>a {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . 'a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1323,7 +1323,7 @@ function wcps_layout_element_css_term_title($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>a {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1422,7 +1422,7 @@ function wcps_layout_element_css_product_category($args)
             margin: <?php echo $wrapper_margin; ?>;
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>a {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
             text-decoration: none;
             <?php if (!empty($link_color)) : ?>color: <?php echo $link_color; ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
@@ -1458,7 +1458,7 @@ function wcps_layout_element_css_product_tag($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>a {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
             text-decoration: none;
             <?php if (!empty($link_color)) : ?>color: <?php echo $link_color; ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
@@ -1620,14 +1620,14 @@ function wcps_layout_element_css_add_to_cart($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>a {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
             <?php if (!empty($background_color)) : ?>background-color: <?php echo $background_color; ?>;
             <?php endif; ?><?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($padding)) : ?>padding: <?php echo $padding; ?>;
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>p {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' p'); ?> {
             border: none !important;
             margin: 0;
             padding: 0 !important;
@@ -1666,7 +1666,7 @@ function wcps_layout_element_css_rating($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>.star-rating {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' .star-rating'); ?> {
             float: none;
 
         }
@@ -1741,7 +1741,7 @@ function wcps_layout_element_css_content($args)
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index); ?>a {
+        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr('.element-' . $element_index . ' a'); ?> {
             <?php if (!empty($read_more_color)) : ?>color: <?php echo $read_more_color; ?>;
             <?php endif; ?>
         }
