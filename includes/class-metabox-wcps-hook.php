@@ -804,6 +804,7 @@ if (!function_exists('wcps_metabox_content_query_product')) {
                     'ID' => __('ID', 'woocommerce-products-slider'),
                     'date' => __('Date', 'woocommerce-products-slider'),
                     'post_date' => __('Post date', 'woocommerce-products-slider'),
+                    'modified' => __('Post modified date', 'woocommerce-products-slider'),
                     'name' => __('Name', 'woocommerce-products-slider'),
                     'rand' => __('Random', 'woocommerce-products-slider'),
                     'comment_count' => __('Comment count', 'woocommerce-products-slider'),
