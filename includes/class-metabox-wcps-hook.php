@@ -605,6 +605,7 @@ if (!function_exists('wcps_metabox_content_query_product')) {
 
 
         $on_sale = isset($query['on_sale']) ? $query['on_sale'] : 'no_check';
+        $catalog_visibility = isset($query['catalog_visibility']) ? $query['catalog_visibility'] : '';
         $product_ids = isset($query['product_ids']) ? $query['product_ids'] : '';
 
 
@@ -999,6 +1000,34 @@ if (!function_exists('wcps_metabox_content_query_product')) {
             );
 
             $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'        => 'catalog_visibility',
+                'parent'        => 'wcps_options[query]',
+                'title'        => __('Catalog visibility?', 'woocommerce-products-slider'),
+                'details'    => __('Include or exclude by catalog visibility.', 'woocommerce-products-slider'),
+                'type'        => 'radio',
+                'value'        => $catalog_visibility,
+                'default'        => '',
+                'args'        => array(
+
+                    '' => __('All', 'woocommerce-products-slider'),
+                    'visible' => __('Visible', 'woocommerce-products-slider'),
+                    'catalog' => __('Catalog', 'woocommerce-products-slider'),
+                    'search' => __('Search', 'woocommerce-products-slider'),
+                    'hidden' => __('Hidden', 'woocommerce-products-slider'),
+
+
+                ),
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+
+
+
+
 
             $query_only_args = apply_filters(
                 'wcps_query_only_args',

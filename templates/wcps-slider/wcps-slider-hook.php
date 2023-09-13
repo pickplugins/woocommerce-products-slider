@@ -92,6 +92,7 @@ function wcps_slider_main_items($args)
 
 
     $on_sale = isset($query['on_sale']) ? $query['on_sale'] : 'no';
+    $catalog_visibility = isset($query['catalog_visibility']) ? $query['catalog_visibility'] : '';
     $product_ids = isset($query['product_ids']) ? $query['product_ids'] : '';
     $query_only = isset($query['query_only']) ? $query['query_only'] : 'no_check';
 
@@ -166,6 +167,44 @@ function wcps_slider_main_items($args)
         $query_args['post__not_in'] = $wc_get_product_ids_on_sale;
     }
 
+    if (!empty($catalog_visibility)) {
+
+        if ($catalog_visibility == 'hidden') {
+            $tax_query[] = array(
+                'taxonomy' => 'product_visibility',
+                'field'    => 'name',
+                'terms'    => 'exclude-from-catalog',
+                'operator' => 'IN',
+            );
+        }
+
+        if ($catalog_visibility == 'visible') {
+            $tax_query[] = array(
+                'taxonomy' => 'product_visibility',
+                'field'    => 'name',
+                'terms'    => 'exclude-from-catalog',
+                'operator' => 'NOT IN',
+            );
+        }
+        if ($catalog_visibility == 'catalog') {
+            $tax_query[] = array(
+                'taxonomy' => 'product_visibility',
+                'field'    => 'name',
+                'terms'    => 'exclude-from-catalog',
+                'operator' => 'NOT IN',
+            );
+        }
+        if ($catalog_visibility == 'search') {
+            $tax_query[] = array(
+                'taxonomy' => 'product_visibility',
+                'field'    => 'name',
+                'terms'    => 'exclude-from-search',
+                'operator' => 'IN',
+            );
+        }
+    }
+
+
 
     if (!empty($product_ids)) {
 
@@ -202,6 +241,9 @@ function wcps_slider_main_items($args)
 
     if (!empty($tax_query))
         $query_args['tax_query'] = array_merge(array('relation' => $taxonomy_relation), $tax_query);
+
+
+    //echo var_export('<pre>' . var_export($tax_query, true) . '</pre>');
 
     $query_args = apply_filters('wcps_slider_query_args', $query_args, $args);
 

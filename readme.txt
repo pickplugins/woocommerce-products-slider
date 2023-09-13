@@ -4,7 +4,7 @@
 	Tags: product slider, woocommerce slider, carousel slider, product category slider, woo slider, carousel slider,  woocommerce product slider
 	Requires at least: 3.8
 	Tested up to: 6.3
-	Stable tag: 1.13.47
+	Stable tag: 1.13.48
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ then paste this shortcode anywhere in your page to display slider<br />
 
 
 
+
+    = 1.13.48 =
+    * 2023-09-13 add - Query orderby date modified added.
 
     = 1.13.47 =
     * 2023-09-09 fix - Layout builder element custom html wrapper output issue fixed
