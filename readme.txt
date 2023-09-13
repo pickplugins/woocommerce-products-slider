@@ -146,6 +146,7 @@ then paste this shortcode anywhere in your page to display slider<br />
 
     = 1.13.48 =
     * 2023-09-13 add - Query orderby date modified added.
+    * 2023-09-13 add - Catalog visibility query added.
 
     = 1.13.47 =
     * 2023-09-09 fix - Layout builder element custom html wrapper output issue fixed
