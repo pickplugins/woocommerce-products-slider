@@ -18,22 +18,22 @@
 
 	<!-- generator="WordPress/5.3.2" created="2020-03-27 09:37" -->
 <rss version="2.0"
-	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
-	xmlns:content="http://purl.org/rss/1.0/modules/content/"
-	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:wp="http://wordpress.org/export/1.2/"
+	xmlns:excerpt="https://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="https://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="https://wellformedweb.org/CommentAPI/"
+	xmlns:dc="https://purl.org/dc/elements/1.1/"
+	xmlns:wp="https://wordpress.org/export/1.2/"
 >
 
 <channel>
 	<title>WordPress</title>
-	<link>http://localhost/wp</link>
+	<link>https://localhost/wp</link>
 	<description>Get latest reviews about WordPress</description>
 	<pubDate>Fri, 27 Mar 2020 09:37:21 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
-	<wp:base_site_url>http://localhost/wp</wp:base_site_url>
-	<wp:base_blog_url>http://localhost/wp</wp:base_blog_url>
+	<wp:base_site_url>https://localhost/wp</wp:base_site_url>
+	<wp:base_blog_url>https://localhost/wp</wp:base_blog_url>
 
 		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[public.nurhasan@gmail.com]]></wp:author_email><wp:author_display_name><![CDATA[Nur Hasan]]></wp:author_display_name><wp:author_first_name><![CDATA[Nur]]></wp:author_first_name><wp:author_last_name><![CDATA[Hasan]]></wp:author_last_name></wp:author>
 
@@ -42,10 +42,10 @@
 
 		<item>
 		<title>– ThumbRounded</title>
-		<link>http://localhost/wp/wcps_layout/50228-theme-thumbrounded/</link>
+		<link>https://localhost/wp/wcps_layout/50228-theme-thumbrounded/</link>
 		<pubDate>Mon, 02 Mar 2020 17:07:39 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost/wp/wcps_layout/50228-theme-thumbrounded/</guid>
+		<guid isPermaLink="false">https://localhost/wp/wcps_layout/50228-theme-thumbrounded/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -84,10 +84,10 @@
 							</item>
 					<item>
 		<title>– ContentBottom</title>
-		<link>http://localhost/wp/wcps_layout/195-theme-contentbottom/</link>
+		<link>https://localhost/wp/wcps_layout/195-theme-contentbottom/</link>
 		<pubDate>Mon, 02 Mar 2020 17:11:15 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost/wp/wcps_layout/195-theme-contentbottom/</guid>
+		<guid isPermaLink="false">https://localhost/wp/wcps_layout/195-theme-contentbottom/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -126,10 +126,10 @@
 							</item>
 					<item>
 		<title>– SpinLeft</title>
-		<link>http://localhost/wp/wcps_layout/179-theme-spinleft/</link>
+		<link>https://localhost/wp/wcps_layout/179-theme-spinleft/</link>
 		<pubDate>Mon, 02 Mar 2020 17:19:06 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost/wp/wcps_layout/179-theme-spinleft/</guid>
+		<guid isPermaLink="false">https://localhost/wp/wcps_layout/179-theme-spinleft/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -168,10 +168,10 @@
 							</item>
 					<item>
 		<title>– ZoomOut</title>
-		<link>http://localhost/wp/wcps_layout/175-theme-zoomout/</link>
+		<link>https://localhost/wp/wcps_layout/175-theme-zoomout/</link>
 		<pubDate>Mon, 02 Mar 2020 17:21:05 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost/wp/wcps_layout/175-theme-zoomout/</guid>
+		<guid isPermaLink="false">https://localhost/wp/wcps_layout/175-theme-zoomout/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -210,10 +210,10 @@
 							</item>
 					<item>
 		<title>– ZoomIn</title>
-		<link>http://localhost/wp/wcps_layout/50220-theme-zoomin/</link>
+		<link>https://localhost/wp/wcps_layout/50220-theme-zoomin/</link>
 		<pubDate>Mon, 02 Mar 2020 17:21:06 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost/wp/wcps_layout/50220-theme-zoomin/</guid>
+		<guid isPermaLink="false">https://localhost/wp/wcps_layout/50220-theme-zoomin/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -252,10 +252,10 @@
 							</item>
 					<item>
 		<title>– Flat</title>
-		<link>http://localhost/wp/wcps_layout/128-theme-flat/</link>
+		<link>https://localhost/wp/wcps_layout/128-theme-flat/</link>
 		<pubDate>Mon, 02 Mar 2020 17:23:05 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost/wp/wcps_layout/128-theme-flat/</guid>
+		<guid isPermaLink="false">https://localhost/wp/wcps_layout/128-theme-flat/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
