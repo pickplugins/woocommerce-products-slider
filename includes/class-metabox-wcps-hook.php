@@ -1509,15 +1509,15 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
 
         $gutter = isset($slider_option['gutter']) ? $slider_option['gutter'] : 10;
 
-        $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : 'true';
+        $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : 1;
         $auto_play_speed = isset($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1500;
         $auto_play_timeout = isset($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 2000;
 
-        $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : 'true';
-        $slider_loop = isset($slider_option['loop']) ? $slider_option['loop'] : 'true';
-        $slider_center = isset($slider_option['center']) ? $slider_option['center'] : 'false';
-        $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 'true';
-        $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 'true';
+        $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : 1;
+        $slider_loop = isset($slider_option['loop']) ? $slider_option['loop'] : 1;
+        $slider_center = isset($slider_option['center']) ? $slider_option['center'] : 0;
+        $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 1;
+        $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 1;
         $navigation_position = isset($slider_option['navigation_position']) ? $slider_option['navigation_position'] : '';
         $navigation_text_prev = isset($slider_option['navigation_text']['prev']) ? $slider_option['navigation_text']['prev'] : '';
         $navigation_text_next = isset($slider_option['navigation_text']['next']) ? $slider_option['navigation_text']['next'] : '';
@@ -1531,12 +1531,12 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
         $dots_active_background_color = isset($slider_option['dots_active_background_color']) ? $slider_option['dots_active_background_color'] : '#1e6fcc';
 
 
-        $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : 'true';
-        $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 'false';
-        $slider_rtl = isset($slider_option['rtl']) ? $slider_option['rtl'] : 'false';
-        $slider_lazy_load = isset($slider_option['lazy_load']) ? $slider_option['lazy_load'] : 'false';
-        $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 'true';
-        $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 'true';
+        $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : 1;
+        $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 0;
+        $slider_rtl = isset($slider_option['rtl']) ? $slider_option['rtl'] : 0;
+        $slider_lazy_load = isset($slider_option['lazy_load']) ? $slider_option['lazy_load'] : 0;
+        $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 1;
+        $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 1;
 
     ?>
         <div class="section">
@@ -1653,8 +1653,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider auto play.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_auto_play,
-                'default'        => 'true',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 1,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1695,8 +1695,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
             //            'details'	=> __('Choose slider rewind.','woocommerce-products-slider'),
             //            'type'		=> 'select',
             //            'value'		=> $slider_rewind,
-            //            'default'		=> 'true',
-            //            'args'		=> array('true'=>__('True','woocommerce-products-slider'), 'false'=>__('False','woocommerce-products-slider')),
+            //            'default'		=> 1,
+            //            'args'		=> array(1=>__('True','woocommerce-products-slider'), 0=>__('False','woocommerce-products-slider')),
             //        );
             //
             //        $settings_tabs_field->generate_field($args);
@@ -1708,8 +1708,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider loop.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_loop,
-                'default'        => 'true',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 1,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1723,8 +1723,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider center.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_center,
-                'default'        => 'true',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 1,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1736,8 +1736,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose stop on hover.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_stop_on_hover,
-                'default'        => 'true',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 1,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1752,8 +1752,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider navigation.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_navigation,
-                'default'        => 'true',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 1,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1867,8 +1867,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider dots at bottom.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_pagination,
-                'default'        => 'true',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 1,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1920,8 +1920,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider dots count.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_pagination_count,
-                'default'        => 'true',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 1,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1933,8 +1933,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider rtl.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_rtl,
-                'default'        => 'false',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 0,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1948,8 +1948,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider lazy load.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_lazy_load,
-                'default'        => 'false',
-                'args'        => array('ondemand' => __('On demand', 'woocommerce-products-slider'), 'progressive' => __('Progressive', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 0,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1962,8 +1962,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider touch drag.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_touch_drag,
-                'default'        => 'false',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 0,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1976,8 +1976,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'details'    => __('Choose slider mouse drag.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_mouse_drag,
-                'default'        => 'false',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'default'        => 0,
+                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);

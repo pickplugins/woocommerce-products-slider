@@ -892,17 +892,17 @@ function wcps_slider_main_scripts_slick($args)
     //    $slider_pagination_speed = isset($slider_option['pagination_speed']) ? $slider_option['pagination_speed'] : 1200;
     $gutter = isset($slider_option['gutter']) ? $slider_option['gutter'] : 10;
 
-    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : 'true';
+    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : 1;
     $auto_play_speed = !empty($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1000;
     $auto_play_timeout = !empty($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 1200;
 
     //$auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
 
-    $slider_rewind = !empty($slider_option['rewind']) ? $slider_option['rewind'] : 'true';
-    $slider_loop = !empty($slider_option['loop']) ? $slider_option['loop'] : 'true';
-    $slider_center = !empty($slider_option['center']) ? $slider_option['center'] : 'true';
-    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 'true';
-    $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 'true';
+    $slider_rewind = !empty($slider_option['rewind']) ? $slider_option['rewind'] : 1;
+    $slider_loop = !empty($slider_option['loop']) ? $slider_option['loop'] : 1;
+    $slider_center = !empty($slider_option['center']) ? $slider_option['center'] : 1;
+    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 1;
+    $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 1;
     $navigation_position = isset($slider_option['navigation_position']) ? $slider_option['navigation_position'] : '';
     $navigation_background_color = isset($slider_option['navigation_background_color']) ? $slider_option['navigation_background_color'] : '';
     $navigation_color = isset($slider_option['navigation_color']) ? $slider_option['navigation_color'] : '';
@@ -911,12 +911,12 @@ function wcps_slider_main_scripts_slick($args)
     $dots_background_color = isset($slider_option['dots_background_color']) ? $slider_option['dots_background_color'] : '';
     $dots_active_background_color = isset($slider_option['dots_active_background_color']) ? $slider_option['dots_active_background_color'] : '';
 
-    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : 'true';
-    $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 'false';
-    $slider_rtl = !empty($slider_option['rtl']) ? $slider_option['rtl'] : 'false';
-    $slider_lazy_load = isset($slider_option['lazy_load']) ? $slider_option['lazy_load'] : 'true';
-    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 'true';
-    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 'true';
+    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : 1;
+    $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 0;
+    $slider_rtl = !empty($slider_option['rtl']) ? $slider_option['rtl'] : 0;
+    $slider_lazy_load = isset($slider_option['lazy_load']) ? (bool) $slider_option['lazy_load'] : 1;
+    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 1;
+    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 1;
 
     $item_layout_id = isset($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : '';
     $layout_elements_data = get_post_meta($item_layout_id, 'layout_elements_data', true);
@@ -995,7 +995,7 @@ function wcps_slider_main_scripts_slick($args)
                 draggable: <?php echo esc_attr($slider_mouse_drag); ?>,
                 touchMove: <?php echo esc_attr($slider_touch_drag); ?>,
                 swipe: <?php echo esc_attr($slider_touch_drag); ?>,
-                lazyLoad: "<?php echo esc_attr($slider_lazy_load); ?>",
+                lazyLoad: <?php echo ($slider_lazy_load) ?  "'ondemand'" : "''"; ?>,
                 rtl: <?php echo esc_attr($slider_rtl); ?>,
             });
 
@@ -1071,17 +1071,17 @@ function wcps_slider_main_style($args)
     //    $slider_slide_speed = isset($slider_option['slide_speed']) ? $slider_option['slide_speed'] : 1000;
     $slider_pagination_speed = isset($slider_option['pagination_speed']) ? $slider_option['pagination_speed'] : 1200;
 
-    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : 'true';
+    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : 1;
     $auto_play_speed = !empty($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1000;
     $auto_play_timeout = !empty($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 1200;
 
     //$auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
 
-    $slider_rewind = !empty($slider_option['rewind']) ? $slider_option['rewind'] : 'true';
-    $slider_loop = !empty($slider_option['loop']) ? $slider_option['loop'] : 'true';
-    $slider_center = !empty($slider_option['center']) ? $slider_option['center'] : 'true';
-    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 'true';
-    $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 'true';
+    $slider_rewind = !empty($slider_option['rewind']) ? $slider_option['rewind'] : 1;
+    $slider_loop = !empty($slider_option['loop']) ? $slider_option['loop'] : 1;
+    $slider_center = !empty($slider_option['center']) ? $slider_option['center'] : 1;
+    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 1;
+    $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 1;
     $navigation_position = isset($slider_option['navigation_position']) ? $slider_option['navigation_position'] : '';
     $navigation_background_color = !empty($slider_option['navigation_background_color']) ? $slider_option['navigation_background_color'] : '#1e6fcc';
     $navigation_color = !empty($slider_option['navigation_color']) ? $slider_option['navigation_color'] : '#ffffff';
@@ -1090,12 +1090,12 @@ function wcps_slider_main_style($args)
     $dots_background_color = isset($slider_option['dots_background_color']) ? $slider_option['dots_background_color'] : '';
     $dots_active_background_color = !empty($slider_option['dots_active_background_color']) ? $slider_option['dots_active_background_color'] : '#1e6fcc';
 
-    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : 'true';
-    $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 'false';
-    $slider_rtl = !empty($slider_option['rtl']) ? $slider_option['rtl'] : 'false';
-    $slider_lazy_load = isset($slider_option['lazy_load']) ? $slider_option['lazy_load'] : 'true';
-    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 'true';
-    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 'true';
+    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : 1;
+    $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 0;
+    $slider_rtl = !empty($slider_option['rtl']) ? $slider_option['rtl'] : 0;
+    $slider_lazy_load = isset($slider_option['lazy_load']) ? $slider_option['lazy_load'] : 1;
+    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 1;
+    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 1;
 
 
 
