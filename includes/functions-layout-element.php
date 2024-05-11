@@ -87,7 +87,7 @@ function wcps_layout_element_thumbnail($args)
     $wcps_id = isset($args['wcps_id']) ? $args['wcps_id'] : '';
 
     $wcps_options = get_post_meta($wcps_id, 'wcps_options', true);
-    $lazy_load = isset($wcps_options['slider']['lazy_load']) ? $wcps_options['slider']['lazy_load'] : 'false';
+    $lazy_load = isset($wcps_options['slider']['lazy_load']) ? (bool) $wcps_options['slider']['lazy_load'] : 0;
 
     $element_index = isset($args['element_index']) ? $args['element_index'] : '';
     $element_class = !empty($element_index) ? 'wcps-items-thumb element-' . $element_index : 'wcps-items-thumb';
@@ -114,7 +114,8 @@ function wcps_layout_element_thumbnail($args)
 
 
 
-        if ($lazy_load == 'true') {
+
+        if ($lazy_load) {
     ?>
             <div class=" <?php echo esc_attr($element_class); ?>">
                 <a href="<?php echo $product_url; ?>">
