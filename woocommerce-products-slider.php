@@ -3,9 +3,9 @@
 Plugin Name: Product Slider for WooCommerce by PickPlugins
 Plugin URI: http://pickplugins.com/items/woocommerce-product-slider-for-wordpress/
 Description: Fully responsive and mobile ready Carousel Slider for your WooCommerce product. unlimited slider anywhere via short-codes and easy admin setting.
-Version: 1.13.49
+Version: 1.13.50
 WC requires at least: 3.0.0
-WC tested up to: 7.2.0
+WC tested up to: 8.8
 Author: PickPlugins
 Text Domain: woocommerce-products-slider
 Author URI: http://pickplugins.com
@@ -25,7 +25,7 @@ class WoocommerceProductsSlider
         define('wcps_plugin_url', plugins_url('/', __FILE__));
         define('wcps_plugin_dir', plugin_dir_path(__FILE__));
         define('wcps_plugin_name', 'PickPlugins Product Slider');
-        define('wcps_plugin_version', '1.13.49');
+        define('wcps_plugin_version', '1.13.50');
         define('wcps_server_url', 'https://www.pickplugins.com/demo/woocommerce-products-slider/');
         //define('wcps_server_url', 'http://localhost/wp/');
 
@@ -67,6 +67,7 @@ class WoocommerceProductsSlider
         add_action('admin_enqueue_scripts', array($this, '_admin_scripts'));
 
         add_action('plugins_loaded', array($this, '_textdomain'));
+        add_action('before_woocommerce_init', array($this, 'high_performance_order_storage'));
 
 
         register_activation_hook(__FILE__, array($this, '_activation'));
@@ -75,7 +76,14 @@ class WoocommerceProductsSlider
         add_filter('cron_schedules', array($this, 'cron_recurrence_interval'));
     }
 
+    // Declare that the plugin is compatible with WooCommerce High-Performance order storage feature.
 
+    function high_performance_order_storage()
+    {
+        if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+        }
+    }
 
     public function _textdomain()
     {

@@ -941,7 +941,6 @@ function wcps_slider_main_scripts_slick($args)
     $navigation_text_prev = !empty($slider_option['navigation_text']['prev']) ? $slider_option['navigation_text']['prev'] : $navigation_text_prev;
     $navigation_text_next = !empty($slider_option['navigation_text']['next']) ? $slider_option['navigation_text']['next'] : $navigation_text_next;
 
-    //var_dump($slider_navigation);
 
 ?>
     <script>
@@ -996,7 +995,7 @@ function wcps_slider_main_scripts_slick($args)
                 draggable: <?php echo esc_attr($slider_mouse_drag); ?>,
                 touchMove: <?php echo esc_attr($slider_touch_drag); ?>,
                 swipe: <?php echo esc_attr($slider_touch_drag); ?>,
-                lazyLoad: <?php echo esc_attr($slider_lazy_load); ?>,
+                lazyLoad: "<?php echo esc_attr($slider_lazy_load); ?>",
                 rtl: <?php echo esc_attr($slider_rtl); ?>,
             });
 
@@ -1258,7 +1257,6 @@ function wcps_slider_main_style($args)
             height: auto;
         }
 
-        /*ribbon position*/
         <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .wcps-ribbon.topright'; ?> {
             position: absolute;
             right: -25px;
@@ -1328,14 +1326,7 @@ function wcps_slider_main_style($args)
             }
         }
 
-
-
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .wcps-items'; ?> {
-            /*padding-top: 20px;*/
-            /*padding-bottom: 50px;*/
-        }
-
-
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .wcps-items'; ?> {}
 
         <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .on-sale img'; ?> {
             width: 30px;
@@ -1421,7 +1412,6 @@ function wcps_slider_main_style($args)
             margin: 0;
         }
 
-
         <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .slick-dots button'; ?> {
             <?php if (!empty($dots_background_color)) : ?>background: <?php echo esc_attr($dots_background_color); ?>;
             <?php endif; ?>border-radius: 20px;
@@ -1439,8 +1429,6 @@ function wcps_slider_main_style($args)
             <?php if (!empty($dots_active_background_color)) : ?>background: <?php echo esc_attr($dots_active_background_color); ?>;
             <?php endif; ?>
         }
-
-
 
         <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap div'; ?> {
             <?php if (!empty($navigation_background_color)) : ?>background: <?php echo esc_attr($navigation_background_color); ?>;
@@ -1580,11 +1568,8 @@ function wcps_slider_main_enqueue_scripts($args)
     $font_aw_version = !empty($wcps_settings['font_aw_version']) ? $wcps_settings['font_aw_version'] : 'v_5';
 
 
-    //wp_enqueue_script('tiny-slider');
-    //wp_enqueue_style('tiny-slider');
 
     wp_enqueue_script('slick');
-    //wp_enqueue_script('wcps_script');
 
     wp_enqueue_style('slick');
 

@@ -145,6 +145,10 @@ then paste this shortcode anywhere in your page to display slider<br />
 
 
     = 1.13.49 =
+    * 2024-05-11 fix -  Thumbnail lazy load issue fixed
+    * 2024-05-11 fix -  WooCommerce High-Performance order storage feature support added
+
+    = 1.13.49 =
     * 2023-10-18 add -  Some http:// url replaced by https://
 
     = 1.13.48 =

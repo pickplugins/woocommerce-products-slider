@@ -1949,7 +1949,7 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
                 'type'        => 'select',
                 'value'        => $slider_lazy_load,
                 'default'        => 'false',
-                'args'        => array('true' => __('True', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
+                'args'        => array('ondemand' => __('On demand', 'woocommerce-products-slider'), 'progressive' => __('Progressive', 'woocommerce-products-slider'), 'false' => __('False', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
