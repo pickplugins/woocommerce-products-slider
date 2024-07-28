@@ -5,7 +5,7 @@ Plugin URI: http://pickplugins.com/items/woocommerce-product-slider-for-wordpres
 Description: Fully responsive and mobile ready Carousel Slider for your WooCommerce product. unlimited slider anywhere via short-codes and easy admin setting.
 Version: 1.13.50
 WC requires at least: 3.0.0
-WC tested up to: 8.8
+WC tested up to: 9.1
 Author: PickPlugins
 Text Domain: woocommerce-products-slider
 Author URI: http://pickplugins.com
@@ -73,7 +73,7 @@ class WoocommerceProductsSlider
         register_activation_hook(__FILE__, array($this, '_activation'));
         register_deactivation_hook(__FILE__, array($this, '_deactivation'));
         //register_uninstall_hook( __FILE__, array( $this, '_uninstall' ) );
-        add_filter('cron_schedules', array($this, 'cron_recurrence_interval'));
+        //add_filter('cron_schedules', array($this, 'cron_recurrence_interval'));
     }
 
     // Declare that the plugin is compatible with WooCommerce High-Performance order storage feature.

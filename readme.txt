@@ -3,7 +3,7 @@
 	Donate link: https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/?ref=wordpress.org
 	Tags: product slider, woocommerce slider, carousel slider, product category slider, woo slider, carousel slider,  woocommerce product slider
 	Requires at least: 3.8
-	Tested up to: 6.3
+	Tested up to: 6.6
 	Stable tag: 1.13.50
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
