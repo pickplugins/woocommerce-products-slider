@@ -780,17 +780,19 @@ if (!class_exists('settings_tabs_field')) {
 
 
             if ($multiple) {
-                $value     = isset($option['value']) ? $option['value'] : array();
-                $field_name = !empty($parent) ? $parent . '[' . $id . '][]' : $id . '[]';
                 $default     = isset($option['default']) ? $option['default'] : array();
+
+                $value     = isset($option['value']) ? $option['value'] : $default;
+                $field_name = !empty($parent) ? $parent . '[' . $id . '][]' : $id . '[]';
             } else {
-                $value     = isset($option['value']) ? $option['value'] : '';
-                $field_name = !empty($parent) ? $parent . '[' . $id . ']' : $id;
                 $default     = isset($option['default']) ? $option['default'] : '';
+
+                $value     = isset($option['value']) ? $option['value'] : $default;
+                $field_name = !empty($parent) ? $parent . '[' . $id . ']' : $id;
             }
 
 
-            $value = !empty($value) ? $value : $default;
+            // $value = !empty($value) ? $value : $default;
 
 
 
