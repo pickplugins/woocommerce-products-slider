@@ -1514,7 +1514,7 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
         $auto_play_timeout = isset($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 2000;
 
         $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : 1;
-        $slider_loop = isset($slider_option['loop']) ? $slider_option['loop'] : 1;
+        $slider_loop = isset($slider_option['loop']) ? (int) $slider_option['loop'] : 1;
         $slider_center = isset($slider_option['center']) ? $slider_option['center'] : 0;
         $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 1;
         $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 1;
@@ -1537,6 +1537,7 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
         $slider_lazy_load = isset($slider_option['lazy_load']) ? $slider_option['lazy_load'] : 0;
         $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 1;
         $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 1;
+
 
     ?>
         <div class="section">
@@ -1631,18 +1632,18 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
 
             $settings_tabs_field->generate_field($args);
 
-            // $args = array(
-            //     'id'        => 'gutter',
-            //     'parent'        => 'wcps_options[slider]',
-            //     'title'        => __('Item gutter', 'woocommerce-products-slider'),
-            //     'details'    => __('Space between slides, ex: 10', 'woocommerce-products-slider'),
-            //     'type'        => 'text',
-            //     'value'        => $gutter,
-            //     'default'        => 10,
-            //     'placeholder'   => '10',
-            // );
+            $args = array(
+                'id'        => 'gutter',
+                'parent'        => 'wcps_options[slider]',
+                'title'        => __('Item gutter', 'woocommerce-products-slider'),
+                'details'    => __('Space between slides, ex: 10', 'woocommerce-products-slider'),
+                'type'        => 'text',
+                'value'        => $gutter,
+                'default'        => 10,
+                'placeholder'   => '10',
+            );
 
-            // $settings_tabs_field->generate_field($args);
+            $settings_tabs_field->generate_field($args);
 
 
 
@@ -1913,18 +1914,18 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
             //
             //        $settings_tabs_field->generate_field($args);
 
-            $args = array(
-                'id'        => 'pagination_count',
-                'parent'        => 'wcps_options[slider]',
-                'title'        => __('Slider dots count', 'woocommerce-products-slider'),
-                'details'    => __('Choose slider dots count.', 'woocommerce-products-slider'),
-                'type'        => 'select',
-                'value'        => $slider_pagination_count,
-                'default'        => 1,
-                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
-            );
+            // $args = array(
+            //     'id'        => 'pagination_count',
+            //     'parent'        => 'wcps_options[slider]',
+            //     'title'        => __('Slider dots count', 'woocommerce-products-slider'),
+            //     'details'    => __('Choose slider dots count.', 'woocommerce-products-slider'),
+            //     'type'        => 'select',
+            //     'value'        => $slider_pagination_count,
+            //     'default'        => 1,
+            //     'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
+            // );
 
-            $settings_tabs_field->generate_field($args);
+            //$settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'        => 'rtl',

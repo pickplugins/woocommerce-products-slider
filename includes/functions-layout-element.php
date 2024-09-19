@@ -119,7 +119,7 @@ function wcps_layout_element_thumbnail($args)
     ?>
             <div class=" <?php echo esc_attr($element_class); ?>">
                 <a href="<?php echo $product_url; ?>">
-                    <img class="slick-loading" alt="<?php echo get_the_title(); ?>" data-lazy="<?php echo esc_url_raw($thumb_image_url); ?>" src="<?php echo esc_url_raw($default_thumb_src); ?>" />
+                    <img class="slick-loading" alt="<?php echo get_the_title(); ?>" data-splide-lazy="<?php echo esc_url_raw($thumb_image_url); ?>" src="<?php echo esc_url_raw($default_thumb_src); ?>" />
                 </a>
             </div>
         <?php

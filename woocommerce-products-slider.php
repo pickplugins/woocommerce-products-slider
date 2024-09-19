@@ -3,7 +3,7 @@
 Plugin Name: Product Slider for WooCommerce by PickPlugins
 Plugin URI: http://pickplugins.com/items/woocommerce-product-slider-for-wordpress/
 Description: Fully responsive and mobile ready Carousel Slider for your WooCommerce product. unlimited slider anywhere via short-codes and easy admin setting.
-Version: 1.13.52
+Version: 1.13.53
 WC requires at least: 3.0.0
 WC tested up to: 9.1
 Author: PickPlugins
@@ -25,7 +25,7 @@ class WoocommerceProductsSlider
         define('wcps_plugin_url', plugins_url('/', __FILE__));
         define('wcps_plugin_dir', plugin_dir_path(__FILE__));
         define('wcps_plugin_name', 'PickPlugins Product Slider');
-        define('wcps_plugin_version', '1.13.52');
+        define('wcps_plugin_version', '1.13.53');
         define('wcps_server_url', 'https://www.pickplugins.com/demo/woocommerce-products-slider/');
         //define('wcps_server_url', 'http://localhost/wp/');
 
@@ -149,7 +149,7 @@ class WoocommerceProductsSlider
         wp_register_script('slick', wcps_plugin_url . 'assets/front/js/slick.js', array('jquery'));
         wp_register_style('slick', wcps_plugin_url . 'assets/front/css/slick.css');
 
-        wp_register_script('wcps_script', wcps_plugin_url . 'assets/front/js/scripts.js', array('jquery'));
+        //wp_register_script('wcps_script', wcps_plugin_url . 'assets/front/js/scripts.js', array('jquery'));
 
         // wp_register_script('tiny-slider', 'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js' , array( 'jquery' ));
         // wp_register_style('tiny-slider', wcps_plugin_url.'assets/front/css/tiny-slider.css');
@@ -158,6 +158,11 @@ class WoocommerceProductsSlider
 
 
         wp_register_style('animate', wcps_plugin_url . 'assets/front/css/animate.css');
+
+
+        wp_register_style('splide_core', wcps_plugin_url . 'assets/front/css/splide-core.min.css');
+        wp_register_script('splide.min', wcps_plugin_url . 'assets/front/js/splide.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+        wp_register_script('wcps_script', wcps_plugin_url . 'assets/front/js/scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
     }
 
     public function _admin_scripts()

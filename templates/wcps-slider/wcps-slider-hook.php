@@ -96,6 +96,105 @@ function wcps_slider_main_items($args)
     $product_ids = isset($query['product_ids']) ? $query['product_ids'] : '';
     $query_only = isset($query['query_only']) ? $query['query_only'] : 'no_check';
 
+
+    $wcps_options = get_post_meta($wcps_id, 'wcps_options', true);
+
+    $container = isset($wcps_options['container']) ? $wcps_options['container'] : array();
+    $container_background_img_url = isset($container['background_img_url']) ? $container['background_img_url'] : '';
+    $container_background_color = isset($container['background_color']) ? $container['background_color'] : '';
+    $container_padding = isset($container['padding']) ? $container['padding'] : '';
+    $container_margin = isset($container['margin']) ? $container['margin'] : '';
+
+    $item_style = isset($wcps_options['item_style']) ? $wcps_options['item_style'] : array();
+    $item_height = isset($wcps_options['item_height']) ? $wcps_options['item_height'] : array();
+
+    $item_height_large = isset($item_height['large']) ? $item_height['large'] : '';
+    $item_height_medium = isset($item_height['medium']) ? $item_height['medium'] : '';
+    $item_height_small = isset($item_height['small']) ? $item_height['small'] : '';
+
+
+
+    $item_padding = isset($item_style['padding']) ? $item_style['padding'] : '';
+    //    $item_margin = isset($item_style['margin']) ? $item_style['margin'] : '10px';
+    $item_background_color = isset($item_style['background_color']) ? $item_style['background_color'] : '';
+    $item_text_align = isset($item_style['text_align']) ? $item_style['text_align'] : '';
+
+    $slider_option = isset($wcps_options['slider']) ? $wcps_options['slider'] : array();
+
+    $slider_column_large = isset($slider_option['column_large']) ? $slider_option['column_large'] : 3;
+    $slider_column_medium = isset($slider_option['column_medium']) ? $slider_option['column_medium'] : 2;
+    $slider_column_small = isset($slider_option['column_small']) ? $slider_option['column_small'] : 1;
+
+    $slider_slideby_large = isset($slider_option['slideby_large']) ? $slider_option['slideby_large'] : 3;
+    $slider_slideby_medium = isset($slider_option['slideby_medium']) ? $slider_option['slideby_medium'] : 2;
+    $slider_slideby_small = isset($slider_option['slideby_small']) ? $slider_option['slideby_small'] : true;
+
+
+
+    $slider_slide_speed = isset($slider_option['slide_speed']) ? $slider_option['slide_speed'] : 1000;
+    //    $slider_pagination_speed = isset($slider_option['pagination_speed']) ? $slider_option['pagination_speed'] : 1200;
+    $gutter = isset($slider_option['gutter']) ? $slider_option['gutter'] : 10;
+
+    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : true;
+    $auto_play_speed = !empty($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1000;
+    $auto_play_timeout = !empty($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 1200;
+
+    //$auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
+
+    $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : true;
+    $slider_loop = isset($slider_option['loop']) ? $slider_option['loop'] : true;
+    $slider_center = isset($slider_option['center']) ? (bool)$slider_option['center'] : true;
+    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : true;
+    $slider_navigation = isset($slider_option['navigation']) ?  $slider_option['navigation'] : true;
+    //$slider_navigation = ($slider_navigation) ? 'true' : 'false';
+
+
+    $navigation_position = isset($slider_option['navigation_position']) ? $slider_option['navigation_position'] : '';
+    $navigation_background_color = isset($slider_option['navigation_background_color']) ? $slider_option['navigation_background_color'] : '';
+    $navigation_color = isset($slider_option['navigation_color']) ? $slider_option['navigation_color'] : '';
+    $navigation_style = isset($slider_option['navigation_style']) ? $slider_option['navigation_style'] : 'flat';
+
+    $dots_background_color = isset($slider_option['dots_background_color']) ? $slider_option['dots_background_color'] : '';
+    $dots_active_background_color = isset($slider_option['dots_active_background_color']) ? $slider_option['dots_active_background_color'] : '';
+
+    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : true;
+    $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 0;
+    $slider_rtl = isset($slider_option['rtl']) ? (bool)$slider_option['rtl'] : false;
+    $slider_lazy_load = isset($slider_option['lazy_load']) ?  $slider_option['lazy_load'] : true;
+    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : true;
+    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : true;
+
+    $item_layout_id = isset($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : '';
+    $layout_elements_data = get_post_meta($item_layout_id, 'layout_elements_data', true);
+    $args['layout_id'] = $item_layout_id;
+
+
+    $wcps_settings = get_option('wcps_settings');
+    $font_aw_version = isset($wcps_settings['font_aw_version']) ? $wcps_settings['font_aw_version'] : 'none';
+
+    if ($font_aw_version == 'v_5') {
+        $navigation_text_prev = '<i class="fas fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fas fa-chevron-right"></i>';
+    } elseif ($font_aw_version == 'v_4') {
+        $navigation_text_prev = '<i class="fa fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fa fa-chevron-right"></i>';
+    } else {
+        $navigation_text_prev = '<i class="fas fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fas fa-chevron-right"></i>';
+    }
+
+
+    $navigation_text_prev = !empty($slider_option['navigation_text']['prev']) ? $slider_option['navigation_text']['prev'] : $navigation_text_prev;
+    $navigation_text_next = !empty($slider_option['navigation_text']['next']) ? $slider_option['navigation_text']['next'] : $navigation_text_next;
+
+
+
+
+
+
+
+
+
     //if(empty($post_id)) return;
     $query_args = array();
 
@@ -263,6 +362,50 @@ function wcps_slider_main_items($args)
     }
 
 
+    $sliderOptions = [
+        "type" => "slide",
+        "perPage" => (int) $slider_column_large,
+        "perMove" => (int)$slider_slideby_large,
+        "arrows" => (bool)$slider_navigation,
+        "pagination" => (bool)$slider_pagination,
+        //"paginationDirection" => $slider_rtl ? 'rtl' : 'ltr',
+        "autoplay" => (bool)$slider_auto_play,
+        "interval" => $auto_play_timeout,
+        "lazyLoad" => (bool)$slider_lazy_load,
+        "pauseOnHover" => (bool)$slider_stop_on_hover,
+        "pauseOnFocus" => (bool)$slider_stop_on_hover,
+        "rewind" => (bool)$slider_rewind,
+        "speed" => (int)$auto_play_speed,
+        //"rewindSpeed" => $auto_play_speed,
+        "rewindByDrag" => true,
+        "drag" => $slider_mouse_drag,
+        "direction" => $slider_rtl ? 'rtl' : 'ltr',
+        "gap" => 20,
+        "breakpoints" => [
+            "1200" => [
+                "perPage" => (int) $slider_column_large,
+                "perMove" => (int) $slider_slideby_large,
+
+            ],
+            "768" => [
+                "perPage" => (int) $slider_column_medium,
+                "perMove" => (int) $slider_slideby_medium,
+
+            ],
+            "576" => [
+                "perPage" => (int) $slider_column_small,
+                "perMove" => (int) $slider_slideby_small,
+
+            ],
+        ],
+
+        //"focus" => $slider_center ? 'center' : 99999,
+    ];
+    $prevIconHtml = wp_specialchars_decode($navigation_text_prev, ENT_QUOTES);
+    $prevIconPosition = 'before';
+    $nextIconPosition = 'after';
+    $nextIconHtml = wp_specialchars_decode($navigation_text_next, ENT_QUOTES);
+
 
     if ($wcps_query->have_posts()) :
 
@@ -272,30 +415,88 @@ function wcps_slider_main_items($args)
 
     ?>
 
-        <div class="controlsWrap controlsWrap-<?php echo esc_attr($wcps_id); ?>">
-        </div>
-
-
-        <div id="wcps-<?php echo esc_attr($wcps_id); ?>" class="<?php echo esc_attr($wcps_items_class); ?> slider">
-
-            <?php
-
-            $loop_count = 1;
-            while ($wcps_query->have_posts()) : $wcps_query->the_post();
-
-                $product_id = get_the_id();
-                $args['product_id'] = $product_id;
-                $args['loop_count'] = $loop_count;
 
 
 
-                do_action('wcps_slider_item', $args);
+        <div id="wcps-<?php echo esc_attr($wcps_id); ?>" class="<?php echo esc_attr($wcps_items_class); ?> splide" data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
 
-                $loop_count++;
-            endwhile;
 
-            wp_reset_query();
-            ?>
+            <div class="splide__arrows <?php echo esc_attr($navigation_position); ?> <?php echo $navigation_style; ?>">
+                <div class='prev splide__arrow splide__arrow--prev'>
+
+                    <?php if ($prevIconPosition == 'before') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($prevIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+
+                    <?php if (!empty($prevText)) : ?>
+                        <span>
+                            <?php echo esc_attr($prevText); ?>
+                        </span>
+                    <?php endif; ?>
+
+
+
+                    <?php if ($prevIconPosition == 'after') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($prevIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+
+                </div>
+                <div class='next splide__arrow splide__arrow--next'>
+
+
+
+                    <?php if ($nextIconPosition == 'before') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($nextIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+                    <?php if (!empty($nextText)) : ?>
+                        <span>
+                            <?php echo esc_attr($nextText); ?>
+                        </span>
+                    <?php endif; ?>
+
+
+
+                    <?php if ($nextIconPosition == 'after') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($nextIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+
+
+
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <?php
+
+                    $loop_count = 1;
+                    while ($wcps_query->have_posts()) : $wcps_query->the_post();
+
+                        $product_id = get_the_id();
+                        $args['product_id'] = $product_id;
+                        $args['loop_count'] = $loop_count;
+
+
+
+                        do_action('wcps_slider_item', $args);
+
+                        $loop_count++;
+                    endwhile;
+
+                    wp_reset_query();
+                    ?>
+                </ul>
+            </div>
+            <ul class="splide__pagination "></ul>
+
         </div>
 
         <?php
@@ -432,7 +633,7 @@ function wcps_slider_item($args)
 
 
 
-    <div class="<?php echo esc_attr($wcps_item_class); ?>">
+    <div class="<?php echo esc_attr($wcps_item_class); ?> splide__slide">
         <div class="elements-wrapper layout-<?php echo esc_attr($item_layout_id); ?>">
             <?php
             if (!empty($layout_elements_data))
@@ -463,7 +664,7 @@ function wcps_slider_item($args)
 
 
 
-add_action('wcps_slider_main', 'wcps_slider_main_items_orders', 20);
+//add_action('wcps_slider_main', 'wcps_slider_main_items_orders', 20);
 
 function wcps_slider_main_items_orders($args)
 {
@@ -572,7 +773,7 @@ function wcps_slider_main_items_orders($args)
 
 
 
-add_action('wcps_slider_item_order', 'wcps_slider_item_order', 10);
+//add_action('wcps_slider_item_order', 'wcps_slider_item_order', 10);
 
 function wcps_slider_item_order($args)
 {
@@ -847,7 +1048,7 @@ function wcps_slider_item_term($args)
 
 
 
-add_filter('wcps_slider_main', 'wcps_slider_main_scripts_slick', 90);
+//add_filter('wcps_slider_main', 'wcps_slider_main_scripts_slick', 90);
 
 function wcps_slider_main_scripts_slick($args)
 {
@@ -884,7 +1085,7 @@ function wcps_slider_main_scripts_slick($args)
 
     $slider_slideby_large = isset($slider_option['slideby_large']) ? $slider_option['slideby_large'] : 3;
     $slider_slideby_medium = isset($slider_option['slideby_medium']) ? $slider_option['slideby_medium'] : 2;
-    $slider_slideby_small = isset($slider_option['slideby_small']) ? $slider_option['slideby_small'] : 1;
+    $slider_slideby_small = isset($slider_option['slideby_small']) ? $slider_option['slideby_small'] : true;
 
 
 
@@ -892,17 +1093,20 @@ function wcps_slider_main_scripts_slick($args)
     //    $slider_pagination_speed = isset($slider_option['pagination_speed']) ? $slider_option['pagination_speed'] : 1200;
     $gutter = isset($slider_option['gutter']) ? $slider_option['gutter'] : 10;
 
-    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : 1;
+    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : true;
     $auto_play_speed = !empty($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1000;
     $auto_play_timeout = !empty($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 1200;
 
-    //$auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
+    $auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
 
-    $slider_rewind = !empty($slider_option['rewind']) ? $slider_option['rewind'] : 1;
-    $slider_loop = !empty($slider_option['loop']) ? $slider_option['loop'] : 1;
-    $slider_center = !empty($slider_option['center']) ? $slider_option['center'] : 1;
-    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 1;
-    $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 1;
+    $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : true;
+    $slider_loop = isset($slider_option['loop']) ? $slider_option['loop'] : true;
+    $slider_center = isset($slider_option['center']) ? $slider_option['center'] : true;
+    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : true;
+    $slider_navigation = isset($slider_option['navigation']) ?  $slider_option['navigation'] : true;
+    //$slider_navigation = ($slider_navigation) ? 'true' : 'false';
+
+
     $navigation_position = isset($slider_option['navigation_position']) ? $slider_option['navigation_position'] : '';
     $navigation_background_color = isset($slider_option['navigation_background_color']) ? $slider_option['navigation_background_color'] : '';
     $navigation_color = isset($slider_option['navigation_color']) ? $slider_option['navigation_color'] : '';
@@ -911,12 +1115,12 @@ function wcps_slider_main_scripts_slick($args)
     $dots_background_color = isset($slider_option['dots_background_color']) ? $slider_option['dots_background_color'] : '';
     $dots_active_background_color = isset($slider_option['dots_active_background_color']) ? $slider_option['dots_active_background_color'] : '';
 
-    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : 1;
+    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : true;
     $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 0;
-    $slider_rtl = !empty($slider_option['rtl']) ? $slider_option['rtl'] : 0;
-    $slider_lazy_load = isset($slider_option['lazy_load']) ? (bool) $slider_option['lazy_load'] : 1;
-    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 1;
-    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 1;
+    $slider_rtl = isset($slider_option['rtl']) ? $slider_option['rtl'] : false;
+    $slider_lazy_load = isset($slider_option['lazy_load']) ?  $slider_option['lazy_load'] : true;
+    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : true;
+    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : true;
 
     $item_layout_id = isset($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : '';
     $layout_elements_data = get_post_meta($item_layout_id, 'layout_elements_data', true);
@@ -942,7 +1146,11 @@ function wcps_slider_main_scripts_slick($args)
     $navigation_text_next = !empty($slider_option['navigation_text']['next']) ? $slider_option['navigation_text']['next'] : $navigation_text_next;
 
 
+
+
 ?>
+
+
     <script>
         jQuery(document).ready(function($) {
 
@@ -979,18 +1187,14 @@ function wcps_slider_main_scripts_slick($args)
                         }
                     }
                 ],
-                gutter: <?php echo esc_attr($gutter); ?>,
                 arrows: <?php echo esc_attr($slider_navigation); ?>,
                 appendArrows: '.controlsWrap-<?php echo esc_attr($wcps_id); ?>',
-                prevArrow: `<div class="
-                prev "><?php echo wp_specialchars_decode($navigation_text_prev, ENT_QUOTES); ?></div>`,
+                prevArrow: `<div class=" prev "><?php echo wp_specialchars_decode($navigation_text_prev, ENT_QUOTES); ?></div>`,
                 nextArrow: `<div class="next"><?php echo wp_specialchars_decode($navigation_text_next, ENT_QUOTES); ?></div>`,
                 speed: <?php echo esc_attr($auto_play_speed); ?>,
                 autoplay: <?php echo esc_attr($slider_auto_play); ?>,
                 autoplaySpeed: <?php echo esc_attr($auto_play_timeout); ?>,
                 dots: <?php echo esc_attr($slider_pagination); ?>,
-                nav: <?php echo esc_attr($slider_navigation); ?>,
-                navPosition: 'bottom',
                 centerMode: <?php echo esc_attr($slider_center); ?>,
                 draggable: <?php echo esc_attr($slider_mouse_drag); ?>,
                 touchMove: <?php echo esc_attr($slider_touch_drag); ?>,
@@ -1060,28 +1264,28 @@ function wcps_slider_main_style($args)
 
     $slider_column_large = isset($slider_option['column_large']) ? $slider_option['column_large'] : 3;
     $slider_column_medium = isset($slider_option['column_medium']) ? $slider_option['column_medium'] : 2;
-    $slider_column_small = isset($slider_option['column_small']) ? $slider_option['column_small'] : 1;
+    $slider_column_small = isset($slider_option['column_small']) ? $slider_option['column_small'] : true;
 
     $slider_slideby_large = isset($slider_option['slideby_large']) ? $slider_option['slideby_large'] : 3;
     $slider_slideby_medium = isset($slider_option['slideby_medium']) ? $slider_option['slideby_medium'] : 2;
-    $slider_slideby_small = isset($slider_option['slideby_small']) ? $slider_option['slideby_small'] : 1;
+    $slider_slideby_small = isset($slider_option['slideby_small']) ? $slider_option['slideby_small'] : true;
 
 
 
     //    $slider_slide_speed = isset($slider_option['slide_speed']) ? $slider_option['slide_speed'] : 1000;
     $slider_pagination_speed = isset($slider_option['pagination_speed']) ? $slider_option['pagination_speed'] : 1200;
 
-    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : 1;
+    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : true;
     $auto_play_speed = !empty($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1000;
     $auto_play_timeout = !empty($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 1200;
 
     //$auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
 
-    $slider_rewind = !empty($slider_option['rewind']) ? $slider_option['rewind'] : 1;
-    $slider_loop = !empty($slider_option['loop']) ? $slider_option['loop'] : 1;
-    $slider_center = !empty($slider_option['center']) ? $slider_option['center'] : 1;
-    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : 1;
-    $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : 1;
+    $slider_rewind = !empty($slider_option['rewind']) ? $slider_option['rewind'] : true;
+    $slider_loop = !empty($slider_option['loop']) ? $slider_option['loop'] : true;
+    $slider_center = !empty($slider_option['center']) ? $slider_option['center'] : true;
+    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : true;
+    $slider_navigation = isset($slider_option['navigation']) ? $slider_option['navigation'] : true;
     $navigation_position = isset($slider_option['navigation_position']) ? $slider_option['navigation_position'] : '';
     $navigation_background_color = !empty($slider_option['navigation_background_color']) ? $slider_option['navigation_background_color'] : '#1e6fcc';
     $navigation_color = !empty($slider_option['navigation_color']) ? $slider_option['navigation_color'] : '#ffffff';
@@ -1090,12 +1294,12 @@ function wcps_slider_main_style($args)
     $dots_background_color = isset($slider_option['dots_background_color']) ? $slider_option['dots_background_color'] : '';
     $dots_active_background_color = !empty($slider_option['dots_active_background_color']) ? $slider_option['dots_active_background_color'] : '#1e6fcc';
 
-    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : 1;
+    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : true;
     $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 0;
     $slider_rtl = !empty($slider_option['rtl']) ? $slider_option['rtl'] : 0;
-    $slider_lazy_load = isset($slider_option['lazy_load']) ? $slider_option['lazy_load'] : 1;
-    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : 1;
-    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : 1;
+    $slider_lazy_load = isset($slider_option['lazy_load']) ? $slider_option['lazy_load'] : true;
+    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : true;
+    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : true;
 
 
 
@@ -1400,19 +1604,19 @@ function wcps_slider_main_style($args)
             z-index: 10;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .slick-dots'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__pagination '; ?> {
             text-align: center;
             width: 100%;
             margin: 30px 0 0;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .slick-dots li'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__pagination li'; ?> {
             display: inline-block;
             list-style: none;
             margin: 0;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .slick-dots button'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__pagination button'; ?> {
             <?php if (!empty($dots_background_color)) : ?>background: <?php echo esc_attr($dots_background_color); ?>;
             <?php endif; ?>border-radius: 20px;
             display: inline-block;
@@ -1424,13 +1628,13 @@ function wcps_slider_main_style($args)
             line-height: 0;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .slick-dots .slick-active button'; ?>,
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .slick-dots .slick-active:hover button'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__pagination button.is-active '; ?>,
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__pagination button.is-active:hover '; ?> {
             <?php if (!empty($dots_active_background_color)) : ?>background: <?php echo esc_attr($dots_active_background_color); ?>;
             <?php endif; ?>
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap div'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows div'; ?> {
             <?php if (!empty($navigation_background_color)) : ?>background: <?php echo esc_attr($navigation_background_color); ?>;
             <?php endif; ?><?php if (!empty($navigation_color)) : ?>color: <?php echo esc_attr($navigation_color); ?>;
             <?php endif; ?>margin: 0 5px;
@@ -1439,29 +1643,29 @@ function wcps_slider_main_style($args)
             display: inline-block;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.topright'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.topright'; ?> {
             text-align: right;
             margin-bottom: 15px;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.topleft'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.topleft'; ?> {
             text-align: left;
             margin-bottom: 15px;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.bottomleft '; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.bottomleft '; ?> {
             position: absolute;
             left: 15px;
             bottom: 15px;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . '  .controlsWrap.bottomright'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . '  .splide__arrows.bottomright'; ?> {
             position: absolute;
             right: 15px;
             bottom: 15px;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.middle-fixed'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.middle-fixed'; ?> {
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
@@ -1469,15 +1673,15 @@ function wcps_slider_main_style($args)
             z-index: 99;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.middle-fixed .next'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.middle-fixed .next'; ?> {
             float: right;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.middle-fixed .-prev'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.middle-fixed .-prev'; ?> {
             float: left;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.middle'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.middle'; ?> {
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
@@ -1485,44 +1689,44 @@ function wcps_slider_main_style($args)
             z-index: 99;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.middle .next '; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.middle .next '; ?> {
             float: right;
             right: -20%;
             position: absolute;
             transition: all ease 1s 0s;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ':hover .controlsWrap.middle .next'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ':hover .splide__arrows.middle .next'; ?> {
             right: 0;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.middle .prev'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.middle .prev'; ?> {
             left: -20%;
             position: absolute;
             transition: all ease 1s 0s;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ':hover .controlsWrap.middle .prev'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ':hover .splide__arrows.middle .prev'; ?> {
             left: 0;
             position: absolute;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.flat div'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.flat div'; ?> {
             padding: 5px 20px;
             border-radius: 0;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.border div'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.border div'; ?> {
             padding: 5px 20px;
             border: 2px solid #777;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.semi-round div'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.semi-round div'; ?> {
             padding: 5px 20px;
             border-radius: 8px;
         }
 
-        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .controlsWrap.round div'; ?> {
+        <?php echo esc_attr('.wcps-container-' . $wcps_id) . ' .splide__arrows.round div'; ?> {
             border-radius: 50px;
         }
 
@@ -1569,9 +1773,12 @@ function wcps_slider_main_enqueue_scripts($args)
 
 
 
-    wp_enqueue_script('slick');
+    // wp_enqueue_script('slick');
+    wp_enqueue_script('splide.min');
 
-    wp_enqueue_style('slick');
+    //wp_enqueue_style('slick');
+    wp_enqueue_style('splide_core');
+    wp_enqueue_script('wcps_script');
 
 
     if ($font_aw_version == 'v_5') {

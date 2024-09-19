@@ -1,31 +1,31 @@
 <?php
-if ( ! defined('ABSPATH')) exit;  // if direct access
+if (! defined('ABSPATH')) exit;  // if direct access
 
-class class_wcps_metabox{
-	
-	public function __construct(){
+class class_wcps_metabox
+{
 
-		//meta box action for "wcps"
-		add_action('add_meta_boxes', array($this, 'wcps_post_meta_wcps'));
-		add_action('save_post', array($this, 'meta_boxes_wcps_save'), 99);
+    public function __construct()
+    {
 
-
-
-		}
-
-
-	public function wcps_post_meta_wcps($post_type){
-
-            add_meta_box('metabox-wcps',__('WCPS data', 'woocommerce-products-slider'), array($this, 'meta_box_wcps_data'), 'wcps', 'normal', 'high');
-        add_meta_box('metabox-wcps-side',__('WCPS Help', 'woocommerce-products-slider'), array($this, 'meta_box_wcps_side'), 'wcps', 'side', 'low');
-
-		}
+        //meta box action for "wcps"
+        add_action('add_meta_boxes', array($this, 'wcps_post_meta_wcps'));
+        add_action('save_post', array($this, 'meta_boxes_wcps_save'), 99);
+    }
 
 
+    public function wcps_post_meta_wcps($post_type)
+    {
 
-    public function meta_box_wcps_side($post){
+        add_meta_box('metabox-wcps', __('WCPS data', 'woocommerce-products-slider'), array($this, 'meta_box_wcps_data'), 'wcps', 'normal', 'high');
+        add_meta_box('metabox-wcps-side', __('WCPS Help', 'woocommerce-products-slider'), array($this, 'meta_box_wcps_side'), 'wcps', 'side', 'low');
+    }
 
-	    ?>
+
+
+    public function meta_box_wcps_side($post)
+    {
+
+?>
         <div class="plugin-help-search">
             <input type="search" value="" placeholder="Start typing">
 
@@ -55,47 +55,49 @@ class class_wcps_metabox{
 
 
 
-        <style >
-            .plugin-help-search{}
-            .plugin-help-search input[type=search]{
+        <style>
+            .plugin-help-search {}
+
+            .plugin-help-search input[type=search] {
                 width: 100%;
             }
         </style>
 
         <script>
-            jQuery(document).ready(function($){
-                jQuery(document).on('keyup', '.plugin-help-search input', function(){
+            jQuery(document).ready(function($) {
+                jQuery(document).on('keyup', '.plugin-help-search input', function() {
                     keyword = jQuery(this).val().toLowerCase();
                     content_body = [];
 
                     console.log(keyword);
 
-                    $('.plugin-help-search li').each(function( index ) {
-                        $( this ).hide();
-                        content = $( this ).text().toLowerCase();
+                    $('.plugin-help-search li').each(function(index) {
+                        $(this).hide();
+                        content = $(this).text().toLowerCase();
                         content_body[index] = content;
                         n = content_body[index].indexOf(keyword);
-                        if(n<0){
-                            $( this ).hide();
-                        }else{
-                            $( this ).show();
+                        if (n < 0) {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
                         }
                     });
                 })
             })
         </script>
 
-        <?php
+    <?php
 
     }
 
-	public function meta_box_wcps_data($post) {
- 
+    public function meta_box_wcps_data($post)
+    {
+
         // Add an nonce field so we can check for it later.
         wp_nonce_field('wcps_nonce_check', 'wcps_nonce_check_value');
- 
+
         // Use get_post_meta to retrieve an existing value from the database.
-       // $wcps_data = get_post_meta($post -> ID, 'wcps_data', true);
+        // $wcps_data = get_post_meta($post -> ID, 'wcps_data', true);
 
         $post_id = $post->ID;
 
@@ -103,7 +105,7 @@ class class_wcps_metabox{
 
         $settings_tabs_field = new settings_tabs_field();
 
-        $wcps_options = get_post_meta($post_id,'wcps_options', true);
+        $wcps_options = get_post_meta($post_id, 'wcps_options', true);
         $current_tab = isset($wcps_options['current_tab']) ? $wcps_options['current_tab'] : 'layouts';
         $slider_for = !empty($wcps_options['slider_for']) ? $wcps_options['slider_for'] : 'products';
 
@@ -112,21 +114,21 @@ class class_wcps_metabox{
 
         $wcps_settings_tabs[] = array(
             'id' => 'shortcode',
-            'title' => sprintf(__('%s Shortcode','woocommerce-products-slider'),'<i class="fas fa-laptop-code"></i>'),
+            'title' => sprintf(__('%s Shortcode', 'woocommerce-products-slider'), '<i class="fas fa-laptop-code"></i>'),
             'priority' => 1,
             'active' => ($current_tab == 'shortcode') ? true : false,
         );
 
         $wcps_settings_tabs[] = array(
             'id' => 'slider_options',
-            'title' => sprintf(__('%s Slider options','woocommerce-products-slider'),'<i class="fa fa-cogs"></i>'),
+            'title' => sprintf(__('%s Slider options', 'woocommerce-products-slider'), '<i class="fa fa-cogs"></i>'),
             'priority' => 2,
             'active' => ($current_tab == 'slider_options') ? true : false,
         );
 
         $wcps_settings_tabs[] = array(
             'id' => 'query_product',
-            'title' => sprintf(__('%s Query product','woocommerce-products-slider'),'<i class="fas fa-qrcode"></i>'),
+            'title' => sprintf(__('%s Query product', 'woocommerce-products-slider'), '<i class="fas fa-qrcode"></i>'),
             'priority' => 3,
             'active' => ($current_tab == 'query_product') ? true : false,
             'data_visible' => 'products',
@@ -135,7 +137,7 @@ class class_wcps_metabox{
 
         $wcps_settings_tabs[] = array(
             'id' => 'query_orders',
-            'title' => sprintf(__('%s Query orders','woocommerce-products-slider'),'<i class="fas fa-qrcode"></i>'),
+            'title' => sprintf(__('%s Query orders', 'woocommerce-products-slider'), '<i class="fas fa-qrcode"></i>'),
             'priority' => 3,
             'active' => ($current_tab == 'query_orders') ? true : false,
             'data_visible' => 'orders',
@@ -144,7 +146,7 @@ class class_wcps_metabox{
 
         $wcps_settings_tabs[] = array(
             'id' => 'query_categories',
-            'title' => sprintf(__('%s Query categories','woocommerce-products-slider'),'<i class="fas fa-qrcode"></i>'),
+            'title' => sprintf(__('%s Query categories', 'woocommerce-products-slider'), '<i class="fas fa-qrcode"></i>'),
             'priority' => 3,
             'active' => ($current_tab == 'query_categories') ? true : false,
             'data_visible' => 'categories',
@@ -153,14 +155,14 @@ class class_wcps_metabox{
 
         $wcps_settings_tabs[] = array(
             'id' => 'style',
-            'title' => sprintf(__('%s Style','woocommerce-products-slider'),'<i class="fas fa-palette"></i>'),
+            'title' => sprintf(__('%s Style', 'woocommerce-products-slider'), '<i class="fas fa-palette"></i>'),
             'priority' => 4,
             'active' => ($current_tab == 'style') ? true : false,
         );
 
         $wcps_settings_tabs[] = array(
             'id' => 'layouts',
-            'title' => sprintf(__('%s Layouts','woocommerce-products-slider'),'<i class="fas fa-qrcode"></i>'),
+            'title' => sprintf(__('%s Layouts', 'woocommerce-products-slider'), '<i class="fas fa-qrcode"></i>'),
             'priority' => 5,
             'active' => ($current_tab == 'layouts') ? true : false,
         );
@@ -168,21 +170,21 @@ class class_wcps_metabox{
 
         $wcps_settings_tabs[] = array(
             'id' => 'custom_scripts',
-            'title' => sprintf(__('%s Custom scripts','woocommerce-products-slider'),'<i class="far fa-file-code"></i>'),
+            'title' => sprintf(__('%s Custom scripts', 'woocommerce-products-slider'), '<i class="far fa-file-code"></i>'),
             'priority' => 6,
             'active' => ($current_tab == 'custom_scripts') ? true : false,
         );
 
         $wcps_settings_tabs[] = array(
             'id' => 'help_support',
-            'title' => sprintf(__('%s Help support','woocommerce-products-slider'),'<i class="fas fa-hands-helping"></i>'),
+            'title' => sprintf(__('%s Help support', 'woocommerce-products-slider'), '<i class="fas fa-hands-helping"></i>'),
             'priority' => 80,
             'active' => ($current_tab == 'help_support') ? true : false,
         );
 
         $wcps_settings_tabs[] = array(
             'id' => 'buy_pro',
-            'title' => sprintf(__('%s Buy pro','woocommerce-products-slider'),'<i class="fas fa-store"></i>'),
+            'title' => sprintf(__('%s Buy pro', 'woocommerce-products-slider'), '<i class="fas fa-store"></i>'),
             'priority' => 90,
             'active' => ($current_tab == 'buy_pro') ? true : false,
         );
@@ -191,47 +193,47 @@ class class_wcps_metabox{
 
         $tabs_sorted = array();
 
-        if(!empty($wcps_settings_tabs))
-        foreach ($wcps_settings_tabs as $page_key => $tab) $tabs_sorted[$page_key] = isset( $tab['priority'] ) ? $tab['priority'] : 0;
+        if (!empty($wcps_settings_tabs))
+            foreach ($wcps_settings_tabs as $page_key => $tab) $tabs_sorted[$page_key] = isset($tab['priority']) ? $tab['priority'] : 0;
         array_multisort($tabs_sorted, SORT_ASC, $wcps_settings_tabs);
 
 
 
         wp_enqueue_script('jquery');
         wp_enqueue_script('jquery-ui-sortable');
-        wp_enqueue_script( 'jquery-ui-core' );
+        wp_enqueue_script('jquery-ui-core');
         wp_enqueue_script('jquery-ui-accordion');
         wp_enqueue_script('wp-color-picker');
         wp_enqueue_style('wp-color-picker');
 
-        wp_enqueue_style( 'jquery-ui');
-        wp_enqueue_style( 'font-awesome-5' );
-        wp_enqueue_style( 'settings-tabs' );
-        wp_enqueue_script( 'settings-tabs' );
+        wp_enqueue_style('jquery-ui');
+        wp_enqueue_style('font-awesome-5');
+        wp_enqueue_style('settings-tabs');
+        wp_enqueue_script('settings-tabs');
 
 
-		?>
+    ?>
         <script>
-            jQuery(document).ready(function($){
-                $(document).on('click', '.settings-tabs input[name="wcps_options[slider_for]"]', function(){
+            jQuery(document).ready(function($) {
+                $(document).on('click', '.settings-tabs input[name="wcps_options[slider_for]"]', function() {
                     var val = $(this).val();
 
-                    console.log( val );
+                    console.log(val);
 
-                    $('.settings-tabs .tab-navs li').each(function( index ) {
-                        data_visible = $( this ).attr('data_visible');
+                    $('.settings-tabs .tab-navs li').each(function(index) {
+                        data_visible = $(this).attr('data_visible');
 
-                        if(typeof data_visible != 'undefined'){
+                        if (typeof data_visible != 'undefined') {
                             //console.log('undefined '+ data_visible );
 
                             n = data_visible.indexOf(val);
-                            if(n<0){
-                                $( this ).hide();
-                            }else{
-                                $( this ).show();
+                            if (n < 0) {
+                                $(this).hide();
+                            } else {
+                                $(this).show();
                             }
-                        }else{
-                            console.log('Not matched: '+ data_visible );
+                        } else {
+                            console.log('Not matched: ' + data_visible);
 
 
                         }
@@ -240,8 +242,6 @@ class class_wcps_metabox{
 
                 })
             })
-
-
         </script>
 
         <div class="settings-tabs vertical">
@@ -252,14 +252,14 @@ class class_wcps_metabox{
 
 
                 $args = array(
-                    'id'		=> 'slider_for',
-                    'parent'		=> 'wcps_options',
-                    'title'		=> __('Slider for','woocommerce-products-slider'),
-                    'details'	=> '',
-                    'type'		=> 'radio',
-                    'value'		=> $slider_for,
-                    'default'		=> '',
-                    'args'		=> apply_filters('wcps_slider_for_args', array('products' => 'Products','orders' => 'Orders', 'categories' => 'Categories' )),
+                    'id'        => 'slider_for',
+                    'parent'        => 'wcps_options',
+                    'title'        => __('Slider for', 'woocommerce-products-slider'),
+                    'details'    => '',
+                    'type'        => 'radio',
+                    'value'        => $slider_for,
+                    'default'        => '',
+                    'args'        => apply_filters('wcps_slider_for_args', array('products' => 'Products', 'categories' => 'Categories')),
                 );
 
                 $settings_tabs_field->generate_field($args);
@@ -269,45 +269,46 @@ class class_wcps_metabox{
 
             <ul class="tab-navs">
                 <?php
-                foreach ($wcps_settings_tabs as $tab){
+                foreach ($wcps_settings_tabs as $tab) {
                     $id = $tab['id'];
                     $title = $tab['title'];
                     $active = $tab['active'];
                     $data_visible = isset($tab['data_visible']) ? $tab['data_visible'] : '';
                     $hidden = isset($tab['hidden']) ? $tab['hidden'] : false;
-                    ?>
-                    <li <?php if(!empty($data_visible)):  ?> data_visible="<?php echo $data_visible; ?>" <?php endif; ?> class="tab-nav <?php if($hidden) echo 'hidden';?> <?php if($active) echo 'active';?>" data-id="<?php echo $id; ?>"><?php echo $title; ?></li>
-                    <?php
+                ?>
+                    <li <?php if (!empty($data_visible)):  ?> data_visible="<?php echo $data_visible; ?>" <?php endif; ?> class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>" data-id="<?php echo $id; ?>"><?php echo $title; ?></li>
+                <?php
                 }
                 ?>
             </ul>
             <?php
-            foreach ($wcps_settings_tabs as $tab){
+            foreach ($wcps_settings_tabs as $tab) {
                 $id = $tab['id'];
                 $title = $tab['title'];
                 $active = $tab['active'];
-                ?>
+            ?>
 
-                <div class="tab-content <?php if($active) echo 'active';?>" id="<?php echo $id; ?>">
+                <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo $id; ?>">
                     <?php
-                    do_action('wcps_metabox_content_'.$id, $post_id);
+                    do_action('wcps_metabox_content_' . $id, $post_id);
                     ?>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>
         <div class="clear clearfix"></div>
 
-        <?php
+<?php
 
 
-   		}
+    }
 
 
 
 
-	public function meta_boxes_wcps_save($post_id){
+    public function meta_boxes_wcps_save($post_id)
+    {
 
         /*
          * We need to verify this came from the our screen and with
@@ -335,7 +336,6 @@ class class_wcps_metabox{
 
             if (!current_user_can('edit_page', $post_id))
                 return $post_id;
-
         } else {
 
             if (!current_user_can('edit_post', $post_id))
@@ -345,12 +345,8 @@ class class_wcps_metabox{
         /* OK, its safe for us to save the data now. */
 
         do_action('wcps_metabox_save', $post_id);
-
-
-					
-		}
-	
-	}
+    }
+}
 
 
 new class_wcps_metabox();
