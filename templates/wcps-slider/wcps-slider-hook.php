@@ -133,7 +133,7 @@ function wcps_slider_main_items($args)
 
     $slider_slide_speed = isset($slider_option['slide_speed']) ? $slider_option['slide_speed'] : 1000;
     //    $slider_pagination_speed = isset($slider_option['pagination_speed']) ? $slider_option['pagination_speed'] : 1200;
-    $gutter = isset($slider_option['gutter']) ? $slider_option['gutter'] : 10;
+    $gutter = isset($slider_option['gutter']) ? $slider_option['gutter'] : 20;
 
     $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : true;
     $auto_play_speed = !empty($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1000;
@@ -141,7 +141,7 @@ function wcps_slider_main_items($args)
 
     //$auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
 
-    $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : true;
+    $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : false;
     $slider_loop = isset($slider_option['loop']) ? $slider_option['loop'] : true;
     $slider_center = isset($slider_option['center']) ? (bool)$slider_option['center'] : true;
     $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : true;
@@ -362,8 +362,19 @@ function wcps_slider_main_items($args)
     }
 
 
+    if ($slider_rtl == 1) {
+        $slider_rtl = 'rtl';
+    } elseif ($slider_rtl == 0) {
+        $slider_rtl = 'ltr';
+    } elseif ($slider_rtl == 'ttb') {
+        $slider_rtl = 'ttb';
+    }
+
+
     $sliderOptions = [
-        "type" => "slide",
+        "type" => $slider_loop ? "loop" : "slide",
+
+        "clones" => 2,
         "perPage" => (int) $slider_column_large,
         "perMove" => (int)$slider_slideby_large,
         "arrows" => (bool)$slider_navigation,
@@ -374,13 +385,14 @@ function wcps_slider_main_items($args)
         "lazyLoad" => (bool)$slider_lazy_load,
         "pauseOnHover" => (bool)$slider_stop_on_hover,
         "pauseOnFocus" => (bool)$slider_stop_on_hover,
-        "rewind" => (bool)$slider_rewind,
+        "autoHeight" => false,
+        // "rewind" => (bool)$slider_rewind,
         "speed" => (int)$auto_play_speed,
         //"rewindSpeed" => $auto_play_speed,
-        "rewindByDrag" => true,
+        // "rewindByDrag" => true,
         "drag" => $slider_mouse_drag,
-        "direction" => $slider_rtl ? 'rtl' : 'ltr',
-        "gap" => 20,
+        "direction" => $slider_rtl,
+        "gap" => (int)$gutter,
         "breakpoints" => [
             "1200" => [
                 "perPage" => (int) $slider_column_large,

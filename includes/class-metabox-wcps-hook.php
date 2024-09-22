@@ -1497,8 +1497,8 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
         $slider_column_medium = isset($slider_option['column_medium']) ? $slider_option['column_medium'] : 2;
         $slider_column_small = isset($slider_option['column_small']) ? $slider_option['column_small'] : 1;
 
-        $slider_slideby_large = isset($slider_option['slideby_large']) ? $slider_option['slideby_large'] : 3;
-        $slider_slideby_medium = isset($slider_option['slideby_medium']) ? $slider_option['slideby_medium'] : 2;
+        $slider_slideby_large = isset($slider_option['slideby_large']) ? $slider_option['slideby_large'] : 1;
+        $slider_slideby_medium = isset($slider_option['slideby_medium']) ? $slider_option['slideby_medium'] : 1;
         $slider_slideby_small = isset($slider_option['slideby_small']) ? $slider_option['slideby_small'] : 1;
 
 
@@ -1930,12 +1930,12 @@ if (!function_exists('wcps_metabox_content_slider_options')) {
             $args = array(
                 'id'        => 'rtl',
                 'parent'        => 'wcps_options[slider]',
-                'title'        => __('Slider rtl', 'woocommerce-products-slider'),
-                'details'    => __('Choose slider rtl.', 'woocommerce-products-slider'),
+                'title'        => __('Slider Direction', 'woocommerce-products-slider'),
+                'details'    => __('Choose slider direction.', 'woocommerce-products-slider'),
                 'type'        => 'select',
                 'value'        => $slider_rtl,
                 'default'        => 0,
-                'args'        => array(1 => __('True', 'woocommerce-products-slider'), 0 => __('False', 'woocommerce-products-slider')),
+                'args'        => array(1 => __('RTL', 'woocommerce-products-slider'), 0 => __('LTR', 'woocommerce-products-slider'), 'ttb' => __('TTB', 'woocommerce-products-slider')),
             );
 
             $settings_tabs_field->generate_field($args);
