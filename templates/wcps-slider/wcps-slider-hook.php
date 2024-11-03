@@ -421,7 +421,7 @@ function wcps_slider_main_items($args)
 
     if ($wcps_query->have_posts()) :
 
-        $wcps_items_class = apply_filters('wcps_items_wrapper_class', 'wcps-items', $args);
+        $wcps_items_class = apply_filters('wcps_items_wrapper_class', ' wcps-items ', $args);
 
         do_action('wcps_slider_before_items', $wcps_query, $args);
 
@@ -634,7 +634,7 @@ function wcps_slider_item($args)
     $item_layout_id = isset($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : wcps_first_wcps_layout();
     $layout_elements_data = get_post_meta($item_layout_id, 'layout_elements_data', true);
 
-    $wcps_item_class = apply_filters('wcps_slider_item_class', 'item ', $args);
+    $wcps_item_class = apply_filters('wcps_slider_item_class', 'item splide__slide ', $args);
 
     $layout_elements_data = !empty($layout_elements_data) ? $layout_elements_data : $defaultLayout_data;
 
@@ -645,7 +645,7 @@ function wcps_slider_item($args)
 
 
 
-    <div class="<?php echo esc_attr($wcps_item_class); ?> splide__slide">
+    <div class="<?php echo esc_attr($wcps_item_class); ?> ">
         <div class="elements-wrapper layout-<?php echo esc_attr($item_layout_id); ?>">
             <?php
             if (!empty($layout_elements_data))
@@ -744,12 +744,12 @@ function wcps_slider_main_items_orders($args)
 
     if ($wcps_query->have_posts()) :
 
-        $wcps_items_class = apply_filters('wcps_items_wrapper_class', 'wcps-items owl-carousel owl-theme', $args);
+        $wcps_items_class = apply_filters('wcps_items_wrapper_class', 'wcps-items  ', $args);
 
         do_action('wcps_slider_before_items', $wcps_query, $args);
 
     ?>
-        <div id="wcps-<?php echo esc_attr($wcps_id); ?>" class="<?php echo esc_attr($wcps_items_class); ?>">
+        <div id="wcps-<?php echo esc_attr($wcps_id); ?>" class="<?php echo esc_attr($wcps_items_class); ?> splide">
             <?php
 
             $loop_count = 1;
@@ -799,7 +799,7 @@ function wcps_slider_item_order($args)
     $item_layout_id = isset($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : wcps_first_wcps_layout();
     $layout_elements_data = get_post_meta($item_layout_id, 'layout_elements_data', true);
 
-    $wcps_item_class = apply_filters('wcps_slider_item_class', 'item ', $args);
+    $wcps_item_class = apply_filters('wcps_slider_item_class', 'item splide__slide ', $args);
 
     ?>
     <div class="<?php echo esc_attr($wcps_item_class); ?>">
@@ -834,6 +834,157 @@ add_action('wcps_slider_main', 'wcps_slider_main_items_dokan_vendors', 20);
 
 function wcps_slider_main_items_dokan_vendors($args)
 {
+
+    $wcps_id = isset($args['wcps_id']) ? (int) $args['wcps_id'] : 0;
+
+
+    $wcps_options = get_post_meta($wcps_id, 'wcps_options', true);
+
+    $container = isset($wcps_options['container']) ? $wcps_options['container'] : array();
+    $container_background_img_url = isset($container['background_img_url']) ? $container['background_img_url'] : '';
+    $container_background_color = isset($container['background_color']) ? $container['background_color'] : '';
+    $container_padding = isset($container['padding']) ? $container['padding'] : '';
+    $container_margin = isset($container['margin']) ? $container['margin'] : '';
+
+    $item_style = isset($wcps_options['item_style']) ? $wcps_options['item_style'] : array();
+    $item_height = isset($wcps_options['item_height']) ? $wcps_options['item_height'] : array();
+
+    $item_height_large = isset($item_height['large']) ? $item_height['large'] : '';
+    $item_height_medium = isset($item_height['medium']) ? $item_height['medium'] : '';
+    $item_height_small = isset($item_height['small']) ? $item_height['small'] : '';
+
+
+
+    $item_padding = isset($item_style['padding']) ? $item_style['padding'] : '';
+    //    $item_margin = isset($item_style['margin']) ? $item_style['margin'] : '10px';
+    $item_background_color = isset($item_style['background_color']) ? $item_style['background_color'] : '';
+    $item_text_align = isset($item_style['text_align']) ? $item_style['text_align'] : '';
+
+    $slider_option = isset($wcps_options['slider']) ? $wcps_options['slider'] : array();
+
+    $slider_column_large = isset($slider_option['column_large']) ? $slider_option['column_large'] : 3;
+    $slider_column_medium = isset($slider_option['column_medium']) ? $slider_option['column_medium'] : 2;
+    $slider_column_small = isset($slider_option['column_small']) ? $slider_option['column_small'] : 1;
+
+    $slider_slideby_large = isset($slider_option['slideby_large']) ? $slider_option['slideby_large'] : 3;
+    $slider_slideby_medium = isset($slider_option['slideby_medium']) ? $slider_option['slideby_medium'] : 2;
+    $slider_slideby_small = isset($slider_option['slideby_small']) ? $slider_option['slideby_small'] : true;
+
+
+
+    $slider_slide_speed = isset($slider_option['slide_speed']) ? $slider_option['slide_speed'] : 1000;
+    //    $slider_pagination_speed = isset($slider_option['pagination_speed']) ? $slider_option['pagination_speed'] : 1200;
+    $gutter = isset($slider_option['gutter']) ? $slider_option['gutter'] : 20;
+
+    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : true;
+    $auto_play_speed = !empty($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1000;
+    $auto_play_timeout = !empty($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 1200;
+
+    //$auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
+
+    $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : false;
+    $slider_loop = isset($slider_option['loop']) ? $slider_option['loop'] : true;
+    $slider_center = isset($slider_option['center']) ? (bool)$slider_option['center'] : true;
+    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : true;
+    $slider_navigation = isset($slider_option['navigation']) ?  $slider_option['navigation'] : true;
+    //$slider_navigation = ($slider_navigation) ? 'true' : 'false';
+
+
+    $navigation_position = isset($slider_option['navigation_position']) ? $slider_option['navigation_position'] : '';
+    $navigation_background_color = isset($slider_option['navigation_background_color']) ? $slider_option['navigation_background_color'] : '';
+    $navigation_color = isset($slider_option['navigation_color']) ? $slider_option['navigation_color'] : '';
+    $navigation_style = isset($slider_option['navigation_style']) ? $slider_option['navigation_style'] : 'flat';
+
+    $dots_background_color = isset($slider_option['dots_background_color']) ? $slider_option['dots_background_color'] : '';
+    $dots_active_background_color = isset($slider_option['dots_active_background_color']) ? $slider_option['dots_active_background_color'] : '';
+
+    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : true;
+    $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 0;
+    $slider_rtl = isset($slider_option['rtl']) ? (bool)$slider_option['rtl'] : false;
+    $slider_lazy_load = isset($slider_option['lazy_load']) ?  $slider_option['lazy_load'] : true;
+    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : true;
+    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : true;
+
+    $item_layout_id = isset($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : '';
+    $layout_elements_data = get_post_meta($item_layout_id, 'layout_elements_data', true);
+    $args['layout_id'] = $item_layout_id;
+
+
+    $wcps_settings = get_option('wcps_settings');
+    $font_aw_version = isset($wcps_settings['font_aw_version']) ? $wcps_settings['font_aw_version'] : 'none';
+
+    if ($font_aw_version == 'v_5') {
+        $navigation_text_prev = '<i class="fas fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fas fa-chevron-right"></i>';
+    } elseif ($font_aw_version == 'v_4') {
+        $navigation_text_prev = '<i class="fa fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fa fa-chevron-right"></i>';
+    } else {
+        $navigation_text_prev = '<i class="fas fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fas fa-chevron-right"></i>';
+    }
+
+
+    $navigation_text_prev = !empty($slider_option['navigation_text']['prev']) ? $slider_option['navigation_text']['prev'] : $navigation_text_prev;
+    $navigation_text_next = !empty($slider_option['navigation_text']['next']) ? $slider_option['navigation_text']['next'] : $navigation_text_next;
+
+
+    $sliderOptions = [
+        "type" => $slider_loop ? "loop" : "slide",
+
+        "clones" => 2,
+        "perPage" => (int) $slider_column_large,
+        "perMove" => (int)$slider_slideby_large,
+        "arrows" => (bool)$slider_navigation,
+        "pagination" => (bool)$slider_pagination,
+        //"paginationDirection" => $slider_rtl ? 'rtl' : 'ltr',
+        "autoplay" => (bool)$slider_auto_play,
+        "interval" => $auto_play_timeout,
+        "lazyLoad" => (bool)$slider_lazy_load,
+        "pauseOnHover" => (bool)$slider_stop_on_hover,
+        "pauseOnFocus" => (bool)$slider_stop_on_hover,
+        "autoHeight" => false,
+        // "rewind" => (bool)$slider_rewind,
+        "speed" => (int)$auto_play_speed,
+        //"rewindSpeed" => $auto_play_speed,
+        // "rewindByDrag" => true,
+        "drag" => $slider_mouse_drag,
+        "direction" => $slider_rtl,
+        "gap" => (int)$gutter,
+        "breakpoints" => [
+            "1200" => [
+                "perPage" => (int) $slider_column_large,
+                "perMove" => (int) $slider_slideby_large,
+
+            ],
+            "768" => [
+                "perPage" => (int) $slider_column_medium,
+                "perMove" => (int) $slider_slideby_medium,
+
+            ],
+            "576" => [
+                "perPage" => (int) $slider_column_small,
+                "perMove" => (int) $slider_slideby_small,
+
+            ],
+        ],
+
+        //"focus" => $slider_center ? 'center' : 99999,
+    ];
+
+    $prevIconHtml = wp_specialchars_decode($navigation_text_prev, ENT_QUOTES);
+    $prevIconPosition = 'before';
+    $nextIconPosition = 'after';
+    $nextIconHtml = wp_specialchars_decode($navigation_text_next, ENT_QUOTES);
+
+
+
+
+
+
+
+
+
 
 
     $wcps_id = isset($args['wcps_id']) ? (int) $args['wcps_id'] : 0;
@@ -874,32 +1025,89 @@ function wcps_slider_main_items_dokan_vendors($args)
 
 
 
-
     $authors = get_users($query_args);
     //$authors = $wp_user_query->get_results();
 
 
     if (!empty($authors)) :
 
-        $wcps_items_class = apply_filters('wcps_items_wrapper_class', 'wcps-items owl-carousel owl-theme', $args);
+        $wcps_items_class = apply_filters('wcps_items_wrapper_class', 'wcps-items  ', $args);
 
 
     ?>
-        <div id="wcps-<?php echo esc_attr($wcps_id); ?>" class="<?php echo esc_attr($wcps_items_class); ?>">
-            <?php
+        <div id="wcps-<?php echo esc_attr($wcps_id); ?>" class="<?php echo esc_attr($wcps_items_class); ?> splide" data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
 
-            $loop_count = 1;
-            foreach ($authors as $author) {
 
-                $args['user_id'] = $author->ID;
-                $args['loop_count'] = $loop_count;
+            <div class="splide__arrows <?php echo esc_attr($navigation_position); ?> <?php echo $navigation_style; ?>">
+                <div class='prev splide__arrow splide__arrow--prev'>
 
-                do_action('wcps_slider_item_dokan_vendor', $args);
+                    <?php if ($prevIconPosition == 'before') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($prevIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
 
-                $loop_count++;
-            }
+                    <?php if (!empty($prevText)) : ?>
+                        <span>
+                            <?php echo esc_attr($prevText); ?>
+                        </span>
+                    <?php endif; ?>
 
-            ?>
+
+
+                    <?php if ($prevIconPosition == 'after') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($prevIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+
+                </div>
+                <div class='next splide__arrow splide__arrow--next'>
+
+
+
+                    <?php if ($nextIconPosition == 'before') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($nextIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+                    <?php if (!empty($nextText)) : ?>
+                        <span>
+                            <?php echo esc_attr($nextText); ?>
+                        </span>
+                    <?php endif; ?>
+
+
+
+                    <?php if ($nextIconPosition == 'after') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($nextIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <?php
+
+                    $loop_count = 1;
+                    foreach ($authors as $author) {
+
+                        $args['user_id'] = $author->ID;
+                        $args['loop_count'] = $loop_count;
+
+                        do_action('wcps_slider_item_dokan_vendor', $args);
+
+                        $loop_count++;
+                    }
+                    ?>
+                </ul>
+            </div>
+            <ul class="splide__pagination "></ul>
+
+
         </div>
 
     <?php
@@ -924,7 +1132,7 @@ function wcps_slider_item_dokan_vendors($args)
     $item_layout_id = isset($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : wcps_first_wcps_layout();
     $layout_elements_data = get_post_meta($item_layout_id, 'layout_elements_data', true);
 
-    $wcps_item_class = apply_filters('wcps_slider_item_class', 'item ', $args);
+    $wcps_item_class = apply_filters('wcps_slider_item_class', 'item splide__slide ', $args);
 
 
     ?>
@@ -978,7 +1186,117 @@ function wcps_slider_main_items_categories($args)
     $taxonomies = !empty($query['taxonomies']) ? $query['taxonomies'] : array();
 
 
+    $slider_option = isset($wcps_options['slider']) ? $wcps_options['slider'] : array();
 
+    $slider_column_large = isset($slider_option['column_large']) ? $slider_option['column_large'] : 3;
+    $slider_column_medium = isset($slider_option['column_medium']) ? $slider_option['column_medium'] : 2;
+    $slider_column_small = isset($slider_option['column_small']) ? $slider_option['column_small'] : 1;
+
+    $slider_slideby_large = isset($slider_option['slideby_large']) ? $slider_option['slideby_large'] : 3;
+    $slider_slideby_medium = isset($slider_option['slideby_medium']) ? $slider_option['slideby_medium'] : 2;
+    $slider_slideby_small = isset($slider_option['slideby_small']) ? $slider_option['slideby_small'] : true;
+
+
+
+    $slider_slide_speed = isset($slider_option['slide_speed']) ? $slider_option['slide_speed'] : 1000;
+    //    $slider_pagination_speed = isset($slider_option['pagination_speed']) ? $slider_option['pagination_speed'] : 1200;
+    $gutter = isset($slider_option['gutter']) ? $slider_option['gutter'] : 20;
+
+    $slider_auto_play = isset($slider_option['auto_play']) ? $slider_option['auto_play'] : true;
+    $auto_play_speed = !empty($slider_option['auto_play_speed']) ? $slider_option['auto_play_speed'] : 1000;
+    $auto_play_timeout = !empty($slider_option['auto_play_timeout']) ? $slider_option['auto_play_timeout'] : 1200;
+
+    //$auto_play_timeout = ($auto_play_speed >= $auto_play_timeout) ? $auto_play_speed + 1000 : $auto_play_timeout;
+
+    $slider_rewind = isset($slider_option['rewind']) ? $slider_option['rewind'] : false;
+    $slider_loop = isset($slider_option['loop']) ? $slider_option['loop'] : true;
+    $slider_center = isset($slider_option['center']) ? (bool)$slider_option['center'] : true;
+    $slider_stop_on_hover = isset($slider_option['stop_on_hover']) ? $slider_option['stop_on_hover'] : true;
+    $slider_navigation = isset($slider_option['navigation']) ?  $slider_option['navigation'] : true;
+    //$slider_navigation = ($slider_navigation) ? 'true' : 'false';
+
+    $navigation_position = isset($slider_option['navigation_position']) ? $slider_option['navigation_position'] : '';
+    $navigation_background_color = isset($slider_option['navigation_background_color']) ? $slider_option['navigation_background_color'] : '';
+    $navigation_color = isset($slider_option['navigation_color']) ? $slider_option['navigation_color'] : '';
+    $navigation_style = isset($slider_option['navigation_style']) ? $slider_option['navigation_style'] : 'flat';
+
+    $dots_background_color = isset($slider_option['dots_background_color']) ? $slider_option['dots_background_color'] : '';
+    $dots_active_background_color = isset($slider_option['dots_active_background_color']) ? $slider_option['dots_active_background_color'] : '';
+
+    $slider_pagination = isset($slider_option['pagination']) ? $slider_option['pagination'] : true;
+    $slider_pagination_count = isset($slider_option['pagination_count']) ? $slider_option['pagination_count'] : 0;
+    $slider_rtl = isset($slider_option['rtl']) ? (bool)$slider_option['rtl'] : false;
+    $slider_lazy_load = isset($slider_option['lazy_load']) ?  $slider_option['lazy_load'] : true;
+    $slider_mouse_drag = isset($slider_option['mouse_drag']) ? $slider_option['mouse_drag'] : true;
+    $slider_touch_drag = isset($slider_option['touch_drag']) ? $slider_option['touch_drag'] : true;
+
+
+    $wcps_settings = get_option('wcps_settings');
+    $font_aw_version = isset($wcps_settings['font_aw_version']) ? $wcps_settings['font_aw_version'] : 'none';
+
+    if ($font_aw_version == 'v_5') {
+        $navigation_text_prev = '<i class="fas fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fas fa-chevron-right"></i>';
+    } elseif ($font_aw_version == 'v_4') {
+        $navigation_text_prev = '<i class="fa fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fa fa-chevron-right"></i>';
+    } else {
+        $navigation_text_prev = '<i class="fas fa-chevron-left"></i>';
+        $navigation_text_next = '<i class="fas fa-chevron-right"></i>';
+    }
+
+
+    $navigation_text_prev = !empty($slider_option['navigation_text']['prev']) ? $slider_option['navigation_text']['prev'] : $navigation_text_prev;
+    $navigation_text_next = !empty($slider_option['navigation_text']['next']) ? $slider_option['navigation_text']['next'] : $navigation_text_next;
+
+
+
+    $sliderOptions = [
+        "type" => $slider_loop ? "loop" : "slide",
+
+        "clones" => 2,
+        "perPage" => (int) $slider_column_large,
+        "perMove" => (int)$slider_slideby_large,
+        "arrows" => (bool)$slider_navigation,
+        "pagination" => (bool)$slider_pagination,
+        //"paginationDirection" => $slider_rtl ? 'rtl' : 'ltr',
+        "autoplay" => (bool)$slider_auto_play,
+        "interval" => $auto_play_timeout,
+        "lazyLoad" => (bool)$slider_lazy_load,
+        "pauseOnHover" => (bool)$slider_stop_on_hover,
+        "pauseOnFocus" => (bool)$slider_stop_on_hover,
+        "autoHeight" => false,
+        // "rewind" => (bool)$slider_rewind,
+        "speed" => (int)$auto_play_speed,
+        //"rewindSpeed" => $auto_play_speed,
+        // "rewindByDrag" => true,
+        "drag" => $slider_mouse_drag,
+        "direction" => $slider_rtl,
+        "gap" => (int)$gutter,
+        "breakpoints" => [
+            "1200" => [
+                "perPage" => (int) $slider_column_large,
+                "perMove" => (int) $slider_slideby_large,
+
+            ],
+            "768" => [
+                "perPage" => (int) $slider_column_medium,
+                "perMove" => (int) $slider_slideby_medium,
+
+            ],
+            "576" => [
+                "perPage" => (int) $slider_column_small,
+                "perMove" => (int) $slider_slideby_small,
+
+            ],
+        ],
+
+        //"focus" => $slider_center ? 'center' : 99999,
+    ];
+    $prevIconHtml = wp_specialchars_decode($navigation_text_prev, ENT_QUOTES);
+    $prevIconPosition = 'before';
+    $nextIconPosition = 'after';
+    $nextIconHtml = wp_specialchars_decode($navigation_text_next, ENT_QUOTES);
 
 
     $terms_list = array();
@@ -986,27 +1304,94 @@ function wcps_slider_main_items_categories($args)
 
     if (!empty($taxonomies) && is_array($taxonomies)) :
 
-        $wcps_items_class = apply_filters('wcps_items_wrapper_class', '', $args);
+        $wcps_items_class = apply_filters('wcps_items_wrapper_class', ' wcps-items ', $args);
 
     ?>
-        <div id="wcps-<?php echo esc_attr($wcps_id); ?>" class="<?php echo esc_attr($wcps_items_class); ?>">
-            <?php
+        <div id="wcps-<?php echo esc_attr($wcps_id); ?>" class="<?php echo esc_attr($wcps_items_class); ?> splide" data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
 
-            foreach ($taxonomies as $taxonomy) {
-                $terms = isset($taxonomy['terms']) ? $taxonomy['terms'] : array();
-                foreach ($terms as $terms_id) {
-                    //$terms_list[] =  $terms_id;
 
-                    $args['term_id'] = $terms_id;
-                    $args['loop_count'] = $loop_count;
+            <div class="splide__arrows <?php echo esc_attr($navigation_position); ?> <?php echo $navigation_style; ?>">
+                <div class='prev splide__arrow splide__arrow--prev'>
 
-                    do_action('wcps_slider_item_term', $args);
+                    <?php if ($prevIconPosition == 'before') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($prevIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
 
-                    $loop_count++;
-                }
-            }
+                    <?php if (!empty($prevText)) : ?>
+                        <span>
+                            <?php echo esc_attr($prevText); ?>
+                        </span>
+                    <?php endif; ?>
 
-            ?>
+
+
+                    <?php if ($prevIconPosition == 'after') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($prevIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+
+                </div>
+                <div class='next splide__arrow splide__arrow--next'>
+
+
+
+                    <?php if ($nextIconPosition == 'before') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($nextIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+                    <?php if (!empty($nextText)) : ?>
+                        <span>
+                            <?php echo esc_attr($nextText); ?>
+                        </span>
+                    <?php endif; ?>
+
+
+
+                    <?php if ($nextIconPosition == 'after') : ?>
+                        <span class='icon'>
+                            <?php echo wp_kses_post($nextIconHtml); ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+
+
+
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <?php
+
+                    foreach ($taxonomies as $taxonomy) {
+                        $terms = isset($taxonomy['terms']) ? $taxonomy['terms'] : array();
+                        foreach ($terms as $terms_id) {
+                            //$terms_list[] =  $terms_id;
+
+                            $args['term_id'] = $terms_id;
+                            $args['loop_count'] = $loop_count;
+
+                            do_action('wcps_slider_item_term', $args);
+
+                            $loop_count++;
+                        }
+                    }
+
+                    ?>
+                </ul>
+            </div>
+            <ul class="splide__pagination "></ul>
+
+
+
+
+
+
+
+
         </div>
     <?php
 
@@ -1031,7 +1416,7 @@ function wcps_slider_item_term($args)
     $item_layout_id = isset($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : wcps_first_wcps_layout();
     $layout_elements_data = get_post_meta($item_layout_id, 'layout_elements_data', true);
 
-    $wcps_item_class = apply_filters('wcps_slider_item_class', 'item ', $args);
+    $wcps_item_class = apply_filters('wcps_slider_item_class', 'item splide__slide', $args);
 
     ?>
     <div class="<?php echo esc_attr($wcps_item_class); ?>">

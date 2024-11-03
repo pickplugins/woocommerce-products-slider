@@ -1,10 +1,10 @@
 ﻿===  Product Slider for WooCommerce by PickPlugins ===
 	Contributors: PickPlugins
-	Donate link: https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/?ref=wordpress.org
+	Donate link: https://pickplugins.com/pickplugins-products-slider/
 	Tags: product slider, woocommerce slider, carousel slider, product category slider, woo slider, carousel slider,  woocommerce product slider
 	Requires at least: 3.8
-	Tested up to: 6.6
-	Stable tag: 1.13.54
+	Tested up to: 6.7
+	Stable tag: 1.13.55
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,10 +17,10 @@ PickPlugins Product Slider is easy and user friendly carousel slider for WooComm
 
 ### Product Slider for WooCommerce by PickPlugins by http://pickplugins.com
 
-* [Buy Premium !&raquo;](https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/?ref=wordpress.org)
-* [See the Live demo !&raquo;](https://www.pickplugins.com/demo/woocommerce-products-slider/?ref=wordpress.org)
-* [Support !&raquo;](https://www.pickplugins.com/support/?ref=wordpress.org)
-* [Documentation !&raquo;](https://www.pickplugins.com/documentation/woocommerce-products-slider/?ref=wordpress.org)
+* [Buy Premium !&raquo;](https://pickplugins.com/pickplugins-products-slider/)
+* [See the Live demo !&raquo;](https://www.pickplugins.com/demo/woocommerce-products-slider/)
+* [Support !&raquo;](https://www.pickplugins.com/support/)
+* [Documentation !&raquo;](https://www.pickplugins.com/documentation/woocommerce-products-slider/)
 
 ###Plugin Features
 
@@ -141,6 +141,10 @@ then paste this shortcode anywhere in your page to display slider<br />
 
 == Changelog ==
 
+
+
+    = 1.13.55 =
+    * 2024-11-03 fix -  Slider issue for categories and dokan vendor fixed.
 
     = 1.13.54 =
     * 2024-09-22 fix -  Fixes some slider options issue.

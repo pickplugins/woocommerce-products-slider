@@ -2187,7 +2187,7 @@ if (!function_exists('wcps_metabox_content_buy_pro')) {
             ?>
 
             <p><?php echo __('If you love our plugin and want more feature please consider to buy pro version.', 'woocommerce-products-slider'); ?></p>
-            <a class="button" href="https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/?ref=dashobard"><?php echo __('Buy premium', 'woocommerce-products-slider'); ?></a>
+            <a class="button" href="https://pickplugins.com/pickplugins-products-slider/?ref=dashobard"><?php echo __('Buy premium', 'woocommerce-products-slider'); ?></a>
 
             <h2><?php echo __('See the differences', 'woocommerce-products-slider'); ?></h2>
 
@@ -2510,7 +2510,7 @@ if (!function_exists('wcps_metabox_content_buy_pro')) {
                 <tr>
                     <td class="col-features"><?php echo __('Buy now', 'woocommerce-products-slider'); ?></td>
                     <td> </td>
-                    <td><a class="button" href="https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/?ref=dashobard"><?php echo __('Buy premium', 'woocommerce-products-slider'); ?></a></td>
+                    <td><a class="button" href="https://pickplugins.com/pickplugins-products-slider/?ref=dashobard"><?php echo __('Buy premium', 'woocommerce-products-slider'); ?></a></td>
                 </tr>
 
 
