@@ -50,6 +50,9 @@ class WoocommerceProductsSlider
 
         require_once(wcps_plugin_dir . 'includes/3rd-party/3rd-party.php');
 
+        require_once(wcps_plugin_dir . 'includes/functions-rest.php');
+
+
 
         require_once(plugin_dir_path(__FILE__) . 'includes/functions.php');
         require_once(plugin_dir_path(__FILE__) . 'includes/class-functions.php');
