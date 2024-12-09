@@ -457,6 +457,9 @@ function Html(props) {
 	return (
 		<div className="">
 
+			{JSON.stringify(wrapper)}
+
+
 			{props.accordionData.post_content == null && (
 				<div className="p-3 text-center">Please select WCPS first</div>
 			)}

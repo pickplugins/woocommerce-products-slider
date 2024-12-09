@@ -6414,7 +6414,7 @@ function Html(props) {
 
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
-  }, props.accordionData.post_content == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, JSON.stringify(wrapper), props.accordionData.post_content == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3 text-center"
   }, "Please select WCPS first"), props.accordionData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     className: "font-medium text-slate-900 ",
