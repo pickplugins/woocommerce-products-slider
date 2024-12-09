@@ -7,7 +7,9 @@ wp_enqueue_style('post-grid-output', wcps_plugin_url . '/dist/output.css', [], t
 
 wp_enqueue_style('wp-components');
 
+wp_register_style('pgcontent_slider_splide_core', wcps_plugin_url . 'assets/admin/css/splide-core.min.css');
 
+wp_enqueue_style('pgcontent_slider_splide_core');
 
 
 

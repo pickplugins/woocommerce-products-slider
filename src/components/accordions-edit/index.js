@@ -3,39 +3,18 @@ import { __ } from "@wordpress/i18n";
 
 import {
 	Icon,
-	close,
-	settings,
-	cloud,
-	plus,
-	brush,
-	mediaAndText,
-} from "@wordpress/icons";
-import { ReactSortable } from "react-sortablejs";
-import {
-	PanelBody,
-	RangeControl,
-	Button,
-	ButtonGroup,
-	Panel,
-	PanelRow,
-	Dropdown,
-	DropdownMenu,
-	SelectControl,
-	ColorPicker,
-	ColorPalette,
-	ToolsPanelItem,
-	ComboboxControl,
-	Spinner,
-	CustomSelectControl,
-	Popover,
 	__experimentalInputControl as InputControl,
+	PanelBody,
+	PanelRow,
+	SelectControl,
 } from "@wordpress/components";
-import apiFetch from "@wordpress/api-fetch";
+import { brush, close, settings } from "@wordpress/icons";
 
-import PGtabs from "../tabs";
-import PGtab from "../tab";
+import breakPoints from "../../breakpoints";
+import PGDropdown from "../dropdown";
 import PGStyles from "../styles";
-import { Pagination } from "aspect-ui";
+import PGtab from "../tab";
+import PGtabs from "../tabs";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -45,426 +24,1496 @@ function Html(props) {
 	}
 
 	var onChange = props.onChange;
+	var postData = props.postData;
 
 	var breakPointX = "Desktop";
 
 
-	var defaultPostData = {
-		sliderFor: "products",
 
-		wrapper: {
-
-			options: {
-				class: "pg-content-slider"
-			},
-			styles: {}
-
-		},
-		itemsWrap: {
-
-			options: {
-				tag: "div",
-				class: "pg-content-slider-item"
-			},
-			styles: {}
-
-		},
-		item: {
-
-			options: {
-				tag: "div",
-				class: "pg-content-slider-item"
-			},
-			styles: {}
-
-		},
-
-
-		sliderOptions: {
-
-
-			perPage: "3",
-			perMove: "1",
-			autoplay: "1",
-			gap: "1em",
-			pagination: "1",
-			drag: "1",
-			arrows: "1",
-			pauseOnHover: "1",
-			speed: "400"
-
-		},
-
-
-		navsWrap: {
-
-			options: {
-				class: "nav-wrap"
-			},
-			styles: {
-				display: {
-					Desktop: "flex"
-				},
-				width: {
-					Desktop: "100%"
-				},
-				alignItems: {
-					Desktop: "center"
-				},
-				position: {
-					Desktop: "absolute !important"
-				},
-				top: {
-					Desktop: "10px"
-				},
-				left: {
-					Desktop: "20px"
-				},
-				gap: {
-					Desktop: "20px"
-				}
-			}
-
-		},
-		prev: {
-
-			options: {
-				text: "Prev",
-				class: ""
-			},
-			styles: {
-				fontSize: {
-					Desktop: "18px"
-				},
-				fontFamily: {
-					Desktop: "Poppins"
-				},
-				fontStyle: {
-					Desktop: "normal"
-				},
-				fontWeight: {
-					Desktop: "400"
-				},
-				textAlign: {
-					Desktop: "left"
-				},
-				color: {
-					Desktop: "#ffffff"
-				},
-				backgroundColor: {
-					Desktop: "#1F2E45"
-				},
-				borderRadius: {
-					Desktop: "50px"
-				},
-				padding: {
-					Desktop: "5px 20px 5px 20px"
-				}
-			}
-
-		},
-		prevIcon: {
-
-			options: {
-				position: "before",
-				class: "",
-				library: "fontAwesome",
-				srcType: "class",
-				iconSrc: "fas fa-chevron-left"
-			},
-			styles: {
-				padding: {
-					Desktop: "0px 10px 0px 0px"
-				},
-				fontSize: {
-					Desktop: "16px"
-				}
-			}
-
-		},
-		next: {
-
-			options: {
-				text: "Next",
-				class: ""
-			},
-			styles: {
-				fontSize: {
-					Desktop: "18px"
-				},
-				fontFamily: {
-					Desktop: "Poppins"
-				},
-				fontStyle: {
-					Desktop: "normal"
-				},
-				fontWeight: {
-					Desktop: "400"
-				},
-				textAlign: {
-					Desktop: "right"
-				},
-				color: {
-					Desktop: "#ffffff"
-				},
-				backgroundColor: {
-					Desktop: "#1F2E45"
-				},
-				borderRadius: {
-					Desktop: "50px"
-				},
-				padding: {
-					Desktop: "5px 20px 5px 20px"
-				}
-			}
-
-		},
-		nextIcon: {
-
-			options: {
-				position: "after",
-				class: "",
-				library: "fontAwesome",
-				srcType: "class",
-				iconSrc: "fas fa-chevron-right"
-			},
-			styles: {
-				padding: {
-					Desktop: "0px 0px 0px 10px"
-				},
-				fontSize: {
-					Desktop: "16px"
-				}
-			}
-
-		},
-		paginationWrap: {
-
-			options: {
-				tag: "ul",
-				class: ""
-			},
-			styles: {}
-
-		},
-		pagination: {
-
-			options: {
-				tag: "span",
-				class: ""
-			},
-			styles: {
-				border: {
-					Desktop: "1px solid #1f2e45"
-				},
-				backgroundColor: {
-					Desktop: "#f1f7f9"
-				},
-				height: {
-					Desktop: "15px"
-				},
-				width: {
-					Desktop: "15px"
-				},
-				borderRadius: {
-					Desktop: "50%"
-				}
-			}
-
-		},
-		paginationActive: {
-
-			options: {
-				class: ""
-			},
-			styles: {
-				backgroundColor: {
-					Desktop: "#1f2e45"
-				}
-			}
-
-		},
+	var accordionDataX = postData.post_content;
 
 
 
+	var [styleObj, setstyleObj] = useState({}); // Using the hook.
+	var [styleSudoObj, setstyleSudoObj] = useState({}); // Using the hook.
+	var [styleStr, setstyleStr] = useState(""); // Using the hook.
+
+	var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
+	var [itemsWrap, setitemsWrap] = useState(accordionDataX.itemsWrap);
+	var [item, setitem] = useState(accordionDataX.item);
+	var [sliderOptions, setsliderOptions] = useState(accordionDataX.sliderOptions);
+	var [prev, setprev] = useState(accordionDataX.prev);
+	var [next, setnext] = useState(accordionDataX.next);
+	var [prevIcon, setprevIcon] = useState(accordionDataX.prevIcon);
+	var [nextIcon, setnextIcon] = useState(accordionDataX.nextIcon);
+	var [paginationWrap, setpaginationWrap] = useState(accordionDataX.paginationWrap);
+	var [paginationActive, setpaginationActive] = useState(accordionDataX.paginationActive);
+	var [pagination, setpagination] = useState(accordionDataX.pagination);
 
 
 
+	const gapValue = sliderOptions?.gap || "0px";
+	const [number, setNumber] = useState(parseInt(gapValue));
+	const [unit, setUnit] = useState(gapValue.replace(number, ""));
+
+	var breakPointList = [{ label: "Select..", icon: "", value: "" }];
+	for (var x in breakPoints) {
+		var breakPointItem = breakPoints[x];
+		breakPointList.push({
+			label: breakPointItem.name,
+			icon: breakPointItem.icon,
+			value: breakPointItem.id,
+		});
+	}
 
 
+	var wrapperSelector = ".wcps-content-slider";
+	var itemsWrapSelector = "." + itemsWrap.options.class;
+	var itemSelector = "." + item.options.class;
+	var prevSelector = "." + prev.options.class;
+	var nextSelector = "." + next.options.class;
+	var prevIconSelector = "." + prevIcon.options.class;
+	var nextIconSelector = "." + nextIcon.options.class;
+	var paginationWrapSelector = "." + paginationWrap.options.class;
+	var paginationActiveSelector = "." + paginationActive.options.class;
+	var paginationSelector = "." + pagination.options.class;
 
-	};
+	var blockId = "";
 
-	var accordionDataX =
-		props.accordionData.post_content == null ||
-			props.accordionData.post_content.length == 0
-			? defaultPostData
-			: props.accordionData;
+	function getElementSelector(sudoScource, mainSelector) {
 
-	var [accordionData, setaccordionData] = useState(accordionDataX); // Using the hook.
-	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
-	var [itemsWrap, setitemsWrap] = useState(defaultPostData.itemsWrap);
-	var [headerActive, setheaderActive] = useState(defaultPostData.headerActive);
-	var [item, setitem] = useState(defaultPostData.item);
-	var [sliderOptions, setsliderOptions] = useState(defaultPostData.sliderOptions);
-	var [prev, setprev] = useState(defaultPostData.prev);
-	var [next, setnext] = useState(defaultPostData.next);
-	var [prevIcon, setprevIcon] = useState(defaultPostData.prevIcon);
-	var [nextIcon, setnextIcon] = useState(defaultPostData.nextIcon);
-	var [paginationWrap, setpaginationWrap] = useState(defaultPostData.paginationWrap);
-	var [paginationActive, setpaginationActive] = useState(defaultPostData.paginationActive);
-	var [pagination, setpagination] = useState(defaultPostData.pagination);
-	var [iconToggle, seticonToggle] = useState(defaultPostData.iconToggle);
-	var [blockCssY, setblockCssY] = useState(defaultPostData.blockCssY);
-
-	var wrapperSelector = "." + wrapper.options.class;
-
-	var blockId = '';
+		var elementSelector = mainSelector;
+		if (sudoScource == "styles") {
+			elementSelector = mainSelector;
+		} else if (sudoScource == "hover") {
+			elementSelector = mainSelector + ":hover";
+		} else if (sudoScource == "after") {
+			elementSelector = mainSelector + "::after";
+		} else if (sudoScource == "before") {
+			elementSelector = mainSelector + "::before";
+		} else if (sudoScource == "first-child") {
+			elementSelector = mainSelector + ":first-child";
+		} else if (sudoScource == "last-child") {
+			elementSelector = mainSelector + ":last-child";
+		} else if (sudoScource == "visited") {
+			elementSelector = mainSelector + ":visited";
+		} else if (sudoScource == "selection") {
+			elementSelector = mainSelector + "::selection";
+		} else if (sudoScource == "first-letter") {
+			elementSelector = mainSelector + "::first-letter";
+		} else if (sudoScource == "first-line") {
+			elementSelector = mainSelector + "::first-line";
+		} else {
+			elementSelector = mainSelector + ":" + sudoScource;
+		}
+		return elementSelector;
+	}
+	function cssAttrParse(key) {
+		var cssProp = "";
+		if (key == "alignContent") {
+			cssProp = "align-content";
+		} else if (key == "alignItems") {
+			cssProp = "align-items";
+		} else if (key == "animationName") {
+			cssProp = "animation-name";
+		} else if (key == "alignSelf") {
+			cssProp = "align-self";
+		} else if (key == "aspectRatio") {
+			cssProp = "aspect-ratio";
+		} else if (key == "backfaceVisibility") {
+			cssProp = "backface-visibility";
+		} else if (key == "backgroundAttachment") {
+			cssProp = "background-attachment";
+		} else if (key == "backgroundBlendMode") {
+			cssProp = "background-blend-mode";
+		} else if (key == "backgroundClip") {
+			cssProp = "background-clip";
+		} else if (key == "bgColor") {
+			cssProp = "background-color";
+		} else if (key == "backgroundColor") {
+			cssProp = "background-color";
+		} else if (key == "backgroundOrigin") {
+			cssProp = "background-origin";
+		} else if (key == "backgroundRepeat") {
+			cssProp = "background-repeat";
+		} else if (key == "backgroundSize") {
+			cssProp = "background-size";
+		} else if (key == "backgroundPosition") {
+			cssProp = "background-position";
+		} else if (key == "backgroundImage") {
+			cssProp = "background-image";
+		} else if (key == "border") {
+			cssProp = "border";
+		} else if (key == "borderTop") {
+			cssProp = "border-top";
+		} else if (key == "borderRight") {
+			cssProp = "border-right";
+		} else if (key == "borderBottom") {
+			cssProp = "border-bottom";
+		} else if (key == "borderLeft") {
+			cssProp = "border-left";
+		} else if (key == "borderRadius") {
+			cssProp = "border-radius";
+		} else if (key == "borderCollapse") {
+			cssProp = "border-collapse";
+		} else if (key == "borderSpacing") {
+			cssProp = "border-spacing";
+		} else if (key == "borderImage") {
+			cssProp = "border-image";
+		} else if (key == "boxShadow") {
+			cssProp = "box-shadow";
+		} else if (key == "backdropFilter") {
+			cssProp = "backdrop-filter";
+		} else if (
+			key == "bottom" ||
+			key == "top" ||
+			key == "left" ||
+			key == "right" ||
+			key == "clear" ||
+			key == "color" ||
+			key == "filter" ||
+			key == "float"
+		) {
+			cssProp = key;
+		} else if (key == "boxSizing") {
+			cssProp = "box-sizing";
+		} else if (key == "cursor") {
+			cssProp = "cursor";
+		} else if (key == "content") {
+			cssProp = "content";
+		} else if (key == "counterIncrement") {
+			cssProp = "counter-increment";
+		} else if (key == "counterReset") {
+			cssProp = "counter-reset";
+		} else if (key == "counterSet") {
+			cssProp = "counter-set";
+		} else if (key == "columnCount") {
+			cssProp = "column-count";
+		} else if (key == "columnRule") {
+			cssProp = "column-rule";
+		} else if (key == "direction") {
+			cssProp = "direction";
+		} else if (key == "fontFamily") {
+			cssProp = "font-family";
+		} else if (key == "fontSize") {
+			cssProp = "font-size";
+		} else if (key == "fontStyle") {
+			cssProp = "font-style";
+		} else if (key == "fontStretch") {
+			cssProp = "font-stretch";
+		} else if (key == "fontWeight") {
+			cssProp = "font-weight";
+		} else if (key == "fontVariantCaps") {
+			cssProp = "font-variant-caps";
+		} else if (key == "flexWrap") {
+			cssProp = "flex-wrap";
+		} else if (key == "flexDirection") {
+			cssProp = "flex-direction";
+		} else if (key == "flexGrow") {
+			cssProp = "flex-grow";
+		} else if (key == "flexShrink") {
+			cssProp = "flex-shrink";
+		} else if (key == "flexBasis") {
+			cssProp = "flex-basis";
+		} else if (key == "flexFlow") {
+			cssProp = "flex-flow";
+		} else if (key == "letterSpacing") {
+			cssProp = "letter-spacing";
+		} else if (key == "gridAutoFlow") {
+			cssProp = "grid-auto-flow";
+		} else if (key == "gridColumnEnd") {
+			cssProp = "grid-column-end";
+		} else if (key == "gridColumnStart") {
+			cssProp = "grid-column-start";
+		} else if (key == "gridRowEnd") {
+			cssProp = "grid-row-end";
+		} else if (key == "gridRowStart") {
+			cssProp = "grid-row-start";
+		} else if (key == "gridTemplateColumns") {
+			cssProp = "grid-template-columns";
+		} else if (key == "gridTemplateRows") {
+			cssProp = "grid-template-rows";
+		} else if (key == "listStyle") {
+			cssProp = "list-style";
+		} else if (key == "lineHeight") {
+			cssProp = "line-height";
+		} else if (key == "justifyContent") {
+			cssProp = "justify-content";
+		} else if (key == "maskImage") {
+			cssProp = "mask-image";
+		} else if (key == "objectFit") {
+			cssProp = "object-fit";
+		} else if (key == "opacity") {
+			cssProp = "opacity";
+		} else if (key == "outline") {
+			cssProp = "outline";
+		} else if (key == "order") {
+			cssProp = "order";
+		} else if (key == "outlineOffset") {
+			cssProp = "outline-offset";
+		} else if (key == "position") {
+			cssProp = "position";
+		} else if (key == "textIndent") {
+			cssProp = "text-indent";
+		} else if (key == "textJustify") {
+			cssProp = "text-justify";
+		} else if (key == "textTransform") {
+			cssProp = "text-transform";
+		} else if (key == "textDecoration") {
+			cssProp = "text-decoration";
+		} else if (key == "textOverflow") {
+			cssProp = "text-overflow";
+		} else if (key == "textShadow") {
+			cssProp = "text-shadow";
+		} else if (key == "textAlign") {
+			cssProp = "text-align";
+		} else if (key == "visibility") {
+			cssProp = "visibility";
+		} else if (key == "wordBreak") {
+			cssProp = "word-break";
+		} else if (key == "wordSpacing") {
+			cssProp = "word-spacing";
+		} else if (key == "zIndex") {
+			cssProp = "z-index";
+		} else if (key == "padding") {
+			cssProp = "padding";
+		} else if (key == "paddingTop") {
+			cssProp = "padding-top";
+		} else if (key == "paddingRight") {
+			cssProp = "padding-right";
+		} else if (key == "paddingBottom") {
+			cssProp = "padding-bottom";
+		} else if (key == "paddingLeft") {
+			cssProp = "padding-left";
+		} else if (key == "placeItems") {
+			cssProp = "place-items";
+		} else if (key == "margin") {
+			cssProp = "margin";
+		} else if (key == "marginTop") {
+			cssProp = "margin-top";
+		} else if (key == "marginRight") {
+			cssProp = "margin-right";
+		} else if (key == "marginBottom") {
+			cssProp = "margin-bottom";
+		} else if (key == "marginLeft") {
+			cssProp = "margin-left";
+		} else if (key == "display") {
+			cssProp = "display";
+		} else if (key == "width") {
+			cssProp = "width";
+		} else if (key == "height") {
+			cssProp = "height";
+		} else if (key == "verticalAlign") {
+			cssProp = "vertical-align";
+		} else if (key == "overflow") {
+			cssProp = "overflow";
+		} else if (key == "overflowX") {
+			cssProp = "overflow-x";
+		} else if (key == "overflowY") {
+			cssProp = "overflow-y";
+		} else if (key == "writingMode") {
+			cssProp = "writing-mode";
+		} else if (key == "wordWrap") {
+			cssProp = "word-wrap";
+		} else if (key == "perspective") {
+			cssProp = "perspective";
+		} else if (key == "minWidth") {
+			cssProp = "min-width";
+		} else if (key == "minHeight") {
+			cssProp = "min-height";
+		} else if (key == "maxHeight") {
+			cssProp = "max-height";
+		} else if (key == "maxWidth") {
+			cssProp = "max-width";
+		} else if (key == "transition") {
+			cssProp = "transition";
+		} else if (key == "transform") {
+			cssProp = "transform";
+		} else if (key == "transformOrigin") {
+			cssProp = "transform-origin";
+		} else if (key == "transformStyle") {
+			cssProp = "transform-style";
+		} else if (key == "tableLayout") {
+			cssProp = "table-layout";
+		} else if (key == "emptyCells") {
+			cssProp = "empty-cells";
+		} else if (key == "captionSide") {
+			cssProp = "caption-side";
+		} else if (key == "gap") {
+			cssProp = "gap";
+		} else if (key == "rowGap") {
+			cssProp = "row-gap";
+		} else if (key == "columnGap") {
+			cssProp = "column-gap";
+		} else if (key == "userSelect") {
+			cssProp = "user-select";
+		} else if (key == "-webkit-text-fill-color") {
+			cssProp = "-webkit-text-fill-color";
+		} else {
+			cssProp = key;
+		}
+		return cssProp;
+	}
 
 	useEffect(() => {
+		var styleSudoObjX = { ...styleSudoObj }
+
+		Object.entries(styleObj).map((element) => {
 
 
-	}, [blockCssY]);
+			var mainSelector = element[0]
+			var elementSudoObj = element[1]
+			Object.entries(elementSudoObj).map((sodu) => {
 
-	function onChangeStyleWrapper(sudoScource, newVal, attr) {
+				var soduId = sodu[0]
+				var soduObj = sodu[1]
+
+				var elementSelector = getElementSelector(soduId, mainSelector)
+
+				if (styleSudoObj[elementSelector] == undefined) {
+					styleSudoObj[elementSelector] = {}
+				}
+
+				Object.entries(soduObj).map((responsiveVal) => {
+
+					console.log(responsiveVal);
+
+					var cssProp = cssAttrParse(responsiveVal[0])
+					var cssVals = sodu[1]
+
+					console.log(cssProp);
+
+					Object.entries(cssVals).map((cssVal) => {
+						console.log(cssVal);
+
+						//styleSudoObj[elementSelector][cssProp] = "";
+
+
+
+					})
+
+				})
+
+
+			})
+
+		})
+
+
+	}, [styleObj]);
+
+
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.sliderOptions = sliderOptions;
+		onChange(postDataX)
+	}, [sliderOptions]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.wrapper = wrapper;
+		onChange(postDataX)
+
+
+		var styleObjX = { ...styleObj }
+		var wrapperX = { ...wrapper }
+		delete wrapperX.options;
+		//styleObjX.wrapper = wrapperX;
+		styleObjX[wrapperSelector] = wrapperX;
+		setstyleObj(styleObjX)
+
+
+	}, [wrapper]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.itemsWrap = itemsWrap;
+		onChange(postDataX)
+
+		var styleObjX = { ...styleObj }
+		var itemsWrapX = { ...itemsWrap }
+		delete itemsWrapX.options;
+		styleObjX.itemsWrap = itemsWrapX;
+		setstyleObj(styleObjX)
+
+
+	}, [itemsWrap]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.item = item;
+		onChange(postDataX)
+
+		var styleObjX = { ...styleObj }
+		var itemX = { ...item }
+		delete itemX.options;
+		styleObjX.item = itemX;
+		setstyleObj(styleObjX)
+	}, [item]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.prev = prev;
+		onChange(postDataX)
+
+		var styleObjX = { ...styleObj }
+		var prevX = { ...prev }
+		delete prevX.options;
+		styleObjX.prev = prevX;
+		setstyleObj(styleObjX)
+	}, [prev]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.next = next;
+		onChange(postDataX)
+
+		var styleObjX = { ...styleObj }
+		var nextX = { ...next }
+		delete nextX.options;
+		styleObjX.next = nextX;
+		setstyleObj(styleObjX)
+	}, [next]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.prevIcon = prevIcon;
+		onChange(postDataX)
+
+		var styleObjX = { ...styleObj }
+		var prevIconX = { ...prevIcon }
+		delete prevIconX.options;
+		styleObjX.prevIcon = prevIconX;
+		setstyleObj(styleObjX)
+	}, [prevIcon]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.nextIcon = nextIcon;
+		onChange(postDataX)
+
+		var styleObjX = { ...styleObj }
+		var nextIconX = { ...nextIcon }
+		delete nextIconX.options;
+		styleObjX.nextIcon = nextIconX;
+		setstyleObj(styleObjX)
+	}, [nextIcon]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.paginationWrap = paginationWrap;
+		onChange(postDataX)
+
+		var styleObjX = { ...styleObj }
+		var paginationWrapX = { ...paginationWrap }
+		delete paginationWrapX.options;
+		styleObjX.paginationWrap = paginationWrapX;
+		setstyleObj(styleObjX)
+	}, [paginationWrap]);
+
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.pagination = pagination;
+		onChange(postDataX)
+
+		var styleObjX = { ...styleObj }
+		var paginationX = { ...pagination }
+		delete paginationX.options;
+		styleObjX.pagination = paginationX;
+		setstyleObj(styleObjX)
+	}, [pagination]);
+
+
+
+
+
+
+
+
+
+
+	var RemoveSliderArg = function ({ index }) {
+		return (
+			<span
+				className="cursor-pointer hover:bg-red-500 hover:text-white "
+				onClick={(ev) => {
+					var sliderOptionsX = { ...sliderOptions };
+					delete sliderOptionsX[index];
+					setsliderOptions(sliderOptionsX);
+				}}>
+				<Icon icon={close} />
+			</span>
+		);
+	};
+
+	function onChangeStyle(sudoScource, newVal, attr, propertyType, setProperty) {
 		var path = [sudoScource, attr, breakPointX];
-		let obj = { ...wrapper };
+		let obj = { ...propertyType };
 		const object = myStore.updatePropertyDeep(obj, path, newVal);
-
-		setwrapper(object);
-
-		// var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
-		// var cssPropty = myStore.cssAttrParse(attr);
-		// let itemsX = Object.assign({}, blockCssY.items);
-
-		// if (itemsX[elementSelector] == undefined) {
-		// 	itemsX[elementSelector] = {};
-		// }
-		// var cssPath = [elementSelector, cssPropty, breakPointX];
-		// const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
-
-		// setblockCssY({ items: cssItems });
+		setProperty(object);
 	}
 
-
-
-	function onAddStyleWrapper(sudoScource, key) {
+	function onAddStyle(sudoScource, key, propertyType, setProperty) {
 		var path = [sudoScource, key, breakPointX];
-		let obj = { ...wrapper };
-
+		let obj = { ...propertyType };
 		const object = myStore.addPropertyDeep(obj, path, "");
-		setwrapper(object);
-
-
-
+		setProperty(object);
 	}
 
-
-
-
-	function onResetWrapper(sudoSources) {
-		let obj = Object.assign({}, wrapper);
-
+	function onResetStyle(sudoSources, propertyType, setProperty) {
+		let obj = Object.assign({}, propertyType);
 		Object.entries(sudoSources).map((args) => {
 			var sudoScource = args[0];
 			if (obj[sudoScource] == undefined) {
 			} else {
 				obj[sudoScource] = {};
-				var elementSelector = myStore.getElementSelector(
-					sudoScource,
-					wrapperSelector
-				);
-
-				// var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
-				// 	elementSelector,
-				// ]);
-				// setAttributes({ blockCssY: { items: cssObject } });
+				// var elementSelector = myStore.getElementSelector(
+				// 	sudoScource,
+				// 	itemsWrapSelector // Replace this selector if needed
+				// );
 			}
 		});
-
-		setwrapper(obj);
+		setProperty(obj);
 	}
 
-
-
-	function onRemoveStyleWrapper(sudoScource, key) {
-		let obj = { ...wrapper };
+	function onRemoveStyle(sudoScource, key, propertyType, setProperty) {
+		let obj = { ...propertyType };
 		var object = myStore.deletePropertyDeep(obj, [
 			sudoScource,
 			key,
 			breakPointX,
 		]);
-
 		var isEmpty =
-			Object.entries(object[sudoScource][key]).length == 0 ? true : false;
+			Object.entries(object[sudoScource][key]).length === 0 ? true : false;
 		var objectX = isEmpty
 			? myStore.deletePropertyDeep(object, [sudoScource, key])
 			: object;
-		setwrapper(objectX);
-
-		// var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
-		// var cssPropty = myStore.cssAttrParse(key);
-		// var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
-		// 	elementSelector,
-		// 	cssPropty,
-		// 	breakPointX,
-		// ]);
-
-		// var isEmptyX = cssObject[cssPropty] == undefined ? false : true;
-		// var cssObjectX = isEmptyX
-		// 	? myStore.deletePropertyDeep(cssObject, [cssPropty])
-		// 	: cssObject;
-
-		// setAttributes({ blockCssY: { items: cssObjectX } });
+		setProperty(objectX);
 	}
 
+	var sliderOptionsArgs = {
+		autoplay: { label: "Auto play", value: 1 },
+		interval: { label: "Interval", value: "500" },
+		pauseOnHover: { label: "Pause On Hover", value: 1 },
+		pauseOnFocus: { label: "Pause On Focus", value: 1 },
+		lazyLoad: { label: "Lazy Load", value: 1 },
+		preloadPages: { label: "Preload Pages", value: 1 },
+		keyboard: { label: "Keyboard", value: 1 },
+		wheel: { label: "Wheel", value: 1 },
+		releaseWheel: { label: "Release Wheel", value: 1 },
+		direction: { label: "Direction", value: "ltr" },
+		cover: { label: "Cover", value: 0 },
+		rewind: { label: "Rewind", value: 0 },
+		speed: { label: "Speed", value: 400 },
+		rewindSpeed: { label: "Rewind Speed", value: 400 },
+		rewindByDrag: { label: "Rewind By Drag", value: 0 },
+		type: { label: "Slider Type", value: "slide" },
+		width: { label: "Width", value: "" },
+		height: { label: "Height", value: "" },
+		fixedWidth: { label: "Fixed Width", value: "" },
+		fixedHeight: { label: "Fixed Height", value: "" },
+		heightRatio: { label: "Height Ratio", value: "" },
+		autoWidth: { label: "Auto Width", value: 0 },
+		autoHeight: { label: "Auto Height", value: 0 },
+		start: { label: "Start", value: 0 },
+		perPage: { label: "Per Page", value: 3 },
+		perMove: { label: "Per Move", value: 3 },
+		focus: { label: "Focus", value: "center" },
+		gap: { label: "Gap", value: "1em", unit: "em", number: "1" },
+		padding: { label: "Padding", value: "" },
+		arrows: { label: "Arrows", value: 1 },
+		pagination: { label: "Pagination", value: 1 },
+		//easing: { label: 'Easing', value: 'cubic-bezier(0.25, 1, 0.5, 1)' },
+		paginationKeyboard: { label: "Pagination Keyboard", value: 1 },
+		paginationDirection: {
+			label: "Pagination Direction",
+			value: "paginationDirectltrion",
+		},
+		drag: { label: "Drag", value: 1 },
+		noDrag: { label: "No Drag", value: "input, textarea, .rich-text" },
+		snap: { label: "Snap", value: 1 },
+		mediaQuery: { label: "Media Query", value: "max" },
+	};
 
 
-	// function onBulkAddText(sudoScource, cssObj) {
-	// 	let obj = Object.assign({}, text);
-	// 	obj[sudoScource] = cssObj;
-
-	// 	setAttributes({ text: obj });
-
-	// 	var selector = myStore.getElementSelector(sudoScource, textSelector);
-	// 	var stylesObj = {};
-
-	// 	Object.entries(cssObj).map((args) => {
-	// 		var attr = args[0];
-	// 		var cssPropty = myStore.cssAttrParse(attr);
-
-	// 		if (stylesObj[selector] == undefined) {
-	// 			stylesObj[selector] = {};
-	// 		}
-
-	// 		if (stylesObj[selector][cssPropty] == undefined) {
-	// 			stylesObj[selector][cssPropty] = {};
-	// 		}
-
-	// 		stylesObj[selector][cssPropty] = args[1];
-	// 	});
-
-	// 	var cssItems = { ...blockCssY.items };
-	// 	var cssItemsX = { ...cssItems, ...stylesObj };
-
-	// 	setAttributes({ blockCssY: { items: cssItemsX } });
-	// }
-
-
-
-
+	var sliderForArgs = {
+		Products: { label: "Products", value: "products" },
+		terms: { label: "Terms", value: "terms" },
+		dokanShops: { label: "Dokan Shops", value: "dokanShops" },
+	}
 
 	return (
 		<div className="">
-
-			{JSON.stringify(wrapper)}
-
-
-			{props.accordionData.post_content == null && (
+			{props.postData.post_content == null && (
 				<div className="p-3 text-center">Please select WCPS first</div>
 			)}
-			{props.accordionData.post_content != null && (
+			<div className="fixed top-20 right-0 w-[400px] z-50">			</div>
+
+			<code className="break-all	p-4 block">
+				{JSON.stringify(styleSudoObj)}
+			</code>
+
+
+			{props.postData.post_content != null && (
 				<>
+
+					<div className="my-4 p-3">
+						<PGDropdown
+							position="bottom right"
+							variant="secondary"
+							buttonTitle={"Slider For"}
+							options={sliderForArgs}
+							onChange={(option, index) => {
+
+
+								var sliderOptionsX = { ...sliderOptions };
+								sliderOptionsX.sliderFor = option.value;
+								setsliderOptions(sliderOptionsX);
+							}}
+							values=""></PGDropdown>
+					</div>
+
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Slider Settings"
+						initialOpen={false}>
+						<PGtab name="normal">
+							<PanelRow className="my-3">
+								<label>{__("Slider Options", "post-grid")}</label>
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={"Choose"}
+									options={sliderOptionsArgs}
+									onChange={(option, index) => {
+										var sliderOptionsX = { ...sliderOptions };
+										sliderOptionsX[index] = option.value;
+										setsliderOptions(sliderOptionsX);
+									}}
+									values=""></PGDropdown>
+							</PanelRow>
+							<PanelRow className="justify-start gap-4 mb-3">
+								{/* <button
+								onClick={() => {
+									copyData(sliderOptions);
+								}}
+								className="pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-700 !text-white font-medium !rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-600">
+								<Icon icon={copy} className="fill-white " size={14} />
+								{__("Copy", "post-grid")}
+							</button>
+							<button
+								onClick={() => {
+									pasteData();
+								}}
+								className="pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-700 !text-white font-medium !rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-600">
+								<Icon icon={pages} className="fill-white " size={14} />
+								{__("Paste", "post-grid")}
+							</button> */}
+							</PanelRow>
+							{Object.entries(sliderOptions).map((item, index) => {
+								var id = item[0];
+								var value = item[1];
+								return (
+									<div key={index}>
+										{id == "autoplay" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Autoplay?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX);
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "rewind" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Rewind?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "type" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Slider Type?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: "Slide", value: "slide" },
+														{ label: "Loop", value: "loop" },
+														{ label: "Fade", value: "fade" },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "interval" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Interval?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													type="number"
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "speed" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Speed?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													type="number"
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "rewindSpeed" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Rewind Speed?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													type="number"
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "start" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Start?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													type="number"
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "perPage" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Per Page?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													type="number"
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+
+														setsliderOptions(sliderOptionsX)
+
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "perMove" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Per Move?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													type="number"
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "gap" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Gap?", "post-grid")}</span>
+												</div>
+												<div className="flex items-center gap-1 ">
+													<input
+														type="number"
+														value={number}
+														className="w-[100px]"
+														onChange={(e) => {
+															const newNumber = e.target.value;
+															setNumber(newNumber);
+															var sliderOptionsX = { ...sliderOptions };
+															sliderOptionsX[id] = `${newNumber}${unit}`;
+															setsliderOptions(sliderOptionsX)
+
+														}}
+													/>
+													<select
+														value={unit}
+														onChange={(e) => {
+															const newUnit = e.target.value;
+															setUnit(newUnit);
+															var sliderOptionsX = { ...sliderOptions };
+															sliderOptionsX[id] = `${number}${newUnit}`;
+															setsliderOptions(sliderOptionsX)
+
+														}}>
+														<option value="px">px</option>
+														<option value="em">em</option>
+														<option value="rem">rem</option>
+														<option value="%">%</option>
+													</select>
+												</div>
+											</PanelRow>
+										)}
+										{id == "padding" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Padding?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "focus" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Focus?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "width" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Width?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "height" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Height?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "fixedWidth" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Fixed Width?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "fixedHeight" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Fixed Height?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "heightRatio" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Height Ratio?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "easing" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Easing?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "pauseOnHover" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Pause On Hover?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "pauseOnFocus" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Pause On Focus?", "post-grid")}</span>
+												</div>
+												<label for="" className="font-medium text-slate-900 ">
+													?
+												</label>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "rewindByDrag" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Rewind By Drag?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "autoWidth" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Auto Width?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "autoHeight" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Auto Height?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "arrows" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Navigation?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "pagination" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Pagination?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "paginationKeyboard" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Pagination Keyboard?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "drag" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Drag?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "snap" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Snap?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "noDrag" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("noDrag?", "post-grid")}</span>
+												</div>
+												<InputControl
+													value={value}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "paginationDirection" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>
+														{__("Pagination Direction?", "post-grid")}
+													</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: "ltr", value: "ltr" },
+														{ label: "rtl", value: "rtl" },
+														{ label: "ttb", value: "ttb" },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "direction" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Direction?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: "ltr", value: "ltr" },
+														{ label: "rtl", value: "rtl" },
+														{ label: "ttb", value: "ttb" },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "lazyLoad" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("LazyLoad?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("Nearby", "post-grid"),
+															value: "nearby",
+														},
+														{
+															label: __("Sequential", "post-grid"),
+															value: "sequential",
+														},
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "keyboard" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Keyboard?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("Global", "post-grid"),
+															value: "global",
+														},
+														{
+															label: __("Focused", "post-grid"),
+															value: "focused",
+														},
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "mediaQuery" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Media Query?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: "min", value: "min" },
+														{ label: "max", value: "max" },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "wheel" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Wheel?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+										{id == "cover" && (
+											<PanelRow>
+												<div className="flex items-center">
+													<RemoveSliderArg index={id} />
+													<span>{__("Cover?", "post-grid")}</span>
+												</div>
+												<SelectControl
+													label=""
+													value={value}
+													options={[
+														{ label: __("True", "post-grid"), value: 1 },
+														{ label: __("False", "post-grid"), value: 0 },
+													]}
+													onChange={(newVal) => {
+														var sliderOptionsX = { ...sliderOptions };
+														sliderOptionsX[id] = newVal;
+														setsliderOptions(sliderOptionsX)
+													}}
+												/>
+											</PanelRow>
+										)}
+									</div>
+								);
+							})}
+						</PGtab>
+						<div>
+
+						</div>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Query Items"
+						initialOpen={false}>
+						<div>
+							<PGtabs
+								activeTab="presets"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "presets",
+										title: "presets",
+										icon: settings,
+										className: "tab-presets",
+									},
+									{
+										name: "custom",
+										title: "Custom",
+										icon: brush,
+										className: "tab-custom",
+									},
+								]}>
+								<PGtab name="presets"></PGtab>
+								<PGtab name="custom"></PGtab>
+							</PGtabs>
+						</div>
+					</PanelBody>
+
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Layouts"
+						initialOpen={false}>
+						<div>
+							<PGtabs
+								activeTab="presets"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "presets",
+										title: "presets",
+										icon: settings,
+										className: "tab-presets",
+									},
+									{
+										name: "custom",
+										title: "Custom",
+										icon: brush,
+										className: "tab-custom",
+									},
+								]}>
+								<PGtab name="presets"></PGtab>
+								<PGtab name="custom"></PGtab>
+							</PGtabs>
+						</div>
+					</PanelBody>
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Wrapper"
@@ -494,24 +1543,43 @@ function Html(props) {
 								// 	className: "tab-css",
 								// },
 							]}>
-							<PGtab name="options">
-
-							</PGtab>
+							<PGtab name="options"></PGtab>
 							<PGtab name="styles">
-								<PGStyles
+								{/* <PGStyles
 									obj={wrapper}
 									onChange={onChangeStyleWrapper}
 									onAdd={onAddStyleWrapper}
 									onRemove={onRemoveStyleWrapper}
 									// onBulkAdd={onBulkAddText}
 									onReset={onResetWrapper}
+								/> */}
+								<PGStyles
+									obj={wrapper}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											wrapper,
+											setwrapper
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, wrapper, setwrapper)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, wrapper, setwrapper)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, wrapper, setwrapper)
+									}
 								/>
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Loop Item"
+						title="Loop Wrap"
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
@@ -531,701 +1599,81 @@ function Html(props) {
 									icon: brush,
 									className: "tab-style",
 								},
-								// {
-								// 	name: "css",
-								// 	title: "CSS Library",
-								// 	icon: mediaAndText,
-								// 	className: "tab-css",
-								// },
 							]}>
-							<PGtab name="options">
-
-							</PGtab>
+							<PGtab name="options"></PGtab>
 							<PGtab name="styles">
-								{/* <PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onRemove={onRemoveStyleWrapper}
-									// onBulkAdd={onBulkAddText}
-									onReset={onResetWrapper}
-								/> */}
+								<PGStyles
+									obj={itemsWrap}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											itemsWrap,
+											setitemsWrap
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, itemsWrap, setitemsWrap)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, itemsWrap, setitemsWrap)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, itemsWrap, setitemsWrap)
+									}
+								/>
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-
-
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Slider Settings"
+						title="Item"
 						initialOpen={false}>
-
-
-
-
-
-
-						<div>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Autoplay?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={""}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Rewind?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => { }}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options"></PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={item}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(sudoScource, newVal, attr, item, setitem)
 									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Interval?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, item, setitem)
 									}
-									type="number"
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Speed?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, item, setitem)
 									}
-									type="number"
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Rewind Speed?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, item, setitem)
 									}
-									type="number"
-									onChange={(newVal) => {
-
-									}}
 								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Start?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									type="number"
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{"Per Page?"}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									type="number"
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Per Move?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									type="number"
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Gap?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Padding?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Focus?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Width?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Height?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Fixed Width?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Fixed Height?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Height Ratio?", "post-grid")}</span>
-								</div>
-								<InputControl
-									value={
-										""
-									}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Pause On Hover?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Pause On Focus?", "post-grid")}</span>
-								</div>
-
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Rewind By Drag?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Auto Width?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Auto Height?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Navigation?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Pagination?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>
-										{__("Pagination Keyboard?", "post-grid")}
-									</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Drag?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Snap?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("No Drag?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>
-										{__("Pagination Direction?", "post-grid")}
-									</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: "ltr", value: "ltr" },
-										{ label: "rtl", value: "rtl" },
-										{ label: "ttb", value: "ttb" },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Direction?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: "ltr", value: "ltr" },
-										{ label: "rtl", value: "rtl" },
-										{ label: "ttb", value: "ttb" },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("LazyLoad?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-										{
-											label: __("Nearby", "post-grid"),
-											value: "nearby",
-										},
-										{
-											label: __("Sequential", "post-grid"),
-											value: "sequential",
-										},
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Keyboard?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-										{
-											label: __("Global", "post-grid"),
-											value: "global",
-										},
-										{
-											label: __("Focused", "post-grid"),
-											value: "focused",
-										},
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Media Query?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: "min", value: "min" },
-										{ label: "max", value: "max" },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Wheel?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<div className="flex items-center">
-
-									<span>{__("Cover?", "post-grid")}</span>
-								</div>
-								<SelectControl
-									label=""
-									value={
-										""
-									}
-									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
-									]}
-									onChange={(newVal) => {
-
-									}}
-								/>
-							</PanelRow>
-
-						</div>
-
-
-
-
-
-
-
+							</PGtab>
+						</PGtabs>
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Query Items"
+						title="Navigation"
 						initialOpen={false}>
-
-
-
-
-
-
 						<div>
-
 							<PGtabs
 								activeTab="presets"
 								orientation="horizontal"
@@ -1245,124 +1693,202 @@ function Html(props) {
 										className: "tab-custom",
 									},
 								]}>
-								<PGtab name="presets">
-
-								</PGtab>
+								<PGtab name="presets"></PGtab>
 								<PGtab name="custom">
+									<PanelBody
+										className="font-medium text-slate-900 "
+										title="Prev Button"
+										initialOpen={false}>
+										<PGtabs
+											activeTab="options"
+											orientation="horizontal"
+											activeClass="active-tab"
+											onSelect={(tabName) => { }}
+											tabs={[
+												{
+													name: "options",
+													title: "Options",
+													icon: settings,
+													className: "tab-settings",
+												},
+												{
+													name: "styles",
+													title: "Styles",
+													icon: brush,
+													className: "tab-style",
+												},
+											]}>
+											<PGtab name="options"></PGtab>
+											<PGtab name="styles">
+												<PGStyles
+													obj={prev}
+													onChange={(sudoScource, newVal, attr) =>
+														onChangeStyle(sudoScource, newVal, attr, prev, setprev)
+													}
+													onAdd={(sudoScource, key) =>
+														onAddStyle(sudoScource, key, prev, setprev)
+													}
+													onRemove={(sudoScource, key) =>
+														onRemoveStyle(sudoScource, key, prev, setprev)
+													}
+													onReset={(sudoSources) =>
+														onResetStyle(sudoSources, prev, setprev)
+													}
+												/>
+											</PGtab>
+										</PGtabs>
+									</PanelBody>
+									<PanelBody
+										className="font-medium text-slate-900 "
+										title="Next Button"
+										initialOpen={false}>
+										<PGtabs
+											activeTab="options"
+											orientation="horizontal"
+											activeClass="active-tab"
+											onSelect={(tabName) => { }}
+											tabs={[
+												{
+													name: "options",
+													title: "Options",
+													icon: settings,
+													className: "tab-settings",
+												},
+												{
+													name: "styles",
+													title: "Styles",
+													icon: brush,
+													className: "tab-style",
+												},
+											]}>
+											<PGtab name="options"></PGtab>
+											<PGtab name="styles">
+												<PGStyles
+													obj={next}
+													onChange={(sudoScource, newVal, attr) =>
+														onChangeStyle(sudoScource, newVal, attr, next, setnext)
+													}
+													onAdd={(sudoScource, key) =>
+														onAddStyle(sudoScource, key, next, setnext)
+													}
+													onRemove={(sudoScource, key) =>
+														onRemoveStyle(sudoScource, key, next, setnext)
+													}
+													onReset={(sudoSources) =>
+														onResetStyle(sudoSources, next, setnext)
+													}
+												/>
+											</PGtab>
+										</PGtabs>
+									</PanelBody>
+									<PanelBody
+										className="font-medium text-slate-900 "
+										title="Prev Icon"
+										initialOpen={false}>
+										<PGtabs
+											activeTab="options"
+											orientation="horizontal"
+											activeClass="active-tab"
+											onSelect={(tabName) => { }}
+											tabs={[
+												{
+													name: "options",
+													title: "Options",
+													icon: settings,
+													className: "tab-settings",
+												},
+												{
+													name: "styles",
+													title: "Styles",
+													icon: brush,
+													className: "tab-style",
+												},
+											]}>
+											<PGtab name="options"></PGtab>
+											<PGtab name="styles">
+												<PGStyles
+													obj={prevIcon}
+													onChange={(sudoScource, newVal, attr) =>
+														onChangeStyle(
+															sudoScource,
+															newVal,
+															attr,
+															prevIcon,
+															setprevIcon
+														)
+													}
+													onAdd={(sudoScource, key) =>
+														onAddStyle(sudoScource, key, prevIcon, setprevIcon)
+													}
+													onRemove={(sudoScource, key) =>
+														onRemoveStyle(sudoScource, key, prevIcon, setprevIcon)
+													}
+													onReset={(sudoSources) =>
+														onResetStyle(sudoSources, prevIcon, setprevIcon)
+													}
+												/>
+											</PGtab>
+										</PGtabs>
+									</PanelBody>
+									<PanelBody
+										className="font-medium text-slate-900 "
+										title="Next Icon"
+										initialOpen={false}>
+										<PGtabs
+											activeTab="options"
+											orientation="horizontal"
+											activeClass="active-tab"
+											onSelect={(tabName) => { }}
+											tabs={[
+												{
+													name: "options",
+													title: "Options",
+													icon: settings,
+													className: "tab-settings",
+												},
+												{
+													name: "styles",
+													title: "Styles",
+													icon: brush,
+													className: "tab-style",
+												},
+											]}>
+											<PGtab name="options"></PGtab>
+											<PGtab name="styles">
+												<PGStyles
+													obj={nextIcon}
+													onChange={(sudoScource, newVal, attr) =>
+														onChangeStyle(
+															sudoScource,
+															newVal,
+															attr,
+															nextIcon,
+															setnextIcon
+														)
+													}
+													onAdd={(sudoScource, key) =>
+														onAddStyle(sudoScource, key, nextIcon, setnextIcon)
+													}
+													onRemove={(sudoScource, key) =>
+														onRemoveStyle(sudoScource, key, nextIcon, setnextIcon)
+													}
+													onReset={(sudoSources) =>
+														onResetStyle(sudoSources, nextIcon, setnextIcon)
+													}
+												/>
+											</PGtab>
+										</PGtabs>
+									</PanelBody>
 
 								</PGtab>
 							</PGtabs>
-
-
-
 						</div>
-
-
-
-
-
-
-
-					</PanelBody>
-
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Layouts"
-						initialOpen={false}>
-
-						<div>
-
-							<PGtabs
-								activeTab="presets"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "presets",
-										title: "presets",
-										icon: settings,
-										className: "tab-presets",
-									},
-									{
-										name: "custom",
-										title: "Custom",
-										icon: brush,
-										className: "tab-custom",
-									},
-								]}>
-								<PGtab name="presets">
-
-								</PGtab>
-								<PGtab name="custom">
-
-								</PGtab>
-							</PGtabs>
-
-
-
-						</div>
-
-
-
-
-
-
-
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Navigations"
-						initialOpen={false}>
-
-						<div>
-
-							<PGtabs
-								activeTab="presets"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "presets",
-										title: "presets",
-										icon: settings,
-										className: "tab-presets",
-									},
-									{
-										name: "custom",
-										title: "Custom",
-										icon: brush,
-										className: "tab-custom",
-									},
-								]}>
-								<PGtab name="presets">
-
-								</PGtab>
-								<PGtab name="custom">
-
-								</PGtab>
-							</PGtabs>
-
-
-
-						</div>
-
-
-
-
-
-
-
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Pagination/Dots"
 						initialOpen={false}>
-
 						<div>
-
 							<PGtabs
 								activeTab="presets"
 								orientation="horizontal"
@@ -1382,32 +1908,122 @@ function Html(props) {
 										className: "tab-custom",
 									},
 								]}>
-								<PGtab name="presets">
-
-								</PGtab>
+								<PGtab name="presets"></PGtab>
 								<PGtab name="custom">
-
+									<PanelBody
+										className="font-medium text-slate-900 "
+										title="Pagination Wrap"
+										initialOpen={false}>
+										<PGtabs
+											activeTab="options"
+											orientation="horizontal"
+											activeClass="active-tab"
+											onSelect={(tabName) => { }}
+											tabs={[
+												{
+													name: "options",
+													title: "Options",
+													icon: settings,
+													className: "tab-settings",
+												},
+												{
+													name: "styles",
+													title: "Styles",
+													icon: brush,
+													className: "tab-style",
+												},
+											]}>
+											<PGtab name="options"></PGtab>
+											<PGtab name="styles">
+												<PGStyles
+													obj={paginationWrap}
+													onChange={(sudoScource, newVal, attr) =>
+														onChangeStyle(
+															sudoScource,
+															newVal,
+															attr,
+															paginationWrap,
+															setpaginationWrap
+														)
+													}
+													onAdd={(sudoScource, key) =>
+														onAddStyle(
+															sudoScource,
+															key,
+															paginationWrap,
+															setpaginationWrap
+														)
+													}
+													onRemove={(sudoScource, key) =>
+														onRemoveStyle(
+															sudoScource,
+															key,
+															paginationWrap,
+															setpaginationWrap
+														)
+													}
+													onReset={(sudoSources) =>
+														onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
+													}
+												/>
+											</PGtab>
+										</PGtabs>
+									</PanelBody>
+									<PanelBody
+										className="font-medium text-slate-900 "
+										title="Pagination"
+										initialOpen={false}>
+										<PGtabs
+											activeTab="options"
+											orientation="horizontal"
+											activeClass="active-tab"
+											onSelect={(tabName) => { }}
+											tabs={[
+												{
+													name: "options",
+													title: "Options",
+													icon: settings,
+													className: "tab-settings",
+												},
+												{
+													name: "styles",
+													title: "Styles",
+													icon: brush,
+													className: "tab-style",
+												},
+											]}>
+											<PGtab name="options"></PGtab>
+											<PGtab name="styles">
+												<PGStyles
+													obj={pagination}
+													onChange={(sudoScource, newVal, attr) =>
+														onChangeStyle(
+															sudoScource,
+															newVal,
+															attr,
+															pagination,
+															setpagination
+														)
+													}
+													onAdd={(sudoScource, key) =>
+														onAddStyle(sudoScource, key, pagination, setpagination)
+													}
+													onRemove={(sudoScource, key) =>
+														onRemoveStyle(sudoScource, key, pagination, setpagination)
+													}
+													onReset={(sudoSources) =>
+														onResetStyle(sudoSources, pagination, setpagination)
+													}
+												/>
+											</PGtab>
+										</PGtabs>
+									</PanelBody>
 								</PGtab>
 							</PGtabs>
-
-
 						</div>
-
-
-
-
-
-
-
 					</PanelBody>
-
 				</>
 			)}
-
-
-
-
-
 		</div>
 	);
 }
@@ -1434,12 +2050,12 @@ class AccordionsEdit extends Component {
 	}
 
 	render() {
-		var { onChange, accordionData } = this.props;
+		var { onChange, postData } = this.props;
 
 		return (
 			<Html
 				onChange={onChange}
-				accordionData={accordionData}
+				postData={postData}
 				warn={this.state.showWarning}
 				isLoaded={this.state.isLoaded}
 			/>

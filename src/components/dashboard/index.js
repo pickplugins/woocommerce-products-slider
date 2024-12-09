@@ -38,8 +38,122 @@ function Html(props) {
 		return null;
 	}
 
+
+
+	var defaultPostData = {
+		sliderFor: "products",
+
+		wrapper: {
+			options: {
+				class: "pg-content-slider",
+			},
+			styles: {},
+		},
+		itemsWrap: {
+			options: {
+				tag: "div",
+				class: "pg-content-slider-item",
+			},
+			styles: {},
+		},
+		item: {
+			options: {
+				tag: "div",
+				class: "pg-content-slider-item",
+			},
+			styles: {},
+		},
+
+		sliderOptions: {
+			perPage: "3",
+			perMove: "1",
+			autoplay: "1",
+			gap: "1em",
+			pagination: "1",
+			drag: "1",
+			arrows: "1",
+			pauseOnHover: "1",
+			speed: "400",
+		},
+
+		navsWrap: {
+			options: {
+				class: "nav-wrap",
+			},
+			styles: {
+
+			},
+		},
+		prev: {
+			options: {
+				text: "Prev",
+				class: "",
+			},
+			styles: {
+
+			},
+		},
+		prevIcon: {
+			options: {
+				position: "before",
+				class: "",
+				library: "fontAwesome",
+				srcType: "class",
+				iconSrc: "fas fa-chevron-left",
+			},
+			styles: {
+
+			},
+		},
+		next: {
+			options: {
+				text: "Next",
+				class: "",
+			},
+			styles: {
+
+			},
+		},
+		nextIcon: {
+			options: {
+				position: "after",
+				class: "",
+				library: "fontAwesome",
+				srcType: "class",
+				iconSrc: "fas fa-chevron-right",
+			},
+			styles: {
+
+			},
+		},
+		paginationWrap: {
+			options: {
+				tag: "ul",
+				class: "",
+			},
+			styles: {},
+		},
+		pagination: {
+			options: {
+				tag: "span",
+				class: "",
+			},
+			styles: {
+
+			},
+		},
+		paginationActive: {
+			options: {
+				class: "",
+			},
+			styles: {
+
+			},
+		},
+	};
+
 	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
-	var [postData, setpostData] = useState(null); // Using the hook.
+	var [postData, setpostData] = useState(defaultPostData); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
 
 
@@ -51,8 +165,11 @@ function Html(props) {
 
 	function onChangeAccordion(args) {
 
+		setpostData(args)
 		//setaccordionData(args)
 	}
+
+
 
 
 	useEffect(() => {
@@ -72,8 +189,10 @@ function Html(props) {
 
 			setisLoading(false);
 
-			console.log(res);
 
+			if (res?.post_content?.length == 0) {
+				res.post_content = defaultPostData;
+			}
 
 			setpostData(res);
 
@@ -86,71 +205,6 @@ function Html(props) {
 
 	}, [activeAccordion]);
 
-
-
-
-	var optionDataDefault = {
-		customFonts: [],
-		googleFonts: [],
-		container: { width: "1150px" },
-		breakpoints: [],
-		colors: [],
-		editor: { width: "1150px" },
-		blocks: { disabled: [] },
-		addons: { disabled: [] },
-		blockInserter: { postGridPositon: "" }, // Category positon
-		openAI: { apiKey: "" },
-		keyframes: {},
-		license: { license_key: { key: "" } },
-		globalStyles: [],
-		customScript: [],
-		postTypes: [
-			{
-				labels: {
-					name: "post types",
-					singular_name: "",
-					menu_name: "",
-					all_items: "",
-					add_new: "",
-					add_new_item: "",
-					edit: "",
-					edit_item: "",
-					new_item: "",
-					view: "",
-					view_item: "",
-					search_items: "",
-					not_found: "",
-					not_found_in_trash: "",
-					parent: "",
-				},
-				description: "",
-				public: false,
-				show_ui: true,
-				show_in_rest: false,
-				capability_type: "post",
-				capabilities: {
-					publish_posts: "",
-					edit_posts: "",
-					edit_others_posts: "",
-					read_private_posts: "",
-					edit_post: "",
-					delete_post: "",
-					read_post: "",
-				},
-				map_meta_cap: true,
-				publicly_queryable: true,
-				exclude_from_search: false,
-				hierarchical: false,
-				query_var: true,
-				supports: ["title"],
-				show_in_nav_menus: true,
-				menu_icon: "",
-				show_in_menu: "",
-			},
-		],
-		apiKeys: {},
-		pageStyles: [],
-	};
 
 
 
@@ -203,7 +257,7 @@ function Html(props) {
 						</PGtab>
 						<PGtab name="edit">
 							<div className=" ">
-								<AccordionsEdit onChange={onChangeAccordion} accordionData={postData} />
+								<AccordionsEdit onChange={onChangeAccordion} postData={postData} />
 							</div>
 						</PGtab>
 						<PGtab name="templates">
@@ -227,7 +281,9 @@ function Html(props) {
 				</div>
 				<div className="w-full">
 					<div className="  relative">
-						<AccordionsView id={activeAccordion} />
+
+
+						<AccordionsView isLoading={isLoading} postData={postData} id={activeAccordion} />
 					</div>
 
 				</div>
