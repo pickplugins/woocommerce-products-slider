@@ -6092,104 +6092,204 @@ function Html(props) {
     sliderFor: "products",
     wrapper: {
       options: {
-        class: "wrapper"
+        class: "pg-content-slider"
       },
-      styles: {
-        color: {
-          Desktop: "#000000"
-        }
-      }
+      styles: {}
     },
-    sliderSettings: {},
-    navigationWrap: {
+    itemsWrap: {
       options: {
-        preset: ""
+        tag: "div",
+        class: "pg-content-slider-item"
+      },
+      styles: {}
+    },
+    item: {
+      options: {
+        tag: "div",
+        class: "pg-content-slider-item"
+      },
+      styles: {}
+    },
+    sliderOptions: {
+      perPage: "3",
+      perMove: "1",
+      autoplay: "1",
+      gap: "1em",
+      pagination: "1",
+      drag: "1",
+      arrows: "1",
+      pauseOnHover: "1",
+      speed: "400"
+    },
+    navsWrap: {
+      options: {
+        class: "nav-wrap"
       },
       styles: {
         display: {
           Desktop: "flex"
         },
+        width: {
+          Desktop: "100%"
+        },
         alignItems: {
           Desktop: "center"
         },
-        color: {
-          Desktop: "#000000"
+        position: {
+          Desktop: "absolute !important"
         },
-        backgroundColor: {
-          Desktop: "#000000"
+        top: {
+          Desktop: "10px"
         },
-        padding: {
-          Desktop: "#000000"
+        left: {
+          Desktop: "20px"
+        },
+        gap: {
+          Desktop: "20px"
         }
       }
     },
-    navigationItem: {
+    prev: {
       options: {
-        preset: ""
+        text: "Prev",
+        class: ""
       },
       styles: {
-        display: {
-          Desktop: "flex"
+        fontSize: {
+          Desktop: "18px"
         },
-        alignItems: {
-          Desktop: "center"
+        fontFamily: {
+          Desktop: "Poppins"
+        },
+        fontStyle: {
+          Desktop: "normal"
+        },
+        fontWeight: {
+          Desktop: "400"
+        },
+        textAlign: {
+          Desktop: "left"
         },
         color: {
-          Desktop: "#000000"
+          Desktop: "#ffffff"
         },
         backgroundColor: {
-          Desktop: "#000000"
+          Desktop: "#1F2E45"
+        },
+        borderRadius: {
+          Desktop: "50px"
         },
         padding: {
-          Desktop: "#000000"
+          Desktop: "5px 20px 5px 20px"
+        }
+      }
+    },
+    prevIcon: {
+      options: {
+        position: "before",
+        class: "",
+        library: "fontAwesome",
+        srcType: "class",
+        iconSrc: "fas fa-chevron-left"
+      },
+      styles: {
+        padding: {
+          Desktop: "0px 10px 0px 0px"
+        },
+        fontSize: {
+          Desktop: "16px"
+        }
+      }
+    },
+    next: {
+      options: {
+        text: "Next",
+        class: ""
+      },
+      styles: {
+        fontSize: {
+          Desktop: "18px"
+        },
+        fontFamily: {
+          Desktop: "Poppins"
+        },
+        fontStyle: {
+          Desktop: "normal"
+        },
+        fontWeight: {
+          Desktop: "400"
+        },
+        textAlign: {
+          Desktop: "right"
+        },
+        color: {
+          Desktop: "#ffffff"
+        },
+        backgroundColor: {
+          Desktop: "#1F2E45"
+        },
+        borderRadius: {
+          Desktop: "50px"
+        },
+        padding: {
+          Desktop: "5px 20px 5px 20px"
+        }
+      }
+    },
+    nextIcon: {
+      options: {
+        position: "after",
+        class: "",
+        library: "fontAwesome",
+        srcType: "class",
+        iconSrc: "fas fa-chevron-right"
+      },
+      styles: {
+        padding: {
+          Desktop: "0px 0px 0px 10px"
+        },
+        fontSize: {
+          Desktop: "16px"
         }
       }
     },
     paginationWrap: {
       options: {
-        preset: ""
+        tag: "ul",
+        class: ""
+      },
+      styles: {}
+    },
+    pagination: {
+      options: {
+        tag: "span",
+        class: ""
       },
       styles: {
-        display: {
-          Desktop: "flex"
-        },
-        alignItems: {
-          Desktop: "center"
-        },
-        color: {
-          Desktop: "#000000"
+        border: {
+          Desktop: "1px solid #1f2e45"
         },
         backgroundColor: {
-          Desktop: "#000000"
+          Desktop: "#f1f7f9"
         },
-        padding: {
-          Desktop: "#000000"
+        height: {
+          Desktop: "15px"
         },
-        padding: {
-          Desktop: "#000000"
+        width: {
+          Desktop: "15px"
+        },
+        borderRadius: {
+          Desktop: "50%"
         }
       }
     },
-    paginationItem: {
-      styles: {
-        color: {
-          Desktop: "#000000"
-        },
-        backgroundColor: {
-          Desktop: "#000000"
-        },
-        padding: {
-          Desktop: "#000000"
-        },
-        padding: {
-          Desktop: "#000000"
-        }
-      }
-    },
-    paginationItemActive: {
+    paginationActive: {
+      options: {
+        class: ""
+      },
       styles: {
         backgroundColor: {
-          Desktop: "#000000"
+          Desktop: "#1f2e45"
         }
       }
     }
@@ -6197,13 +6297,17 @@ function Html(props) {
   var accordionDataX = props.accordionData.post_content == null || props.accordionData.post_content.length == 0 ? defaultPostData : props.accordionData;
   var [accordionData, setaccordionData] = useState(accordionDataX); // Using the hook.
   var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
-  var [header, setheader] = useState(defaultPostData.header);
+  var [itemsWrap, setitemsWrap] = useState(defaultPostData.itemsWrap);
   var [headerActive, setheaderActive] = useState(defaultPostData.headerActive);
-  var [headerLabel, setheaderLabel] = useState(defaultPostData.headerLabel);
-  var [labelIcon, setlabelIcon] = useState(defaultPostData.labelIcon);
-  var [labelCounter, setlabelCounter] = useState(defaultPostData.labelCounter);
-  var [content, setcontent] = useState(defaultPostData.content);
-  var [icon, seticon] = useState(defaultPostData.icon);
+  var [item, setitem] = useState(defaultPostData.item);
+  var [sliderOptions, setsliderOptions] = useState(defaultPostData.sliderOptions);
+  var [prev, setprev] = useState(defaultPostData.prev);
+  var [next, setnext] = useState(defaultPostData.next);
+  var [prevIcon, setprevIcon] = useState(defaultPostData.prevIcon);
+  var [nextIcon, setnextIcon] = useState(defaultPostData.nextIcon);
+  var [paginationWrap, setpaginationWrap] = useState(defaultPostData.paginationWrap);
+  var [paginationActive, setpaginationActive] = useState(defaultPostData.paginationActive);
+  var [pagination, setpagination] = useState(defaultPostData.pagination);
   var [iconToggle, seticonToggle] = useState(defaultPostData.iconToggle);
   var [blockCssY, setblockCssY] = useState(defaultPostData.blockCssY);
   var wrapperSelector = "." + wrapper.options.class;
@@ -6216,58 +6320,67 @@ function Html(props) {
     };
     const object = myStore.updatePropertyDeep(obj, path, newVal);
     setwrapper(object);
-    var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
-    var cssPropty = myStore.cssAttrParse(attr);
-    let itemsX = Object.assign({}, blockCssY.items);
-    if (itemsX[elementSelector] == undefined) {
-      itemsX[elementSelector] = {};
-    }
-    var cssPath = [elementSelector, cssPropty, breakPointX];
-    const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
-    setblockCssY({
-      items: cssItems
-    });
+
+    // var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+    // var cssPropty = myStore.cssAttrParse(attr);
+    // let itemsX = Object.assign({}, blockCssY.items);
+
+    // if (itemsX[elementSelector] == undefined) {
+    // 	itemsX[elementSelector] = {};
+    // }
+    // var cssPath = [elementSelector, cssPropty, breakPointX];
+    // const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+    // setblockCssY({ items: cssItems });
   }
+  function onAddStyleWrapper(sudoScource, key) {
+    var path = [sudoScource, key, breakPointX];
+    let obj = {
+      ...wrapper
+    };
+    const object = myStore.addPropertyDeep(obj, path, "");
+    setwrapper(object);
+  }
+  function onResetWrapper(sudoSources) {
+    let obj = Object.assign({}, wrapper);
+    Object.entries(sudoSources).map(args => {
+      var sudoScource = args[0];
+      if (obj[sudoScource] == undefined) {} else {
+        obj[sudoScource] = {};
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-  // function onRemoveStyleText(sudoScource, key) {
-  // 	let obj = { ...text };
-  // 	var object = myStore.deletePropertyDeep(obj, [
-  // 		sudoScource,
-  // 		key,
-  // 		breakPointX,
-  // 	]);
+        // var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+        // 	elementSelector,
+        // ]);
+        // setAttributes({ blockCssY: { items: cssObject } });
+      }
+    });
+    setwrapper(obj);
+  }
+  function onRemoveStyleWrapper(sudoScource, key) {
+    let obj = {
+      ...wrapper
+    };
+    var object = myStore.deletePropertyDeep(obj, [sudoScource, key, breakPointX]);
+    var isEmpty = Object.entries(object[sudoScource][key]).length == 0 ? true : false;
+    var objectX = isEmpty ? myStore.deletePropertyDeep(object, [sudoScource, key]) : object;
+    setwrapper(objectX);
 
-  // 	var isEmpty =
-  // 		Object.entries(object[sudoScource][key]).length == 0 ? true : false;
-  // 	var objectX = isEmpty
-  // 		? myStore.deletePropertyDeep(object, [sudoScource, key])
-  // 		: object;
-  // 	setAttributes({ text: objectX });
+    // var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
+    // var cssPropty = myStore.cssAttrParse(key);
+    // var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+    // 	elementSelector,
+    // 	cssPropty,
+    // 	breakPointX,
+    // ]);
 
-  // 	var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
-  // 	var cssPropty = myStore.cssAttrParse(key);
-  // 	var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
-  // 		elementSelector,
-  // 		cssPropty,
-  // 		breakPointX,
-  // 	]);
+    // var isEmptyX = cssObject[cssPropty] == undefined ? false : true;
+    // var cssObjectX = isEmptyX
+    // 	? myStore.deletePropertyDeep(cssObject, [cssPropty])
+    // 	: cssObject;
 
-  // 	var isEmptyX = cssObject[cssPropty] == undefined ? false : true;
-  // 	var cssObjectX = isEmptyX
-  // 		? myStore.deletePropertyDeep(cssObject, [cssPropty])
-  // 		: cssObject;
-
-  // 	setAttributes({ blockCssY: { items: cssObjectX } });
-  // }
-
-  // function onAddStyleText(sudoScource, key) {
-  // 	var path = [sudoScource, key, breakPointX];
-  // 	//let objX = Object.assign({}, text);
-  // 	let obj = { ...text };
-
-  // 	const object = myStore.addPropertyDeep(obj, path, "");
-  // 	setAttributes({ text: object });
-  // }
+    // setAttributes({ blockCssY: { items: cssObjectX } });
+  }
 
   // function onBulkAddText(sudoScource, cssObj) {
   // 	let obj = Object.assign({}, text);
@@ -6299,34 +6412,52 @@ function Html(props) {
   // 	setAttributes({ blockCssY: { items: cssItemsX } });
   // }
 
-  // function onResetText(sudoSources) {
-  // 	let obj = Object.assign({}, text);
-
-  // 	Object.entries(sudoSources).map((args) => {
-  // 		var sudoScource = args[0];
-  // 		if (obj[sudoScource] == undefined) {
-  // 		} else {
-  // 			obj[sudoScource] = {};
-  // 			var elementSelector = myStore.getElementSelector(
-  // 				sudoScource,
-  // 				textSelector
-  // 			);
-
-  // 			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
-  // 				elementSelector,
-  // 			]);
-  // 			setAttributes({ blockCssY: { items: cssObject } });
-  // 		}
-  // 	});
-
-  // 	setAttributes({ text: obj });
-  // }
-
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+  }, props.accordionData.post_content == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-3 text-center"
+  }, "Please select WCPS first"), props.accordionData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Wrapper",
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    activeTab: "options",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "options",
+      title: "Options",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      className: "tab-settings"
+    }, {
+      name: "styles",
+      title: "Styles",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      className: "tab-style"
+    }
+    // {
+    // 	name: "css",
+    // 	title: "CSS Library",
+    // 	icon: mediaAndText,
+    // 	className: "tab-css",
+    // },
+    ]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "options"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "styles"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    obj: wrapper,
+    onChange: onChangeStyleWrapper,
+    onAdd: onAddStyleWrapper,
+    onRemove: onRemoveStyleWrapper
+    // onBulkAdd={onBulkAddText}
+    ,
+    onReset: onResetWrapper
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    className: "font-medium text-slate-900 ",
+    title: "Loop Item",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
     activeTab: "options",
@@ -6717,54 +6848,99 @@ function Html(props) {
     className: "font-medium text-slate-900 ",
     title: "Query Items",
     initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autoplay?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-    label: "",
-    value: "",
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
-      value: 1
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    activeTab: "presets",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "presets",
+      title: "presets",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      className: "tab-presets"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
-      value: 0
-    }],
-    onChange: newVal => {}
+      name: "custom",
+      title: "Custom",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      className: "tab-custom"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "presets"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "custom"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    className: "font-medium text-slate-900 ",
+    title: "Layouts",
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    activeTab: "presets",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "presets",
+      title: "presets",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      className: "tab-presets"
+    }, {
+      name: "custom",
+      title: "Custom",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      className: "tab-custom"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "presets"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "custom"
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Navigations",
     initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autoplay?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-    label: "",
-    value: "",
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
-      value: 1
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    activeTab: "presets",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "presets",
+      title: "presets",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      className: "tab-presets"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
-      value: 0
-    }],
-    onChange: newVal => {}
+      name: "custom",
+      title: "Custom",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      className: "tab-custom"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "presets"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "custom"
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination/Dots",
     initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autoplay?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-    label: "",
-    value: "",
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
-      value: 1
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    activeTab: "presets",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "presets",
+      title: "presets",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      className: "tab-presets"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
-      value: 0
-    }],
-    onChange: newVal => {}
-  })))));
+      name: "custom",
+      title: "Custom",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      className: "tab-custom"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "presets"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "custom"
+  }))))));
 }
 class AccordionsEdit extends Component {
   constructor(props) {
