@@ -1,4 +1,5 @@
 const { Component, RawHTML } = wp.element;
+import { __ } from "@wordpress/i18n";
 import colorsPresets from "../../colors-presets";
 import {
 	__experimentalInputControl as InputControl,
@@ -12,26 +13,18 @@ import {
 } from "@wordpress/components";
 import PGColorPicker from "../../components/input-color-picker";
 import { Icon, close } from "@wordpress/icons";
-
 import { useState, useEffect } from "@wordpress/element";
-
 import { applyFilters } from "@wordpress/hooks";
-
 function Html(props) {
 	if (!props.warn) {
 		return null;
 	}
-
 	let isProFeature = applyFilters("isProFeature", true);
-
 	var valZ =
 		props.val == null || props.val == undefined || props.val.length == 0
 			? "0px 0px 0px #000"
 			: props.val;
 	// var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
-
-	//console.log(valZ);
-
 	var colorNames = [
 		"AliceBlue",
 		"AntiqueWhite",
@@ -181,24 +174,16 @@ function Html(props) {
 		"Yellow",
 		"YellowGreen",
 	];
-
-	// console.log(valZ);
 	var isMulti = valZ.split(",").length > 1 ? true : false;
-	// console.log(isMulti)
 	var shadows = isMulti ? valZ.split(", ") : [valZ];
-	// console.log(shadows)
-
-
 	const getBoxShadowObj = (boxshadow) => {
 		var sadhow_arr = [];
-
 		boxshadow.map((arg) => {
 			var inset = arg.includes("inset");
 			var color = "";
 			var re = /(rgba|rgb|#|hsla|hsl)/;
 			var colorMatch = arg.match(re);
 			var colorType = colorMatch != null ? colorMatch[0] : "";
-
 			if (colorType == "hsl") {
 				var regex = /hsl\(([^)]+)\)/;
 				var matches = arg.match(regex);
@@ -243,24 +228,14 @@ function Html(props) {
 					color = matches[0];
 				}
 			}
-
 			var placement = arg;
-
-			console.log(placement);
-
 			// if (inset) {
 			// 	placement = placement.replace("inset", "");
 			// }
 			if (color) {
 				placement = placement.replace(color, "");
 			}
-
-			//console.log(placement.trim());
-
 			var placementArr = placement.trim().split(" ");
-
-			//console.log(placementArr);
-
 			if (placementArr.length == 2) {
 				var h = placementArr[0];
 				var v = placementArr[1];
@@ -276,7 +251,6 @@ function Html(props) {
 			// 	var blur = placementArr[2];
 			// 	var spread = placementArr[3];
 			// }
-
 			sadhow_arr.push({
 				h: h,
 				v: v,
@@ -286,19 +260,13 @@ function Html(props) {
 				color: color,
 			});
 		});
-
 		return sadhow_arr;
 	};
-
 	const [shadowObj, setShadowObj] = useState(getBoxShadowObj(shadows));
-	console.log(shadowObj);
 	const [isImportant, setImportant] = useState(
 		valZ.includes(" !important") ? true : false
 	);
-
 	useEffect(() => {
-		console.log(shadowObj);
-		console.log(isImportant);
 		//props.onChange(newVal + 'px ' + v + 'px ' + blur + 'px ' + spread + 'px ' + color, 'boxShadow');
 		var stringArr = [];
 		shadowObj.map((shadow, index) => {
@@ -308,62 +276,49 @@ function Html(props) {
 			// var spread = shadow.spread;
 			// var inset = shadow.inset ? "inset" : "";
 			var color = shadow.color;
-
 			// var item = [h, v, blur, spread, color, inset];
 			var item = [h, v, blur, color];
 			var filtered = item.filter(function (el) {
 				return el;
 			});
-
 			stringArr.push(filtered.join(" "));
 		});
-
 		stringArr = stringArr.join(",  ");
-
 		if (isImportant) {
 			stringArr = stringArr + " !important";
 		} else {
 			stringArr = stringArr;
 		}
-
-		console.log(stringArr);
-
 		props.onChange(stringArr, "textShadow");
 	}, [shadowObj, isImportant]);
-
 	var unitArgs = [
 		{ label: "PX", value: "px" },
 		{ label: "EM", value: "em" },
 		{ label: "REM", value: "rem" },
 		{ label: "%", value: "%" },
-
 		{ label: "CM", value: "cm" },
 		{ label: "MM", value: "mm" },
 		{ label: "IN", value: "in" },
 		{ label: "PT", value: "pt" },
 		{ label: "PC", value: "pc" },
 		{ label: "EX", value: "ex" },
-
 		{ label: "CH", value: "ch" },
 		{ label: "VW", value: "vw" },
 		{ label: "VH", value: "vh" },
 		{ label: "VMIN", value: "vmin" },
 		{ label: "VMAX", value: "vmax" },
 	];
-
 	const [proText, setProText] = useState(false);
-
 	const handleClick = () => {
 		setProText(true);
 		setTimeout(() => {
 			setProText(false);
 		}, 5000);
 	};
-
 	return (
 		<div>
 			<button
-				className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize  bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
+				className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize  bg-gray-700 text-white font-medium rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-700"
 				onClick={() => {
 					if (isProFeature) {
 						handleClick();
@@ -380,75 +335,59 @@ function Html(props) {
 					});
 					setShadowObj(shadowObjX);
 				}}>
-				Add
+				{__("Add","post-grid")}
 			</button>
 			{proText && (
 				<a
 					href="https://comboblocks.com/pricing/"
 					className="pg-text-color block py-2 px-1">
-					Subscribe to add multiple shadows.
+					{__("Subscribe to add multiple shadows.","post-grid")}
 				</a>
 			)}
 			<>
 				{shadowObj.map((shadow, index) => {
-
 					var h = shadow.h;
 					var v = shadow.v;
 					var blur = shadow.blur;
 					// var spread = shadow.spread;
 					// var inset = shadow.inset;
 					var color = shadow.color;
-
 					var hVal = h.match(/-?\d+/g) == null ? 0 : h.match(/-?\d+/g)[0];
 					var hUnit =
 						h.match(/[a-zA-Z%]+/g) == null ? "px" : h.match(/[a-zA-Z%]+/g)[0];
-
 					var vVal = v.match(/-?\d+/g) == null ? 0 : v.match(/-?\d+/g)[0];
 					var vUnit =
 						v.match(/[a-zA-Z%]+/g) == null ? "px" : v.match(/[a-zA-Z%]+/g)[0];
-
 					var blurVal =
 						blur.match(/-?\d+/g) == null ? 0 : blur.match(/-?\d+/g)[0];
 					var blurUnit =
 						blur.match(/[a-zA-Z%]+/g) == null
 							? "px"
 							: blur.match(/[a-zA-Z%]+/g)[0];
-
 					// var spreadVal =
 					// 	spread.match(/-?\d+/g) == null ? 0 : spread.match(/-?\d+/g)[0];
 					// var spreadUnit =
 					// 	spread.match(/[a-zA-Z%]+/g) == null
 					// 		? "px"
 					// 		: spread.match(/[a-zA-Z%]+/g)[0];
-					// console.log(
-					// 	h +hUnit+
-					// 		" " +
-					// 		v +vUnit+
-					// 		" " +
-					// 		blur +blurUnit+
-					// 		" " +
-					// 		color
-					// );
 					return (
 						<>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title={
-								<>
-									<span
-										className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
-										onClick={(ev) => {
-											var shadowObjX = [...shadowObj];
-											shadowObjX.splice(index, 1);
-
-											setShadowObj(shadowObjX);
-										}}>
-										<Icon icon={close} />
-									</span>
-
-									<span>
-										{
-											h +
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title={
+									<>
+										<span
+											className="cursor-pointer hover:bg-red-500 hover:text-white "
+											onClick={(ev) => {
+												var shadowObjX = [...shadowObj];
+												shadowObjX.splice(index, 1);
+												setShadowObj(shadowObjX);
+											}}>
+											<Icon icon={close} />
+										</span>
+										<span>
+											{
+												h +
 												" " +
 												v +
 												" " +
@@ -457,111 +396,101 @@ function Html(props) {
 												// spread +
 												// " " +
 												color
-											// + " " +
-											// (inset ? "inset" : "")
-										}
-									</span>
-								</>
-							}
-							// title={
-							// 	h +
-							// 	" " +
-							// 	v +
-							// 	" " +
-							// 	blur +
-							// 	" " +
-							// 	spread +
-							// 	" " +
-							// 	color +
-							// 	" " +
-							// 	(inset ? "inset" : "")
-							// }
-							initialOpen={false}>
-							<PanelRow>
-								<label for="">H-Offset</label>
+												// + " " +
+												// (inset ? "inset" : "")
+											}
+										</span>
+									</>
+								}
+								// title={
+								// 	h +
+								// 	" " +
+								// 	v +
+								// 	" " +
+								// 	blur +
+								// 	" " +
+								// 	spread +
+								// 	" " +
+								// 	color +
+								// 	" " +
+								// 	(inset ? "inset" : "")
+								// }
+								initialOpen={false}>
+								<PanelRow>
+									<label htmlFor="">{__("H-Offset","post-grid")}</label>
+								</PanelRow>
+								<PanelRow>
+									<InputControl
+										value={hVal}
+										type="number"
+										onChange={(newVal) => {
+											var shadowObjX = [...shadowObj];
+											shadowObjX[index].h = newVal + hUnit;
+											setShadowObj(shadowObjX);
+										}}
+									/>
+									<SelectControl
+										label=""
+										value={hUnit}
+										options={unitArgs}
+										onChange={(newVal) => {
+											var shadowObjX = [...shadowObj];
+											shadowObjX[index].h = hVal + newVal;
+											setShadowObj(shadowObjX);
+										}}
+									/>
+								</PanelRow>
+								<PanelRow>
+									<label htmlFor="">{__("V-Offset","post-grid")}</label>
+								</PanelRow>
+								<PanelRow>
+									<InputControl
+										value={vVal}
+										type="number"
+										onChange={(newVal) => {
+											var shadowObjX = [...shadowObj];
+											shadowObjX[index].v = newVal + vUnit;
+											setShadowObj(shadowObjX);
+										}}
+									/>
+									<SelectControl
+										label=""
+										value={vUnit}
+										options={unitArgs}
+										onChange={(newVal) => {
+											var shadowObjX = [...shadowObj];
+											shadowObjX[index].v = vVal + newVal;
+											setShadowObj(shadowObjX);
+										}}
+									/>
+								</PanelRow>
+								<PanelRow>
+									<label htmlFor="">{__("Blur","post-grid")}</label>
+								</PanelRow>
+								<PanelRow>
+									<InputControl
+										value={blurVal}
+										type="number"
+										onChange={(newVal) => {
+											var shadowObjX = [...shadowObj];
+											shadowObjX[index].blur = newVal + blurUnit;
+											setShadowObj(shadowObjX);
+										}}
+									/>
+									<SelectControl
+										label=""
+										value={blurUnit}
+										options={unitArgs}
+										onChange={(newVal) => {
+											var shadowObjX = [...shadowObj];
+											shadowObjX[index].blur = blurVal + newVal;
+											setShadowObj(shadowObjX);
+										}}
+									/>
+								</PanelRow>
+								{/* <PanelRow>
+								<label htmlFor="">Spread</label>
 							</PanelRow>
-
-							<PanelRow>
-								<InputControl
-									value={hVal}
-									type="number"
-									onChange={(newVal) => {
-										var shadowObjX = [...shadowObj];
-										shadowObjX[index].h = newVal + hUnit;
-										setShadowObj(shadowObjX);
-									}}
-								/>
-
-								<SelectControl
-									label=""
-									value={hUnit}
-									options={unitArgs}
-									onChange={(newVal) => {
-										var shadowObjX = [...shadowObj];
-										shadowObjX[index].h = hVal + newVal;
-										setShadowObj(shadowObjX);
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<label for="">V-Offset</label>
-							</PanelRow>
-
-							<PanelRow>
-								<InputControl
-									value={vVal}
-									type="number"
-									onChange={(newVal) => {
-										var shadowObjX = [...shadowObj];
-										shadowObjX[index].v = newVal + vUnit;
-										setShadowObj(shadowObjX);
-									}}
-								/>
-
-								<SelectControl
-									label=""
-									value={vUnit}
-									options={unitArgs}
-									onChange={(newVal) => {
-										var shadowObjX = [...shadowObj];
-										shadowObjX[index].v = vVal + newVal;
-										setShadowObj(shadowObjX);
-									}}
-								/>
-							</PanelRow>
-
-							<PanelRow>
-								<label for="">Blur</label>
-							</PanelRow>
-
-							<PanelRow>
-								<InputControl
-									value={blurVal}
-									type="number"
-									onChange={(newVal) => {
-										var shadowObjX = [...shadowObj];
-										shadowObjX[index].blur = newVal + blurUnit;
-										setShadowObj(shadowObjX);
-									}}
-								/>
-
-								<SelectControl
-									label=""
-									value={blurUnit}
-									options={unitArgs}
-									onChange={(newVal) => {
-										var shadowObjX = [...shadowObj];
-										shadowObjX[index].blur = blurVal + newVal;
-										setShadowObj(shadowObjX);
-									}}
-								/>
-							</PanelRow>
-
-							{/* <PanelRow>
-								<label for="">Spread</label>
-							</PanelRow>
-
 							<PanelRow>
 								<InputControl
 									value={spreadVal}
@@ -572,7 +501,6 @@ function Html(props) {
 										setShadowObj(shadowObjX);
 									}}
 								/>
-
 								<SelectControl
 									label=""
 									value={spreadUnit}
@@ -584,44 +512,43 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow> */}
-
-							<PanelRow>
-								<label for="">Color</label>
-							</PanelRow>
-
-							<PGColorPicker
-								value={color}
-								colors={colorsPresets}
-								enableAlpha
-								onChange={(newVal) => {
-									var shadowObjX = [...shadowObj];
-									shadowObjX[index].color = newVal;
-									setShadowObj(shadowObjX);
-								}}
-							/>
-
-							{/* <ToggleControl
-								help={inset ? "Inset (Enabled)" : "Inset?"}
+								<PanelRow>
+									<label htmlFor="">{__("Color","post-grid")}</label>
+								</PanelRow>
+								<PGColorPicker
+									value={color}
+									colors={colorsPresets}
+									enableAlpha
+									onChange={(newVal) => {
+										var shadowObjX = [...shadowObj];
+										shadowObjX[index].color = newVal;
+										setShadowObj(shadowObjX);
+									}}
+								/>
+								{/* <ToggleControl
+								help={inset ? __('Inset Enabled',"post-grid")
+            : __('Inset ?',"post-grid")}
 								checked={inset}
 								onChange={(arg) => {
 									var shadowObjX = [...shadowObj];
-
 									if (inset) {
 										shadowObjX[index].inset = false;
 									} else {
 										shadowObjX[index].inset = true;
 									}
-
 									setShadowObj(shadowObjX);
 								}}
 							/> */}
-						</PanelBody>
+							</PanelBody>
 						</>
 					);
 				})}
-
 				<ToggleControl
-					help={isImportant ? "Important (Enabled)" : "Important?"}
+					help={
+						isImportant
+							? __("Important (Enabled)", "post-grid")
+							: __("Important?", "post-grid")
+					}
 					checked={isImportant}
 					onChange={(arg) => {
 						setImportant((isImportant) => !isImportant);
@@ -631,23 +558,19 @@ function Html(props) {
 		</div>
 	);
 }
-
 class PGcssTextShadow extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
 		this.handleToggleClick = this.handleToggleClick.bind(this);
 	}
-
 	handleToggleClick() {
 		this.setState((state) => ({
 			showWarning: !state.showWarning,
 		}));
 	}
-
 	render() {
 		const { val, onChange } = this.props;
-
 		return (
 			<div>
 				<Html val={val} onChange={onChange} warn={this.state.showWarning} />
@@ -655,10 +578,4 @@ class PGcssTextShadow extends Component {
 		);
 	}
 }
-
 export default PGcssTextShadow;
-
-
-
-
-
