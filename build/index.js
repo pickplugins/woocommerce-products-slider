@@ -5092,6 +5092,36 @@ function Html(props) {
     name: "custom"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
+    title: "Navs Wrap",
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    activeTab: "options",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "options",
+      title: "Options",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      className: "tab-settings"
+    }, {
+      name: "styles",
+      title: "Styles",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      className: "tab-style"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "options"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "styles"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    obj: navsWrap,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, navsWrap, setnavsWrap),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, navsWrap, setnavsWrap),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap),
+    onReset: sudoSources => onResetStyle(sudoSources, navsWrap, setnavsWrap)
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    className: "font-medium text-slate-900 ",
     title: "Prev Button",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -5264,6 +5294,36 @@ function Html(props) {
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, paginationWrap, setpaginationWrap),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, paginationWrap, setpaginationWrap),
     onReset: sudoSources => onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    className: "font-medium text-slate-900 ",
+    title: "Pagination Active",
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    activeTab: "options",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "options",
+      title: "Options",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      className: "tab-settings"
+    }, {
+      name: "styles",
+      title: "Styles",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      className: "tab-style"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "options"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "styles"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    obj: paginationActive,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, paginationActive, setpaginationActive),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, paginationActive, setpaginationActive),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive),
+    onReset: sudoSources => onResetStyle(sudoSources, paginationActive, setpaginationActive)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination",
@@ -28336,6 +28396,7 @@ function Html(props) {
     }
   };
   var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
+  console.log(activeAccordion);
   var [postData, setpostData] = useState(defaultPostData); // Using the hook.
   var [isLoading, setisLoading] = useState(false); // Using the hook.
 
@@ -28368,9 +28429,9 @@ function Html(props) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pg-setting-input-text pg-dashboard"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex "
+    className: "flex h-[700px] "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-[450px]"
+    className: "w-[450px] overflow-y-scroll light-scrollbar"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_2__["default"], {
     activeTab: "accordions",
     orientation: "",
@@ -28414,7 +28475,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3"
   }, "Coming Soon")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full"
+    className: "w-full sticky top-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "  relative"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_5__["default"], {
