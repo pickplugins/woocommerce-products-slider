@@ -1,4 +1,5 @@
 const { Component } = wp.element;
+import { __ } from "@wordpress/i18n";
 import {
 	Button,
 	Dropdown,
@@ -6,14 +7,12 @@ import {
 	SelectControl,
 	Spinner,
 } from "@wordpress/components";
-
 import {
 	__experimentalInputControl as InputControl,
 	ColorPalette,
 	RangeControl,
 	Popover,
 } from "@wordpress/components";
-
 import { memo, useMemo, useState, useEffect } from "@wordpress/element";
 import { applyFilters } from "@wordpress/hooks";
 import PGtabs from "../../components/tabs";
@@ -30,31 +29,25 @@ import {
 	replace,
 	download,
 } from "@wordpress/icons";
-
 import * as htmlToImage from "html-to-image";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 import apiFetch from "@wordpress/api-fetch";
-
 function Html(props) {
 	if (!props.warn) {
 		return null;
 	}
-
 	const [queryCss, setQueryCss] = useState({
 		keyword: "",
 		page: 1,
 		category: "",
 		isReset: true,
 	});
-
 	var [cssLibrary, setCssLibrary] = useState({ items: [] });
 	var [cssLibraryCats, setCssLibraryCats] = useState([]);
 	var [isLoading, setIsLoading] = useState(false);
 	var [debounce, setDebounce] = useState(null); // Using the hook.
 	var [sudoPicker, setsudoPicker] = useState(null); // Using the hook.
-
 	let isProFeature = applyFilters("isProFeature", true);
-
 	var [cssSubmission, setCssSubmission] = useState({
 		enable: false,
 		title: "",
@@ -67,14 +60,11 @@ function Html(props) {
 		failedMessage: "Submission was failed!",
 		idleMessage: "Submit to CSS Library",
 		message: "",
-
 		timeout: 2,
 	});
-
 	useEffect(() => {
 		fetchCss();
 	}, [queryCss]);
-
 	useEffect(() => {
 		apiFetch({
 			path: "/post-grid/v2/get_site_details",
@@ -86,17 +76,14 @@ function Html(props) {
 			setCssSubmission({ ...cssSubmission, email: res.email });
 		});
 	}, []);
-
 	function fetchCss() {
 		setIsLoading(true);
-
 		var postData = {
 			keyword: queryCss.keyword,
 			page: queryCss.page,
 			category: queryCss.category,
 		};
 		postData = JSON.stringify(postData);
-
 		fetch("https://comboblocks.com/server/wp-json/post-grid/v2/get_post_css", {
 			method: "POST",
 			headers: {
@@ -114,12 +101,8 @@ function Html(props) {
 							res.posts.map((item) => {
 								cssLibrary.items.push(item);
 							});
-
 							var items = cssLibrary.items;
 						}
-
-						//console.log(items);
-
 						setCssLibrary({ items: items });
 						setCssLibraryCats(res.terms);
 						setIsLoading(false);
@@ -131,7 +114,6 @@ function Html(props) {
 				// handle the error
 			});
 	}
-
 	const htmlToImageCapt = () => {
 		// setloading(true);
 		var stylesheet = document.getElementById("pg-google-fonts-css");
@@ -139,32 +121,26 @@ function Html(props) {
 			stylesheet.setAttribute("disabled", "disabled");
 			//setDisabled(true);
 		}
-
 		const eleementToCapture = document.querySelector("." + props.blockId);
-
 		htmlToImage.toPng(eleementToCapture).then(function (dataUrl) {
 			setCssSubmission({ ...cssSubmission, thumb: dataUrl });
-
 			setTimeout(() => {
 				if (stylesheet && stylesheet.hasAttribute("disabled")) {
 					stylesheet.removeAttribute("disabled");
 				}
 			}, 500);
-
 			//download(dataUrl, 'my-node.png');
 		});
 	};
-
 	const [isHovered, setIsHovered] = useState(false);
 	const [hoverValue, setHoverValue] = useState("");
-
 	return (
 		<div className=" mt-4">
 			<PGtabs
 				activeTab="cssItems"
 				orientation="horizontal"
 				activeClass="active-tab"
-				onSelect={(tabName) => {}}
+				onSelect={(tabName) => { }}
 				tabs={[
 					{
 						name: "cssItems",
@@ -195,7 +171,6 @@ function Html(props) {
 										isReset: true,
 									});
 								}, 1000);
-
 								//fetchLayouts();
 							}}
 						/>
@@ -216,11 +191,9 @@ function Html(props) {
 							}}
 						/>
 					</PanelRow>
-
 					<div className="items">
 						{cssLibrary.items.map((x, index) => {
 							var objCss = JSON.parse(x.post_content);
-
 							return (
 								<div
 									className={`item-${index} border border-solid relative border-slate-400 rounded-md shadow-md py-2 my-3 `}
@@ -237,31 +210,27 @@ function Html(props) {
 											src={x.thumb_url}
 											alt={x.ID}
 											onClick={(ev) => {
-												//console.log(objCss);
-
 												// var objCss = {
 												//   styles: { "backgroundColor": { "Desktop": "#9DD6DF" }, "textAlign": { "Desktop": "center" }, "border": { "Desktop": "5px dashed #000000" } }, hover: { "border": { "Desktop": "2px dashed #A084CF" } }
 												// }
-
 												props.onChange(objCss);
 											}}
 										/>
 										{isProFeature && (
 											<div className="absolute top-0 right-2">
 												{!x.is_pro && (
-													<span className=" bg-lime-600 text-white text-xs px-2 rounded-sm py-1">
-														Free
+													<span className=" bg-lime-600 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
+														{__("Free", "post-grid")}
 													</span>
 												)}
 												{x.is_pro && (
-													<span className=" bg-orange-500 text-white text-xs px-2 rounded-sm py-1">
-														Pro
+													<span className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
+														{__("Pro", "post-grid")}
 													</span>
 												)}
 											</div>
 										)}
 									</div>
-
 									<div className="my-2 mb-0 w-full bg-slate-400 bg-opacity-30 flex items-center justify-center flex-wrap gap-2 opacity-100 visible h-[max-content]">
 										{x.is_pro && isProFeature && (
 											<div className="">
@@ -272,7 +241,7 @@ function Html(props) {
 													}
 													className="px-3 py-2 bg-amber-500 rounded-sm text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform  flex items-center gap-2 justify-center ">
 													<Icon fill="#fff" icon={link} />
-													<span>Subscribe to Import</span>
+													<span>{__("Subscribe to Import", "post-grid")}</span>
 												</a>
 											</div>
 										)}
@@ -301,7 +270,7 @@ function Html(props) {
 																height="186px"
 																viewBox="0 -6 16 16"
 																version="1.1">
-																<title>Apply Style</title>
+																<title>{__("Apply Style", "post-grid")}</title>
 																<defs>
 																	<linearGradient
 																		id="gradient1"
@@ -310,8 +279,8 @@ function Html(props) {
 																		x2="154.067"
 																		y2="99.4278"
 																		gradientUnits="userSpaceOnUse">
-																		<stop stop-color="#FC7F64" />
-																		<stop offset="1" stop-color="#FF9D42" />
+																		<stop stopColor="#FC7F64" />
+																		<stop offset="1" stopColor="#FF9D42" />
 																	</linearGradient>
 																	<linearGradient
 																		id="gradient2"
@@ -320,20 +289,20 @@ function Html(props) {
 																		x2="178.095"
 																		y2="155.123"
 																		gradientUnits="userSpaceOnUse">
-																		<stop stop-color="#FC7F64" />
-																		<stop offset="1" stop-color="#FF9D42" />
+																		<stop stopColor="#FC7F64" />
+																		<stop offset="1" stopColor="#FF9D42" />
 																	</linearGradient>
 																</defs>
 																<g
 																	id="Free-Icons"
 																	stroke="none"
-																	stroke-width="1"
+																	strokeWidth="1"
 																	fill="none"
-																	fill-rule="evenodd">
+																	fillRule="evenodd">
 																	<g
 																		transform="translate(-1119.000000, -756.000000)"
 																		fill="#000000"
-																		fill-rule="nonzero"
+																		fillRule="nonzero"
 																		id="Group">
 																		<g
 																			transform="translate(1115.000000, 746.000000)"
@@ -358,7 +327,7 @@ function Html(props) {
 													<Popover position="bottom left">
 														<div
 															className="w-40 p-2"
-															// className="w-32 p-2 border-b border-b-gray-800/20 hover:border-b-gray-800 transition-all duration-200 ease-in-out border-transparent border-solid cursor-pointer hover:bg-slate-200 block last-of-type:border-b-0 min-h-[40px] "
+														// className="w-32 p-2 border-b border-b-gray-800/20 hover:border-b-gray-800 transition-all duration-200 ease-in-out border-transparent border-solid cursor-pointer hover:bg-slate-200 block last-of-type:border-b-0 min-h-[40px] "
 														>
 															<div
 																className="p-2 border-b border-b-gray-800/20 hover:border-b-gray-800 transition-all duration-200 ease-in-out border-transparent border-solid cursor-pointer hover:pg-text-color hover:bg-slate-200 block last-of-type:border-b-0 last-of-type:hover:border-b min-h-[40px] "
@@ -366,22 +335,18 @@ function Html(props) {
 																onClick={(ev) => {
 																	props.onChange(objCss);
 																}}>
-																Apply All
+																{__("Apply All", "post-grid")}
 															</div>
-
 															{Object.entries(objCss).map((item) => {
 																var sudoIndex = item[0];
 																var sudoArgs = item[1];
-
 																return (
 																	<div
 																		className="p-2 border-b border-b-gray-800/20 hover:border-b-gray-800 transition-all duration-200 ease-in-out border-transparent border-solid cursor-pointer hover:bg-slate-200 block last-of-type:border-b-0 min-h-[40px] "
 																		// className="p-2 cursor-pointer hover:bg-slate-300"
 																		onClick={(ev) => {
 																			var css = {};
-
 																			css[sudoIndex] = objCss[sudoIndex];
-
 																			props.onChange(css);
 																		}}>
 																		{sudoIndex}
@@ -398,9 +363,8 @@ function Html(props) {
 							);
 						})}
 					</div>
-
 					<div
-						className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center"
+						className="w-full rounded-sm  py-2 bg-gray-700 hover:bg-gray-600 text-[14px] font-bold text-white cursor-pointer my-3 text-center"
 						onClick={(_ev) => {
 							var page = queryCss.page + 1;
 							setQueryCss({
@@ -415,12 +379,12 @@ function Html(props) {
 								<Spinner />
 							</span>
 						)}
-						Load More
+						{__("Load More", "post-grid")}
 					</div>
 				</PGtab>
 				<PGtab name="submit">
 					<div>
-						<label for="">Item Title</label>
+						<label htmlFor="">{__("Item Title", "post-grid")}</label>
 						<InputControl
 							className="w-full"
 							value={cssSubmission.title}
@@ -431,10 +395,8 @@ function Html(props) {
 							}}
 						/>
 					</div>
-
 					<PanelRow>
-						<label for="">Choose category</label>
-
+						<label htmlFor="">{__("Choose category", "post-grid")}</label>
 						<SelectControl
 							className="w-full"
 							style={{ margin: 0 }}
@@ -446,9 +408,8 @@ function Html(props) {
 							}}
 						/>
 					</PanelRow>
-
 					<div>
-						<label for="">Add Some Tags</label>
+						<label htmlFor="">{__("Add Some Tags", "post-grid")}</label>
 						<InputControl
 							className="w-full"
 							value={cssSubmission.tags}
@@ -459,44 +420,35 @@ function Html(props) {
 							}}
 						/>
 					</div>
-
 					<div className="my-4">
 						<div
 							onClick={htmlToImageCapt}
 							className="bg-green-700 text-white p-3 px-5 cursor-pointer">
-							Take Screenshot
+							{__("Take Screenshot", "post-grid")}
 						</div>
-
-						<label for="">Preview Thumbnail</label>
+						<label htmlFor="">{__("Preview Thumbnail", "post-grid")}</label>
 						<img src={cssSubmission.thumb} />
 					</div>
-
 					<div>
-						<label for="">Your Email</label>
+						<label htmlFor="">{__("Your Email", "post-grid")}</label>
 						<InputControl
 							className="w-full"
 							value={cssSubmission.email}
 							type="text"
-							placeholder=""
 							onChange={(newVal) => {
 								setCssSubmission({ ...cssSubmission, email: newVal });
 							}}
 						/>
 					</div>
-
 					<div
-						className="bg-blue-500 my-5 px-10 py-3 text-white cursor-pointer text-center rounded-sm mb-5"
+						className="bg-gray-700 hover:bg-gray-600 my-5 px-10 py-3 text-white cursor-pointer text-center rounded-sm mb-5"
 						onClick={(ev) => {
 							setIsLoading(true);
-
 							setCssSubmission({ ...cssSubmission, status: "busy" });
-
 							var objX = Object.assign({}, props.obj);
-
 							if (objX.options != undefined) {
 								delete objX.options;
 							}
-
 							var postData = {
 								title: cssSubmission.title,
 								content: objX,
@@ -505,7 +457,6 @@ function Html(props) {
 								tags: cssSubmission.tags,
 							};
 							postData = JSON.stringify(postData);
-
 							fetch(
 								"https://comboblocks.com/server/wp-json/post-grid/v2/submit_css",
 								{
@@ -525,7 +476,6 @@ function Html(props) {
 													status: "success",
 													message: res.message,
 												});
-
 												setTimeout(() => {
 													setCssSubmission({
 														...cssSubmission,
@@ -539,7 +489,6 @@ function Html(props) {
 													status: "falied",
 													message: res.message,
 												});
-
 												setTimeout(() => {
 													setCssSubmission({
 														...cssSubmission,
@@ -556,26 +505,23 @@ function Html(props) {
 									// handle the error
 								});
 						}}>
-						Submit to CSS Library
+						{__("Submit to CSS Library", "post-grid")}
 						{cssSubmission.status == "busy" && (
 							<span className="text-center">
 								<Spinner />
 							</span>
 						)}
 					</div>
-
 					{cssSubmission.status == "success" && (
 						<div className=" font-bold text-green-700">
 							{cssSubmission.successMessage}
 						</div>
 					)}
-
 					{cssSubmission.status == "falied" && (
 						<div>
 							<div className=" font-bold text-red-500">
 								{cssSubmission.failedMessage}
 							</div>
-
 							<p>{cssSubmission.message}</p>
 						</div>
 					)}
@@ -584,23 +530,19 @@ function Html(props) {
 		</div>
 	);
 }
-
 class PGCssLibrary extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
 		this.handleToggleClick = this.handleToggleClick.bind(this);
 	}
-
 	handleToggleClick() {
 		this.setState((state) => ({
 			showWarning: !state.showWarning,
 		}));
 	}
-
 	render() {
 		var { blockId, obj, onChange } = this.props;
-
 		return (
 			<Html
 				blockId={blockId}
@@ -611,5 +553,4 @@ class PGCssLibrary extends Component {
 		);
 	}
 }
-
 export default PGCssLibrary;

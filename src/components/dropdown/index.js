@@ -33,7 +33,6 @@ function Html(props) {
 	var btnClass = props.btnClass;
 
 	var options = props.options;
-	console.log(options);
 	var buttonTitle = props.buttonTitle;
 	var value = props.value == undefined ? "" : props.value;
 	var onChange = props.onChange;
@@ -129,7 +128,7 @@ function Html(props) {
 				{typeof value == "string" && (
 					<Button
 						className={`${btnClass} pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700`}
-						// variant={variant}
+					// variant={variant}
 					>
 						{options[value] != undefined ? options[value]?.label : buttonTitle}
 					</Button>
@@ -138,7 +137,7 @@ function Html(props) {
 				{typeof value != "string" && (
 					<Button
 						className={`${btnClass} pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700`}
-						// variant={variant}
+					// variant={variant}
 					>
 						{buttonTitle}
 					</Button>
@@ -151,13 +150,13 @@ function Html(props) {
 						className="p-2 w-[300px] pg-font pg-setting-input-text max-h-[350px] custom-scrollbar	"
 						onKeyDown={handleKeyDown}>
 						{/* <div className="relative h-[30px] w-full  "> */}
-							<span
-								className="absolute -top-[15px] -left-[15px] rounded-full  w-[30px] h-[30px] bg-red-500 flex justify-center items-center cursor-pointer "
-								onClick={(ev) => {
-									setPickerOpen((prev) => !prev);
-								}}>
-								<span className="text-[20px] text-white ">&times;</span>
-							</span>
+						<span
+							className="absolute -top-[15px] -left-[15px] rounded-full  w-[30px] h-[30px] bg-red-500 flex justify-center items-center cursor-pointer "
+							onClick={(ev) => {
+								setPickerOpen((prev) => !prev);
+							}}>
+							<span className="text-[20px] text-white ">&times;</span>
+						</span>
 						{/* </div> */}
 						<div className="flex flex-col w-full ">
 							{/* <input
@@ -300,9 +299,9 @@ function Html(props) {
 											////
 											className={[
 												typeof value == "object" &&
-												value.includes(
-													isNumeric(index) ? parseInt(index) : index
-												)
+													value.includes(
+														isNumeric(index) ? parseInt(index) : index
+													)
 													? "w-full focusable !border-b cursor-pointer bg-slate-200 p-2 block"
 													: "w-full focusable !border-b !border-b-gray-800/20 hover:border-b-gray-800 transition-all duration-200 ease-in-out border-transparent !border-solid cursor-pointer hover:bg-slate-200 p-2 block last-of-type:!border-b-0 min-h-[40px] ",
 											]}
@@ -359,9 +358,9 @@ function Html(props) {
 											////
 											className={[
 												typeof value == "object" &&
-												value.includes(
-													IsNumeric(index) ? parseInt(index) : index
-												)
+													value.includes(
+														IsNumeric(index) ? parseInt(index) : index
+													)
 													? "border-b cursor-pointer bg-slate-200 p-2 block"
 													: "border-b border-b-gray-800/20 hover:border-b-gray-800 transition-all duration-200 ease-in-out border-transparent border-solid cursor-pointer hover:bg-slate-200 p-2 block last-of-type:!border-b-0 min-h-[40px] ",
 											]}

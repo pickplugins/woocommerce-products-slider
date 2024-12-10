@@ -22,6 +22,7 @@ import {
 	__experimentalInputControl as InputControl,
 } from "@wordpress/components";
 import apiFetch from "@wordpress/api-fetch";
+import { Splide, SplideTrack } from "@splidejs/react-splide";
 
 import PGDropdown from '../../components/dropdown'
 
@@ -34,184 +35,47 @@ function Html(props) {
 	}
 
 	var id = props.id;
+	var isLoading = props.isLoading;
 
-	var [isLoading, setisLoading] = useState(false); // Using the hook.
-	var [postData, setpostData] = useState(null); // Using the hook.
-	var [viewType, setviewType] = useState("accordion"); // Using the hook.
-	var [sliderFor, setsliderFor] = useState("product"); // product, product categories, dokan shop, 
-	var [items, setitems] = useState(null); // Using the hook.
 
-	var defaultPostData = {
-		wrapper: {
-			options: {
-				class: "wrapper",
-			},
-			styles: {
-				color: {
-					Desktop: "#000000",
-				},
-			},
-		},
-		header: {
-			options: {
-				class: "",
-			},
-			styles: {
-				color: {
-					Desktop: "#000000",
-				},
-			},
-		},
-		headerActive: {
-			options: {
-				class: "",
-			},
-			styles: {
-				color: {
-					Desktop: "#000000",
-				},
-			},
-		},
-		headerLabel: {
-			options: {
-				class: "",
-			},
-			styles: {
-				color: {
-					Desktop: "#000000",
-				},
-			},
-		},
-		labelIcon: {
-			options: {
-				enable: true,
-				library: "fontAwesome",
-				srcType: "class",
-				iconSrc: "fas fa-check-circle",
-				position: "beforeText",
-				class: "text-icon",
-			},
-			styles: {},
-		},
-		labelCounter: {
-			options: {
-				enable: false,
-				position: "beforeText",
-				class: "text-icon",
-			},
-			styles: {},
-		},
-		content: {
-			options: {
-				class: "",
-			},
-			styles: {
-				color: {
-					Desktop: "#000000",
-				},
-			},
-		},
-		icon: {
-			options: {
-				enable: true,
-				library: "fontAwesome",
-				srcType: "class",
-				iconSrc: "fas fa-check-circle",
-				position: "beforeText",
-				class: "text-icon",
-			},
-			styles: {},
-		},
-		iconToggle: {
-			options: {
-				class: "",
-			},
-			styles: {
-				color: {
-					Desktop: "#000000",
-				},
-			},
-		},
+	var postData = props.postData;
+	var accordionDataX = postData.post_content;
 
-		items: [
-			{
-				header: {
-					label: "Label 1",
-					labelToggle: "Label 1 Toggle",
-					icon: "",
-					iconToggle: "",
-				},
-				content: { text: "Accordion content 1" },
-			},
-			{
-				header: { label: "Label 2" },
-				content: { text: "Accordion content 3" },
-			},
-		],
-	};
+
+	var wrapper = accordionDataX?.wrapper;
+	var sliderOptions = accordionDataX?.sliderOptions;
+	var prev = accordionDataX?.prev;
+	var next = accordionDataX?.next;
+	var prevIcon = accordionDataX?.prevIcon;
+	var nextIcon = accordionDataX?.nextIcon;
+
+
+
+	const [prevIconHtml, setPrevIconHtml] = useState("");
+	const [nextIconHtml, setNextIconHtml] = useState("");
 
 	useEffect(() => {
-		setisLoading(true);
-
-		apiFetch({
-			path: "/accordions/v2/accordions_data",
-			method: "POST",
-			data: {
-				postId: id,
-				_wpnonce: post_grid_editor_js._wpnonce,
-			},
-		}).then((res) => {
-			setisLoading(false);
-
-
-			setpostData(res);
-			var post_content =
-				res.post_content == null || res.post_content.length == 0
-					? defaultPostData.items
-					: res.post_content;
-			setitems(post_content);
-		});
-	}, [id]);
-
-	var [wrapper, setwrapper] = useState(defaultPostData.wrapper);
-	var [header, setheader] = useState(defaultPostData.header);
-	var [headerActive, setheaderActive] = useState(defaultPostData.headerActive);
-	var [headerLabel, setheaderLabel] = useState(defaultPostData.headerLabel);
-	var [labelIcon, setlabelIcon] = useState(defaultPostData.labelIcon);
-	var [labelCounter, setlabelCounter] = useState(defaultPostData.labelCounter);
-	var [content, setcontent] = useState(defaultPostData.content);
-	var [icon, seticon] = useState(defaultPostData.icon);
-	var [iconToggle, seticonToggle] = useState(defaultPostData.iconToggle);
-
-	var [active, setactive] = useState("0");
-	const handleActive = (index) => {
-		setactive(index);
-	}
-
-
-	var sliderForArgs = {
-		Products: { label: "Products", value: "products" },
-		terms: { label: "Terms", value: "terms" },
-		dokanShops: { label: "Dokan Shops", value: "dokanShops" },
-	}
-
+		var iconSrc = nextIcon?.options?.iconSrc;
+		var iconHtml = `<span class="${iconSrc}"></span>`;
+		setNextIconHtml(iconHtml);
+	}, [nextIcon?.options]);
+	useEffect(() => {
+		var iconSrc = prevIcon?.options?.iconSrc;
+		var iconHtml = `<span class="${iconSrc}"></span>`;
+		setPrevIconHtml(iconHtml);
+	}, [prevIcon?.options]);
 
 	return (
 		<div className="ml-5">
 
 
+
+
+
 			<div className="flex items-center justify-between align-middle bg-white p-5  mb-5">
 				<div className="flex items-center gap-5">
 
-					<PGDropdown
-						position="bottom right"
-						variant="secondary"
-						buttonTitle={"Slider For"}
-						options={sliderForArgs}
-						onChange={(option, index) => {
-							setsliderFor(option.value);
-						}}
-						values=""></PGDropdown>
+
 
 
 
@@ -233,9 +97,65 @@ function Html(props) {
 
 			<div></div>
 
-			<div className={`my-5 ${wrapper.options.class} `}>
-				Slide Items
+
+
+
+
+
+			<div className={`my-5 ${wrapper?.options?.class} `}>
+				<Splide hasTrack={false} options={sliderOptions}>
+					<SplideTrack>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 1</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 2</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 3</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 4</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 5</div>
+
+
+					</SplideTrack>
+					<div className="splide__arrows">
+						<div className="prev splide__arrow splide__arrow--prev">
+							{prevIcon?.options.position == "before" && (
+								<span
+									className="icon"
+									dangerouslySetInnerHTML={{ __html: prevIconHtml }}
+								/>
+							)}
+							{prev?.options.text.length > 0 && (
+								<span> {prev.options.text} </span>
+							)}
+							{prevIcon?.options.position == "after" && (
+								<span
+									className="icon"
+									dangerouslySetInnerHTML={{ __html: prevIconHtml }}
+								/>
+							)}
+						</div>
+						<div className="next splide__arrow splide__arrow--next">
+							{nextIcon?.options.position == "before" && (
+								<span
+									className="icon"
+									dangerouslySetInnerHTML={{ __html: nextIconHtml }}
+								/>
+							)}
+							{next?.options.text.length > 0 && (
+								<span> {next.options.text} </span>
+							)}
+							{nextIcon?.options.position == "after" && (
+								<span
+									className="icon"
+									dangerouslySetInnerHTML={{ __html: nextIconHtml }}
+								/>
+							)}
+						</div>
+					</div>
+					<ul className="splide__pagination "></ul>
+				</Splide>
 			</div>
+
+			<code>
+				{JSON.stringify(wrapper)}
+			</code>
 		</div>
 	);
 }
@@ -254,9 +174,9 @@ class AccordionsView extends Component {
 	}
 
 	render() {
-		var { onChange, id } = this.props;
+		var { postData, id, isLoading } = this.props;
 
-		return <Html onChange={onChange} id={id} warn={this.state.showWarning} />;
+		return <Html isLoading={isLoading} postData={postData} id={id} warn={this.state.showWarning} />;
 	}
 }
 
