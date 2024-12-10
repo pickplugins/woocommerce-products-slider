@@ -1869,6 +1869,49 @@ function Html(props) {
 								<PGtab name="custom">
 									<PanelBody
 										className="font-medium text-slate-900 "
+										title="Navs Wrap"
+										initialOpen={false}>
+										<PGtabs
+											activeTab="options"
+											orientation="horizontal"
+											activeClass="active-tab"
+											onSelect={(tabName) => { }}
+											tabs={[
+												{
+													name: "options",
+													title: "Options",
+													icon: settings,
+													className: "tab-settings",
+												},
+												{
+													name: "styles",
+													title: "Styles",
+													icon: brush,
+													className: "tab-style",
+												},
+											]}>
+											<PGtab name="options"></PGtab>
+											<PGtab name="styles">
+												<PGStyles
+													obj={navsWrap}
+													onChange={(sudoScource, newVal, attr) =>
+														onChangeStyle(sudoScource, newVal, attr, navsWrap, setnavsWrap)
+													}
+													onAdd={(sudoScource, key) =>
+														onAddStyle(sudoScource, key, navsWrap, setnavsWrap)
+													}
+													onRemove={(sudoScource, key) =>
+														onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap)
+													}
+													onReset={(sudoSources) =>
+														onResetStyle(sudoSources, navsWrap, setnavsWrap)
+													}
+												/>
+											</PGtab>
+										</PGtabs>
+									</PanelBody>
+									<PanelBody
+										className="font-medium text-slate-900 "
 										title="Prev Button"
 										initialOpen={false}>
 										<PGtabs
@@ -2136,6 +2179,55 @@ function Html(props) {
 													}
 													onReset={(sudoSources) =>
 														onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
+													}
+												/>
+											</PGtab>
+										</PGtabs>
+									</PanelBody>
+									<PanelBody
+										className="font-medium text-slate-900 "
+										title="Pagination Active"
+										initialOpen={false}>
+										<PGtabs
+											activeTab="options"
+											orientation="horizontal"
+											activeClass="active-tab"
+											onSelect={(tabName) => { }}
+											tabs={[
+												{
+													name: "options",
+													title: "Options",
+													icon: settings,
+													className: "tab-settings",
+												},
+												{
+													name: "styles",
+													title: "Styles",
+													icon: brush,
+													className: "tab-style",
+												},
+											]}>
+											<PGtab name="options"></PGtab>
+											<PGtab name="styles">
+												<PGStyles
+													obj={paginationActive}
+													onChange={(sudoScource, newVal, attr) =>
+														onChangeStyle(
+															sudoScource,
+															newVal,
+															attr,
+															paginationActive,
+															setpaginationActive
+														)
+													}
+													onAdd={(sudoScource, key) =>
+														onAddStyle(sudoScource, key, paginationActive, setpaginationActive)
+													}
+													onRemove={(sudoScource, key) =>
+														onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive)
+													}
+													onReset={(sudoSources) =>
+														onResetStyle(sudoSources, paginationActive, setpaginationActive)
 													}
 												/>
 											</PGtab>

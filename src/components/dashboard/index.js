@@ -153,6 +153,7 @@ function Html(props) {
 	};
 
 	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
+	console.log(activeAccordion);
 	var [postData, setpostData] = useState(defaultPostData); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
 
@@ -215,9 +216,9 @@ function Html(props) {
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
 
-			<div className="flex ">
+			<div className="flex h-[700px] ">
 
-				<div className="w-[450px]">
+				<div className="w-[450px] overflow-y-scroll light-scrollbar">
 					<PGtabs
 						activeTab="accordions"
 						orientation=""
@@ -279,7 +280,7 @@ function Html(props) {
 					</PGtabs>
 
 				</div>
-				<div className="w-full">
+				<div className="w-full sticky top-0">
 					<div className="  relative">
 
 

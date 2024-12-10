@@ -71,7 +71,16 @@
 
 /* custom CSS  */
 
+.light-scrollbar::-webkit-scrollbar {
+  width: 5px !important;
+}
+.light-scrollbar::-webkit-scrollbar-track {
+  display: none;
+}
 
+.light-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-800 dark:bg-gray-200 rounded;
+}
 
 
 
