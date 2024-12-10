@@ -32,23 +32,8 @@ function Html(props) {
 	);
 	const [customColor, setCustomColor] = useState([]);
 	const [newColorPreset, setNewColorPreset] = useState([]);
-	3;
-	useEffect(() => {
-		if (window.postGridBlockEditor.colors != undefined) {
-			setCustomColor(window.postGridBlockEditor.colors);
-		}
-	}, [window.postGridBlockEditor]);
-	// useEffect(() => {
-	// 	apiFetch({
-	// 		path: "/post-grid/v2/get_options",
-	// 		method: "POST",
-	// 		data: { option: "post_grid_block_editor" },
-	// 	}).then((res) => {
-	// 		if (res.colors.length != 0) {
-	// 			setCustomColor(res.colors);
-	// 		}
-	// 	});
-	// }, []);
+
+
 	useEffect(() => {
 		const transformedColors = customColor.map((color, index) => {
 			const name = color.substring(1).toUpperCase();

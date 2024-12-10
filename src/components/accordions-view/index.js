@@ -50,10 +50,20 @@ function Html(props) {
 	var nextIcon = accordionDataX?.nextIcon;
 
 
-	var nextIconHtml = "";
-	var prevIconHtml = "";
 
+	const [prevIconHtml, setPrevIconHtml] = useState("");
+	const [nextIconHtml, setNextIconHtml] = useState("");
 
+	useEffect(() => {
+		var iconSrc = nextIcon?.options?.iconSrc;
+		var iconHtml = `<span class="${iconSrc}"></span>`;
+		setNextIconHtml(iconHtml);
+	}, [nextIcon?.options]);
+	useEffect(() => {
+		var iconSrc = prevIcon?.options?.iconSrc;
+		var iconHtml = `<span class="${iconSrc}"></span>`;
+		setPrevIconHtml(iconHtml);
+	}, [prevIcon?.options]);
 
 	return (
 		<div className="ml-5">
@@ -95,12 +105,12 @@ function Html(props) {
 			<div className={`my-5 ${wrapper?.options?.class} `}>
 				<Splide hasTrack={false} options={sliderOptions}>
 					<SplideTrack>
-						<div className="splide__slide item">Item 1</div>
-						<div className="splide__slide item">Item 2</div>
-						<div className="splide__slide item">Item 3</div>
-						<div className="splide__slide item">Item 4</div>
-						<div className="splide__slide item">Item 5</div>
-						<div className="splide__slide item">Item 6</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 1</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 2</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 3</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 4</div>
+						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 5</div>
+
 
 					</SplideTrack>
 					<div className="splide__arrows">

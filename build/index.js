@@ -3349,13 +3349,12 @@ function Html(props) {
   var breakPointX = "Desktop";
   var accordionDataX = postData.post_content;
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
-  var [styleSudoObj, setstyleSudoObj] = useState({}); // Using the hook.
-  var [styleStr, setstyleStr] = useState(""); // Using the hook.
 
   var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
   var [itemsWrap, setitemsWrap] = useState(accordionDataX.itemsWrap);
   var [item, setitem] = useState(accordionDataX.item);
   var [sliderOptions, setsliderOptions] = useState(accordionDataX.sliderOptions);
+  var [navsWrap, setnavsWrap] = useState(accordionDataX.navsWrap);
   var [prev, setprev] = useState(accordionDataX.prev);
   var [next, setnext] = useState(accordionDataX.next);
   var [prevIcon, setprevIcon] = useState(accordionDataX.prevIcon);
@@ -3379,17 +3378,19 @@ function Html(props) {
       value: breakPointItem.id
     });
   }
-  var wrapperSelector = ".wcps-content-slider";
-  var itemsWrapSelector = "." + itemsWrap.options.class;
-  var itemSelector = "." + item.options.class;
-  var prevSelector = "." + prev.options.class;
-  var nextSelector = "." + next.options.class;
-  var prevIconSelector = "." + prevIcon.options.class;
-  var nextIconSelector = "." + nextIcon.options.class;
-  var paginationWrapSelector = "." + paginationWrap.options.class;
-  var paginationActiveSelector = "." + paginationActive.options.class;
-  var paginationSelector = "." + pagination.options.class;
-  var blockId = "";
+  var blockClass = ".wcps-content-slider";
+  var wrapperSelector = blockClass + " .splide";
+  var itemsWrapSelector = blockClass + " .splide__track";
+  var itemSelector = blockClass + " .pg-content-slider-item";
+  var nextSelector = blockClass + " .splide__arrow--next";
+  var prevSelector = blockClass + " .splide__arrow--prev";
+  var nextIconSelector = blockClass + " .splide__arrow--next .icon";
+  var prevIconSelector = blockClass + " .splide__arrow--prev .icon";
+  var navsWrapSelector = blockClass + " .splide__arrows";
+  var paginationWrapSelector = blockClass + " .splide__pagination";
+  var paginationSelector = blockClass + " .splide__pagination__page";
+  var paginationActiveSelector = blockClass + " .splide__pagination__page.is-active";
+  var blockId = postData.ID;
   function getElementSelector(sudoScource, mainSelector) {
     var elementSelector = mainSelector;
     if (sudoScource == "styles") {
@@ -3654,33 +3655,120 @@ function Html(props) {
     }
     return cssProp;
   }
-  useEffect(() => {
-    var styleSudoObjX = {
-      ...styleSudoObj
-    };
-    Object.entries(styleObj).map(element => {
-      var mainSelector = element[0];
-      var elementSudoObj = element[1];
-      Object.entries(elementSudoObj).map(sodu => {
-        var soduId = sodu[0];
-        var soduObj = sodu[1];
-        var elementSelector = getElementSelector(soduId, mainSelector);
-        if (styleSudoObj[elementSelector] == undefined) {
-          styleSudoObj[elementSelector] = {};
-        }
-        Object.entries(soduObj).map(responsiveVal => {
-          console.log(responsiveVal);
-          var cssProp = cssAttrParse(responsiveVal[0]);
-          var cssVals = sodu[1];
-          console.log(cssProp);
-          Object.entries(cssVals).map(cssVal => {
-            console.log(cssVal);
-
-            //styleSudoObj[elementSelector][cssProp] = "";
-          });
+  function generateElementCss(obj, elementSelector) {
+    var cssObj = {};
+    Object.entries(obj).map(args => {
+      var sudoSrc = args[0];
+      var sudoArgs = args[1];
+      if (sudoSrc != "options" && sudoArgs != null) {
+        var selector = getElementSelector(sudoSrc, elementSelector);
+        Object.entries(args[1]).map(x => {
+          var attr = x[0];
+          var propVal = x[1];
+          var cssPropty = cssAttrParse(attr);
+          var found = Object.entries(propVal).reduce((a, [k, v]) => v ? (a[k] = v, a) : a, {});
+          if (Object.keys(found).length > 0) {
+            if (cssObj[selector] == undefined) {
+              cssObj[selector] = {};
+            }
+            if (cssObj[selector][cssPropty] == undefined) {
+              cssObj[selector][cssPropty] = {};
+            }
+            cssObj[selector][cssPropty] = x[1];
+          }
         });
-      });
+      }
     });
+    return cssObj;
+  }
+  function generateBlockCss(items) {
+    var reponsiveCssGroups = {};
+    for (var selector in items) {
+      var attrs = items[selector];
+      for (var attr in attrs) {
+        var breakpoints = attrs[attr];
+        for (var device in breakpoints) {
+          var attrValue = breakpoints[device];
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = [];
+          }
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = [];
+          }
+          if (reponsiveCssGroups[device][selector] == undefined) {
+            reponsiveCssGroups[device][selector] = [];
+          }
+          if (typeof attrValue == "string") {
+            attrValue = attrValue.replaceAll("u0022", '"');
+            reponsiveCssGroups[device][selector].push({
+              attr: attr,
+              val: attrValue
+            });
+          }
+        }
+      }
+    }
+    var reponsiveCssDesktop = "";
+    if (reponsiveCssGroups["Desktop"] != undefined) {
+      for (var selector in reponsiveCssGroups["Desktop"]) {
+        var attrs = reponsiveCssGroups["Desktop"][selector];
+        reponsiveCssDesktop += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssDesktop += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssDesktop += "}";
+      }
+    }
+    var reponsiveCssTablet = "";
+    if (reponsiveCssGroups["Tablet"] != undefined) {
+      reponsiveCssTablet += "@media(max-width: 991px){";
+      for (var selector in reponsiveCssGroups["Tablet"]) {
+        var attrs = reponsiveCssGroups["Tablet"][selector];
+        reponsiveCssTablet += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssTablet += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssTablet += "}";
+      }
+      reponsiveCssTablet += "}";
+    }
+    var reponsiveCssMobile = "";
+    if (reponsiveCssGroups["Mobile"] != undefined) {
+      reponsiveCssMobile += "@media(max-width:767px){";
+      for (var selector in reponsiveCssGroups["Mobile"]) {
+        var attrs = reponsiveCssGroups["Mobile"][selector];
+        reponsiveCssMobile += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssMobile += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssMobile += "}";
+      }
+      reponsiveCssMobile += "}";
+    }
+    var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
+    var wpfooter = document.getElementById("wpfooter");
+    var divWrap = document.getElementById("css-block");
+    if (divWrap != undefined) {
+      document.getElementById("css-block").outerHTML = "";
+    }
+    var divWrap = '<style id="css-block"></style>';
+    wpfooter.insertAdjacentHTML("beforeend", divWrap);
+    var csswrappg = document.getElementById("css-block");
+    var str = "" + reponsiveCss + "";
+    csswrappg.insertAdjacentHTML("beforeend", str);
+  }
+  useEffect(() => {
+    console.log(styleObj);
+    generateBlockCss(styleObj);
   }, [styleObj]);
   useEffect(() => {
     var postDataX = {
@@ -3698,12 +3786,12 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var wrapperX = {
-      ...wrapper
-    };
-    delete wrapperX.options;
-    //styleObjX.wrapper = wrapperX;
-    styleObjX[wrapperSelector] = wrapperX;
+    var wrapperCss = generateElementCss(wrapper, wrapperSelector);
+    Object.entries(wrapperCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [wrapper]);
   useEffect(() => {
@@ -3715,11 +3803,12 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var itemsWrapX = {
-      ...itemsWrap
-    };
-    delete itemsWrapX.options;
-    styleObjX.itemsWrap = itemsWrapX;
+    var itemsWrapCss = generateElementCss(itemsWrap, itemsWrapSelector);
+    Object.entries(itemsWrapCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [itemsWrap]);
   useEffect(() => {
@@ -3731,13 +3820,31 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var itemX = {
-      ...item
-    };
-    delete itemX.options;
-    styleObjX.item = itemX;
+    var itemCss = generateElementCss(item, itemSelector);
+    Object.entries(itemCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [item]);
+  useEffect(() => {
+    var postDataX = {
+      ...postData
+    };
+    postDataX.post_content.navsWrap = navsWrap;
+    onChange(postDataX);
+    var styleObjX = {
+      ...styleObj
+    };
+    var navsWrapCss = generateElementCss(navsWrap, navsWrapSelector);
+    Object.entries(navsWrapCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    setstyleObj(styleObjX);
+  }, [navsWrap]);
   useEffect(() => {
     var postDataX = {
       ...postData
@@ -3747,11 +3854,12 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var prevX = {
-      ...prev
-    };
-    delete prevX.options;
-    styleObjX.prev = prevX;
+    var prevCss = generateElementCss(prev, prevSelector);
+    Object.entries(prevCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [prev]);
   useEffect(() => {
@@ -3763,11 +3871,12 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var nextX = {
-      ...next
-    };
-    delete nextX.options;
-    styleObjX.next = nextX;
+    var nextCss = generateElementCss(next, nextSelector);
+    Object.entries(nextCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [next]);
   useEffect(() => {
@@ -3779,11 +3888,12 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var prevIconX = {
-      ...prevIcon
-    };
-    delete prevIconX.options;
-    styleObjX.prevIcon = prevIconX;
+    var prevIconCss = generateElementCss(prevIcon, prevIconSelector);
+    Object.entries(prevIconCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [prevIcon]);
   useEffect(() => {
@@ -3795,11 +3905,12 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var nextIconX = {
-      ...nextIcon
-    };
-    delete nextIconX.options;
-    styleObjX.nextIcon = nextIconX;
+    var nextIconCss = generateElementCss(nextIcon, nextIconSelector);
+    Object.entries(nextIconCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [nextIcon]);
   useEffect(() => {
@@ -3811,11 +3922,12 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var paginationWrapX = {
-      ...paginationWrap
-    };
-    delete paginationWrapX.options;
-    styleObjX.paginationWrap = paginationWrapX;
+    var paginationWrapCss = generateElementCss(paginationWrap, paginationWrapSelector);
+    Object.entries(paginationWrapCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [paginationWrap]);
   useEffect(() => {
@@ -3827,13 +3939,31 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var paginationX = {
-      ...pagination
-    };
-    delete paginationX.options;
-    styleObjX.pagination = paginationX;
+    var paginationCss = generateElementCss(pagination, paginationSelector);
+    Object.entries(paginationCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [pagination]);
+  useEffect(() => {
+    var postDataX = {
+      ...postData
+    };
+    postDataX.post_content.paginationActive = paginationActive;
+    onChange(postDataX);
+    var styleObjX = {
+      ...styleObj
+    };
+    var paginationActiveCss = generateElementCss(paginationActive, paginationActiveSelector);
+    Object.entries(paginationActiveCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    setstyleObj(styleObjX);
+  }, [paginationActive]);
   var RemoveSliderArg = function ({
     index
   }) {
@@ -4064,7 +4194,7 @@ function Html(props) {
     className: "fixed top-20 right-0 w-[400px] z-50"
   }, "   "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
     className: "break-all\tp-4 block"
-  }, JSON.stringify(styleSudoObj)), props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, JSON.stringify(styleObj)), props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
@@ -5253,8 +5383,18 @@ function Html(props) {
   var next = accordionDataX?.next;
   var prevIcon = accordionDataX?.prevIcon;
   var nextIcon = accordionDataX?.nextIcon;
-  var nextIconHtml = "";
-  var prevIconHtml = "";
+  const [prevIconHtml, setPrevIconHtml] = useState("");
+  const [nextIconHtml, setNextIconHtml] = useState("");
+  useEffect(() => {
+    var iconSrc = nextIcon?.options?.iconSrc;
+    var iconHtml = `<span class="${iconSrc}"></span>`;
+    setNextIconHtml(iconHtml);
+  }, [nextIcon?.options]);
+  useEffect(() => {
+    var iconSrc = prevIcon?.options?.iconSrc;
+    var iconHtml = `<span class="${iconSrc}"></span>`;
+    setPrevIconHtml(iconHtml);
+  }, [prevIcon?.options]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "ml-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -5269,18 +5409,16 @@ function Html(props) {
     hasTrack: false,
     options: sliderOptions
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_splidejs_react_splide__WEBPACK_IMPORTED_MODULE_4__.SplideTrack, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "splide__slide item"
+    className: `splide__slide my-5 ${wrapper?.options?.class} `
   }, "Item 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "splide__slide item"
+    className: `splide__slide my-5 ${wrapper?.options?.class} `
   }, "Item 2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "splide__slide item"
+    className: `splide__slide my-5 ${wrapper?.options?.class} `
   }, "Item 3"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "splide__slide item"
+    className: `splide__slide my-5 ${wrapper?.options?.class} `
   }, "Item 4"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "splide__slide item"
-  }, "Item 5"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "splide__slide item"
-  }, "Item 6")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `splide__slide my-5 ${wrapper?.options?.class} `
+  }, "Item 5")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "splide__arrows"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "prev splide__arrow splide__arrow--prev"
@@ -6888,24 +7026,7 @@ function Html(props) {
   const [val, setval] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(valArgs[0]);
   const [isImportant, setImportant] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(valArgs[1] == undefined ? false : true);
   const [customColor, setCustomColor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
-    if (window.postGridBlockEditor.colors != undefined) {
-      setCustomColor(window.postGridBlockEditor.colors);
-    }
-  }, [window.postGridBlockEditor]);
   const [newColorPreset, setNewColorPreset] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
-  // useEffect(() => {
-  // 	apiFetch({
-  // 		path: "/post-grid/v2/get_options",
-  // 		method: "POST",
-  // 		data: { option: "post_grid_block_editor" },
-  // 	}).then((res) => {
-  // 		if (res.colors.length != 0) {
-  // 			setCustomColor(res.colors);
-  // 		}
-  // 	});
-  // }, []);
-
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
     const transformedColors = customColor.map((color, index) => {
       const name = color.substring(1).toUpperCase();
@@ -6915,9 +7036,6 @@ function Html(props) {
         color: upperCaseColor
       };
     });
-    // const newColor = transformedColors.concat(
-    // 	colorsPresets.slice(0, 6 - transformedColors.length)
-    // );
     let newColor;
     if (transformedColors.length >= 6) {
       newColor = transformedColors;
@@ -11439,23 +11557,6 @@ function Html(props) {
   const [isImportant, setImportant] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(valArgs[1] == undefined ? false : true);
   const [customColor, setCustomColor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
   const [newColorPreset, setNewColorPreset] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
-  3;
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
-    if (window.postGridBlockEditor.colors != undefined) {
-      setCustomColor(window.postGridBlockEditor.colors);
-    }
-  }, [window.postGridBlockEditor]);
-  // useEffect(() => {
-  // 	apiFetch({
-  // 		path: "/post-grid/v2/get_options",
-  // 		method: "POST",
-  // 		data: { option: "post_grid_block_editor" },
-  // 	}).then((res) => {
-  // 		if (res.colors.length != 0) {
-  // 			setCustomColor(res.colors);
-  // 		}
-  // 	});
-  // }, []);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
     const transformedColors = customColor.map((color, index) => {
       const name = color.substring(1).toUpperCase();
@@ -28144,21 +28245,21 @@ function Html(props) {
     sliderFor: "products",
     wrapper: {
       options: {
-        class: "pg-content-slider"
+        class: "wcps-content-slider"
       },
       styles: {}
     },
     itemsWrap: {
       options: {
         tag: "div",
-        class: "pg-content-slider-item"
+        class: "wcps-content-slider-items"
       },
       styles: {}
     },
     item: {
       options: {
         tag: "div",
-        class: "pg-content-slider-item"
+        class: "wcps-content-slider-item"
       },
       styles: {}
     },
@@ -28685,7 +28786,6 @@ function Html(props) {
   var variant = props.variant;
   var btnClass = props.btnClass;
   var options = props.options;
-  console.log(options);
   var buttonTitle = props.buttonTitle;
   var value = props.value == undefined ? "" : props.value;
   var onChange = props.onChange;

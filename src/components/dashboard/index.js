@@ -45,21 +45,21 @@ function Html(props) {
 
 		wrapper: {
 			options: {
-				class: "pg-content-slider",
+				class: "wcps-content-slider",
 			},
 			styles: {},
 		},
 		itemsWrap: {
 			options: {
 				tag: "div",
-				class: "pg-content-slider-item",
+				class: "wcps-content-slider-items",
 			},
 			styles: {},
 		},
 		item: {
 			options: {
 				tag: "div",
-				class: "pg-content-slider-item",
+				class: "wcps-content-slider-item",
 			},
 			styles: {},
 		},
