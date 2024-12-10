@@ -1,5 +1,5 @@
 ﻿===  Product Slider for WooCommerce by PickPlugins ===
-	Contributors: PickPlugins
+	Contributors: PickPlugins, nafismahmudayon
 	Donate link: https://pickplugins.com/pickplugins-products-slider/
 	Tags: product slider, woocommerce slider, carousel slider, product category slider, woo slider, carousel slider,  woocommerce product slider
 	Requires at least: 3.8
