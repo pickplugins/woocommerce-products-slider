@@ -239,7 +239,7 @@ function Html(props) {
 
 	var accordionDataX =
 		props.accordionData.post_content == null ||
-		props.accordionData.post_content.length == 0
+			props.accordionData.post_content.length == 0
 			? defaultPostData
 			: props.accordionData;
 
@@ -294,7 +294,7 @@ function Html(props) {
 
 	var blockId = "";
 
-	useEffect(() => {}, [blockCssY]);
+	useEffect(() => { }, [blockCssY]);
 
 	var RemoveSliderArg = function ({ index }) {
 		return (
@@ -551,13 +551,6 @@ function Html(props) {
 
 	return (
 		<div className="">
-<<<<<<< HEAD
-
-			{JSON.stringify(wrapper)}
-
-
-=======
->>>>>>> 4cdb7fb38ad79b212bdb2ed346414a01f494ee6d
 			{props.accordionData.post_content == null && (
 				<div className="p-3 text-center">Please select WCPS first</div>
 			)}
@@ -597,7 +590,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -660,7 +653,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -709,7 +702,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -752,7 +745,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -795,7 +788,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -838,7 +831,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -887,7 +880,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -936,7 +929,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -995,7 +988,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1044,7 +1037,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1102,7 +1095,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1117,7 +1110,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1128,7 +1121,7 @@ function Html(props) {
 								<InputControl
 									value={""}
 									type="number"
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1139,7 +1132,7 @@ function Html(props) {
 								<InputControl
 									value={""}
 									type="number"
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1150,7 +1143,7 @@ function Html(props) {
 								<InputControl
 									value={""}
 									type="number"
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1161,7 +1154,7 @@ function Html(props) {
 								<InputControl
 									value={""}
 									type="number"
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1172,7 +1165,7 @@ function Html(props) {
 								<InputControl
 									value={""}
 									type="number"
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1183,7 +1176,7 @@ function Html(props) {
 								<InputControl
 									value={""}
 									type="number"
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1191,56 +1184,56 @@ function Html(props) {
 								<div className="flex items-center">
 									<span>{__("Gap?", "post-grid")}</span>
 								</div>
-								<InputControl value={""} onChange={(newVal) => {}} />
+								<InputControl value={""} onChange={(newVal) => { }} />
 							</PanelRow>
 
 							<PanelRow>
 								<div className="flex items-center">
 									<span>{__("Padding?", "post-grid")}</span>
 								</div>
-								<InputControl value={""} onChange={(newVal) => {}} />
+								<InputControl value={""} onChange={(newVal) => { }} />
 							</PanelRow>
 
 							<PanelRow>
 								<div className="flex items-center">
 									<span>{__("Focus?", "post-grid")}</span>
 								</div>
-								<InputControl value={""} onChange={(newVal) => {}} />
+								<InputControl value={""} onChange={(newVal) => { }} />
 							</PanelRow>
 
 							<PanelRow>
 								<div className="flex items-center">
 									<span>{__("Width?", "post-grid")}</span>
 								</div>
-								<InputControl value={""} onChange={(newVal) => {}} />
+								<InputControl value={""} onChange={(newVal) => { }} />
 							</PanelRow>
 
 							<PanelRow>
 								<div className="flex items-center">
 									<span>{__("Height?", "post-grid")}</span>
 								</div>
-								<InputControl value={""} onChange={(newVal) => {}} />
+								<InputControl value={""} onChange={(newVal) => { }} />
 							</PanelRow>
 
 							<PanelRow>
 								<div className="flex items-center">
 									<span>{__("Fixed Width?", "post-grid")}</span>
 								</div>
-								<InputControl value={""} onChange={(newVal) => {}} />
+								<InputControl value={""} onChange={(newVal) => { }} />
 							</PanelRow>
 
 							<PanelRow>
 								<div className="flex items-center">
 									<span>{__("Fixed Height?", "post-grid")}</span>
 								</div>
-								<InputControl value={""} onChange={(newVal) => {}} />
+								<InputControl value={""} onChange={(newVal) => { }} />
 							</PanelRow>
 
 							<PanelRow>
 								<div className="flex items-center">
 									<span>{__("Height Ratio?", "post-grid")}</span>
 								</div>
-								<InputControl value={""} onChange={(newVal) => {}} />
+								<InputControl value={""} onChange={(newVal) => { }} />
 							</PanelRow>
 
 							<PanelRow>
@@ -1254,7 +1247,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1270,7 +1263,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1285,7 +1278,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1300,7 +1293,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1315,7 +1308,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1330,7 +1323,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1345,7 +1338,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1360,7 +1353,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1375,7 +1368,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1390,7 +1383,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1405,7 +1398,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1421,7 +1414,7 @@ function Html(props) {
 										{ label: "rtl", value: "rtl" },
 										{ label: "ttb", value: "ttb" },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1437,7 +1430,7 @@ function Html(props) {
 										{ label: "rtl", value: "rtl" },
 										{ label: "ttb", value: "ttb" },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1460,7 +1453,7 @@ function Html(props) {
 											value: "sequential",
 										},
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1483,7 +1476,7 @@ function Html(props) {
 											value: "focused",
 										},
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1498,7 +1491,7 @@ function Html(props) {
 										{ label: "min", value: "min" },
 										{ label: "max", value: "max" },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1513,7 +1506,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 
@@ -1528,7 +1521,7 @@ function Html(props) {
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
-									onChange={(newVal) => {}}
+									onChange={(newVal) => { }}
 								/>
 							</PanelRow>
 						</div>
@@ -3404,7 +3397,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "presets",
@@ -3434,7 +3427,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "presets",
@@ -3463,7 +3456,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "presets",
@@ -3492,7 +3485,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "presets",
