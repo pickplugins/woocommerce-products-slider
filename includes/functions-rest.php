@@ -4,7 +4,7 @@ if (!defined('ABSPATH'))
 
 
 
-class AccordionsRest
+class WCPSRest
 {
 	function __construct()
 	{
@@ -1146,4 +1146,4 @@ class AccordionsRest
 	}
 }
 
-$AccordionsRest = new AccordionsRest();
+$WCPSRest = new WCPSRest();

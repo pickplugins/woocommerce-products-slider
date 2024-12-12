@@ -75,6 +75,9 @@ function Html(props) {
 			pauseOnHover: "1",
 			speed: "400",
 		},
+		loopLayout: [],
+
+
 
 		navsWrap: {
 			options: {
@@ -150,6 +153,9 @@ function Html(props) {
 
 			},
 		},
+
+
+
 	};
 
 	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
@@ -216,7 +222,7 @@ function Html(props) {
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
 
-			<div className="flex h-[700px] ">
+			<div className="flex ">
 
 				<div className="w-[450px] overflow-y-scroll light-scrollbar">
 					<PGtabs
@@ -252,7 +258,10 @@ function Html(props) {
 						<PGtab name="accordions">
 							<div className="relative p-3">
 
-								<p>Please select wcps first.</p>
+								{postData.post_content == null && (
+									<div className="p-3 my-5 bg-orange-400">Please choose an WCPS first.</div>
+								)}
+
 								<WCPSList selectAccordion={selectAccordion} activeAccordion={activeAccordion} />
 							</div>
 						</PGtab>
