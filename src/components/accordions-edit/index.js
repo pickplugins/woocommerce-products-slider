@@ -15,6 +15,7 @@ import PGDropdown from "../dropdown";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
+import AccordionsLayouts from "../accordions-layouts";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -28,8 +29,15 @@ function Html(props) {
 
 	var breakPointX = "Desktop";
 
+	console.log(postData);
+	if (postData.post_content == null) {
+		return (
+			<div className="p-3 my-5 bg-orange-400">Please choose an WCPS first.</div>
 
-	var accordionDataX = postData.post_content;
+		);
+	}
+
+	var accordionDataX = postData?.post_content;
 
 
 
@@ -814,6 +822,15 @@ function Html(props) {
 		terms: { label: "Terms", value: "terms" },
 		dokanShops: { label: "Dokan Shops", value: "dokanShops" },
 	}
+
+	function onChangeLayouts() {
+
+	}
+
+
+
+
+
 
 	return (
 		<div className="">
@@ -1681,7 +1698,10 @@ function Html(props) {
 									},
 								]}>
 								<PGtab name="presets"></PGtab>
-								<PGtab name="custom"></PGtab>
+								<PGtab name="custom">
+
+									<AccordionsLayouts postData={postData} onChange={onChangeLayouts} />
+								</PGtab>
 							</PGtabs>
 						</div>
 					</PanelBody>
