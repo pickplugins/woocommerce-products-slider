@@ -1,5 +1,5 @@
- 
- const { Component, RawHTML, useState, useEffect } = wp.element;
+
+const { Component, RawHTML, useState, useEffect } = wp.element;
 
 import { Icon, close, settings, cloud, plus } from "@wordpress/icons";
 import { ReactSortable } from "react-sortablejs";
@@ -40,15 +40,17 @@ function Html(props) {
 
 
 	var postData = props.postData;
-	var accordionDataX = postData.post_content;
+	var wcpsData = postData?.post_content;
 
 
-	var wrapper = accordionDataX?.wrapper;
-	var sliderOptions = accordionDataX?.sliderOptions;
-	var prev = accordionDataX?.prev;
-	var next = accordionDataX?.next;
-	var prevIcon = accordionDataX?.prevIcon;
-	var nextIcon = accordionDataX?.nextIcon;
+	var loopLayout = wcpsData?.loopLayout;
+	var wrapper = wcpsData?.wrapper;
+	var item = wcpsData?.item;
+	var sliderOptions = wcpsData?.sliderOptions;
+	var prev = wcpsData?.prev;
+	var next = wcpsData?.next;
+	var prevIcon = wcpsData?.prevIcon;
+	var nextIcon = wcpsData?.nextIcon;
 
 
 
@@ -65,6 +67,65 @@ function Html(props) {
 		var iconHtml = `<span class="${iconSrc}"></span>`;
 		setPrevIconHtml(iconHtml);
 	}, [prevIcon?.options]);
+
+
+
+
+	var sliderElementsDummyData = {
+
+		// wrapper: { label: "Wrapper", value: "wrapper", prams: { options: {}, styles: {} }, childs: [] },
+		postTitle: { label: "Post Title", html: `Product Title`, },
+		thumbnail: { label: "Thumbnail", value: "thumbnail", },
+		productCategory: { label: "Product Category", terms: ["Category 1", "Category 2", "Category 3", "Category 4", "Category 5"], },
+		productTag: { label: "Product Tag", terms: ["Category 1", "Category 2", "Category 3", "Category 4", "Category 5"], },
+		saleCount: { label: "Sale Count", value: "123", },
+		featuredMark: { label: "Featured Mark", value: "featuredMark", },
+		onSaleMark: { label: "On Sale Mark", value: "On Sale", },
+		addToCart: { label: "Add To Cart", value: "add To Cart", },
+		rating: { label: "Rating", value: "4.5", },
+		productPrice: { label: "Product Price", value: "123", },
+		productId: { label: "Product Id", value: "123", },
+
+		termTitle: { label: "Term Title", value: "Term Title", },
+		termThumb: { label: "Term Thumb", value: "", },
+		termDescription: { label: "Term Description", value: "term Description", },
+		termSlug: { label: "Term Slug", value: "term-slug", },
+		termPostCount: { label: "Term Post Count", value: "123", },
+		customText: { label: "Custom Text", value: "Custom Text", },
+
+		// dokanStoreName: { label: "Dokan Store Name", value: "dokanStoreName", },
+		// dokanStoreAddress: { label: "Dokan Store Address", value: "dokanStoreAddress", },
+		// dokanStoreCity: { label: "Dokan Store City", value: "dokanStoreCity", },
+		// dokanStoreCountry: { label: "Dokan Store Country", value: "dokanStoreCountry", },
+		// dokanStorePhone: { label: "Dokan Store Phone", value: "dokanStorePhone", },
+		// dokanBanner: { label: "Dokan Banner", value: "dokanBanner", },
+		// dokanAvatar: { label: "Dokan Avatar", value: "dokanAvatar", },
+
+		// eddPrice: { label: "Edd Price", value: "eddPrice", },
+		// eddAddToCart: { label: "Edd Add To Cart", value: "eddAddToCart", },
+		// eddCategories: { label: "Edd Categories", value: "eddCategories", },
+		// eddTags: { label: "Edd Tags", value: "eddTags", },
+
+		// yithQuickView: { label: "Yith Quick View", value: "yithQuickView", },
+		// yithWishlist: { label: "Yith Wishlist", value: "yithWishlist", },
+		// yithCompare: { label: "Yith Compare", value: "yithCompare", },
+		// yithBrands: { label: "Yith Brands", value: "yithBrands", },
+		// yithBadges: { label: "Yith Badges", value: "yithBadges", },
+		// wpcCountdownTimer: { label: "Wpc Countdown Timer", value: "wpcCountdownTimer", },
+		// wooSmartWishlist: { label: "Woo Smart Wishlist", value: "wooSmartWishlist", },
+		// wooSmartQuickView: { label: "Woo Smart Quick View", value: "wooSmartQuickView", },
+		// wooSmartCompare: { label: "Woo Smart Compare", value: "wooSmartCompare", },
+		// wishlistForWc: { label: "Wishlist For Wc", value: "wishlistForWc", },
+		// wishlist: { label: "Wishlist", value: "wishlist", },
+		// tiWishlist: { label: "Ti Wishlist", value: "tiWishlist", },
+		// perfectBrands: { label: "Perfect Brands", value: "perfectBrands", },
+		// advancedProductLabels: { label: "Advanced Product Labels", value: "advancedProductLabels", },
+	}
+		;
+
+
+
+
 
 	return (
 		<div className="ml-5">
@@ -106,11 +167,52 @@ function Html(props) {
 			<div className={`my-5 ${wrapper?.options?.class} `}>
 				<Splide hasTrack={false} options={sliderOptions}>
 					<SplideTrack>
-						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 1</div>
-						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 2</div>
-						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 3</div>
-						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 4</div>
-						<div className={`splide__slide my-5 ${wrapper?.options?.class} `}>Item 5</div>
+						<div className={`splide__slide my-5 ${item?.options?.class} `}>
+							{loopLayout?.map(layout => {
+								return (
+									<div>
+										{layout.id}
+									</div>
+								)
+							})}
+						</div>
+						<div className={`splide__slide my-5 ${item?.options?.class} `}>
+							{loopLayout?.map(layout => {
+								return (
+									<div>
+										{layout.id}
+									</div>
+								)
+							})}
+						</div>
+						<div className={`splide__slide my-5 ${item?.options?.class} `}>
+							{loopLayout?.map(layout => {
+								return (
+									<div>
+										{layout.id}
+									</div>
+								)
+							})}
+						</div>
+						<div className={`splide__slide my-5 ${item?.options?.class} `}>
+							{loopLayout?.map(layout => {
+								return (
+									<div>
+										{layout.id}
+									</div>
+								)
+							})}
+						</div>
+						<div className={`splide__slide my-5 ${item?.options?.class} `}>
+							{loopLayout?.map(layout => {
+								return (
+									<div>
+										{layout.id}
+									</div>
+								)
+							})}
+						</div>
+
 
 
 					</SplideTrack>
@@ -154,9 +256,7 @@ function Html(props) {
 				</Splide>
 			</div>
 
-			<code>
-				{JSON.stringify(wrapper)}
-			</code>
+
 		</div>
 	);
 }

@@ -3160,6 +3160,37 @@ const formatUppercase = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wo
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/menu.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/menu.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const menu = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M5 5v1.5h14V5H5zm0 7.8h14v-1.5H5v1.5zM5 19h14v-1.5H5V19z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (menu);
+//# sourceMappingURL=menu.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@wordpress/icons/build-module/library/plus.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@wordpress/icons/build-module/library/plus.js ***!
@@ -3221,6 +3252,38 @@ const settings = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress
 }));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (settings);
 //# sourceMappingURL=settings.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@wordpress/icons/build-module/library/styles.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/styles.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   styles: () => (/* binding */ styles)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const styles = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  viewBox: "0 0 24 24",
+  xmlns: "http://www.w3.org/2000/svg"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M12 4c-4.4 0-8 3.6-8 8v.1c0 4.1 3.2 7.5 7.2 7.9h.8c4.4 0 8-3.6 8-8s-3.6-8-8-8zm0 15V5c3.9 0 7 3.1 7 7s-3.1 7-7 7z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (styles);
+//# sourceMappingURL=styles.js.map
 
 /***/ }),
 
@@ -3349,27 +3412,29 @@ function Html(props) {
   var onChange = props.onChange;
   var postData = props.postData;
   var breakPointX = "Desktop";
-  console.log(postData);
   if (postData.post_content == null) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "p-3 my-5 bg-orange-400"
     }, "Please choose an WCPS first.");
   }
-  var accordionDataX = postData?.post_content;
+  var wcpsData = postData?.post_content;
+  var [wcpsData, setwcpsData] = useState(wcpsData); // Using the hook.
+
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
-  var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-  var [itemsWrap, setitemsWrap] = useState(accordionDataX.itemsWrap);
-  var [item, setitem] = useState(accordionDataX.item);
-  var [sliderOptions, setsliderOptions] = useState(accordionDataX.sliderOptions);
-  var [navsWrap, setnavsWrap] = useState(accordionDataX.navsWrap);
-  var [prev, setprev] = useState(accordionDataX.prev);
-  var [next, setnext] = useState(accordionDataX.next);
-  var [prevIcon, setprevIcon] = useState(accordionDataX.prevIcon);
-  var [nextIcon, setnextIcon] = useState(accordionDataX.nextIcon);
-  var [paginationWrap, setpaginationWrap] = useState(accordionDataX.paginationWrap);
-  var [paginationActive, setpaginationActive] = useState(accordionDataX.paginationActive);
-  var [pagination, setpagination] = useState(accordionDataX.pagination);
+  var [loopLayout, setloopLayout] = useState(wcpsData.loopLayout); // Using the hook.
+  var [wrapper, setwrapper] = useState(wcpsData.wrapper); // Using the hook.
+  var [itemsWrap, setitemsWrap] = useState(wcpsData.itemsWrap);
+  var [item, setitem] = useState(wcpsData.item);
+  var [sliderOptions, setsliderOptions] = useState(wcpsData.sliderOptions);
+  var [navsWrap, setnavsWrap] = useState(wcpsData.navsWrap);
+  var [prev, setprev] = useState(wcpsData.prev);
+  var [next, setnext] = useState(wcpsData.next);
+  var [prevIcon, setprevIcon] = useState(wcpsData.prevIcon);
+  var [nextIcon, setnextIcon] = useState(wcpsData.nextIcon);
+  var [paginationWrap, setpaginationWrap] = useState(wcpsData.paginationWrap);
+  var [paginationActive, setpaginationActive] = useState(wcpsData.paginationActive);
+  var [pagination, setpagination] = useState(wcpsData.pagination);
   const gapValue = sliderOptions?.gap || "0px";
   const [number, setNumber] = useState(parseInt(gapValue));
   const [unit, setUnit] = useState(gapValue.replace(number, ""));
@@ -3389,7 +3454,7 @@ function Html(props) {
   var blockClass = ".wcps-content-slider";
   var wrapperSelector = blockClass + " .splide";
   var itemsWrapSelector = blockClass + " .splide__track";
-  var itemSelector = blockClass + " .pg-content-slider-item";
+  var itemSelector = blockClass + " .wcps-content-slider-item";
   var nextSelector = blockClass + " .splide__arrow--next";
   var prevSelector = blockClass + " .splide__arrow--prev";
   var nextIconSelector = blockClass + " .splide__arrow--next .icon";
@@ -3775,202 +3840,178 @@ function Html(props) {
     csswrappg.insertAdjacentHTML("beforeend", str);
   }
   useEffect(() => {
-    console.log(styleObj);
     generateBlockCss(styleObj);
   }, [styleObj]);
+  function onChangeLayouts(loopLayout) {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.loopLayout = loopLayout;
+    setwcpsData(wcpsDataX);
+  }
   useEffect(() => {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.sliderOptions = sliderOptions;
-    onChange(postDataX);
-  }, [sliderOptions]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.wrapper = wrapper;
+    postDataX.post_content = wcpsData;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var wrapperCss = generateElementCss(wrapper, wrapperSelector);
+    var wrapperCss = generateElementCss(wcpsData.wrapper, wrapperSelector);
     Object.entries(wrapperCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [wrapper]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.itemsWrap = itemsWrap;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var itemsWrapCss = generateElementCss(itemsWrap, itemsWrapSelector);
+    var itemsWrapCss = generateElementCss(wcpsData.itemsWrap, itemsWrapSelector);
     Object.entries(itemsWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [itemsWrap]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.item = item;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var itemCss = generateElementCss(item, itemSelector);
+    var itemCss = generateElementCss(wcpsData.item, itemSelector);
     Object.entries(itemCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [item]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.navsWrap = navsWrap;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var navsWrapCss = generateElementCss(navsWrap, navsWrapSelector);
+    var navsWrapCss = generateElementCss(wcpsData.navsWrap, navsWrapSelector);
     Object.entries(navsWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [navsWrap]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.prev = prev;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var prevCss = generateElementCss(prev, prevSelector);
+    var prevCss = generateElementCss(wcpsData.prev, prevSelector);
     Object.entries(prevCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [prev]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.next = next;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var nextCss = generateElementCss(next, nextSelector);
+    var nextCss = generateElementCss(wcpsData.next, nextSelector);
     Object.entries(nextCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [next]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.prevIcon = prevIcon;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var prevIconCss = generateElementCss(prevIcon, prevIconSelector);
+    var prevIconCss = generateElementCss(wcpsData.prevIcon, prevIconSelector);
     Object.entries(prevIconCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [prevIcon]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.nextIcon = nextIcon;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var nextIconCss = generateElementCss(nextIcon, nextIconSelector);
+    var nextIconCss = generateElementCss(wcpsData.nextIcon, nextIconSelector);
     Object.entries(nextIconCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [nextIcon]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.paginationWrap = paginationWrap;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var paginationWrapCss = generateElementCss(paginationWrap, paginationWrapSelector);
+    var paginationWrapCss = generateElementCss(wcpsData.paginationWrap, paginationWrapSelector);
+    console.log(paginationWrapCss);
     Object.entries(paginationWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [paginationWrap]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.pagination = pagination;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var paginationCss = generateElementCss(pagination, paginationSelector);
+    var paginationCss = generateElementCss(wcpsData.pagination, paginationSelector);
+    console.log(paginationCss);
     Object.entries(paginationCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    setstyleObj(styleObjX);
-  }, [pagination]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.paginationActive = paginationActive;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var paginationActiveCss = generateElementCss(paginationActive, paginationActiveSelector);
+    var paginationActiveCss = generateElementCss(wcpsData.paginationActive, paginationActiveSelector);
+    console.log(paginationActiveCss);
     Object.entries(paginationActiveCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
     setstyleObj(styleObjX);
+  }, [wcpsData]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.sliderOptions = sliderOptions;
+    setwcpsData(wcpsDataX);
+  }, [sliderOptions]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.wrapper = wrapper;
+    setwcpsData(wcpsDataX);
+  }, [wrapper]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.itemsWrap = itemsWrap;
+    setwcpsData(wcpsDataX);
+  }, [itemsWrap]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.item = item;
+    setwcpsData(wcpsDataX);
+  }, [item]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.navsWrap = navsWrap;
+    setwcpsData(wcpsDataX);
+  }, [navsWrap]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.prev = prev;
+    setwcpsData(wcpsDataX);
+  }, [prev]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.next = next;
+    setwcpsData(wcpsDataX);
+  }, [next]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.prevIcon = prevIcon;
+    setwcpsData(wcpsDataX);
+  }, [prevIcon]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.nextIcon = nextIcon;
+    setwcpsData(wcpsDataX);
+  }, [nextIcon]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.paginationWrap = paginationWrap;
+    setwcpsData(wcpsDataX);
+  }, [paginationWrap]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.pagination = pagination;
+    setwcpsData(wcpsDataX);
+  }, [pagination]);
+  useEffect(() => {
+    var wcpsDataX = {
+      ...wcpsData
+    };
+    wcpsDataX.paginationActive = paginationActive;
+    setwcpsData(wcpsDataX);
   }, [paginationActive]);
   var RemoveSliderArg = function ({
     index
@@ -4194,16 +4235,175 @@ function Html(props) {
       value: "dokanShops"
     }
   };
-  function onChangeLayouts() {}
+  var paginationPresets = [{
+    label: "Preset 1",
+    prams: {
+      paginationWrap: {
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          },
+          "gap": {
+            "Desktop": "0.5em"
+          }
+        }
+      },
+      pagination: {
+        "styles": {
+          "width": {
+            "Desktop": "15px"
+          },
+          "height": {
+            "Desktop": "15px"
+          },
+          "borderRadius": {
+            "Desktop": "20px 20px 20px 20px"
+          },
+          "backgroundColor": {
+            "Desktop": "#9DD6DF"
+          }
+        }
+      },
+      paginationActive: {
+        "styles": {
+          "backgroundColor": {
+            "Desktop": "#18978F"
+          }
+        }
+      }
+    }
+  }, {
+    label: "Preset 2",
+    prams: {
+      paginationWrap: {
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          },
+          "gap": {
+            "Desktop": "0.5em"
+          }
+        }
+      },
+      pagination: {
+        "styles": {
+          "width": {
+            "Desktop": "20px"
+          },
+          "height": {
+            "Desktop": "20px"
+          },
+          "borderRadius": {
+            "Desktop": "20px 20px 20px 20px"
+          },
+          "backgroundColor": {
+            "Desktop": "#9DD6DF"
+          }
+        }
+      },
+      paginationActive: {
+        "styles": {
+          "backgroundColor": {
+            "Desktop": "#18978F"
+          }
+        }
+      }
+    }
+  }, {
+    label: "Preset 3",
+    prams: {
+      paginationWrap: {
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          },
+          "gap": {
+            "Desktop": "0.5em"
+          }
+        }
+      },
+      pagination: {
+        "styles": {
+          "width": {
+            "Desktop": "20px"
+          },
+          "height": {
+            "Desktop": "20px"
+          },
+          "borderRadius": {
+            "Desktop": "2px 2px 2px 2px"
+          },
+          "backgroundColor": {
+            "Desktop": "#9DD6DF"
+          }
+        }
+      },
+      paginationActive: {
+        "styles": {
+          "backgroundColor": {
+            "Desktop": "#18978F"
+          }
+        }
+      }
+    }
+  }];
+  var navigationPresets = [{
+    label: "Preset 1",
+    prams: {
+      navsWrap: {
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          },
+          "gap": {
+            "Desktop": "2em"
+          },
+          "position": {
+            "Desktop": "absolute"
+          },
+          "top": {
+            "Desktop": "0px"
+          },
+          "right": {
+            "Desktop": "0px"
+          }
+        }
+      },
+      prev: {
+        "styles": {
+          "borderRadius": {
+            "Desktop": "3px 3px 3px 3px"
+          },
+          "backgroundColor": {
+            "Desktop": "#9DD6DF"
+          },
+          "padding": {
+            "Desktop": "8px 15px 8px 15px"
+          }
+        }
+      },
+      next: {
+        "styles": {
+          "borderRadius": {
+            "Desktop": "3px 3px 3px 3px"
+          },
+          "backgroundColor": {
+            "Desktop": "#9DD6DF"
+          },
+          "padding": {
+            "Desktop": "8px 15px 8px 15px"
+          }
+        }
+      }
+    }
+  }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
-  }, props.postData.post_content == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "p-3 text-center"
-  }, "Please select WCPS first"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "fixed top-20 right-0 w-[400px] z-50"
-  }, "   "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
     className: "break-all\tp-4 block"
-  }, JSON.stringify(styleObj)), props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, JSON.stringify(wcpsData.loopLayout)), wcpsData == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-3 text-center"
+  }, "Please select WCPS first"), wcpsData != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
@@ -5100,7 +5300,34 @@ function Html(props) {
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "presets"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, navigationPresets.map(preset => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      onClick: ev => {
+        var wcpsDataX = {
+          ...wcpsData
+        };
+        var navsWrapX = {
+          ...navsWrap,
+          ...preset.prams.navsWrap
+        };
+        var prevX = {
+          ...prev,
+          ...preset.prams.prev
+        };
+        var nextX = {
+          ...next,
+          ...preset.prams.next
+        };
+        wcpsDataX.navsWrap = navsWrapX;
+        wcpsDataX.prev = prevX;
+        wcpsDataX.next = nextX;
+        setnavsWrap(navsWrapX);
+        setprev(prevX);
+        setnext(nextX);
+        setwcpsData(wcpsDataX);
+      }
+    }, preset.label);
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "custom"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
@@ -5274,99 +5501,66 @@ function Html(props) {
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "presets"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, paginationPresets.map(preset => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      onClick: ev => {
+        var wcpsDataX = {
+          ...wcpsData
+        };
+        var paginationWrapX = {
+          ...paginationWrap,
+          ...preset.prams.paginationWrap
+        };
+        var paginationX = {
+          ...pagination,
+          ...preset.prams.pagination
+        };
+        var paginationActiveX = {
+          ...paginationActive,
+          ...preset.prams.paginationActive
+        };
+        wcpsDataX.paginationWrap = paginationWrapX;
+        wcpsDataX.pagination = paginationX;
+        wcpsDataX.paginationActive = paginationActiveX;
+        setpaginationWrap(paginationWrapX);
+        setpagination(paginationX);
+        setpaginationActive(paginationActiveX);
+        setwcpsData(wcpsDataX);
+      }
+    }, preset.label);
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "custom"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination Wrap",
     initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "options",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "options",
-      title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-settings"
-    }, {
-      name: "styles",
-      title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
-      className: "tab-style"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "options"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: paginationWrap,
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, paginationWrap, setpaginationWrap),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, paginationWrap, setpaginationWrap),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, paginationWrap, setpaginationWrap),
     onReset: sudoSources => onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination Active",
     initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "options",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "options",
-      title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-settings"
-    }, {
-      name: "styles",
-      title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
-      className: "tab-style"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "options"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: paginationActive,
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, paginationActive, setpaginationActive),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, paginationActive, setpaginationActive),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive),
     onReset: sudoSources => onResetStyle(sudoSources, paginationActive, setpaginationActive)
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination",
     initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "options",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "options",
-      title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-settings"
-    }, {
-      name: "styles",
-      title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
-      className: "tab-style"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "options"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: pagination,
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, pagination, setpagination),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, pagination, setpagination),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, pagination, setpagination),
     onReset: sudoSources => onResetStyle(sudoSources, pagination, setpagination)
-  }))))))))));
+  }))))))));
 }
 class AccordionsEdit extends Component {
   constructor(props) {
@@ -5423,12 +5617,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
-/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
-/* harmony import */ var _dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../dropdown */ "./src/components/dropdown/index.js");
-/* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles */ "./src/components/styles/index.js");
-/* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../tab */ "./src/components/tab/index.js");
-/* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/menu.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
+/* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-sortablejs */ "./node_modules/react-sortablejs/dist/index.js");
+/* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_sortablejs__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
+/* harmony import */ var _dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../dropdown */ "./src/components/dropdown/index.js");
+/* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles */ "./src/components/styles/index.js");
+/* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tab */ "./src/components/tab/index.js");
+/* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tabs */ "./src/components/tabs/index.js");
 
 const {
   Component,
@@ -5436,6 +5635,7 @@ const {
   useState,
   useEffect
 } = wp.element;
+
 
 
 
@@ -5452,193 +5652,193 @@ function Html(props) {
   var onChange = props.onChange;
   var postData = props.postData;
   var breakPointX = "Desktop";
-  var accordionDataX = postData.post_content;
+  var wcpsData = postData.post_content;
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
-  var [loopLayout, setloopLayout] = useState(accordionDataX.loopLayout); // Using the hook.
+  var [loopLayout, setloopLayout] = useState(wcpsData.loopLayout); // Using the hook.
 
+  useEffect(() => {
+    onChange(loopLayout);
+  }, [loopLayout]);
   var blockId = postData.ID;
-  var sliderOptionsArgs = {
-    post_title: {
-      label: "post_title",
-      value: "post_title"
+  var sliderElementsArgs = {
+    // wrapper: { label: "Wrapper", value: "wrapper", prams: { options: {}, styles: {} }, childs: [] },
+    postTitle: {
+      label: "Post Title",
+      value: "postTitle",
+      prams: {
+        options: {
+          linkTo: ""
+        },
+        styles: {}
+      }
     },
     thumbnail: {
-      label: "thumbnail",
-      value: "thumbnail"
+      label: "Thumbnail",
+      value: "thumbnail",
+      prams: {
+        options: {
+          linkTo: "",
+          thumbSize: "",
+          defaultThumbSrc: ""
+        },
+        styles: {}
+      }
     },
-    product_category: {
-      label: "product_category",
-      value: "product_category"
+    productCategory: {
+      label: "Product Category",
+      value: "productCategory",
+      prams: {
+        options: {
+          maxCount: "",
+          separator: ""
+        },
+        styles: {}
+      }
     },
-    product_tag: {
-      label: "product_tag",
-      value: "product_tag"
+    productTag: {
+      label: "Product Tag",
+      value: "productTag",
+      prams: {
+        options: {
+          maxCount: "",
+          separator: ""
+        },
+        styles: {}
+      }
     },
-    sale_count: {
-      label: "sale_count",
-      value: "sale_count"
+    saleCount: {
+      label: "Sale Count",
+      value: "saleCount",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    featured_mark: {
-      label: "featured_mark",
-      value: "featured_mark"
+    featuredMark: {
+      label: "Featured Mark",
+      value: "featuredMark",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    on_sale_mark: {
-      label: "on_sale_mark",
-      value: "on_sale_mark"
+    onSaleMark: {
+      label: "On Sale Mark",
+      value: "onSaleMark",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    add_to_cart: {
-      label: "add_to_cart",
-      value: "add_to_cart"
+    addToCart: {
+      label: "Add To Cart",
+      value: "addToCart",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
     rating: {
-      label: "rating",
-      value: "rating"
+      label: "Rating",
+      value: "rating",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    product_price: {
-      label: "product_price",
-      value: "product_price"
+    productPrice: {
+      label: "Product Price",
+      value: "productPrice",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    product_id: {
-      label: "product_id",
-      value: "product_id"
+    productId: {
+      label: "Product Id",
+      value: "productId",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    term_title: {
-      label: "term_title",
-      value: "term_title"
+    termTitle: {
+      label: "Term Title",
+      value: "termTitle",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    term_thumb: {
-      label: "term_thumb",
-      value: "term_thumb"
+    termThumb: {
+      label: "Term Thumb",
+      value: "termThumb",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    term_description: {
-      label: "term_description",
-      value: "term_description"
+    termDescription: {
+      label: "Term Description",
+      value: "termDescription",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    term_slug: {
-      label: "term_slug",
-      value: "term_slug"
+    termSlug: {
+      label: "Term Slug",
+      value: "termSlug",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    term_post_count: {
-      label: "term_post_count",
-      value: "term_post_count"
+    termPostCount: {
+      label: "Term Post Count",
+      value: "termPostCount",
+      prams: {
+        options: {},
+        styles: {}
+      }
     },
-    wrapper_start: {
-      label: "wrapper_start",
-      value: "wrapper_start"
-    },
-    custom_text: {
-      label: "custom_text",
-      value: "custom_text"
-    },
-    dokan_store_name: {
-      label: "dokan_store_name",
-      value: "dokan_store_name"
-    },
-    dokan_store_address: {
-      label: "dokan_store_address",
-      value: "dokan_store_address"
-    },
-    dokan_store_city: {
-      label: "dokan_store_city",
-      value: "dokan_store_city"
-    },
-    dokan_store_country: {
-      label: "dokan_store_country",
-      value: "dokan_store_country"
-    },
-    dokan_store_phone: {
-      label: "dokan_store_phone",
-      value: "dokan_store_phone"
-    },
-    dokan_banner: {
-      label: "dokan_banner",
-      value: "dokan_banner"
-    },
-    dokan_avatar: {
-      label: "dokan_avatar",
-      value: "dokan_avatar"
-    },
-    edd_price: {
-      label: "edd_price",
-      value: "edd_price"
-    },
-    edd_add_to_cart: {
-      label: "edd_add_to_cart",
-      value: "edd_add_to_cart"
-    },
-    edd_categories: {
-      label: "edd_categories",
-      value: "edd_categories"
-    },
-    edd_tags: {
-      label: "edd_tags",
-      value: "edd_tags"
-    },
-    yith_quick_view: {
-      label: "yith_quick_view",
-      value: "yith_quick_view"
-    },
-    yith_wishlist: {
-      label: "yith_wishlist",
-      value: "yith_wishlist"
-    },
-    yith_compare: {
-      label: "yith_compare",
-      value: "yith_compare"
-    },
-    yith_brands: {
-      label: "yith_brands",
-      value: "yith_brands"
-    },
-    yith_badges: {
-      label: "yith_badges",
-      value: "yith_badges"
-    },
-    wpc_countdown_timer: {
-      label: "wpc_countdown_timer",
-      value: "wpc_countdown_timer"
-    },
-    woo_smart_wishlist: {
-      label: "woo_smart_wishlist",
-      value: "woo_smart_wishlist"
-    },
-    woo_smart_quick_view: {
-      label: "woo_smart_quick_view",
-      value: "woo_smart_quick_view"
-    },
-    woo_smart_compare: {
-      label: "woo_smart_compare",
-      value: "woo_smart_compare"
-    },
-    wishlist_for_wc: {
-      label: "wishlist_for_wc",
-      value: "wishlist_for_wc"
-    },
-    wishlist: {
-      label: "wishlist",
-      value: "wishlist"
-    },
-    ti_wishlist: {
-      label: "ti_wishlist",
-      value: "ti_wishlist"
-    },
-    perfect_brands: {
-      label: "perfect_brands",
-      value: "perfect_brands"
-    },
-    advanced_product_labels: {
-      label: "advanced_product_labels",
-      value: "advanced_product_labels"
-    },
-    edd_tags: {
-      label: "edd_tags",
-      value: "edd_tags"
-    },
-    edd_tags: {
-      label: "edd_tags",
-      value: "edd_tags"
+    customText: {
+      label: "Custom Text",
+      value: "customText",
+      prams: {
+        options: {},
+        styles: {}
+      }
     }
+
+    // dokanStoreName: { label: "Dokan Store Name", value: "dokanStoreName", prams: { options: {}, styles: {} } },
+    // dokanStoreAddress: { label: "Dokan Store Address", value: "dokanStoreAddress", prams: { options: {}, styles: {} } },
+    // dokanStoreCity: { label: "Dokan Store City", value: "dokanStoreCity", prams: { options: {}, styles: {} } },
+    // dokanStoreCountry: { label: "Dokan Store Country", value: "dokanStoreCountry", prams: { options: {}, styles: {} } },
+    // dokanStorePhone: { label: "Dokan Store Phone", value: "dokanStorePhone", prams: { options: {}, styles: {} } },
+    // dokanBanner: { label: "Dokan Banner", value: "dokanBanner", prams: { options: {}, styles: {} } },
+    // dokanAvatar: { label: "Dokan Avatar", value: "dokanAvatar", prams: { options: {}, styles: {} } },
+
+    // eddPrice: { label: "Edd Price", value: "eddPrice", prams: { options: {}, styles: {} } },
+    // eddAddToCart: { label: "Edd Add To Cart", value: "eddAddToCart", prams: { options: {}, styles: {} } },
+    // eddCategories: { label: "Edd Categories", value: "eddCategories", prams: { options: {}, styles: {} } },
+    // eddTags: { label: "Edd Tags", value: "eddTags", prams: { options: {}, styles: {} } },
+
+    // yithQuickView: { label: "Yith Quick View", value: "yithQuickView", prams: { options: {}, styles: {} } },
+    // yithWishlist: { label: "Yith Wishlist", value: "yithWishlist", prams: { options: {}, styles: {} } },
+    // yithCompare: { label: "Yith Compare", value: "yithCompare", prams: { options: {}, styles: {} } },
+    // yithBrands: { label: "Yith Brands", value: "yithBrands", prams: { options: {}, styles: {} } },
+    // yithBadges: { label: "Yith Badges", value: "yithBadges", prams: { options: {}, styles: {} } },
+    // wpcCountdownTimer: { label: "Wpc Countdown Timer", value: "wpcCountdownTimer", prams: { options: {}, styles: {} } },
+    // wooSmartWishlist: { label: "Woo Smart Wishlist", value: "wooSmartWishlist", prams: { options: {}, styles: {} } },
+    // wooSmartQuickView: { label: "Woo Smart Quick View", value: "wooSmartQuickView", prams: { options: {}, styles: {} } },
+    // wooSmartCompare: { label: "Woo Smart Compare", value: "wooSmartCompare", prams: { options: {}, styles: {} } },
+    // wishlistForWc: { label: "Wishlist For Wc", value: "wishlistForWc", prams: { options: {}, styles: {} } },
+    // wishlist: { label: "Wishlist", value: "wishlist", prams: { options: {}, styles: {} } },
+    // tiWishlist: { label: "Ti Wishlist", value: "tiWishlist", prams: { options: {}, styles: {} } },
+    // perfectBrands: { label: "Perfect Brands", value: "perfectBrands", prams: { options: {}, styles: {} } },
+    // advancedProductLabels: { label: "Advanced Product Labels", value: "advancedProductLabels", prams: { options: {}, styles: {} } },
   };
   var RemoveSliderArg = function ({
     index
@@ -5653,41 +5853,93 @@ function Html(props) {
         setloopLayout(loopLayoutX);
       }
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"]
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"]
     }));
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
-    className: "break-all\tp-4 block"
-  }, JSON.stringify(styleObj)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "my-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Options", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add Elements", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_5__["default"], {
     position: "bottom right",
     variant: "secondary",
     buttonTitle: "Choose",
-    options: sliderOptionsArgs,
+    options: sliderElementsArgs,
     onChange: (option, index) => {
-      var loopLayoutX = {
-        ...loopLayout
-      };
-      loopLayoutX[index] = option.value;
+      console.log(option);
+      var loopLayoutX = [...loopLayout];
+      loopLayoutX.push({
+        id: option.value,
+        ...option.prams
+      });
+      console.log(loopLayoutX);
       setloopLayout(loopLayoutX);
     },
     values: ""
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "justify-start gap-4 mb-3"
-  }), Object.entries(loopLayout).map((item, index) => {
-    var id = item[0];
-    var value = item[1];
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      key: index
-    }, id == "post_title" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
-      index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("post_title?", "post-grid")))));
-  }));
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_sortablejs__WEBPACK_IMPORTED_MODULE_3__.ReactSortable, {
+    list: loopLayout,
+    handle: ".handle",
+    setList: item => {
+      // setAttributes({
+      // 	elements: { ...elements, items: item },
+      // });
+    }
+  }, loopLayout.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: item.id,
+    className: ""
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1",
+      onClick: ev => {
+        // var elementsX = loopLayout.splice(
+        // 	index,
+        // 	1
+        // );
+        // setAttributes({
+        // 	elements: {
+        // 		...elements,
+        // 		items: loopLayout,
+        // 	},
+        // });
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"]
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"]
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "mx-2"
+    }, sliderElementsArgs[item.id]?.label)),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    activeTab: "options",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "options",
+      title: "Options",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      className: "tab-settings"
+    }, {
+      name: "styles",
+      title: "Styles",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
+      className: "tab-style"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    name: "options"
+  }, item.id == "postTitle" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: "",
+    className: "font-medium text-slate-900 "
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("postTitle", "post-grid")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    name: "styles"
+  })))))));
 }
 class AccordionsLayouts extends Component {
   constructor(props) {
@@ -5769,13 +6021,15 @@ function Html(props) {
   var id = props.id;
   var isLoading = props.isLoading;
   var postData = props.postData;
-  var accordionDataX = postData.post_content;
-  var wrapper = accordionDataX?.wrapper;
-  var sliderOptions = accordionDataX?.sliderOptions;
-  var prev = accordionDataX?.prev;
-  var next = accordionDataX?.next;
-  var prevIcon = accordionDataX?.prevIcon;
-  var nextIcon = accordionDataX?.nextIcon;
+  var wcpsData = postData?.post_content;
+  var loopLayout = wcpsData?.loopLayout;
+  var wrapper = wcpsData?.wrapper;
+  var item = wcpsData?.item;
+  var sliderOptions = wcpsData?.sliderOptions;
+  var prev = wcpsData?.prev;
+  var next = wcpsData?.next;
+  var prevIcon = wcpsData?.prevIcon;
+  var nextIcon = wcpsData?.nextIcon;
   const [prevIconHtml, setPrevIconHtml] = useState("");
   const [nextIconHtml, setNextIconHtml] = useState("");
   useEffect(() => {
@@ -5788,6 +6042,105 @@ function Html(props) {
     var iconHtml = `<span class="${iconSrc}"></span>`;
     setPrevIconHtml(iconHtml);
   }, [prevIcon?.options]);
+  var sliderElementsDummyData = {
+    // wrapper: { label: "Wrapper", value: "wrapper", prams: { options: {}, styles: {} }, childs: [] },
+    postTitle: {
+      label: "Post Title",
+      html: `Product Title`
+    },
+    thumbnail: {
+      label: "Thumbnail",
+      value: "thumbnail"
+    },
+    productCategory: {
+      label: "Product Category",
+      terms: ["Category 1", "Category 2", "Category 3", "Category 4", "Category 5"]
+    },
+    productTag: {
+      label: "Product Tag",
+      terms: ["Category 1", "Category 2", "Category 3", "Category 4", "Category 5"]
+    },
+    saleCount: {
+      label: "Sale Count",
+      value: "123"
+    },
+    featuredMark: {
+      label: "Featured Mark",
+      value: "featuredMark"
+    },
+    onSaleMark: {
+      label: "On Sale Mark",
+      value: "On Sale"
+    },
+    addToCart: {
+      label: "Add To Cart",
+      value: "add To Cart"
+    },
+    rating: {
+      label: "Rating",
+      value: "4.5"
+    },
+    productPrice: {
+      label: "Product Price",
+      value: "123"
+    },
+    productId: {
+      label: "Product Id",
+      value: "123"
+    },
+    termTitle: {
+      label: "Term Title",
+      value: "Term Title"
+    },
+    termThumb: {
+      label: "Term Thumb",
+      value: ""
+    },
+    termDescription: {
+      label: "Term Description",
+      value: "term Description"
+    },
+    termSlug: {
+      label: "Term Slug",
+      value: "term-slug"
+    },
+    termPostCount: {
+      label: "Term Post Count",
+      value: "123"
+    },
+    customText: {
+      label: "Custom Text",
+      value: "Custom Text"
+    }
+
+    // dokanStoreName: { label: "Dokan Store Name", value: "dokanStoreName", },
+    // dokanStoreAddress: { label: "Dokan Store Address", value: "dokanStoreAddress", },
+    // dokanStoreCity: { label: "Dokan Store City", value: "dokanStoreCity", },
+    // dokanStoreCountry: { label: "Dokan Store Country", value: "dokanStoreCountry", },
+    // dokanStorePhone: { label: "Dokan Store Phone", value: "dokanStorePhone", },
+    // dokanBanner: { label: "Dokan Banner", value: "dokanBanner", },
+    // dokanAvatar: { label: "Dokan Avatar", value: "dokanAvatar", },
+
+    // eddPrice: { label: "Edd Price", value: "eddPrice", },
+    // eddAddToCart: { label: "Edd Add To Cart", value: "eddAddToCart", },
+    // eddCategories: { label: "Edd Categories", value: "eddCategories", },
+    // eddTags: { label: "Edd Tags", value: "eddTags", },
+
+    // yithQuickView: { label: "Yith Quick View", value: "yithQuickView", },
+    // yithWishlist: { label: "Yith Wishlist", value: "yithWishlist", },
+    // yithCompare: { label: "Yith Compare", value: "yithCompare", },
+    // yithBrands: { label: "Yith Brands", value: "yithBrands", },
+    // yithBadges: { label: "Yith Badges", value: "yithBadges", },
+    // wpcCountdownTimer: { label: "Wpc Countdown Timer", value: "wpcCountdownTimer", },
+    // wooSmartWishlist: { label: "Woo Smart Wishlist", value: "wooSmartWishlist", },
+    // wooSmartQuickView: { label: "Woo Smart Quick View", value: "wooSmartQuickView", },
+    // wooSmartCompare: { label: "Woo Smart Compare", value: "wooSmartCompare", },
+    // wishlistForWc: { label: "Wishlist For Wc", value: "wishlistForWc", },
+    // wishlist: { label: "Wishlist", value: "wishlist", },
+    // tiWishlist: { label: "Ti Wishlist", value: "tiWishlist", },
+    // perfectBrands: { label: "Perfect Brands", value: "perfectBrands", },
+    // advancedProductLabels: { label: "Advanced Product Labels", value: "advancedProductLabels", },
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "ml-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -5802,16 +6155,26 @@ function Html(props) {
     hasTrack: false,
     options: sliderOptions
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_splidejs_react_splide__WEBPACK_IMPORTED_MODULE_4__.SplideTrack, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `splide__slide my-5 ${wrapper?.options?.class} `
-  }, "Item 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `splide__slide my-5 ${wrapper?.options?.class} `
-  }, "Item 2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `splide__slide my-5 ${wrapper?.options?.class} `
-  }, "Item 3"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `splide__slide my-5 ${wrapper?.options?.class} `
-  }, "Item 4"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `splide__slide my-5 ${wrapper?.options?.class} `
-  }, "Item 5")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `splide__slide my-5 ${item?.options?.class} `
+  }, loopLayout?.map(layout => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, layout.id);
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `splide__slide my-5 ${item?.options?.class} `
+  }, loopLayout?.map(layout => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, layout.id);
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `splide__slide my-5 ${item?.options?.class} `
+  }, loopLayout?.map(layout => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, layout.id);
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `splide__slide my-5 ${item?.options?.class} `
+  }, loopLayout?.map(layout => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, layout.id);
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `splide__slide my-5 ${item?.options?.class} `
+  }, loopLayout?.map(layout => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, layout.id);
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "splide__arrows"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "prev splide__arrow splide__arrow--prev"
@@ -5839,7 +6202,7 @@ function Html(props) {
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
     className: "splide__pagination "
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, JSON.stringify(wrapper)));
+  }))));
 }
 class AccordionsView extends Component {
   constructor(props) {
@@ -28730,7 +29093,6 @@ function Html(props) {
     }
   };
   var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
-  console.log(activeAccordion);
   var [postData, setpostData] = useState(defaultPostData); // Using the hook.
   var [isLoading, setisLoading] = useState(false); // Using the hook.
 
@@ -28765,7 +29127,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-[450px] overflow-y-scroll light-scrollbar"
+    className: "w-[450px] h-full bg-white"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_2__["default"], {
     activeTab: "accordions",
     orientation: "",
@@ -28811,7 +29173,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3"
   }, "Coming Soon")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full sticky top-0"
+    className: "w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "  relative"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -31775,7 +32137,6 @@ function Html(props) {
         _wpnonce: post_grid_editor_js._wpnonce
       }
     }).then(res => {
-      console.log(res);
       setisLoading(false);
       setPosts(res.posts);
     });
