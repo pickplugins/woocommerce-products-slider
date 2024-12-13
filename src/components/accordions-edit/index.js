@@ -29,7 +29,6 @@ function Html(props) {
 
 	var breakPointX = "Desktop";
 
-	console.log(postData);
 	if (postData.post_content == null) {
 		return (
 			<div className="p-3 my-5 bg-orange-400">Please choose an WCPS first.</div>
@@ -37,24 +36,26 @@ function Html(props) {
 		);
 	}
 
-	var accordionDataX = postData?.post_content;
+	var wcpsData = postData?.post_content;
 
+	var [wcpsData, setwcpsData] = useState(wcpsData); // Using the hook.
 
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
-	var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-	var [itemsWrap, setitemsWrap] = useState(accordionDataX.itemsWrap);
-	var [item, setitem] = useState(accordionDataX.item);
-	var [sliderOptions, setsliderOptions] = useState(accordionDataX.sliderOptions);
-	var [navsWrap, setnavsWrap] = useState(accordionDataX.navsWrap);
-	var [prev, setprev] = useState(accordionDataX.prev);
-	var [next, setnext] = useState(accordionDataX.next);
-	var [prevIcon, setprevIcon] = useState(accordionDataX.prevIcon);
-	var [nextIcon, setnextIcon] = useState(accordionDataX.nextIcon);
-	var [paginationWrap, setpaginationWrap] = useState(accordionDataX.paginationWrap);
-	var [paginationActive, setpaginationActive] = useState(accordionDataX.paginationActive);
-	var [pagination, setpagination] = useState(accordionDataX.pagination);
+	var [loopLayout, setloopLayout] = useState(wcpsData.loopLayout); // Using the hook.
+	var [wrapper, setwrapper] = useState(wcpsData.wrapper); // Using the hook.
+	var [itemsWrap, setitemsWrap] = useState(wcpsData.itemsWrap);
+	var [item, setitem] = useState(wcpsData.item);
+	var [sliderOptions, setsliderOptions] = useState(wcpsData.sliderOptions);
+	var [navsWrap, setnavsWrap] = useState(wcpsData.navsWrap);
+	var [prev, setprev] = useState(wcpsData.prev);
+	var [next, setnext] = useState(wcpsData.next);
+	var [prevIcon, setprevIcon] = useState(wcpsData.prevIcon);
+	var [nextIcon, setnextIcon] = useState(wcpsData.nextIcon);
+	var [paginationWrap, setpaginationWrap] = useState(wcpsData.paginationWrap);
+	var [paginationActive, setpaginationActive] = useState(wcpsData.paginationActive);
+	var [pagination, setpagination] = useState(wcpsData.pagination);
 
 
 
@@ -80,7 +81,7 @@ function Html(props) {
 
 	var wrapperSelector = blockClass + " .splide";
 	var itemsWrapSelector = blockClass + " .splide__track";
-	var itemSelector = blockClass + " .pg-content-slider-item";
+	var itemSelector = blockClass + " .wcps-content-slider-item";
 	var nextSelector = blockClass + " .splide__arrow--next";
 	var prevSelector = blockClass + " .splide__arrow--prev";
 	var nextIconSelector = blockClass + " .splide__arrow--next .icon";
@@ -519,189 +520,239 @@ function Html(props) {
 
 	useEffect(() => {
 
-		console.log(styleObj);
 		generateBlockCss(styleObj)
 
 	}, [styleObj]);
 
 
+	function onChangeLayouts(loopLayout) {
+
+
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.loopLayout = loopLayout;
+		setwcpsData(wcpsDataX)
+	}
+
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.sliderOptions = sliderOptions;
+		postDataX.post_content = wcpsData
 		onChange(postDataX)
-	}, [sliderOptions]);
 
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.wrapper = wrapper;
-		onChange(postDataX)
+
+
+
 
 
 		var styleObjX = { ...styleObj }
-		var wrapperCss = generateElementCss(wrapper, wrapperSelector)
+
+		var wrapperCss = generateElementCss(wcpsData.wrapper, wrapperSelector)
 		Object.entries(wrapperCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
-		setstyleObj(styleObjX)
 
-	}, [wrapper]);
 
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.itemsWrap = itemsWrap;
-		onChange(postDataX)
-
-		var styleObjX = { ...styleObj }
-		var itemsWrapCss = generateElementCss(itemsWrap, itemsWrapSelector)
+		var itemsWrapCss = generateElementCss(wcpsData.itemsWrap, itemsWrapSelector)
 		Object.entries(itemsWrapCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
-		setstyleObj(styleObjX)
 
 
-	}, [itemsWrap]);
-
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.item = item;
-		onChange(postDataX)
-
-		var styleObjX = { ...styleObj }
-		var itemCss = generateElementCss(item, itemSelector)
+		var itemCss = generateElementCss(wcpsData.item, itemSelector)
 		Object.entries(itemCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
+
+
+		var navsWrapCss = generateElementCss(wcpsData.navsWrap, navsWrapSelector)
+		Object.entries(navsWrapCss).map(selectors => {
+			var selector = selectors[0]
+			var selectorData = selectors[1]
+			styleObjX[selector] = selectorData;
+		})
+
+
+		var prevCss = generateElementCss(wcpsData.prev, prevSelector)
+		Object.entries(prevCss).map(selectors => {
+			var selector = selectors[0]
+			var selectorData = selectors[1]
+			styleObjX[selector] = selectorData;
+		})
+
+		var nextCss = generateElementCss(wcpsData.next, nextSelector)
+		Object.entries(nextCss).map(selectors => {
+			var selector = selectors[0]
+			var selectorData = selectors[1]
+			styleObjX[selector] = selectorData;
+		})
+
+		var prevIconCss = generateElementCss(wcpsData.prevIcon, prevIconSelector)
+		Object.entries(prevIconCss).map(selectors => {
+			var selector = selectors[0]
+			var selectorData = selectors[1]
+			styleObjX[selector] = selectorData;
+		})
+
+		var nextIconCss = generateElementCss(wcpsData.nextIcon, nextIconSelector)
+		Object.entries(nextIconCss).map(selectors => {
+			var selector = selectors[0]
+			var selectorData = selectors[1]
+			styleObjX[selector] = selectorData;
+		})
+
+		var paginationWrapCss = generateElementCss(wcpsData.paginationWrap, paginationWrapSelector)
+
+		console.log(paginationWrapCss);
+
+		Object.entries(paginationWrapCss).map(selectors => {
+			var selector = selectors[0]
+			var selectorData = selectors[1]
+			styleObjX[selector] = selectorData;
+		})
+
+
+		var paginationCss = generateElementCss(wcpsData.pagination, paginationSelector)
+
+		console.log(paginationCss);
+
+		Object.entries(paginationCss).map(selectors => {
+			var selector = selectors[0]
+			var selectorData = selectors[1]
+			styleObjX[selector] = selectorData;
+		})
+
+
+
+
+
+		var paginationActiveCss = generateElementCss(wcpsData.paginationActive, paginationActiveSelector)
+
+		console.log(paginationActiveCss);
+
+
+		Object.entries(paginationActiveCss).map(selectors => {
+			var selector = selectors[0]
+			var selectorData = selectors[1]
+			styleObjX[selector] = selectorData;
+		})
+
+
+
 		setstyleObj(styleObjX)
+
+
+
+
+
+
+	}, [wcpsData]);
+
+	useEffect(() => {
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.sliderOptions = sliderOptions;
+		setwcpsData(wcpsDataX)
+	}, [sliderOptions]);
+
+	useEffect(() => {
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.wrapper = wrapper;
+		setwcpsData(wcpsDataX)
+
+
+
+	}, [wrapper]);
+
+	useEffect(() => {
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.itemsWrap = itemsWrap;
+		setwcpsData(wcpsDataX)
+
+
+
+
+	}, [itemsWrap]);
+
+	useEffect(() => {
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.item = item;
+		setwcpsData(wcpsDataX)
+
+
 	}, [item]);
 
 
 
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.navsWrap = navsWrap;
-		onChange(postDataX)
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.navsWrap = navsWrap;
+		setwcpsData(wcpsDataX)
 
-		var styleObjX = { ...styleObj }
-		var navsWrapCss = generateElementCss(navsWrap, navsWrapSelector)
-		Object.entries(navsWrapCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+
 	}, [navsWrap]);
 
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.prev = prev;
-		onChange(postDataX)
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.prev = prev;
+		setwcpsData(wcpsDataX)
 
-		var styleObjX = { ...styleObj }
-		var prevCss = generateElementCss(prev, prevSelector)
-		Object.entries(prevCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+
 	}, [prev]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.next = next;
-		onChange(postDataX)
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.next = next;
+		setwcpsData(wcpsDataX)
 
-		var styleObjX = { ...styleObj }
-		var nextCss = generateElementCss(next, nextSelector)
-		Object.entries(nextCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+
 	}, [next]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.prevIcon = prevIcon;
-		onChange(postDataX)
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.prevIcon = prevIcon;
+		setwcpsData(wcpsDataX)
 
-		var styleObjX = { ...styleObj }
-		var prevIconCss = generateElementCss(prevIcon, prevIconSelector)
-		Object.entries(prevIconCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+
 	}, [prevIcon]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.nextIcon = nextIcon;
-		onChange(postDataX)
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.nextIcon = nextIcon;
+		setwcpsData(wcpsDataX)
 
-		var styleObjX = { ...styleObj }
-		var nextIconCss = generateElementCss(nextIcon, nextIconSelector)
-		Object.entries(nextIconCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+
 	}, [nextIcon]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.paginationWrap = paginationWrap;
-		onChange(postDataX)
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.paginationWrap = paginationWrap;
+		setwcpsData(wcpsDataX)
 
-		var styleObjX = { ...styleObj }
-		var paginationWrapCss = generateElementCss(paginationWrap, paginationWrapSelector)
-		Object.entries(paginationWrapCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+
+
+
 	}, [paginationWrap]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.pagination = pagination;
-		onChange(postDataX)
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.pagination = pagination;
+		setwcpsData(wcpsDataX)
 
-		var styleObjX = { ...styleObj }
-		var paginationCss = generateElementCss(pagination, paginationSelector)
-		Object.entries(paginationCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+
 	}, [pagination]);
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.paginationActive = paginationActive;
-		onChange(postDataX)
+		var wcpsDataX = { ...wcpsData };
+		wcpsDataX.paginationActive = paginationActive;
+		setwcpsData(wcpsDataX)
 
-		var styleObjX = { ...styleObj }
-		var paginationActiveCss = generateElementCss(paginationActive, paginationActiveSelector)
-		Object.entries(paginationActiveCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+
 	}, [paginationActive]);
 
 
@@ -823,28 +874,94 @@ function Html(props) {
 		dokanShops: { label: "Dokan Shops", value: "dokanShops" },
 	}
 
-	function onChangeLayouts() {
-
-	}
 
 
 
 
+	var paginationPresets = [
+
+		{
+			label: "Preset 1",
+			prams: {
+				paginationWrap: {
+					"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "0.5em" } }
+				},
+				pagination: {
+					"styles": { "width": { "Desktop": "15px" }, "height": { "Desktop": "15px" }, "borderRadius": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#9DD6DF" } }
+				},
+				paginationActive: {
+					"styles": { "backgroundColor": { "Desktop": "#18978F" } }
+				},
+			}
+		},
+		{
+			label: "Preset 2",
+			prams: {
+				paginationWrap: {
+					"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "0.5em" } }
+				},
+				pagination: {
+					"styles": { "width": { "Desktop": "20px" }, "height": { "Desktop": "20px" }, "borderRadius": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#9DD6DF" } }
+				},
+				paginationActive: {
+					"styles": { "backgroundColor": { "Desktop": "#18978F" } }
+				},
+			}
+		},
+		{
+			label: "Preset 3",
+			prams: {
+				paginationWrap: {
+					"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "0.5em" } }
+				},
+				pagination: {
+					"styles": { "width": { "Desktop": "20px" }, "height": { "Desktop": "20px" }, "borderRadius": { "Desktop": "2px 2px 2px 2px" }, "backgroundColor": { "Desktop": "#9DD6DF" } }
+				},
+				paginationActive: {
+					"styles": { "backgroundColor": { "Desktop": "#18978F" } }
+				},
+			}
+		},
+	]
+
+	var navigationPresets = [
+
+		{
+			label: "Preset 1",
+			prams: {
+				navsWrap: {
+					"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "2em" }, "position": { "Desktop": "absolute" }, "top": { "Desktop": "0px" }, "right": { "Desktop": "0px" } }
+				},
+				prev: {
+					"styles": { "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "backgroundColor": { "Desktop": "#9DD6DF" }, "padding": { "Desktop": "8px 15px 8px 15px" } }
+				},
+				next: {
+					"styles": { "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "backgroundColor": { "Desktop": "#9DD6DF" }, "padding": { "Desktop": "8px 15px 8px 15px" } }
+				},
+			}
+		},
+
+	]
 
 
 	return (
 		<div className="">
-			{props.postData.post_content == null && (
-				<div className="p-3 text-center">Please select WCPS first</div>
-			)}
-			<div className="fixed top-20 right-0 w-[400px] z-50">			</div>
 
 			<code className="break-all	p-4 block">
-				{JSON.stringify(styleObj)}
+				{JSON.stringify(wcpsData.loopLayout)}
 			</code>
 
 
-			{props.postData.post_content != null && (
+
+
+
+
+			{wcpsData == null && (
+				<div className="p-3 text-center">Please select WCPS first</div>
+			)}
+
+
+			{wcpsData != null && (
 				<>
 
 					<div className="my-4 p-3">
@@ -1885,7 +2002,31 @@ function Html(props) {
 										className: "tab-custom",
 									},
 								]}>
-								<PGtab name="presets"></PGtab>
+								<PGtab name="presets">
+
+									{navigationPresets.map((preset) => {
+
+										return (
+											<div onClick={ev => {
+												var wcpsDataX = { ...wcpsData };
+												var navsWrapX = { ...navsWrap, ...preset.prams.navsWrap }
+												var prevX = { ...prev, ...preset.prams.prev }
+												var nextX = { ...next, ...preset.prams.next }
+
+												wcpsDataX.navsWrap = navsWrapX;
+												wcpsDataX.prev = prevX;
+												wcpsDataX.next = nextX;
+
+												setnavsWrap(navsWrapX)
+												setprev(prevX)
+												setnext(nextX)
+												setwcpsData(wcpsDataX)
+											}}>{preset.label}</div>
+										)
+
+									})}
+
+								</PGtab>
 								<PGtab name="custom">
 									<PanelBody
 										className="font-medium text-slate-900 "
@@ -2143,164 +2284,124 @@ function Html(props) {
 										className: "tab-custom",
 									},
 								]}>
-								<PGtab name="presets"></PGtab>
+								<PGtab name="presets">
+									{paginationPresets.map((preset) => {
+
+										return (
+											<div onClick={ev => {
+												var wcpsDataX = { ...wcpsData };
+												var paginationWrapX = { ...paginationWrap, ...preset.prams.paginationWrap }
+												var paginationX = { ...pagination, ...preset.prams.pagination }
+												var paginationActiveX = { ...paginationActive, ...preset.prams.paginationActive }
+
+												wcpsDataX.paginationWrap = paginationWrapX;
+												wcpsDataX.pagination = paginationX;
+												wcpsDataX.paginationActive = paginationActiveX;
+
+												setpaginationWrap(paginationWrapX)
+												setpagination(paginationX)
+												setpaginationActive(paginationActiveX)
+												setwcpsData(wcpsDataX)
+											}}>{preset.label}</div>
+										)
+
+									})}
+
+
+
+
+
+								</PGtab>
 								<PGtab name="custom">
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Pagination Wrap"
 										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={paginationWrap}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															paginationWrap,
-															setpaginationWrap
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(
-															sudoScource,
-															key,
-															paginationWrap,
-															setpaginationWrap
-														)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(
-															sudoScource,
-															key,
-															paginationWrap,
-															setpaginationWrap
-														)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
+										<PGStyles
+											obj={paginationWrap}
+											onChange={(sudoScource, newVal, attr) =>
+												onChangeStyle(
+													sudoScource,
+													newVal,
+													attr,
+													paginationWrap,
+													setpaginationWrap
+												)
+											}
+											onAdd={(sudoScource, key) =>
+												onAddStyle(
+													sudoScource,
+													key,
+													paginationWrap,
+													setpaginationWrap
+												)
+											}
+											onRemove={(sudoScource, key) =>
+												onRemoveStyle(
+													sudoScource,
+													key,
+													paginationWrap,
+													setpaginationWrap
+												)
+											}
+											onReset={(sudoSources) =>
+												onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
+											}
+										/>
 									</PanelBody>
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Pagination Active"
 										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={paginationActive}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															paginationActive,
-															setpaginationActive
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, paginationActive, setpaginationActive)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, paginationActive, setpaginationActive)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
+										<PGStyles
+											obj={paginationActive}
+											onChange={(sudoScource, newVal, attr) =>
+												onChangeStyle(
+													sudoScource,
+													newVal,
+													attr,
+													paginationActive,
+													setpaginationActive
+												)
+											}
+											onAdd={(sudoScource, key) =>
+												onAddStyle(sudoScource, key, paginationActive, setpaginationActive)
+											}
+											onRemove={(sudoScource, key) =>
+												onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive)
+											}
+											onReset={(sudoSources) =>
+												onResetStyle(sudoSources, paginationActive, setpaginationActive)
+											}
+										/>
+
 									</PanelBody>
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Pagination"
 										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={pagination}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															pagination,
-															setpagination
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, pagination, setpagination)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, pagination, setpagination)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, pagination, setpagination)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
+										<PGStyles
+											obj={pagination}
+											onChange={(sudoScource, newVal, attr) =>
+												onChangeStyle(
+													sudoScource,
+													newVal,
+													attr,
+													pagination,
+													setpagination
+												)
+											}
+											onAdd={(sudoScource, key) =>
+												onAddStyle(sudoScource, key, pagination, setpagination)
+											}
+											onRemove={(sudoScource, key) =>
+												onRemoveStyle(sudoScource, key, pagination, setpagination)
+											}
+											onReset={(sudoSources) =>
+												onResetStyle(sudoSources, pagination, setpagination)
+											}
+										/>
+
 									</PanelBody>
 								</PGtab>
 							</PGtabs>

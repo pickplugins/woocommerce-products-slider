@@ -124,8 +124,6 @@ function Html(props) {
 			},
 		}).then((res) => {
 
-			console.log(res)
-
 			setisLoading(false);
 
 			setPosts(res.posts);

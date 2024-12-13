@@ -159,7 +159,6 @@ function Html(props) {
 	};
 
 	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
-	console.log(activeAccordion);
 	var [postData, setpostData] = useState(defaultPostData); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
 
@@ -224,7 +223,7 @@ function Html(props) {
 
 			<div className="flex ">
 
-				<div className="w-[450px] overflow-y-scroll light-scrollbar">
+				<div className="w-[450px] h-full bg-white">
 					<PGtabs
 						activeTab="accordions"
 						orientation=""
@@ -289,12 +288,17 @@ function Html(props) {
 					</PGtabs>
 
 				</div>
-				<div className="w-full sticky top-0">
+				<div className="w-full">
 					<div className="  relative">
 
 
 						<AccordionsView isLoading={isLoading} postData={postData} id={activeAccordion} />
 					</div>
+
+
+
+
+
 
 				</div>
 			</div>
