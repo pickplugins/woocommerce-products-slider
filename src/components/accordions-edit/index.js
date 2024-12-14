@@ -36,9 +36,8 @@ function Html(props) {
 		);
 	}
 
-	var wcpsData = postData?.post_content;
 
-	var [wcpsData, setwcpsData] = useState(wcpsData); // Using the hook.
+	var [wcpsData, setwcpsData] = useState(postData?.post_content); // Using the hook.
 
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
