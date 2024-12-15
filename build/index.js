@@ -3379,15 +3379,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
 /* harmony import */ var _dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../dropdown */ "./src/components/dropdown/index.js");
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles */ "./src/components/styles/index.js");
 /* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../tab */ "./src/components/tab/index.js");
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tabs */ "./src/components/tabs/index.js");
 /* harmony import */ var _accordions_layouts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../accordions-layouts */ "./src/components/accordions-layouts/index.js");
+/* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
 
 const {
   Component,
@@ -3395,6 +3396,7 @@ const {
   useState,
   useEffect
 } = wp.element;
+
 
 
 
@@ -4025,7 +4027,7 @@ function Html(props) {
         setsliderOptions(sliderOptionsX);
       }
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"]
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"]
     }));
   };
   function onChangeStyle(sudoScource, newVal, attr, propertyType, setProperty) {
@@ -4425,7 +4427,7 @@ function Html(props) {
     name: "normal"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "my-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Options", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Options", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
     variant: "secondary",
     buttonTitle: "Choose",
@@ -4449,14 +4451,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autoplay?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autoplay?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4470,14 +4472,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rewind?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rewind?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4491,7 +4493,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
@@ -4515,7 +4517,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Interval?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Interval?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       type: "number",
       onChange: newVal => {
@@ -4529,7 +4531,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       type: "number",
       onChange: newVal => {
@@ -4543,7 +4545,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rewind Speed?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rewind Speed?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       type: "number",
       onChange: newVal => {
@@ -4557,7 +4559,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Start?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Start?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       type: "number",
       onChange: newVal => {
@@ -4571,7 +4573,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Per Page?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Per Page?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       type: "number",
       onChange: newVal => {
@@ -4585,7 +4587,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Per Move?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Per Move?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       type: "number",
       onChange: newVal => {
@@ -4599,7 +4601,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gap?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gap?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center gap-1 "
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
       type: "number",
@@ -4637,7 +4639,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4650,7 +4652,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Focus?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Focus?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4663,7 +4665,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4676,7 +4678,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Height?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Height?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4689,7 +4691,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fixed Width?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fixed Width?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4702,7 +4704,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fixed Height?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fixed Height?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4715,7 +4717,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Height Ratio?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Height Ratio?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4728,7 +4730,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Easing?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Easing?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4741,14 +4743,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pause On Hover?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pause On Hover?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4762,17 +4764,17 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pause On Focus?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pause On Focus?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: "",
       className: "font-medium text-slate-900 "
     }, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4786,14 +4788,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rewind By Drag?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rewind By Drag?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4807,14 +4809,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Width?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Width?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4828,14 +4830,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Height?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Height?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4849,14 +4851,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Navigation?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Navigation?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4870,14 +4872,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4891,14 +4893,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination Keyboard?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination Keyboard?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4912,14 +4914,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Drag?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Drag?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4933,14 +4935,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snap?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snap?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -4954,7 +4956,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("noDrag?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("noDrag?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: value,
       onChange: newVal => {
         var sliderOptionsX = {
@@ -4967,7 +4969,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination Direction?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination Direction?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
@@ -4991,7 +4993,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Direction?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Direction?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
@@ -5015,20 +5017,20 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("LazyLoad?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("LazyLoad?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nearby", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nearby", "woocommerce-products-slider"),
         value: "nearby"
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sequential", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sequential", "woocommerce-products-slider"),
         value: "sequential"
       }],
       onChange: newVal => {
@@ -5042,20 +5044,20 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Keyboard?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Keyboard?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global", "woocommerce-products-slider"),
         value: "global"
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Focused", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Focused", "woocommerce-products-slider"),
         value: "focused"
       }],
       onChange: newVal => {
@@ -5069,7 +5071,7 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Media Query?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Media Query?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
@@ -5090,14 +5092,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wheel?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wheel?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -5111,14 +5113,14 @@ function Html(props) {
       className: "flex items-center"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
       index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cover?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cover?", "woocommerce-products-slider"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "",
       value: value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "woocommerce-products-slider"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "woocommerce-products-slider"),
         value: 0
       }],
       onChange: newVal => {
@@ -5141,12 +5143,12 @@ function Html(props) {
     tabs: [{
       name: "presets",
       title: "presets",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-presets"
     }, {
       name: "custom",
       title: "Custom",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-custom"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5165,12 +5167,12 @@ function Html(props) {
     tabs: [{
       name: "presets",
       title: "presets",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-presets"
     }, {
       name: "custom",
       title: "Custom",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-custom"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5192,12 +5194,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-style"
     }
     // {
@@ -5209,7 +5211,25 @@ function Html(props) {
     ]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "options"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: wrapper.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...wrapper,
+        options: {
+          ...wrapper.options,
+          class: newVal.target.value
+        }
+      };
+      setwrapper(optionsX);
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: wrapper,
@@ -5229,17 +5249,35 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "options"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: itemsWrap.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...itemsWrap,
+        options: {
+          ...itemsWrap.options,
+          class: newVal.target.value
+        }
+      };
+      setitemsWrap(optionsX);
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: itemsWrap,
@@ -5259,17 +5297,35 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "options"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: item.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...item,
+        options: {
+          ...item.options,
+          class: newVal.target.value
+        }
+      };
+      setitem(optionsX);
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: item,
@@ -5289,12 +5345,12 @@ function Html(props) {
     tabs: [{
       name: "presets",
       title: "presets",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-presets"
     }, {
       name: "custom",
       title: "Custom",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-custom"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5326,7 +5382,97 @@ function Html(props) {
         setwcpsData(wcpsDataX);
       }
     }, preset.label);
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Navs Wrap Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: navsWrap.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...navsWrap,
+        options: {
+          ...navsWrap.options,
+          class: newVal.target.value
+        }
+      };
+      setnavsWrap(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Previous Button Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: prev.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...prev,
+        options: {
+          ...prev.options,
+          class: newVal.target.value
+        }
+      };
+      setprev(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Next Button Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: next.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...next,
+        options: {
+          ...next.options,
+          class: newVal.target.value
+        }
+      };
+      setnext(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Previous Icon Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: prevIcon.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...prevIcon,
+        options: {
+          ...prevIcon.options,
+          class: newVal.target.value
+        }
+      };
+      setprevIcon(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Next Icon Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: nextIcon.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...nextIcon,
+        options: {
+          ...nextIcon.options,
+          class: newVal.target.value
+        }
+      };
+      setnextIcon(optionsX);
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "custom"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
@@ -5340,12 +5486,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5370,12 +5516,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5400,12 +5546,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5430,12 +5576,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5460,12 +5606,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5490,12 +5636,12 @@ function Html(props) {
     tabs: [{
       name: "presets",
       title: "presets",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-presets"
     }, {
       name: "custom",
       title: "Custom",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-custom"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5527,7 +5673,61 @@ function Html(props) {
         setwcpsData(wcpsDataX);
       }
     }, preset.label);
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination Wrap Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: paginationWrap.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...paginationWrap,
+        options: {
+          ...paginationWrap.options,
+          class: newVal.target.value
+        }
+      };
+      setpaginationWrap(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: pagination.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...pagination,
+        options: {
+          ...pagination.options,
+          class: newVal.target.value
+        }
+      };
+      setpagination(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pagination Active Class", "woocommerce-products-slider")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    value: paginationActive.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...paginationActive,
+        options: {
+          ...paginationActive.options,
+          class: newVal.target.value
+        }
+      };
+      setpaginationActive(optionsX);
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "custom"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
@@ -30035,6 +30235,98 @@ class PGColorPicker extends Component {
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGColorPicker);
+
+/***/ }),
+
+/***/ "./src/components/input-text/index.js":
+/*!********************************************!*\
+  !*** ./src/components/input-text/index.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+
+const {
+  Component
+} = wp.element;
+
+
+
+function Html(props) {
+  if (!props.warn) {
+    return null;
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: props.className,
+    id: props.id,
+    value: props.value,
+    type: "text",
+    size: props.size,
+    name: props.name,
+    placeholder: props.placeholder,
+    minlength: props.minlength,
+    maxlength: props.maxlength,
+    required: props.required,
+    disabled: props.disabled,
+    onChange: newVal => {
+      props.onChange(newVal);
+    }
+  }));
+}
+class PGinputText extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: true
+    };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+  render() {
+    var {
+      value,
+      placeholder,
+      className,
+      id,
+      name,
+      size,
+      minlength,
+      maxlength,
+      required,
+      disabled,
+      onChange
+    } = this.props;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
+      val: value,
+      name: name,
+      id: id,
+      size: size,
+      placeholder: placeholder,
+      className: className,
+      minlength: minlength,
+      maxlength: maxlength,
+      required: required,
+      disabled: disabled,
+      onChange: onChange,
+      warn: this.state.showWarning
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGinputText);
 
 /***/ }),
 
