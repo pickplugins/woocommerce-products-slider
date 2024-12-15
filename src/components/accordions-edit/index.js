@@ -2732,6 +2732,7 @@ function Html(props) {
 											}
 										/>
 									</PanelBody>
+
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Pagination"
@@ -2762,7 +2763,12 @@ function Html(props) {
 												onResetStyle(sudoSources, pagination, setpagination)
 											}
 											onBulkAdd={(sudoSource, cssObj) =>
-												onBulkAddStyle(sudoSource, cssObj, pagination, setpagination)
+												onBulkAddStyle(
+													sudoSource,
+													cssObj,
+													pagination,
+													setpagination
+												)
 											}
 										/>
 									</PanelBody>
