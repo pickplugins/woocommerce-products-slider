@@ -4093,6 +4093,13 @@ function Html(props) {
     });
     setProperty(obj);
   }
+  function onBulkAddStyle(sudoSource, cssObj, propertyType, setProperty) {
+    let obj = {
+      ...propertyType
+    };
+    obj[sudoSource] = cssObj;
+    setProperty(obj);
+  }
   function onRemoveStyle(sudoScource, key, propertyType, setProperty) {
     let obj = {
       ...propertyType
@@ -5269,7 +5276,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, wrapper, setwrapper),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, wrapper, setwrapper),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, wrapper, setwrapper),
-    onReset: sudoSources => onResetStyle(sudoSources, wrapper, setwrapper)
+    onReset: sudoSources => onResetStyle(sudoSources, wrapper, setwrapper),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, wrapper, setwrapper)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Loop Wrap",
@@ -5317,7 +5325,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, itemsWrap, setitemsWrap),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, itemsWrap, setitemsWrap),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, itemsWrap, setitemsWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, itemsWrap, setitemsWrap)
+    onReset: sudoSources => onResetStyle(sudoSources, itemsWrap, setitemsWrap),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, itemsWrap, setitemsWrap)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Item",
@@ -5365,7 +5374,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, item, setitem),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, item, setitem),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, item, setitem),
-    onReset: sudoSources => onResetStyle(sudoSources, item, setitem)
+    onReset: sudoSources => onResetStyle(sudoSources, item, setitem),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, item, setitem)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Navigation",
@@ -5556,7 +5566,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, navsWrap, setnavsWrap),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, navsWrap, setnavsWrap),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, navsWrap, setnavsWrap)
+    onReset: sudoSources => onResetStyle(sudoSources, navsWrap, setnavsWrap),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, navsWrap, setnavsWrap)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Prev Button",
@@ -5566,7 +5577,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, prev, setprev),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, prev, setprev),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, prev, setprev),
-    onReset: sudoSources => onResetStyle(sudoSources, prev, setprev)
+    onReset: sudoSources => onResetStyle(sudoSources, prev, setprev),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, prev, setprev)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Next Button",
@@ -5576,7 +5588,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, next, setnext),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, next, setnext),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, next, setnext),
-    onReset: sudoSources => onResetStyle(sudoSources, next, setnext)
+    onReset: sudoSources => onResetStyle(sudoSources, next, setnext),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, next, setnext)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Prev Icon",
@@ -5586,7 +5599,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, prevIcon, setprevIcon),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, prevIcon, setprevIcon),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, prevIcon, setprevIcon),
-    onReset: sudoSources => onResetStyle(sudoSources, prevIcon, setprevIcon)
+    onReset: sudoSources => onResetStyle(sudoSources, prevIcon, setprevIcon),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, prevIcon, setprevIcon)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Next Icon",
@@ -5596,7 +5610,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, nextIcon, setnextIcon),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, nextIcon, setnextIcon),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, nextIcon, setnextIcon),
-    onReset: sudoSources => onResetStyle(sudoSources, nextIcon, setnextIcon)
+    onReset: sudoSources => onResetStyle(sudoSources, nextIcon, setnextIcon),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, nextIcon, setnextIcon)
   })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination/Dots",
@@ -5711,7 +5726,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, paginationWrap, setpaginationWrap),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, paginationWrap, setpaginationWrap),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, paginationWrap, setpaginationWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
+    onReset: sudoSources => onResetStyle(sudoSources, paginationWrap, setpaginationWrap),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, paginationWrap, setpaginationWrap)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination Active",
@@ -5721,7 +5737,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, paginationActive, setpaginationActive),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, paginationActive, setpaginationActive),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive),
-    onReset: sudoSources => onResetStyle(sudoSources, paginationActive, setpaginationActive)
+    onReset: sudoSources => onResetStyle(sudoSources, paginationActive, setpaginationActive),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, paginationActive, setpaginationActive)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination",
@@ -5731,7 +5748,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, pagination, setpagination),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, pagination, setpagination),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, pagination, setpagination),
-    onReset: sudoSources => onResetStyle(sudoSources, pagination, setpagination)
+    onReset: sudoSources => onResetStyle(sudoSources, pagination, setpagination),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, pagination, setpagination)
   }))))))));
 }
 class AccordionsEdit extends Component {

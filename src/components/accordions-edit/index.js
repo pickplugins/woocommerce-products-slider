@@ -718,6 +718,12 @@ function Html(props) {
 		setProperty(obj);
 	}
 
+	function onBulkAddStyle(sudoSource, cssObj, propertyType, setProperty) {
+		let obj = { ...propertyType };
+		obj[sudoSource] = cssObj;
+		setProperty(obj);
+	}
+
 	function onRemoveStyle(sudoScource, key, propertyType, setProperty) {
 		let obj = { ...propertyType };
 		var object = myStore.deletePropertyDeep(obj, [
@@ -2014,6 +2020,9 @@ function Html(props) {
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, wrapper, setwrapper)
 									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, wrapper, setwrapper)
+									}
 								/>
 							</PGtab>
 						</PGtabs>
@@ -2083,6 +2092,9 @@ function Html(props) {
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, itemsWrap, setitemsWrap)
 									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, itemsWrap, setitemsWrap)
+									}
 								/>
 							</PGtab>
 						</PGtabs>
@@ -2145,6 +2157,9 @@ function Html(props) {
 									}
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, item, setitem)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, item, setitem)
 									}
 								/>
 							</PGtab>
@@ -2372,6 +2387,14 @@ function Html(props) {
 											onReset={(sudoSources) =>
 												onResetStyle(sudoSources, navsWrap, setnavsWrap)
 											}
+											onBulkAdd={(sudoSource, cssObj) =>
+												onBulkAddStyle(
+													sudoSource,
+													cssObj,
+													navsWrap,
+													setnavsWrap
+												)
+											}
 										/>
 									</PanelBody>
 									<PanelBody
@@ -2392,6 +2415,9 @@ function Html(props) {
 											onReset={(sudoSources) =>
 												onResetStyle(sudoSources, prev, setprev)
 											}
+											onBulkAdd={(sudoSource, cssObj) =>
+												onBulkAddStyle(sudoSource, cssObj, prev, setprev)
+											}
 										/>
 									</PanelBody>
 									<PanelBody
@@ -2411,6 +2437,9 @@ function Html(props) {
 											}
 											onReset={(sudoSources) =>
 												onResetStyle(sudoSources, next, setnext)
+											}
+											onBulkAdd={(sudoSource, cssObj) =>
+												onBulkAddStyle(sudoSource, cssObj, next, setnext)
 											}
 										/>
 									</PanelBody>
@@ -2438,6 +2467,14 @@ function Html(props) {
 											onReset={(sudoSources) =>
 												onResetStyle(sudoSources, prevIcon, setprevIcon)
 											}
+											onBulkAdd={(sudoSource, cssObj) =>
+												onBulkAddStyle(
+													sudoSource,
+													cssObj,
+													prevIcon,
+													setprevIcon
+												)
+											}
 										/>
 									</PanelBody>
 									<PanelBody
@@ -2463,6 +2500,14 @@ function Html(props) {
 											}
 											onReset={(sudoSources) =>
 												onResetStyle(sudoSources, nextIcon, setnextIcon)
+											}
+											onBulkAdd={(sudoSource, cssObj) =>
+												onBulkAddStyle(
+													sudoSource,
+													cssObj,
+													nextIcon,
+													setnextIcon
+												)
 											}
 										/>
 									</PanelBody>
@@ -2629,6 +2674,14 @@ function Html(props) {
 													setpaginationWrap
 												)
 											}
+											onBulkAdd={(sudoSource, cssObj) =>
+												onBulkAddStyle(
+													sudoSource,
+													cssObj,
+													paginationWrap,
+													setpaginationWrap
+												)
+											}
 										/>
 									</PanelBody>
 									<PanelBody
@@ -2669,6 +2722,14 @@ function Html(props) {
 													setpaginationActive
 												)
 											}
+											onBulkAdd={(sudoSource, cssObj) =>
+												onBulkAddStyle(
+													sudoSource,
+													cssObj,
+													paginationActive,
+													setpaginationActive
+												)
+											}
 										/>
 									</PanelBody>
 									<PanelBody
@@ -2699,6 +2760,9 @@ function Html(props) {
 											}
 											onReset={(sudoSources) =>
 												onResetStyle(sudoSources, pagination, setpagination)
+											}
+											onBulkAdd={(sudoSource, cssObj) =>
+												onBulkAddStyle(sudoSource, cssObj, pagination, setpagination)
 											}
 										/>
 									</PanelBody>
