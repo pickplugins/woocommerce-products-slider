@@ -11,11 +11,13 @@ import {
 import { brush, close, settings } from "@wordpress/icons";
 
 import breakPoints from "../../breakpoints";
+import AccordionsLayouts from "../accordions-layouts";
 import PGDropdown from "../dropdown";
+import PGIconPicker from "../icon-picker";
+import PGinputText from "../input-text";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
-import AccordionsLayouts from "../accordions-layouts";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -32,13 +34,10 @@ function Html(props) {
 	if (postData.post_content == null) {
 		return (
 			<div className="p-3 my-5 bg-orange-400">Please choose an WCPS first.</div>
-
 		);
 	}
 
-
 	var [wcpsData, setwcpsData] = useState(postData?.post_content); // Using the hook.
-
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
@@ -53,10 +52,10 @@ function Html(props) {
 	var [prevIcon, setprevIcon] = useState(wcpsData.prevIcon);
 	var [nextIcon, setnextIcon] = useState(wcpsData.nextIcon);
 	var [paginationWrap, setpaginationWrap] = useState(wcpsData.paginationWrap);
-	var [paginationActive, setpaginationActive] = useState(wcpsData.paginationActive);
+	var [paginationActive, setpaginationActive] = useState(
+		wcpsData.paginationActive
+	);
 	var [pagination, setpagination] = useState(wcpsData.pagination);
-
-
 
 	const gapValue = sliderOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
@@ -72,11 +71,7 @@ function Html(props) {
 		});
 	}
 
-
-
-
 	var blockClass = ".wcps-content-slider";
-
 
 	var wrapperSelector = blockClass + " .splide";
 	var itemsWrapSelector = blockClass + " .splide__track";
@@ -91,19 +86,9 @@ function Html(props) {
 	var paginationActiveSelector =
 		blockClass + " .splide__pagination__page.is-active";
 
-
-
-
-
-
-
-
-
-
 	var blockId = postData.ID;
 
 	function getElementSelector(sudoScource, mainSelector) {
-
 		var elementSelector = mainSelector;
 		if (sudoScource == "styles") {
 			elementSelector = mainSelector;
@@ -384,11 +369,7 @@ function Html(props) {
 			var sudoSrc = args[0];
 			var sudoArgs = args[1];
 			if (sudoSrc != "options" && sudoArgs != null) {
-				var selector = getElementSelector(
-
-					sudoSrc,
-					elementSelector
-				);
+				var selector = getElementSelector(sudoSrc, elementSelector);
 				Object.entries(args[1]).map((x) => {
 					var attr = x[0];
 					var propVal = x[1];
@@ -415,11 +396,7 @@ function Html(props) {
 		return cssObj;
 	}
 
-
-
-
 	function generateBlockCss(items) {
-
 		var reponsiveCssGroups = {};
 		for (var selector in items) {
 			var attrs = items[selector];
@@ -492,7 +469,8 @@ function Html(props) {
 			}
 			reponsiveCssMobile += "}";
 		}
-		var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
+		var reponsiveCss =
+			reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
 
 		var wpfooter = document.getElementById("wpfooter");
 		var divWrap = document.getElementById("css-block");
@@ -505,263 +483,196 @@ function Html(props) {
 		var csswrappg = document.getElementById("css-block");
 		var str = "" + reponsiveCss + "";
 		csswrappg.insertAdjacentHTML("beforeend", str);
-
-
 	}
-
-
-
-
-
-
-
-
 
 	useEffect(() => {
-
-		generateBlockCss(styleObj)
-
+		generateBlockCss(styleObj);
 	}, [styleObj]);
 
-
 	function onChangeLayouts(loopLayout) {
-
-
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.loopLayout = loopLayout;
-		setwcpsData(wcpsDataX)
+		setwcpsData(wcpsDataX);
 	}
-
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content = wcpsData
-		onChange(postDataX)
+		postDataX.post_content = wcpsData;
+		onChange(postDataX);
 
+		var styleObjX = { ...styleObj };
 
-
-
-
-
-		var styleObjX = { ...styleObj }
-
-		var wrapperCss = generateElementCss(wcpsData.wrapper, wrapperSelector)
-		Object.entries(wrapperCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var wrapperCss = generateElementCss(wcpsData.wrapper, wrapperSelector);
+		Object.entries(wrapperCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-
-		var itemsWrapCss = generateElementCss(wcpsData.itemsWrap, itemsWrapSelector)
-		Object.entries(itemsWrapCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var itemsWrapCss = generateElementCss(
+			wcpsData.itemsWrap,
+			itemsWrapSelector
+		);
+		Object.entries(itemsWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-
-		var itemCss = generateElementCss(wcpsData.item, itemSelector)
-		Object.entries(itemCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var itemCss = generateElementCss(wcpsData.item, itemSelector);
+		Object.entries(itemCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-
-		var navsWrapCss = generateElementCss(wcpsData.navsWrap, navsWrapSelector)
-		Object.entries(navsWrapCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var navsWrapCss = generateElementCss(wcpsData.navsWrap, navsWrapSelector);
+		Object.entries(navsWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-
-		var prevCss = generateElementCss(wcpsData.prev, prevSelector)
-		Object.entries(prevCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var prevCss = generateElementCss(wcpsData.prev, prevSelector);
+		Object.entries(prevCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-		var nextCss = generateElementCss(wcpsData.next, nextSelector)
-		Object.entries(nextCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var nextCss = generateElementCss(wcpsData.next, nextSelector);
+		Object.entries(nextCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-		var prevIconCss = generateElementCss(wcpsData.prevIcon, prevIconSelector)
-		Object.entries(prevIconCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var prevIconCss = generateElementCss(wcpsData.prevIcon, prevIconSelector);
+		Object.entries(prevIconCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-		var nextIconCss = generateElementCss(wcpsData.nextIcon, nextIconSelector)
-		Object.entries(nextIconCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var nextIconCss = generateElementCss(wcpsData.nextIcon, nextIconSelector);
+		Object.entries(nextIconCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-		var paginationWrapCss = generateElementCss(wcpsData.paginationWrap, paginationWrapSelector)
+		var paginationWrapCss = generateElementCss(
+			wcpsData.paginationWrap,
+			paginationWrapSelector
+		);
 
 		console.log(paginationWrapCss);
 
-		Object.entries(paginationWrapCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		Object.entries(paginationWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-
-		var paginationCss = generateElementCss(wcpsData.pagination, paginationSelector)
+		var paginationCss = generateElementCss(
+			wcpsData.pagination,
+			paginationSelector
+		);
 
 		console.log(paginationCss);
 
-		Object.entries(paginationCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		Object.entries(paginationCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-
-
-
-
-		var paginationActiveCss = generateElementCss(wcpsData.paginationActive, paginationActiveSelector)
+		var paginationActiveCss = generateElementCss(
+			wcpsData.paginationActive,
+			paginationActiveSelector
+		);
 
 		console.log(paginationActiveCss);
 
-
-		Object.entries(paginationActiveCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		Object.entries(paginationActiveCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
+		});
 
-
-
-		setstyleObj(styleObjX)
-
-
-
-
-
-
+		setstyleObj(styleObjX);
 	}, [wcpsData]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.sliderOptions = sliderOptions;
-		setwcpsData(wcpsDataX)
+		setwcpsData(wcpsDataX);
 	}, [sliderOptions]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.wrapper = wrapper;
-		setwcpsData(wcpsDataX)
-
-
-
+		setwcpsData(wcpsDataX);
 	}, [wrapper]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.itemsWrap = itemsWrap;
-		setwcpsData(wcpsDataX)
-
-
-
-
+		setwcpsData(wcpsDataX);
 	}, [itemsWrap]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.item = item;
-		setwcpsData(wcpsDataX)
-
-
+		setwcpsData(wcpsDataX);
 	}, [item]);
-
-
-
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.navsWrap = navsWrap;
-		setwcpsData(wcpsDataX)
-
-
+		setwcpsData(wcpsDataX);
 	}, [navsWrap]);
-
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.prev = prev;
-		setwcpsData(wcpsDataX)
-
-
+		setwcpsData(wcpsDataX);
 	}, [prev]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.next = next;
-		setwcpsData(wcpsDataX)
-
-
+		setwcpsData(wcpsDataX);
 	}, [next]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.prevIcon = prevIcon;
-		setwcpsData(wcpsDataX)
-
-
+		setwcpsData(wcpsDataX);
 	}, [prevIcon]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.nextIcon = nextIcon;
-		setwcpsData(wcpsDataX)
-
-
+		setwcpsData(wcpsDataX);
 	}, [nextIcon]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.paginationWrap = paginationWrap;
-		setwcpsData(wcpsDataX)
-
-
-
-
+		setwcpsData(wcpsDataX);
 	}, [paginationWrap]);
 
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.pagination = pagination;
-		setwcpsData(wcpsDataX)
-
-
+		setwcpsData(wcpsDataX);
 	}, [pagination]);
 	useEffect(() => {
 		var wcpsDataX = { ...wcpsData };
 		wcpsDataX.paginationActive = paginationActive;
-		setwcpsData(wcpsDataX)
-
-
+		setwcpsData(wcpsDataX);
 	}, [paginationActive]);
-
-
-
-
-
-
-
-
-
 
 	var RemoveSliderArg = function ({ index }) {
 		return (
@@ -866,103 +777,115 @@ function Html(props) {
 		mediaQuery: { label: "Media Query", value: "max" },
 	};
 
-
 	var sliderForArgs = {
 		Products: { label: "Products", value: "products" },
 		terms: { label: "Terms", value: "terms" },
 		dokanShops: { label: "Dokan Shops", value: "dokanShops" },
-	}
-
-
-
-
+	};
 
 	var paginationPresets = [
-
 		{
 			label: "Preset 1",
 			prams: {
 				paginationWrap: {
-					"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "0.5em" } }
+					styles: { display: { Desktop: "flex" }, gap: { Desktop: "0.5em" } },
 				},
 				pagination: {
-					"styles": { "width": { "Desktop": "15px" }, "height": { "Desktop": "15px" }, "borderRadius": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#9DD6DF" } }
+					styles: {
+						width: { Desktop: "15px" },
+						height: { Desktop: "15px" },
+						borderRadius: { Desktop: "20px 20px 20px 20px" },
+						backgroundColor: { Desktop: "#9DD6DF" },
+					},
 				},
 				paginationActive: {
-					"styles": { "backgroundColor": { "Desktop": "#18978F" } }
+					styles: { backgroundColor: { Desktop: "#18978F" } },
 				},
-			}
+			},
 		},
 		{
 			label: "Preset 2",
 			prams: {
 				paginationWrap: {
-					"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "0.5em" } }
+					styles: { display: { Desktop: "flex" }, gap: { Desktop: "0.5em" } },
 				},
 				pagination: {
-					"styles": { "width": { "Desktop": "20px" }, "height": { "Desktop": "20px" }, "borderRadius": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#9DD6DF" } }
+					styles: {
+						width: { Desktop: "20px" },
+						height: { Desktop: "20px" },
+						borderRadius: { Desktop: "20px 20px 20px 20px" },
+						backgroundColor: { Desktop: "#9DD6DF" },
+					},
 				},
 				paginationActive: {
-					"styles": { "backgroundColor": { "Desktop": "#18978F" } }
+					styles: { backgroundColor: { Desktop: "#18978F" } },
 				},
-			}
+			},
 		},
 		{
 			label: "Preset 3",
 			prams: {
 				paginationWrap: {
-					"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "0.5em" } }
+					styles: { display: { Desktop: "flex" }, gap: { Desktop: "0.5em" } },
 				},
 				pagination: {
-					"styles": { "width": { "Desktop": "20px" }, "height": { "Desktop": "20px" }, "borderRadius": { "Desktop": "2px 2px 2px 2px" }, "backgroundColor": { "Desktop": "#9DD6DF" } }
+					styles: {
+						width: { Desktop: "20px" },
+						height: { Desktop: "20px" },
+						borderRadius: { Desktop: "2px 2px 2px 2px" },
+						backgroundColor: { Desktop: "#9DD6DF" },
+					},
 				},
 				paginationActive: {
-					"styles": { "backgroundColor": { "Desktop": "#18978F" } }
+					styles: { backgroundColor: { Desktop: "#18978F" } },
 				},
-			}
+			},
 		},
-	]
+	];
 
 	var navigationPresets = [
-
 		{
 			label: "Preset 1",
 			prams: {
 				navsWrap: {
-					"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "2em" }, "position": { "Desktop": "absolute" }, "top": { "Desktop": "0px" }, "right": { "Desktop": "0px" } }
+					styles: {
+						display: { Desktop: "flex" },
+						gap: { Desktop: "2em" },
+						position: { Desktop: "absolute" },
+						top: { Desktop: "0px" },
+						right: { Desktop: "0px" },
+					},
 				},
 				prev: {
-					"styles": { "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "backgroundColor": { "Desktop": "#9DD6DF" }, "padding": { "Desktop": "8px 15px 8px 15px" } }
+					styles: {
+						borderRadius: { Desktop: "3px 3px 3px 3px" },
+						backgroundColor: { Desktop: "#9DD6DF" },
+						padding: { Desktop: "8px 15px 8px 15px" },
+					},
 				},
 				next: {
-					"styles": { "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "backgroundColor": { "Desktop": "#9DD6DF" }, "padding": { "Desktop": "8px 15px 8px 15px" } }
+					styles: {
+						borderRadius: { Desktop: "3px 3px 3px 3px" },
+						backgroundColor: { Desktop: "#9DD6DF" },
+						padding: { Desktop: "8px 15px 8px 15px" },
+					},
 				},
-			}
+			},
 		},
-
-	]
-
+	];
 
 	return (
 		<div className="">
-
 			<code className="break-all	p-4 block">
 				{JSON.stringify(wcpsData.loopLayout)}
 			</code>
-
-
-
-
-
 
 			{wcpsData == null && (
 				<div className="p-3 text-center">Please select WCPS first</div>
 			)}
 
-
 			{wcpsData != null && (
 				<>
-
 					<div className="my-4 p-3">
 						<PGDropdown
 							position="bottom right"
@@ -970,8 +893,6 @@ function Html(props) {
 							buttonTitle={"Slider For"}
 							options={sliderForArgs}
 							onChange={(option, index) => {
-
-
 								var sliderOptionsX = { ...sliderOptions };
 								sliderOptionsX.sliderFor = option.value;
 								setsliderOptions(sliderOptionsX);
@@ -985,7 +906,9 @@ function Html(props) {
 						initialOpen={false}>
 						<PGtab name="normal">
 							<PanelRow className="my-3">
-								<label>{__("Slider Options", "post-grid")}</label>
+								<label>
+									{__("Slider Options", "woocommerce-products-slider")}
+								</label>
 								<PGDropdown
 									position="bottom right"
 									variant="secondary"
@@ -1005,7 +928,7 @@ function Html(props) {
 								}}
 								className="pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-700 !text-white font-medium !rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-600">
 								<Icon icon={copy} className="fill-white " size={14} />
-								{__("Copy", "post-grid")}
+								{__("Copy", "woocommerce-products-slider")}
 							</button>
 							<button
 								onClick={() => {
@@ -1013,7 +936,7 @@ function Html(props) {
 								}}
 								className="pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-700 !text-white font-medium !rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-600">
 								<Icon icon={pages} className="fill-white " size={14} />
-								{__("Paste", "post-grid")}
+								{__("Paste", "woocommerce-products-slider")}
 							</button> */}
 							</PanelRow>
 							{Object.entries(sliderOptions).map((item, index) => {
@@ -1025,14 +948,22 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Autoplay?", "post-grid")}</span>
+													<span>
+														{__("Autoplay?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
@@ -1046,19 +977,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Rewind?", "post-grid")}</span>
+													<span>
+														{__("Rewind?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1067,7 +1006,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Slider Type?", "post-grid")}</span>
+													<span>
+														{__("Slider Type?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
@@ -1080,7 +1021,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1089,7 +1030,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Interval?", "post-grid")}</span>
+													<span>
+														{__("Interval?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
@@ -1097,7 +1040,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1106,7 +1049,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Speed?", "post-grid")}</span>
+													<span>
+														{__("Speed?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
@@ -1114,7 +1059,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1123,7 +1068,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Rewind Speed?", "post-grid")}</span>
+													<span>
+														{__("Rewind Speed?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
@@ -1131,7 +1078,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1140,7 +1087,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Start?", "post-grid")}</span>
+													<span>
+														{__("Start?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
@@ -1148,7 +1097,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1157,7 +1106,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Per Page?", "post-grid")}</span>
+													<span>
+														{__("Per Page?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
@@ -1166,8 +1117,7 @@ function Html(props) {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
 
-														setsliderOptions(sliderOptionsX)
-
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1176,7 +1126,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Per Move?", "post-grid")}</span>
+													<span>
+														{__("Per Move?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
@@ -1184,7 +1136,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1193,7 +1145,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Gap?", "post-grid")}</span>
+													<span>
+														{__("Gap?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<div className="flex items-center gap-1 ">
 													<input
@@ -1205,8 +1159,7 @@ function Html(props) {
 															setNumber(newNumber);
 															var sliderOptionsX = { ...sliderOptions };
 															sliderOptionsX[id] = `${newNumber}${unit}`;
-															setsliderOptions(sliderOptionsX)
-
+															setsliderOptions(sliderOptionsX);
 														}}
 													/>
 													<select
@@ -1216,8 +1169,7 @@ function Html(props) {
 															setUnit(newUnit);
 															var sliderOptionsX = { ...sliderOptions };
 															sliderOptionsX[id] = `${number}${newUnit}`;
-															setsliderOptions(sliderOptionsX)
-
+															setsliderOptions(sliderOptionsX);
 														}}>
 														<option value="px">px</option>
 														<option value="em">em</option>
@@ -1231,14 +1183,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Padding?", "post-grid")}</span>
+													<span>
+														{__("Padding?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1247,14 +1201,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Focus?", "post-grid")}</span>
+													<span>
+														{__("Focus?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1263,14 +1219,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Width?", "post-grid")}</span>
+													<span>
+														{__("Width?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1279,14 +1237,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Height?", "post-grid")}</span>
+													<span>
+														{__("Height?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1295,14 +1255,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Fixed Width?", "post-grid")}</span>
+													<span>
+														{__("Fixed Width?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1311,14 +1273,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Fixed Height?", "post-grid")}</span>
+													<span>
+														{__("Fixed Height?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1327,14 +1291,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Height Ratio?", "post-grid")}</span>
+													<span>
+														{__("Height Ratio?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1343,14 +1309,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Easing?", "post-grid")}</span>
+													<span>
+														{__("Easing?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1359,19 +1327,30 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Pause On Hover?", "post-grid")}</span>
+													<span>
+														{__(
+															"Pause On Hover?",
+															"woocommerce-products-slider"
+														)}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1380,7 +1359,12 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Pause On Focus?", "post-grid")}</span>
+													<span>
+														{__(
+															"Pause On Focus?",
+															"woocommerce-products-slider"
+														)}
+													</span>
 												</div>
 												<label for="" className="font-medium text-slate-900 ">
 													?
@@ -1389,13 +1373,19 @@ function Html(props) {
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1404,19 +1394,30 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Rewind By Drag?", "post-grid")}</span>
+													<span>
+														{__(
+															"Rewind By Drag?",
+															"woocommerce-products-slider"
+														)}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1425,19 +1426,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Auto Width?", "post-grid")}</span>
+													<span>
+														{__("Auto Width?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1446,19 +1455,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Auto Height?", "post-grid")}</span>
+													<span>
+														{__("Auto Height?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1467,19 +1484,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Navigation?", "post-grid")}</span>
+													<span>
+														{__("Navigation?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1488,19 +1513,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Pagination?", "post-grid")}</span>
+													<span>
+														{__("Pagination?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1509,19 +1542,30 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Pagination Keyboard?", "post-grid")}</span>
+													<span>
+														{__(
+															"Pagination Keyboard?",
+															"woocommerce-products-slider"
+														)}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1530,19 +1574,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Drag?", "post-grid")}</span>
+													<span>
+														{__("Drag?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1551,19 +1603,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Snap?", "post-grid")}</span>
+													<span>
+														{__("Snap?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1572,14 +1632,16 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("noDrag?", "post-grid")}</span>
+													<span>
+														{__("noDrag?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<InputControl
 													value={value}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1589,7 +1651,10 @@ function Html(props) {
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
 													<span>
-														{__("Pagination Direction?", "post-grid")}
+														{__(
+															"Pagination Direction?",
+															"woocommerce-products-slider"
+														)}
 													</span>
 												</div>
 												<SelectControl
@@ -1603,7 +1668,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1612,7 +1677,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Direction?", "post-grid")}</span>
+													<span>
+														{__("Direction?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
@@ -1625,7 +1692,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1634,27 +1701,41 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("LazyLoad?", "post-grid")}</span>
+													<span>
+														{__("LazyLoad?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
 														{
-															label: __("Nearby", "post-grid"),
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
+														{
+															label: __(
+																"Nearby",
+																"woocommerce-products-slider"
+															),
 															value: "nearby",
 														},
 														{
-															label: __("Sequential", "post-grid"),
+															label: __(
+																"Sequential",
+																"woocommerce-products-slider"
+															),
 															value: "sequential",
 														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1663,27 +1744,41 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Keyboard?", "post-grid")}</span>
+													<span>
+														{__("Keyboard?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
 														{
-															label: __("Global", "post-grid"),
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
+														{
+															label: __(
+																"Global",
+																"woocommerce-products-slider"
+															),
 															value: "global",
 														},
 														{
-															label: __("Focused", "post-grid"),
+															label: __(
+																"Focused",
+																"woocommerce-products-slider"
+															),
 															value: "focused",
 														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1692,7 +1787,9 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Media Query?", "post-grid")}</span>
+													<span>
+														{__("Media Query?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
@@ -1704,7 +1801,7 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1713,19 +1810,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Wheel?", "post-grid")}</span>
+													<span>
+														{__("Wheel?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1734,19 +1839,27 @@ function Html(props) {
 											<PanelRow>
 												<div className="flex items-center">
 													<RemoveSliderArg index={id} />
-													<span>{__("Cover?", "post-grid")}</span>
+													<span>
+														{__("Cover?", "woocommerce-products-slider")}
+													</span>
 												</div>
 												<SelectControl
 													label=""
 													value={value}
 													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
+														{
+															label: __("True", "woocommerce-products-slider"),
+															value: 1,
+														},
+														{
+															label: __("False", "woocommerce-products-slider"),
+															value: 0,
+														},
 													]}
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...sliderOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX)
+														setsliderOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
@@ -1755,9 +1868,7 @@ function Html(props) {
 								);
 							})}
 						</PGtab>
-						<div>
-
-						</div>
+						<div></div>
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
@@ -1768,7 +1879,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "presets",
@@ -1798,7 +1909,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "presets",
@@ -1815,8 +1926,10 @@ function Html(props) {
 								]}>
 								<PGtab name="presets"></PGtab>
 								<PGtab name="custom">
-
-									<AccordionsLayouts postData={postData} onChange={onChangeLayouts} />
+									<AccordionsLayouts
+										postData={postData}
+										onChange={onChangeLayouts}
+									/>
 								</PGtab>
 							</PGtabs>
 						</div>
@@ -1830,7 +1943,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1851,7 +1964,27 @@ function Html(props) {
 								// 	className: "tab-css",
 								// },
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "woocommerce-products-slider")}
+									</label>
+									<PGinputText
+										value={wrapper.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...wrapper,
+												options: {
+													...wrapper.options,
+													class: newVal.target.value,
+												},
+											};
+											setwrapper(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="styles">
 								{/* <PGStyles
 									obj={wrapper}
@@ -1893,7 +2026,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1908,7 +2041,27 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "woocommerce-products-slider")}
+									</label>
+									<PGinputText
+										value={itemsWrap.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...itemsWrap,
+												options: {
+													...itemsWrap.options,
+													class: newVal.target.value,
+												},
+											};
+											setitemsWrap(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={itemsWrap}
@@ -1942,7 +2095,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1957,7 +2110,27 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "woocommerce-products-slider")}
+									</label>
+									<PGinputText
+										value={item.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...item,
+												options: {
+													...item.options,
+													class: newVal.target.value,
+												},
+											};
+											setitem(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={item}
@@ -1986,7 +2159,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "presets",
@@ -2002,259 +2175,297 @@ function Html(props) {
 									},
 								]}>
 								<PGtab name="presets">
-
 									{navigationPresets.map((preset) => {
-
 										return (
-											<div onClick={ev => {
-												var wcpsDataX = { ...wcpsData };
-												var navsWrapX = { ...navsWrap, ...preset.prams.navsWrap }
-												var prevX = { ...prev, ...preset.prams.prev }
-												var nextX = { ...next, ...preset.prams.next }
+											<div
+												onClick={(ev) => {
+													var wcpsDataX = { ...wcpsData };
+													var navsWrapX = {
+														...navsWrap,
+														...preset.prams.navsWrap,
+													};
+													var prevX = { ...prev, ...preset.prams.prev };
+													var nextX = { ...next, ...preset.prams.next };
 
-												wcpsDataX.navsWrap = navsWrapX;
-												wcpsDataX.prev = prevX;
-												wcpsDataX.next = nextX;
+													wcpsDataX.navsWrap = navsWrapX;
+													wcpsDataX.prev = prevX;
+													wcpsDataX.next = nextX;
 
-												setnavsWrap(navsWrapX)
-												setprev(prevX)
-												setnext(nextX)
-												setwcpsData(wcpsDataX)
-											}}>{preset.label}</div>
-										)
-
+													setnavsWrap(navsWrapX);
+													setprev(prevX);
+													setnext(nextX);
+													setwcpsData(wcpsDataX);
+												}}>
+												{preset.label}
+											</div>
+										);
 									})}
 
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Navs Wrap Class", "woocommerce-products-slider")}
+										</label>
+										<PGinputText
+											value={navsWrap.options.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...navsWrap,
+													options: {
+														...navsWrap.options,
+														class: newVal.target.value,
+													},
+												};
+												setnavsWrap(optionsX);
+											}}
+										/>
+									</div>
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__(
+												"Previous Button Class",
+												"woocommerce-products-slider"
+											)}
+										</label>
+										<PGinputText
+											value={prev.options.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...prev,
+													options: {
+														...prev.options,
+														class: newVal.target.value,
+													},
+												};
+												setprev(optionsX);
+											}}
+										/>
+									</div>
+
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Next Button Class", "woocommerce-products-slider")}
+										</label>
+										<PGinputText
+											value={next.options.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...next,
+													options: {
+														...next.options,
+														class: newVal.target.value,
+													},
+												};
+												setnext(optionsX);
+											}}
+										/>
+									</div>
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Previous Icon Class", "woocommerce-products-slider")}
+										</label>
+										<PGinputText
+											value={prevIcon.options.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...prevIcon,
+													options: {
+														...prevIcon.options,
+														class: newVal.target.value,
+													},
+												};
+												setprevIcon(optionsX);
+											}}
+										/>
+									</div>
+									<PanelRow>
+										<label htmlFor="" className="font-medium text-slate-900 ">
+											{__("Prev Icon", "post-grid")}
+										</label>
+										<PGIconPicker
+											library={prevIcon.options.library}
+											srcType={prevIcon.options.srcType}
+											iconSrc={prevIcon.options.iconSrc}
+											onChange={(arg) => {
+												var prevIconX = { ...prevIcon };
+
+												var optionsX = {
+													...prevIconX.options,
+													srcType: arg.srcType,
+													library: arg.library,
+													iconSrc: arg.iconSrc,
+												};
+
+												prevIconX.options = optionsX;
+												setprevIcon(prevIconX);
+											}}
+										/>
+									</PanelRow>
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Next Icon Class", "woocommerce-products-slider")}
+										</label>
+										<PGinputText
+											value={nextIcon.options.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...nextIcon,
+													options: {
+														...nextIcon.options,
+														class: newVal.target.value,
+													},
+												};
+												setnextIcon(optionsX);
+											}}
+										/>
+									</div>
+									<PanelRow>
+										<label htmlFor="" className="font-medium text-slate-900 ">
+											{__("Next Icon", "post-grid")}
+										</label>
+										<PGIconPicker
+											library={nextIcon.options.library}
+											srcType={nextIcon.options.srcType}
+											iconSrc={nextIcon.options.iconSrc}
+											onChange={(arg) => {
+												var nextIconX = { ...nextIcon };
+
+												var optionsX = {
+													...nextIconX.options,
+													srcType: arg.srcType,
+													library: arg.library,
+													iconSrc: arg.iconSrc,
+												};
+
+												nextIconX.options = optionsX;
+												setnextIcon(nextIconX);
+											}}
+										/>
+									</PanelRow>
 								</PGtab>
 								<PGtab name="custom">
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Navs Wrap"
 										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={navsWrap}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, navsWrap, setnavsWrap)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, navsWrap, setnavsWrap)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, navsWrap, setnavsWrap)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
+										<PGStyles
+											obj={navsWrap}
+											onChange={(sudoScource, newVal, attr) =>
+												onChangeStyle(
+													sudoScource,
+													newVal,
+													attr,
+													navsWrap,
+													setnavsWrap
+												)
+											}
+											onAdd={(sudoScource, key) =>
+												onAddStyle(sudoScource, key, navsWrap, setnavsWrap)
+											}
+											onRemove={(sudoScource, key) =>
+												onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap)
+											}
+											onReset={(sudoSources) =>
+												onResetStyle(sudoSources, navsWrap, setnavsWrap)
+											}
+										/>
 									</PanelBody>
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Prev Button"
 										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={prev}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, prev, setprev)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, prev, setprev)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, prev, setprev)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, prev, setprev)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
+										<PGStyles
+											obj={prev}
+											onChange={(sudoScource, newVal, attr) =>
+												onChangeStyle(sudoScource, newVal, attr, prev, setprev)
+											}
+											onAdd={(sudoScource, key) =>
+												onAddStyle(sudoScource, key, prev, setprev)
+											}
+											onRemove={(sudoScource, key) =>
+												onRemoveStyle(sudoScource, key, prev, setprev)
+											}
+											onReset={(sudoSources) =>
+												onResetStyle(sudoSources, prev, setprev)
+											}
+										/>
 									</PanelBody>
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Next Button"
 										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={next}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, next, setnext)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, next, setnext)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, next, setnext)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, next, setnext)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
+										<PGStyles
+											obj={next}
+											onChange={(sudoScource, newVal, attr) =>
+												onChangeStyle(sudoScource, newVal, attr, next, setnext)
+											}
+											onAdd={(sudoScource, key) =>
+												onAddStyle(sudoScource, key, next, setnext)
+											}
+											onRemove={(sudoScource, key) =>
+												onRemoveStyle(sudoScource, key, next, setnext)
+											}
+											onReset={(sudoSources) =>
+												onResetStyle(sudoSources, next, setnext)
+											}
+										/>
 									</PanelBody>
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Prev Icon"
 										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={prevIcon}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															prevIcon,
-															setprevIcon
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, prevIcon, setprevIcon)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, prevIcon, setprevIcon)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, prevIcon, setprevIcon)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
+										<PGStyles
+											obj={prevIcon}
+											onChange={(sudoScource, newVal, attr) =>
+												onChangeStyle(
+													sudoScource,
+													newVal,
+													attr,
+													prevIcon,
+													setprevIcon
+												)
+											}
+											onAdd={(sudoScource, key) =>
+												onAddStyle(sudoScource, key, prevIcon, setprevIcon)
+											}
+											onRemove={(sudoScource, key) =>
+												onRemoveStyle(sudoScource, key, prevIcon, setprevIcon)
+											}
+											onReset={(sudoSources) =>
+												onResetStyle(sudoSources, prevIcon, setprevIcon)
+											}
+										/>
 									</PanelBody>
 									<PanelBody
 										className="font-medium text-slate-900 "
 										title="Next Icon"
 										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={nextIcon}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															nextIcon,
-															setnextIcon
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, nextIcon, setnextIcon)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, nextIcon, setnextIcon)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, nextIcon, setnextIcon)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
+										<PGStyles
+											obj={nextIcon}
+											onChange={(sudoScource, newVal, attr) =>
+												onChangeStyle(
+													sudoScource,
+													newVal,
+													attr,
+													nextIcon,
+													setnextIcon
+												)
+											}
+											onAdd={(sudoScource, key) =>
+												onAddStyle(sudoScource, key, nextIcon, setnextIcon)
+											}
+											onRemove={(sudoScource, key) =>
+												onRemoveStyle(sudoScource, key, nextIcon, setnextIcon)
+											}
+											onReset={(sudoSources) =>
+												onResetStyle(sudoSources, nextIcon, setnextIcon)
+											}
+										/>
 									</PanelBody>
-
 								</PGtab>
 							</PGtabs>
 						</div>
@@ -2268,7 +2479,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "presets",
@@ -2285,31 +2496,99 @@ function Html(props) {
 								]}>
 								<PGtab name="presets">
 									{paginationPresets.map((preset) => {
-
 										return (
-											<div onClick={ev => {
-												var wcpsDataX = { ...wcpsData };
-												var paginationWrapX = { ...paginationWrap, ...preset.prams.paginationWrap }
-												var paginationX = { ...pagination, ...preset.prams.pagination }
-												var paginationActiveX = { ...paginationActive, ...preset.prams.paginationActive }
+											<div
+												onClick={(ev) => {
+													var wcpsDataX = { ...wcpsData };
+													var paginationWrapX = {
+														...paginationWrap,
+														...preset.prams.paginationWrap,
+													};
+													var paginationX = {
+														...pagination,
+														...preset.prams.pagination,
+													};
+													var paginationActiveX = {
+														...paginationActive,
+														...preset.prams.paginationActive,
+													};
 
-												wcpsDataX.paginationWrap = paginationWrapX;
-												wcpsDataX.pagination = paginationX;
-												wcpsDataX.paginationActive = paginationActiveX;
+													wcpsDataX.paginationWrap = paginationWrapX;
+													wcpsDataX.pagination = paginationX;
+													wcpsDataX.paginationActive = paginationActiveX;
 
-												setpaginationWrap(paginationWrapX)
-												setpagination(paginationX)
-												setpaginationActive(paginationActiveX)
-												setwcpsData(wcpsDataX)
-											}}>{preset.label}</div>
-										)
-
+													setpaginationWrap(paginationWrapX);
+													setpagination(paginationX);
+													setpaginationActive(paginationActiveX);
+													setwcpsData(wcpsDataX);
+												}}>
+												{preset.label}
+											</div>
+										);
 									})}
-
-
-
-
-
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__(
+												"Pagination Wrap Class",
+												"woocommerce-products-slider"
+											)}
+										</label>
+										<PGinputText
+											value={paginationWrap.options.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...paginationWrap,
+													options: {
+														...paginationWrap.options,
+														class: newVal.target.value,
+													},
+												};
+												setpaginationWrap(optionsX);
+											}}
+										/>
+									</div>
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Pagination Class", "woocommerce-products-slider")}
+										</label>
+										<PGinputText
+											value={pagination.options.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...pagination,
+													options: {
+														...pagination.options,
+														class: newVal.target.value,
+													},
+												};
+												setpagination(optionsX);
+											}}
+										/>
+									</div>
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__(
+												"Pagination Active Class",
+												"woocommerce-products-slider"
+											)}
+										</label>
+										<PGinputText
+											value={paginationActive.options.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...paginationActive,
+													options: {
+														...paginationActive.options,
+														class: newVal.target.value,
+													},
+												};
+												setpaginationActive(optionsX);
+											}}
+										/>
+									</div>
 								</PGtab>
 								<PGtab name="custom">
 									<PanelBody
@@ -2344,7 +2623,11 @@ function Html(props) {
 												)
 											}
 											onReset={(sudoSources) =>
-												onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
+												onResetStyle(
+													sudoSources,
+													paginationWrap,
+													setpaginationWrap
+												)
 											}
 										/>
 									</PanelBody>
@@ -2364,16 +2647,29 @@ function Html(props) {
 												)
 											}
 											onAdd={(sudoScource, key) =>
-												onAddStyle(sudoScource, key, paginationActive, setpaginationActive)
+												onAddStyle(
+													sudoScource,
+													key,
+													paginationActive,
+													setpaginationActive
+												)
 											}
 											onRemove={(sudoScource, key) =>
-												onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive)
+												onRemoveStyle(
+													sudoScource,
+													key,
+													paginationActive,
+													setpaginationActive
+												)
 											}
 											onReset={(sudoSources) =>
-												onResetStyle(sudoSources, paginationActive, setpaginationActive)
+												onResetStyle(
+													sudoSources,
+													paginationActive,
+													setpaginationActive
+												)
 											}
 										/>
-
 									</PanelBody>
 									<PanelBody
 										className="font-medium text-slate-900 "
@@ -2394,13 +2690,17 @@ function Html(props) {
 												onAddStyle(sudoScource, key, pagination, setpagination)
 											}
 											onRemove={(sudoScource, key) =>
-												onRemoveStyle(sudoScource, key, pagination, setpagination)
+												onRemoveStyle(
+													sudoScource,
+													key,
+													pagination,
+													setpagination
+												)
 											}
 											onReset={(sudoSources) =>
 												onResetStyle(sudoSources, pagination, setpagination)
 											}
 										/>
-
 									</PanelBody>
 								</PGtab>
 							</PGtabs>
