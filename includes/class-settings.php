@@ -18,9 +18,13 @@ class wcps_class_settings
 
         add_submenu_page('edit.php?post_type=wcps', __('Settings', 'woocommerce-products-slider'), __('Settings', 'woocommerce-products-slider'), 'manage_options', 'settings', array($this, 'settings'));
         add_submenu_page('edit.php?post_type=wcps', __('Import layouts', 'woocommerce-products-slider'), __('Import layouts', 'woocommerce-products-slider'), 'manage_options', 'import_layouts', array($this, 'import_layouts'));
-        add_submenu_page('edit.php?post_type=wcps', __('Dashboard', 'wcps'), __('Dashboard', 'wcps'), 'manage_options', 'wcps-dashboard', array($this, 'dashboard'));
+        // add_submenu_page('edit.php?post_type=wcps', __('Dashboard', 'wcps'), __('Dashboard', 'wcps'), 'manage_options', 'wcps-dashboard', array($this, 'dashboard'));
+        add_submenu_page('edit.php?post_type=wcps', __('wcps Builder', 'wcps'), __('Builder', 'wcps'), 'manage_options', 'wcps-builder', array($this, 'builder'));
     }
-
+    public function builder()
+    {
+        include('menu/builder.php');
+    }
     public function settings()
     {
 

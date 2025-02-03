@@ -33,7 +33,7 @@ function Html(props) {
 						{/* <div className=" ">{(args[val] != undefined) ? args[val].label : 'Select...'}</div> */}
 						<div className=" ">
 							{args[align] == undefined
-								? __("Select...", "post-grid")
+								? __("Select...", "woocommerce-products-slider")
 								: args[align].label}
 						</div>
 					</Button>
@@ -57,7 +57,7 @@ function Html(props) {
 											props.onChange(x.value, "textOverflow");
 										}
 									}}>
-									{!x.value && <div>{__("Reset", "post-grid")}</div>}
+									{!x.value && <div>{__("Reset", "woocommerce-products-slider")}</div>}
 									{x.value && <>{x.label}</>}
 								</div>
 							);
@@ -68,8 +68,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "woocommerce-products-slider")
+						: __("Important?", "woocommerce-products-slider")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

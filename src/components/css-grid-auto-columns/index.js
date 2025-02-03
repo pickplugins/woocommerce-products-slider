@@ -84,7 +84,7 @@ function Html(props) {
 							<div className=" ">
 								{valZ
 									? unitArgs[widthUnit].label
-									: __("Select...", "post-grid")}
+									: __("Select...", "woocommerce-products-slider")}
 							</div>
 						</Button>
 					)}
@@ -131,8 +131,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "woocommerce-products-slider")
+						: __("Important?", "woocommerce-products-slider")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

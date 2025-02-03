@@ -68,16 +68,16 @@ class PGDatePicker extends Component {
 				.getDate()
 				.toString()
 				.padStart(2, "0")}/${(inputDate.getMonth() + 1)
-				.toString()
-				.padStart(2, "0")}/${inputDate.getFullYear()} - ${inputDate
-				.getHours()
-				.toString()
-				.padStart(2, "0")}:${inputDate
-				.getMinutes()
-				.toString()
-				.padStart(2, "0")} ${inputDate.getHours() >= 12 ? "PM" : "AM"}`;
+					.toString()
+					.padStart(2, "0")}/${inputDate.getFullYear()} - ${inputDate
+						.getHours()
+						.toString()
+						.padStart(2, "0")}:${inputDate
+							.getMinutes()
+							.toString()
+							.padStart(2, "0")} ${inputDate.getHours() >= 12 ? "PM" : "AM"}`;
 
-			console.log(formattedDate);
+
 			return formattedDate;
 		}
 
@@ -91,7 +91,7 @@ class PGDatePicker extends Component {
 						{/* <Icon icon={calendar} /> */}
 					</span>
 					<span className="p-2 text-base flex justify-start items-center text-gray-800">
-						{date.length > 0 ? convertedDate() : label}
+						{date && date.length > 0 ? convertedDate() : label}
 					</span>
 				</div>
 				<WarningBanner

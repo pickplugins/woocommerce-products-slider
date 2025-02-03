@@ -39,7 +39,7 @@ var myStore = wp.data.select("postgrid-shop");
 
 const PGPostTypes = (props) => {
 	const [postTypes, setpostTypes] = useState(props.args);
-	
+
 	useEffect(() => {
 		props.onChange(postTypes);
 	}, [postTypes]);
@@ -75,7 +75,6 @@ const PGPostTypes = (props) => {
 				// className="bg-blue-500 my-3 cursor-pointer rounded-sm inline-block text-white px-3 py-1"
 				className="pg-bg-color inline-block gap-2 justify-center my-4 cursor-pointer py-2 px-8 capitalize  text-base font-semibold text-white rounded  focus:outline-none focus:bg-gray-700"
 				onClick={(ev) => {
-					console.log(postTypes);
 					var sdsd = postTypes.concat({
 						labels: {
 							name: "",
@@ -121,7 +120,6 @@ const PGPostTypes = (props) => {
 						show_in_menu: "",
 					});
 
-					console.log(sdsd);
 
 					setpostTypes(sdsd);
 				}}>
@@ -133,7 +131,6 @@ const PGPostTypes = (props) => {
 					//var itemArgs = item[1];
 
 					var options = item;
-					console.log(options);
 					return (
 						<PanelBody
 							title={
@@ -158,8 +155,8 @@ const PGPostTypes = (props) => {
 											duplicate(index)
 
 										}}>
-											<Icon fill={"#fff"} icon={copy} />
-										
+										<Icon fill={"#fff"} icon={copy} />
+
 									</span>
 									<span className="px-3">{options.labels.name}</span>
 								</>
@@ -182,7 +179,7 @@ const PGPostTypes = (props) => {
 								}}
 							/> */}
 							<div className="mt-8 grid grid-cols-4 gap-5 gap-y-2  p-3 border border-solid border-gray-900/50 relative after:absolute after:content-['Labels'] after:-top-3 after:left-4 after:h-6 after:w-max after:flex after:items-center after:bg-white after:px-2 rounded-md after:z-10 ">
-							<div className="flex flex-col bg-gray-500/10 p-3 ">
+								<div className="flex flex-col bg-gray-500/10 p-3 ">
 									<label for="">Slug</label>
 									<InputControl
 										className="my-3"
@@ -196,18 +193,18 @@ const PGPostTypes = (props) => {
 											postTypes[index].labels.name = value;
 											postTypes[index].labels.singular_name = value;
 											postTypes[index].labels.menu_name = value;
-											postTypes[index].labels.all_items = "All "+value;;
-											postTypes[index].labels.add_new = "Add "+value;
-											postTypes[index].labels.add_new_item = "Add "+value;
-											postTypes[index].labels.edit = "Edit "+value;
-											postTypes[index].labels.edit_item = "Edit "+value;
-											postTypes[index].labels.new_item = "New "+value;
-											postTypes[index].labels.view = "View "+value;
-											postTypes[index].labels.view_item = "View "+value;
-											postTypes[index].labels.search_items = "Search "+value;
-											postTypes[index].labels.not_found = value+ " Not found";
+											postTypes[index].labels.all_items = "All " + value;;
+											postTypes[index].labels.add_new = "Add " + value;
+											postTypes[index].labels.add_new_item = "Add " + value;
+											postTypes[index].labels.edit = "Edit " + value;
+											postTypes[index].labels.edit_item = "Edit " + value;
+											postTypes[index].labels.new_item = "New " + value;
+											postTypes[index].labels.view = "View " + value;
+											postTypes[index].labels.view_item = "View " + value;
+											postTypes[index].labels.search_items = "Search " + value;
+											postTypes[index].labels.not_found = value + " Not found";
 											postTypes[index].labels.not_found_in_trash = value + " Not found in trash";
-											postTypes[index].labels.parent = "Parent "+value;
+											postTypes[index].labels.parent = "Parent " + value;
 
 
 
@@ -220,8 +217,8 @@ const PGPostTypes = (props) => {
 										}}
 									/>
 								</div>
-								
-								
+
+
 								<div className="flex justify-between flex-col bg-gray-500/10 p-3 ">
 									<label for="">Name</label>
 
@@ -542,7 +539,7 @@ const PGPostTypes = (props) => {
 							</div> */}
 
 							<div className="grid grid-cols-4 gap-6 gap-y-2 p-3 mt-2">
-								
+
 								<div className="flex flex-col bg-gray-500/10 p-3 ">
 									<label for="">Capability Type</label>
 									<InputControl
@@ -740,7 +737,7 @@ const PGPostTypes = (props) => {
 										className="my-3"
 										label=""
 										help=""
-										placeholder="post-grid"
+										placeholder="woocommerce-products-slider"
 										value={options.show_in_menu}
 										onChange={(value) => {
 											postTypes[index].show_in_menu = value;
@@ -749,23 +746,23 @@ const PGPostTypes = (props) => {
 									/>
 								</div>
 								<div className="flex  justify-start flex-col pg-post-type bg-gray-500/10 p-3 ">
-										<label for="">Menu Icon</label>
-										<textarea
-											className="my-3"
-											label=""
-											help=""
-											placeholder="Set Menu Icon "
-											value={options.menu_icon}
-											onChange={(event) => {
-												const { value } = event.target;
-												const updatedPostTypes = [...postTypes];
-												updatedPostTypes[index].menu_icon = value;
-												props.onChange(updatedPostTypes);
-											}}
-										/>
-									</div>
+									<label for="">Menu Icon</label>
+									<textarea
+										className="my-3"
+										label=""
+										help=""
+										placeholder="Set Menu Icon "
+										value={options.menu_icon}
+										onChange={(event) => {
+											const { value } = event.target;
+											const updatedPostTypes = [...postTypes];
+											updatedPostTypes[index].menu_icon = value;
+											props.onChange(updatedPostTypes);
+										}}
+									/>
+								</div>
 								<div className="grid col-span-2  gap-6">
-									
+
 									<div className=" flex  justify-between flex-col bg-gray-500/10 p-3  ">
 										<label for="">Supports</label>
 

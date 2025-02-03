@@ -10,11 +10,11 @@ function Html(props) {
 	if (!props.warn) {
 		return null;
 	}
-	var content =
-		props.val == null || props.val == undefined
-			? ""
-			: props.val.replaceAll('"', "");
+	var content = props.val == null || props.val == undefined ? " " : props.val;
+	content = props.val.replaceAll('"', "");
+	content = content.replaceAll("u2018", "'");
 	content = content.replaceAll("u0022", "");
+
 	return (
 		<div className="mt-4">
 			<InputControl
@@ -22,10 +22,22 @@ function Html(props) {
 				type="text"
 				onChange={(newVal) => {
 					if (newVal.includes("attr")) {
+
+						newVal = newVal.replaceAll('"', "u0022");
+						newVal = newVal.replaceAll('"', "u2018");
+
 						props.onChange(newVal, "content");
 					}
 					//setwidthVal(newVal);
-					else props.onChange('"' + newVal + '"', "content");
+					else {
+						newVal = newVal.replaceAll('"', "u0022");
+						newVal = newVal.replaceAll("'", "u2018");
+						newVal = 'u0022' + newVal + 'u0022';
+
+						console.log(newVal);
+
+						props.onChange(newVal, "content");
+					}
 				}}
 			/>
 		</div>

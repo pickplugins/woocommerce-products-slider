@@ -8,6 +8,7 @@ import {
 	SelectControl,
 	Popover,
 } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
 import {
 	createElement,
 	useCallback,
@@ -18,11 +19,12 @@ import {
 } from "@wordpress/element";
 
 import { __experimentalInputControl as InputControl } from "@wordpress/components";
-import { link, linkOff } from "@wordpress/icons";
+import { Icon, link, linkOff, close } from "@wordpress/icons";
 
 import fontawesomeClasses from "./fontawesome-classes";
 import iconfontClasses from "./iconfont-classes";
 import bootstrapIcons from "./bootstrap-icons";
+import PGDropdown from "../dropdown";
 
 function Html(props) {
 	if (!props.warn) {
@@ -73,20 +75,20 @@ function Html(props) {
 				{iconSrc?.length == 0 && (
 					<Button
 						icon={link}
-						// className="w-8 h-8 text-lg border cursor-pointer hover:bg-gray-200 border-gray-500 text-center"
+
 					></Button>
 				)}
 				{iconSrc?.length == undefined && (
 					<Button
 						icon={link}
-						// className="w-8 h-8 text-lg border cursor-pointer hover:bg-gray-200 border-gray-500 text-center"
+
 					></Button>
 				)}
 
 				{iconSrc?.length > 0 && (
 					<div
 						className="w-8  text-lg  text-center"
-						// className="w-8 h-8 text-lg !border cursor-pointer hover:bg-gray-200 border-gray-500 text-center"
+					// className="w-8 h-8 text-lg !border cursor-pointer hover:bg-gray-200 border-gray-500 text-center"
 					>
 						<span className={` inline-block ${iconSrc}`}></span>
 					</div>
@@ -109,10 +111,11 @@ function Html(props) {
 				<Popover position="bottom right">
 					<div className="w-72 p-2 pg-setting-input-text  custom-scrollbar relative ">
 						<div className="w-[calc(100%_-_8px)] fixed top-0 left-0  p-1 bg-white ">
-							<PanelRow>
-								<SelectControl
-									label=""
-									value={iconData.library}
+							<div className="flex gap-1 items-center">
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={__("Choose", "woocommerce-products-slider")}
 									options={[
 										{ label: "Choose Library", value: "" },
 										{ label: "Font Awesome", value: "fontAwesome" },
@@ -121,14 +124,22 @@ function Html(props) {
 										// { label: 'Material', value: 'material' },
 									]}
 									onChange={(newVal) => {
-										setIconData({ ...iconData, library: newVal });
+										setIconData({ ...iconData, library: newVal.value });
 										props.onChange({
 											iconSrc: iconSrc,
 											library: newVal,
 											srcType: srcType,
 										});
 									}}
-								/>
+									values=""></PGDropdown>
+
+								<span className="bg-red-500 px-1 py-1" onClick={(ev) => {
+									props.onChange({
+										iconSrc: "",
+										library: "",
+										srcType: "",
+									});
+								}}><Icon icon={close} /></span>
 
 								<InputControl
 									placeholder="Search for icons"
@@ -149,7 +160,7 @@ function Html(props) {
 										setFilteredIcons(icons);
 									}}
 								/>
-							</PanelRow>
+							</div>
 						</div>
 						<div className="flex flex-wrap justify-around mt-[28px] ">
 							{iconData.keyword.length == 0 &&

@@ -218,7 +218,7 @@ function Html(props) {
 					position="bottom right"
 					variant="secondary"
 					options={transitionProperties}
-					buttonTitle={__("Choose","post-grid")}
+					buttonTitle={__("Choose", "woocommerce-products-slider")}
 					onChange={(option, index) => {
 						valArgs.push({
 							property: option.value,
@@ -254,7 +254,7 @@ function Html(props) {
 							}
 							initialOpen={false}>
 							<PanelRow>
-								<label htmlFor="">{__("Duration","post-grid")}</label>
+								<label htmlFor="">{__("Duration", "woocommerce-products-slider")}</label>
 								<InputControl
 									value={arg.duration.slice(0, -1)}
 									type="number"
@@ -291,7 +291,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">{__("Timing Function","post-grid")}</label>
+								<label htmlFor="">{__("Timing Function", "woocommerce-products-slider")}</label>
 								<PGDropdown
 									position="bottom right"
 									variant="secondary"
@@ -330,7 +330,7 @@ function Html(props) {
 									}}></PGDropdown>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">{__("Delay","post-grid")}</label>
+								<label htmlFor="">{__("Delay", "woocommerce-products-slider")}</label>
 								<InputControl
 									value={arg.delay.slice(0, -1)}
 									type="number"

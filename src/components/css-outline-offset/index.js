@@ -49,7 +49,7 @@ function Html(props) {
               onClick={onToggle}
               aria-expanded={isOpen}
             >
-              <div className=" ">{props.val ? unitArgs[widthUnit].label : __('Select...',"post-grid")}</div>
+              <div className=" ">{props.val ? unitArgs[widthUnit].label : __('Select...', "woocommerce-products-slider")}</div>
             </Button>
           )}
           renderContent={() => <div className='w-32'>

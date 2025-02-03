@@ -48,7 +48,7 @@ function Html(props) {
 	valZ =
 		typeof valZ == "object"
 			? (valZ.val == undefined ? "px" : valZ.val) +
-			  (valZ.unit == undefined ? "px" : valZ.unit)
+			(valZ.unit == undefined ? "px" : valZ.unit)
 			: valZ;
 	var widthValX =
 		valZ == undefined || valZ.match(/[+-]?([0-9]*[.])?[0-9]+/g) == null
@@ -99,7 +99,7 @@ function Html(props) {
 							<div className=" ">
 								{valZ
 									? unitArgs[widthUnit].label
-									: __("Select...", "post-grid")}
+									: __("Select...", "woocommerce-products-slider")}
 							</div>
 						</Button>
 					)}
@@ -143,8 +143,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "woocommerce-products-slider")
+						: __("Important?", "woocommerce-products-slider")
 				}
 				checked={isImportant}
 				onChange={(arg) => {
