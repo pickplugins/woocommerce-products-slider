@@ -4,7 +4,7 @@ if (!defined('ABSPATH'))
 
 
 
-class WCPSRest
+class WoocommerceProductsSliderRest
 {
 	function __construct()
 	{
@@ -17,15 +17,82 @@ class WCPSRest
 
 
 
+		register_rest_route(
+			'wcps/v2',
+			'/delete_post',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'delete_post'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'wcps/v2',
+			'/duplicate_post',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'duplicate_post'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'wcps/v2',
+			'/post_type_objects',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_post_type_objects'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
+		register_rest_route(
+			'wcps/v2',
+			'/get_site_details',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_site_details'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+
+		register_rest_route(
+			'wcps/v2',
+			'/send_mail',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'send_mail'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'wcps/v2',
 			'/update_options',
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'update_options'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'wcps/v2',
+			'/check_license',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'check_license'),
 				'permission_callback' => function () {
 					return current_user_can('manage_options');
 				},
@@ -37,7 +104,7 @@ class WCPSRest
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'wcps/v2',
 			'/get_options',
 			array(
 				'methods' => 'POST',
@@ -52,7 +119,7 @@ class WCPSRest
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'wcps/v2',
 			'/get_posts',
 			array(
 				'methods' => 'POST',
@@ -61,12 +128,15 @@ class WCPSRest
 
 			)
 		);
+
+
+
 		register_rest_route(
-			'accordions/v2',
-			'/accordions_list',
+			'wcps/v2',
+			'/post_list',
 			array(
 				'methods' => 'POST',
-				'callback' => array($this, 'accordions_list'),
+				'callback' => array($this, 'post_list'),
 				'permission_callback' => function () {
 					return current_user_can('manage_options');
 				},
@@ -74,11 +144,11 @@ class WCPSRest
 			)
 		);
 		register_rest_route(
-			'accordions/v2',
-			'/accordions_data',
+			'wcps/v2',
+			'/wcps_data',
 			array(
 				'methods' => 'POST',
-				'callback' => array($this, 'accordions_data'),
+				'callback' => array($this, 'wcps_data'),
 				'permission_callback' => function () {
 					return current_user_can('manage_options');
 				},
@@ -86,7 +156,7 @@ class WCPSRest
 			)
 		);
 		register_rest_route(
-			'accordions/v2',
+			'wcps/v2',
 			'/update_post_data',
 			array(
 				'methods' => 'POST',
@@ -97,14 +167,45 @@ class WCPSRest
 
 			)
 		);
+		register_rest_route(
+			'wcps/v2',
+			'/create_post',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'create_post'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'wcps/v2',
+			'/update_post_title',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'update_post_title'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
-
-
+		register_rest_route(
+			'wcps/v2',
+			'/user_roles_list',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'user_roles_list'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'wcps/v2',
 			'/get_post_data',
 			array(
 				'methods' => 'POST',
@@ -121,6 +222,255 @@ class WCPSRest
 
 
 	/**
+	 * Return terms for taxonomy.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $tax_data The tax data.
+	 */
+	public function get_post_type_objects($request)
+	{
+		global $wp_post_types;
+		$postTypes = [];
+		$post_types_all = get_post_types('', 'names');
+		foreach ($post_types_all as $post_type) {
+			$obj = $wp_post_types[$post_type];
+			$postTypes[] = $post_type;
+		}
+		$post_types =  (!empty($request['postTypes'])) ? $request['postTypes'] : $postTypes;
+		$search = isset($request['search']) ? $request['search'] : '';
+		$taxonomies = get_object_taxonomies($post_types);
+		$terms = [];
+		$taxonomiesArr = [];
+		foreach ($taxonomies as $taxonomy) {
+			$taxDetails = get_taxonomy($taxonomy);
+			$taxonomiesArr[] = ['label' => $taxDetails->label, 'id' => $taxonomy];
+		}
+		die(wp_json_encode($taxonomiesArr));
+	}
+
+
+
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function duplicate_post($post_data)
+	{
+
+		$postId = isset($post_data['postId']) ? sanitize_text_field($post_data['postId']) : '';
+		$response = new stdClass();
+
+
+		if (empty($postId)) {
+			$response->error = true;
+			$response->errorMessage = __("Post ID should not empty");
+			die(wp_json_encode($response));
+		}
+
+		$post = get_post($postId);
+
+		if ($post->post_type != 'wcps') {
+			$response->error = true;
+			$response->errorMessage = __("Post type is not wcps");
+			die(wp_json_encode($response));
+		}
+
+		$current_user = wp_get_current_user();
+		$new_post_author = $current_user->ID;
+
+
+		if (isset($post) && $post != null) {
+
+			/*
+		 * new post data array
+		 */
+			$args = array(
+				'comment_status' => $post->comment_status,
+				'ping_status'    => $post->ping_status,
+				'post_author'    => $new_post_author,
+				'post_content'   => $post->post_content,
+				'post_excerpt'   => $post->post_excerpt,
+				'post_name'      => $post->post_name,
+				'post_parent'    => $post->post_parent,
+				'post_password'  => $post->post_password,
+				'post_status'    => 'publish',
+				'post_title'     => $post->post_title . ' - Copy of #' . $postId,
+				'post_type'      => $post->post_type,
+				'to_ping'        => $post->to_ping,
+				'menu_order'     => $post->menu_order
+			);
+
+			/*
+		 * insert the post by wp_insert_post() function
+		 */
+			$new_post_id = wp_insert_post($args);
+
+			if ($new_post_id) {
+				$response->post_title = $post->post_title . ' - Copy of #' . $postId;
+				$response->success = true;
+				$response->successMessage = __("Post created");
+			}
+			$response->id = $new_post_id;
+		} else {
+			$response->error = true;
+			$response->errorMessage = __("Post creation failed.");
+		}
+
+
+
+
+
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function delete_post($post_data)
+	{
+
+		$postId = isset($post_data['postId']) ? sanitize_text_field($post_data['postId']) : '';
+		$response = new stdClass();
+
+
+		if (empty($postId)) {
+			$response->error = true;
+			$response->errorMessage = __("Post ID should not empty");
+			die(wp_json_encode($response));
+		}
+
+		$post = get_post($postId);
+
+		if ($post->post_type != 'wcps') {
+			$response->error = true;
+			$response->errorMessage = __("Post type is not wcps");
+			die(wp_json_encode($response));
+		}
+
+
+		if (isset($post) && $post != null) {
+
+			$new_post_id = wp_trash_post($postId, false);
+
+			if ($new_post_id) {
+				$response->success = true;
+				$response->successMessage = __("Post deleted");
+			}
+		} else {
+			$response->error = true;
+			$response->errorMessage = __("Post deletion failed.");
+		}
+
+
+
+
+
+		die(wp_json_encode($response));
+	}
+
+
+	/**
+	 * Return license info.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $tax_data The tax data.
+	 */
+	public function get_site_details($request)
+	{
+		$response = [];
+		if (!current_user_can('manage_options')) {
+			die(wp_json_encode($response));
+		}
+		$admin_email = get_option('admin_email');
+		$siteurl = get_option('siteurl');
+		$siteAdminurl = admin_url();
+		$adminData = get_user_by('email', $admin_email);
+		$response['email'] = $admin_email;
+		$response['name'] = isset($adminData->display_name) ? $adminData->display_name : '';
+		$response['siteurl'] = $siteurl;
+		$response['siteAdminurl'] = $siteAdminurl;
+		$post_grid_info = get_option('post_grid_info');
+		$subscribe_status = isset($post_grid_info['subscribe_status']) ? $post_grid_info['subscribe_status'] : 'not_subscribed'; /*subscribed, not_interested, not_subscribed*/
+		$response['subscribe_status'] = $subscribe_status;
+		//delete_option('post_grid_info');
+		die(wp_json_encode($response));
+	}
+
+
+
+
+
+
+
+	/**
+	 * Return send_mail.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $tax_data The tax data.
+	 */
+	public function send_mail($request)
+	{
+		$response = [];
+		if (!current_user_can('manage_options')) {
+			die(wp_json_encode($response));
+		}
+		$subject = isset($request['subject']) ? $request['subject'] : '';
+		$email_body = isset($request['body']) ? $request['body'] : '';
+		$email_to = isset($request['email_to']) ? $request['email_to'] : '';
+		$email_from = isset($request['email_from']) ? $request['email_from'] : '';
+		$email_from_name = isset($request['email_from_name']) ? $request['email_from_name'] : '';
+		$reply_to = isset($request['reply_to']) ? $request['reply_to'] : '';
+		$reply_to_name = isset($request['reply_to_name']) ? $request['reply_to_name'] : '';
+		$attachments = isset($email_data['attachments']) ? $email_data['attachments'] : '';
+		$headers = array();
+		$headers[] = "From: " . $email_from_name . " <" . $email_from . ">";
+		if (!empty($reply_to)) {
+			$headers[] = "Reply-To: " . $reply_to_name . " <" . $reply_to . ">";
+		}
+		$headers[] = "MIME-Version: 1.0";
+		$headers[] = "Content-Type: text/html; charset=UTF-8";
+		$status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
+		if ($status) {
+			$response['mail_sent'] = true;
+		} else {
+			$response['mail_sent'] = false;
+		}
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return user_roles_list
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function user_roles_list($request)
+	{
+		$response = [];
+		$formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
+		global $wp_roles;
+		$roles = [];
+		if ($wp_roles && property_exists($wp_roles, 'roles')) {
+			$rolesAll = isset($wp_roles->roles) ? $wp_roles->roles : [];
+			foreach ($rolesAll as $roleIndex => $role) {
+				$roles[$roleIndex] = $role['name'];
+			}
+		}
+		$response['roles'] = $roles;
+		die(wp_json_encode($response));
+	}
+
+
+	/**
 	 * Return update_options
 	 *
 	 * @since 1.0.0
@@ -132,18 +482,40 @@ class WCPSRest
 
 
 		$name = isset($request['name']) ? sanitize_text_field($request['name']) : '';
-		$value = isset($request['value']) ? post_grid_recursive_sanitize_arr($request['value']) : '';
+		$value = isset($request['value']) ? wcps_recursive_sanitize_arr($request['value']) : '';
 		$message = "";
 		if (!empty($value)) {
 			$status = update_option($name, $value);
-			$message = __("Options updated", "post-grid");
+			$message = __("Options updated", "wcps");
 		} else {
 			$status = false;
-			$message = __("Value should not empty", "post-grid");
+			$message = __("Value should not empty", "wcps");
 		}
 
 
 		$response['status'] = $status;
+		$response['message'] = $message;
+
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return check_license
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function check_license($request)
+	{
+		$response = [];
+
+
+		$license_key = isset($request['license_key']) ? sanitize_text_field($request['license_key']) : '';
+		$message = "";
+
+
+
+		//$response['status'] = $status;
 		$response['message'] = $message;
 
 		die(wp_json_encode($response));
@@ -367,53 +739,31 @@ class WCPSRest
 	 * @since 1.0.0
 	 * @param WP_REST_Request $post_data Post data.
 	 */
-	public function accordions_data($post_data)
+	public function wcps_data($post_data)
 	{
 
 		$postId = isset($post_data['postId']) ? $post_data['postId'] : '';
 
 		$response = new stdClass();
-
+		if (empty($postId)) {
+			$response->post_id_missing = "";
+			die(wp_json_encode($response));
+		}
 
 		$post = get_post($postId);
 
 
+
+		$post_title = isset($post->post_title) ? $post->post_title : "";
+		$post_content = isset($post->post_content) ? $post->post_content : "";
+
+		$post_content =  json_decode($post_content);
+
 		$response->ID = $post->ID;
-		$response->post_title = $post->post_title;
-		$response->post_content = $post->post_content;
-
-		$taxonomies = get_object_taxonomies(get_post_type($postId));
+		$response->post_title = $post_title;
+		$response->post_content = $post_content;
 
 
-
-		if (!empty($taxonomies))
-			foreach ($taxonomies as $taxonomy) {
-
-				$terms = get_the_terms($postId, $taxonomy);
-
-				$termsData = [];
-
-				if (!empty($terms))
-					foreach ($terms as $index => $term) {
-
-						$termsData[$index]['term_id'] = $term->term_id;
-						$termsData[$index]['name'] = $term->name;
-						$termsData[$index]['slug'] = $term->slug;
-						$termsData[$index]['count'] = $term->count;
-						$termsData[$index]['url'] = get_term_link($term->term_id);
-					}
-
-
-				if (!empty($termsData))
-					$response->$taxonomy = $termsData;
-			}
-
-
-		// $post_id = $post->ID;
-		// $post->post_id = $post->ID;
-		// $post->post_title = $post->post_title;
-
-		//$post->post_content = !empty($post->post_content) ? $post->post_content : null;
 
 
 		die(wp_json_encode($response));
@@ -430,11 +780,16 @@ class WCPSRest
 
 		$postId = isset($post_data['postId']) ? $post_data['postId'] : '';
 		$content = isset($post_data['content']) ? $post_data['content'] : '';
-
 		$response = new stdClass();
 
+		if (empty($postId)) {
+			$response["id_missing"] = __("Post Id should not empty");
+		}
 
+		$content = json_encode($content);
+		$content = wp_kses_post($content); // Sanitizes content for safe HTML output
 
+		error_log($content);
 
 		$my_post = array(
 			'ID'           => $postId,
@@ -442,8 +797,90 @@ class WCPSRest
 		);
 
 		// Update the post into the database
-		wp_update_post($my_post);
+		$updatep_post_id = wp_update_post($my_post);
 
+		if ($updatep_post_id)
+			$response->id = $updatep_post_id;
+
+		die(wp_json_encode($response));
+	}
+
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function create_post($post_data)
+	{
+
+		$postTitle = isset($post_data['postTitle']) ? sanitize_text_field($post_data['postTitle']) : '';
+		$content = isset($post_data['content']) ? wp_kses_post($post_data['content']) : '';
+		$response = new stdClass();
+
+		if (empty($postTitle)) {
+			$response->error = true;
+			$response->errorMessage = __("Post title should not empty");
+			die(wp_json_encode($response));
+		}
+
+
+		$my_post = array(
+			'post_title' => ($postTitle),
+			'post_content' => ($content),
+			'post_type' => "wcps",
+			'post_status' => "publish",
+		);
+
+		// Update the post into the database
+		$updatep_post_id = wp_insert_post($my_post);
+
+		if ($updatep_post_id) {
+			$response->success = true;
+			$response->successMessage = __("Post created");
+		}
+		$response->id = $updatep_post_id;
+
+		die(wp_json_encode($response));
+	}
+
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function update_post_title($post_data)
+	{
+		$postId = isset($post_data['postId']) ? $post_data['postId'] : '';
+
+		$postTitle = isset($post_data['postTitle']) ? sanitize_text_field($post_data['postTitle']) : '';
+		$response = new stdClass();
+
+		if (empty($postTitle)) {
+			$response->error = true;
+			$response->errorMessage = __("Post title should not empty");
+			die(wp_json_encode($response));
+		}
+
+
+		$my_post = array(
+			'ID'           => $postId,
+			'post_title' => ($postTitle),
+		);
+
+		$updatep_post_id = wp_update_post($my_post);
+
+
+		// Update the post into the database
+
+		if ($updatep_post_id) {
+			$response->success = true;
+			$response->successMessage = __("Post created");
+		}
+		$response->id = $updatep_post_id;
 
 		die(wp_json_encode($response));
 	}
@@ -515,7 +952,6 @@ class WCPSRest
 
 
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
-		error_log(serialize($queryArgs));
 		$rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
 		$rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
 
@@ -835,7 +1271,7 @@ class WCPSRest
 	 * @since 1.0.0
 	 * @param WP_REST_Request $post_data Post data.
 	 */
-	public function accordions_list($post_data)
+	public function post_list($post_data)
 	{
 		$query_args = [];
 
@@ -849,8 +1285,8 @@ class WCPSRest
 
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
 
-		$prevText = !empty($post_data['prevText']) ? $post_data['prevText'] : __("Previous", "accordions");
-		$nextText = !empty($post_data['nextText']) ? $post_data['nextText'] : __("Next", "accordions");
+		$prevText = !empty($post_data['prevText']) ? $post_data['prevText'] : __("Previous", "wcps");
+		$nextText = !empty($post_data['nextText']) ? $post_data['nextText'] : __("Next", "wcps");
 		$maxPageNum = !empty($post_data['maxPageNum']) ? $post_data['maxPageNum'] : 0;
 
 
@@ -903,6 +1339,8 @@ class WCPSRest
 						$query_args['orderby'] = implode(' ', $val);
 					} elseif ($id == 'metaKey') {
 						$query_args['meta_key'] = $val;
+					} elseif ($id == 's') {
+						$query_args['s'] = $val;
 					} elseif ($id == 'dateQuery') {
 
 
@@ -1077,6 +1515,7 @@ class WCPSRest
 		$responses = [];
 
 
+
 		$post_grid_wp_query = new WP_Query($query_args);
 
 
@@ -1108,31 +1547,12 @@ class WCPSRest
 			endwhile;
 
 
-			$big = 999999999; // need an unlikely integer
-
-			$maxPageNum = (!empty($maxPageNum)) ? $maxPageNum : $post_grid_wp_query->max_num_pages;
-
-
-
-			$pages = paginate_links(
-				array(
-					'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-					'format' => '?paged=%#%',
-					'current' => max(1, $paged),
-					'total' => $maxPageNum,
-					'prev_text' => $prevText,
-					'next_text' => $nextText,
-					'type' => 'array',
-
-				)
-			);
 
 
 
 
 
 			$responses['posts'] = $posts;
-			$responses['pagination'] = $pages;
 
 			wp_reset_query();
 			wp_reset_postdata();
@@ -1146,4 +1566,4 @@ class WCPSRest
 	}
 }
 
-$WCPSRest = new WCPSRest();
+$WoocommerceProductsSliderRest = new WoocommerceProductsSliderRest();

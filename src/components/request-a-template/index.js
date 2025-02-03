@@ -38,7 +38,7 @@ function Html(props) {
 
 	useEffect(() => {
 		apiFetch({
-			path: '/post-grid/v2/get_site_details',
+			path: '/wcps/v2/get_site_details',
 			method: 'POST',
 			data: {},
 		}).then((res) => {
@@ -84,7 +84,7 @@ function Html(props) {
 
 
 		apiFetch({
-			path: '/post-grid/v2/send_mail',
+			path: '/wcps/v2/send_mail',
 			method: 'POST',
 			data: postData,
 
@@ -166,7 +166,7 @@ function Html(props) {
 								onSelect={(media) => {
 									var filesX = searchPrams.files.push(media.url);
 
-									console.log(searchPrams.files);
+
 
 									setsearchPrams({ ...searchPrams, files: searchPrams.files });
 								}}
@@ -195,7 +195,7 @@ function Html(props) {
 											onClick={() => {
 												var filesX = searchPrams.files.splice(index, 1);
 
-												console.log(filesX);
+
 
 												setsearchPrams({
 													...searchPrams,

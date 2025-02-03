@@ -335,13 +335,13 @@ function Html(props) {
 					});
 					setShadowObj(shadowObjX);
 				}}>
-				{__("Add","post-grid")}
+				{__("Add", "woocommerce-products-slider")}
 			</button>
 			{proText && (
 				<a
 					href="https://comboblocks.com/pricing/"
 					className="pg-text-color block py-2 px-1">
-					{__("Subscribe to add multiple shadows.","post-grid")}
+					{__("Subscribe to add multiple shadows.", "woocommerce-products-slider")}
 				</a>
 			)}
 			<>
@@ -417,7 +417,7 @@ function Html(props) {
 								// }
 								initialOpen={false}>
 								<PanelRow>
-									<label htmlFor="">{__("H-Offset","post-grid")}</label>
+									<label htmlFor="">{__("H-Offset", "woocommerce-products-slider")}</label>
 								</PanelRow>
 								<PanelRow>
 									<InputControl
@@ -441,7 +441,7 @@ function Html(props) {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label htmlFor="">{__("V-Offset","post-grid")}</label>
+									<label htmlFor="">{__("V-Offset", "woocommerce-products-slider")}</label>
 								</PanelRow>
 								<PanelRow>
 									<InputControl
@@ -465,7 +465,7 @@ function Html(props) {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label htmlFor="">{__("Blur","post-grid")}</label>
+									<label htmlFor="">{__("Blur", "woocommerce-products-slider")}</label>
 								</PanelRow>
 								<PanelRow>
 									<InputControl
@@ -513,7 +513,7 @@ function Html(props) {
 								/>
 							</PanelRow> */}
 								<PanelRow>
-									<label htmlFor="">{__("Color","post-grid")}</label>
+									<label htmlFor="">{__("Color", "woocommerce-products-slider")}</label>
 								</PanelRow>
 								<PGColorPicker
 									value={color}
@@ -526,8 +526,8 @@ function Html(props) {
 									}}
 								/>
 								{/* <ToggleControl
-								help={inset ? __('Inset Enabled',"post-grid")
-            : __('Inset ?',"post-grid")}
+								help={inset ? __('Inset Enabled',"woocommerce-products-slider")
+            : __('Inset ?',"woocommerce-products-slider")}
 								checked={inset}
 								onChange={(arg) => {
 									var shadowObjX = [...shadowObj];
@@ -546,8 +546,8 @@ function Html(props) {
 				<ToggleControl
 					help={
 						isImportant
-							? __("Important (Enabled)", "post-grid")
-							: __("Important?", "post-grid")
+							? __("Important (Enabled)", "woocommerce-products-slider")
+							: __("Important?", "woocommerce-products-slider")
 					}
 					checked={isImportant}
 					onChange={(arg) => {

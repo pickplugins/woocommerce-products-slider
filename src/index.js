@@ -5,6 +5,7 @@
 
 import "./store";
 
-import "./dashboard";
+import "./app";
+import "./global";
 
 

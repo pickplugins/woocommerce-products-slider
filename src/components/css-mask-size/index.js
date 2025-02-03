@@ -58,12 +58,12 @@ function Html(props) {
 						setValArgs(valArgs);
 						props.onChange(valArgs.join(" "), "maskSize");
 					}}>
-					{__('Add', "post-grid")}</div>
+					{__('Add', "woocommerce-products-slider")}</div>
 				<ToggleControl
 					label={
 						isMultiple
-							? __("Multiple (Enabled)", "post-grid")
-							: __("Multiple?", "post-grid")
+							? __("Multiple (Enabled)", "woocommerce-products-slider")
+							: __("Multiple?", "woocommerce-products-slider")
 					}
 					checked={isMultiple}
 					onChange={(arg) => {
@@ -118,13 +118,13 @@ function Html(props) {
 								position="bottom"
 								renderToggle={({ isOpen, onToggle }) => (
 									<Button
-										title={__("Background Repeat", "post-grid")}
+										title={__("Background Repeat", "woocommerce-products-slider")}
 										onClick={onToggle}
 										aria-expanded={isOpen}>
 										{/* <div className=" ">{val ? args[val].label : 'Select...'}</div> */}
 										<div className=" ">
 											{args[item] == undefined
-												? __("Custom", "post-grid")
+												? __("Custom", "woocommerce-products-slider")
 												: args[item].label}
 										</div>
 									</Button>
@@ -148,7 +148,7 @@ function Html(props) {
 														props.onChange(valArgs.join(" "), "maskSize");
 														setValArgs(valArgs);
 													}}>
-													{!x.value && <div>{__("Reset", "post-grid")}</div>}
+													{!x.value && <div>{__("Reset", "woocommerce-products-slider")}</div>}
 													{x.value && <>{x.label}</>}
 												</div>
 											);
@@ -183,7 +183,7 @@ function Html(props) {
 												aria-expanded={isOpen}>
 												<div className=" ">
 													{item.match(/[a-zA-Z%]+/g) == null
-														? __("Select...", "post-grid")
+														? __("Select...", "woocommerce-products-slider")
 														: unitArgs[item.match(/[a-zA-Z%]+/g)[0]] ==
 															undefined
 															? ""
@@ -227,8 +227,8 @@ function Html(props) {
 			<ToggleControl
 				label={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "woocommerce-products-slider")
+						: __("Important?", "woocommerce-products-slider")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

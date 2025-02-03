@@ -205,30 +205,36 @@ function Html(props) {
 		target: { label: "target", value: "target", isPro: true },
 		visited: { label: "Visited", value: "visited", isPro: true },
 		selection: { label: "Selection", value: "selection", isPro: true },
-		":marker": { label: "Marker", value: ":marker" },
+		":marker": { label: "Marker", value: ":marker", isPro: true },
 		"nth-child(even)": {
 			label: "nth-child(even)",
 			value: "nth-child(even)",
+			isPro: true
 		},
 		"nth-child(odd)": {
 			label: "nth-child(odd)",
 			value: "nth-child(odd)",
+			isPro: true
 		},
 		"nth-child(2)": {
 			label: "nth-child(2)",
 			value: "nth-child(2)",
+			isPro: true
 		},
 		"nth-child(3)": {
 			label: "nth-child(3)",
 			value: "nth-child(3)",
+			isPro: true
 		},
 		"nth-child(4)": {
 			label: "nth-child(4)",
 			value: "nth-child(4)",
+			isPro: true
 		},
 		"nth-child(5)": {
 			label: "nth-child(5)",
 			value: "nth-child(5)",
+			isPro: true
 		},
 
 		"first-child": { label: "First-child", value: "first-child", isPro: true },
@@ -249,11 +255,11 @@ function Html(props) {
 		"hover:first-line": { label: "hover:first-line", value: "hover:first-line", isPro: true },
 		"hover:nth-child(odd)": { label: "hover:nth-child(odd)", value: "hover:nth-child(odd)", isPro: true },
 		"hover:nth-child(even)": { label: "hover:nth-child(even)", value: "hover:nth-child(even)", isPro: true },
-		"-webkit-slider-thumb": { label: "-webkit-slider-thumb", value: "-webkit-slider-thumb", },
-		"-moz-range-thumb": { label: "-moz-range-thumb", value: "-moz-range-thumb", },
-		"checked": { label: "checked", value: "checked", },
-		"checked:after": { label: "checked:after", value: "checked:after", },
-		"checked:before": { label: "checked:before", value: "checked:before", },
+		"-webkit-slider-thumb": { label: "-webkit-slider-thumb", value: "-webkit-slider-thumb", isPro: true },
+		"-moz-range-thumb": { label: "-moz-range-thumb", value: "-moz-range-thumb", isPro: true },
+		"checked": { label: "checked", value: "checked", isPro: true },
+		"checked:after": { label: "checked:after", value: "checked:after", isPro: true },
+		"checked:before": { label: "checked:before", value: "checked:before", isPro: true },
 		//custom: { label: 'Custom', value: '', isPro: true },
 	};
 
@@ -325,17 +331,17 @@ function Html(props) {
 		backgroundAttachment: {
 			id: "backgroundAttachment",
 			label: "Background Attachment",
-			isPro: true,
+			//isPro: true,
 		},
 		backgroundBlendMode: {
 			id: "backgroundBlendMode",
 			label: "Background Blend Mode",
-			isPro: true,
+			//isPro: true,
 		},
 		backgroundClip: {
 			id: "backgroundClip",
 			label: "Background Clip",
-			isPro: true,
+			//isPro: true,
 		},
 		backgroundColor: { id: "backgroundColor", label: "Background Color" },
 		backgroundImage: { id: "backgroundImage", label: "Background Image" },
@@ -355,14 +361,14 @@ function Html(props) {
 		borderCollapse: {
 			id: "borderCollapse",
 			label: "Border Collapse",
-			isPro: true,
+			//isPro: true,
 		},
 		borderImage: { id: "borderImage", label: "Border Image", isPro: true },
 		borderRadius: { id: "borderRadius", label: "Border Radius" },
 		borderSpacing: {
 			id: "borderSpacing",
 			label: "Border Spacing",
-			isPro: true,
+			//isPro: true,
 		},
 		backdropFilter: { id: "backdropFilter", label: "Backdrop Filter" },
 
@@ -380,7 +386,7 @@ function Html(props) {
 		counterIncrement: {
 			id: "counterIncrement",
 			label: "Counter Increment",
-			isPro: true,
+			//isPro: true,
 		},
 		counterReset: { id: "counterReset", label: "Counter Reset", isPro: true },
 		counterSet: { id: "counterSet", label: "Counter Set", isPro: true },
@@ -408,7 +414,7 @@ function Html(props) {
 		fontVariantCaps: {
 			id: "fontVariantCaps",
 			label: "Font VariantCaps",
-			isPro: true,
+			//isPro: true,
 		},
 		fontWeight: { id: "fontWeight", label: "Font Weight" },
 		gridAutoFlow: { id: "gridAutoFlow", label: "Grid Auto Flow" },
@@ -428,7 +434,7 @@ function Html(props) {
 		letterSpacing: {
 			id: "letterSpacing",
 			label: "Letter Spacing",
-			isPro: true,
+			//isPro: true,
 		},
 		lineHeight: { id: "lineHeight", label: "Line Height" },
 		listStyle: { id: "listStyle", label: "List Style" },
@@ -480,7 +486,7 @@ function Html(props) {
 		textDecoration: {
 			id: "textDecoration",
 			label: "Text Decoration",
-			isPro: true,
+			//isPro: true,
 		},
 		textIndent: { id: "textIndent", label: "Text Indent", isPro: true },
 		textJustify: { id: "textJustify", label: "Text Justify", isPro: true },
@@ -489,7 +495,7 @@ function Html(props) {
 		transformOrigin: {
 			id: "transformOrigin",
 			label: "Transform Origin",
-			isPro: true,
+			//isPro: true,
 		},
 		tableLayout: {
 			id: "tableLayout",
@@ -506,7 +512,7 @@ function Html(props) {
 		textTransform: {
 			id: "textTransform",
 			label: "Text Transform",
-			isPro: true,
+			//isPro: true,
 		},
 		wordBreak: { id: "wordBreak", label: "Word Break", isPro: true },
 		wordSpacing: { id: "wordSpacing", label: "Word Spacing", isPro: true },
@@ -515,7 +521,7 @@ function Html(props) {
 		"-webkit-text-fill-color": {
 			id: "-webkit-text-fill-color",
 			label: "Webkit Text Fill Color",
-			isPro: true,
+			//isPro: true,
 		},
 	};
 	let cssProps = applyFilters("cssProps", cssPropsBasic);

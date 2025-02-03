@@ -65,7 +65,7 @@ function Html(props) {
 
 	useEffect(() => {
 		apiFetch({
-			path: "/post-grid/v2/get_site_details",
+			path: "/wcps/v2/get_site_details",
 			method: "POST",
 			data: {},
 		}).then((res) => {
@@ -86,7 +86,7 @@ function Html(props) {
 		};
 		postData = JSON.stringify(postData);
 
-		fetch("https://comboblocks.com/server/wp-json/post-grid/v2/get_block_patterns", {
+		fetch("https://comboblocks.com/server/wp-json/wcps/v2/get_block_patterns", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json;charset=utf-8",
@@ -159,12 +159,12 @@ function Html(props) {
 			</PanelRow>
 
 			<div className="items">
-				{cssLibrary.items.map((x) => {
+				{cssLibrary.items.map((x, index) => {
 					var content = x.post_content;
 
 
 					return (
-						<div className=" border py-2 my-3">
+						<div className=" border py-2 my-3" key={index}>
 							<img src={x.thumb_url} alt="" className="" />
 							<div className="my-2  flex items-center justify-center flex-wrap gap-2 ">
 								<button

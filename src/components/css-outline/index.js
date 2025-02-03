@@ -44,7 +44,7 @@ function Html(props) {
 	return (
 		<div>
 			<PanelRow>
-				<label htmlFor="">{__("Width","post-grid")}</label>
+				<label htmlFor="">{__("Width", "woocommerce-products-slider")}</label>
 			</PanelRow>
 			<RangeControl
 				min="0"
@@ -62,7 +62,7 @@ function Html(props) {
 					variant="secondary"
 					options={styleArgs}
 					buttonTitle={
-						styleArgs[style] == undefined ? __("Choose","post-grid") : styleArgs[style].label
+						styleArgs[style] == undefined ? __("Choose", "woocommerce-products-slider") : styleArgs[style].label
 					}
 					onChange={(option, index) => {
 						props.onChange(
@@ -72,7 +72,7 @@ function Html(props) {
 					}}
 					values=""></PGDropdown>
 			</PanelRow>
-			<div for="">{__("Color","post-grid")}</div>
+			<div for="">{__("Color", "woocommerce-products-slider")}</div>
 			<PGColorPicker
 				value={color}
 				colors={colorsPresets}
@@ -84,8 +84,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "woocommerce-products-slider")
+						: __("Important?", "woocommerce-products-slider")
 				}
 				checked={isImportant}
 				onChange={(arg) => {
