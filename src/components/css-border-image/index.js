@@ -49,16 +49,16 @@ function Html(props) {
 	return (
 		<div>
 			<PanelRow>
-				<label htmlFor="">{__("Source", "post-grid")}</label>
+				<label htmlFor="">{__("Source", "woocommerce-products-slider")}</label>
 			</PanelRow>
 			<div className="my-4">
 				<label htmlFor="" className="font-medium text-slate-900 pg-font ">
-					{__("Select Source", "post-grid")}
+					{__("Select Source", "woocommerce-products-slider")}
 				</label>
 				<SelectControl
 					options={[
-						{ label: __("Linear Gradient", "post-grid"), value: "linear" },
-						{ label: __("Image", "post-grid"), value: "image" },
+						{ label: __("Linear Gradient", "woocommerce-products-slider"), value: "linear" },
+						{ label: __("Image", "woocommerce-products-slider"), value: "image" },
 					]}
 					values=""
 					onChange={(newVal) => {
@@ -159,7 +159,7 @@ function Html(props) {
 								<Button
 									className="my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full"
 									onClick={open}>
-									{__("Open Media Library", "post-grid")}
+									{__("Open Media Library", "woocommerce-products-slider")}
 								</Button>
 							)}
 						/>
@@ -203,7 +203,7 @@ function Html(props) {
 				]}
 			/> */}
 			<PanelRow>
-				<label htmlFor="">{__("Slice", "post-grid")}</label>
+				<label htmlFor="">{__("Slice", "woocommerce-products-slider")}</label>
 			</PanelRow>
 			<BoxControl
 				label=""
@@ -234,7 +234,7 @@ function Html(props) {
 				}}
 			/>
 			<PanelRow>
-				<label htmlFor="">{__("Width", "post-grid")}</label>
+				<label htmlFor="">{__("Width", "woocommerce-products-slider")}</label>
 			</PanelRow>
 			<BoxControl
 				label=""
@@ -266,7 +266,7 @@ function Html(props) {
 				}}
 			/>
 			<PanelRow>
-				<label htmlFor="">{__("Outset", "post-grid")}</label>
+				<label htmlFor="">{__("Outset", "woocommerce-products-slider")}</label>
 			</PanelRow>
 			<BoxControl
 				label=""
@@ -298,16 +298,16 @@ function Html(props) {
 				}}
 			/>
 			<PanelRow>
-				<label htmlFor="">{__("Repeat", "post-grid")}</label>
+				<label htmlFor="">{__("Repeat", "woocommerce-products-slider")}</label>
 				<SelectControl
 					label=""
 					value={repeat}
 					options={[
-						{ label: __("Stretch", "post-grid"), value: "stretch" },
-						{ label: __("Repeat", "post-grid"), value: "repeat" },
-						{ label: __("Round", "post-grid"), value: "round" },
-						{ label: __("Space", "post-grid"), value: "space" },
-						{ label: __("Fill", "post-grid"), value: "fill" },
+						{ label: __("Stretch", "woocommerce-products-slider"), value: "stretch" },
+						{ label: __("Repeat", "woocommerce-products-slider"), value: "repeat" },
+						{ label: __("Round", "woocommerce-products-slider"), value: "round" },
+						{ label: __("Space", "woocommerce-products-slider"), value: "space" },
+						{ label: __("Fill", "woocommerce-products-slider"), value: "fill" },
 					]}
 					onChange={(newVal) => {
 						var sliceX = slice.replaceAll("px", "");

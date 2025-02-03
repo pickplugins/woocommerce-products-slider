@@ -65,12 +65,11 @@ function Html(props) {
   return (
     <div className='mt-4'>
       <div className='flex'>
-        <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle={__("Add Filter","post-grid")} onChange={addFilter} values=""></PGDropdown>
+        <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle={__("Add Filter", "woocommerce-products-slider")} onChange={addFilter} values=""></PGDropdown>
       </div>
       {
         valArgs != undefined && (
           valArgs.map((arg, i) => {
-            console.log(valArgs)
             return (
               <div className='flex my-3 items-center justify-between'>
                 <label htmlFor="">{filterArgs[arg.id]?.label}</label>

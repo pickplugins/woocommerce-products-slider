@@ -13,34 +13,28 @@ function Html(props) {
     return null;
   }
 
-
-
-
   return (
 
-    <div >
+    <input
+      className={props.className}
+      id={props.id}
+      value={props.value}
+      type="text"
+      size={props.size}
+      name={props.name}
+      placeholder={props.placeholder}
+      minlength={props.minlength}
+      maxlength={props.maxlength}
+      required={props.required}
+      disabled={props.disabled}
 
-      <input
-        className={props.className}
-        id={props.id}
-        value={props.value}
-        type="text"
-        size={props.size}
-        name={props.name}
-        placeholder={props.placeholder}
-        minlength={props.minlength}
-        maxlength={props.maxlength}
-        required={props.required}
-        disabled={props.disabled}
+      onChange={(e) => {
+        props.onChange(e.target.value);
 
-        onChange={(newVal) => {
-          props.onChange(newVal);
-
-        }}
-      />
+      }}
+    />
 
 
-    </div>
 
 
 
@@ -92,7 +86,7 @@ class PGinputText extends Component {
     return (
 
 
-      <Html val={value} name={name} id={id} size={size} placeholder={placeholder} className={className} minlength={minlength} maxlength={maxlength} required={required} disabled={disabled} onChange={onChange} warn={this.state.showWarning} />
+      <Html value={value} name={name} id={id} size={size} placeholder={placeholder} className={className} minlength={minlength} maxlength={maxlength} required={required} disabled={disabled} onChange={onChange} warn={this.state.showWarning} />
 
 
     )

@@ -163,7 +163,7 @@ import PGcssWordWrap from "../../components/css-word-wrap";
 import PGcssZIndex from "../../components/css-z-index";
 var myStore = wp.data.select("postgrid-shop");
 
-// console.log(myStore);
+
 
 
 import breakPoints from "../../breakpoints";
@@ -815,7 +815,7 @@ function Html(props) {
 							buttonTitle={
 								sudoScources[sudoScource] != undefined
 									? sudoScources[sudoScource].label
-									: __("Choose", "post-grid")
+									: __("Choose", "woocommerce-products-slider")
 							}
 							onChange={(option, index) => {
 								setSudoScource(option.value);
@@ -829,7 +829,7 @@ function Html(props) {
 						position="bottom right"
 						variant="secondary"
 						options={cssProps}
-						buttonTitle={__("Add", "post-grid")}
+						buttonTitle={__("Add", "woocommerce-products-slider")}
 						onChange={setCssAttr}
 						values=""></PGDropdown>
 				</div>
@@ -877,9 +877,9 @@ function Html(props) {
 												setResetArgs({ ...resetArgs, isReset: false });
 											}, 2000);
 										}}>
-										{resetArgs.isReset && <>{__("Reset Done!", "post-grid")}</>}
+										{resetArgs.isReset && <>{__("Reset Done!", "woocommerce-products-slider")}</>}
 										{!resetArgs.isReset && (
-											<> {__("Reset Styles!", "post-grid")}</>
+											<> {__("Reset Styles!", "woocommerce-products-slider")}</>
 										)}
 									</div>
 									<div
@@ -897,18 +897,18 @@ function Html(props) {
 												setCopyArgs({ ...copyArgs, isCopied: false });
 											}, 2000);
 										}}>
-										{copyArgs.isCopied && <> {__("Copied!", "post-grid")}</>}
+										{copyArgs.isCopied && <> {__("Copied!", "woocommerce-products-slider")}</>}
 										{!copyArgs.isCopied && (
-											<> {__("Copy Styles!", "post-grid")}</>
+											<> {__("Copy Styles!", "woocommerce-products-slider")}</>
 										)}
 									</div>
 									<div
 										className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-700 text-white font-medium rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-700"
 										// className="px-4 inline-block m-2 py-2 bg-sky-600  text-white cursor-pointer"
 										onClick={handlePasteFromClipboard}>
-										{copyArgs.isPasted && <>{__("Paste Done", "post-grid")}</>}
+										{copyArgs.isPasted && <>{__("Paste Done", "woocommerce-products-slider")}</>}
 										{!copyArgs.isPasted && (
-											<>{__("Paste Styles", "post-grid")}</>
+											<>{__("Paste Styles", "woocommerce-products-slider")}</>
 										)}
 									</div>
 									<div
@@ -938,10 +938,10 @@ function Html(props) {
 											handlePasteRawClipboard();
 										}}>
 										{copyRawArgs.isPasted && (
-											<>{__("Paste Done", "post-grid")}</>
+											<>{__("Paste Done", "woocommerce-products-slider")}</>
 										)}
 										{!copyRawArgs.isPasted && (
-											<>{__("Paste Raw CSS", "post-grid")}</>
+											<>{__("Paste Raw CSS", "woocommerce-products-slider")}</>
 										)}
 									</div>
 								</div>
@@ -983,7 +983,7 @@ function Html(props) {
 			<div className="my-5 pg-setting-input-text pg-new-styles">
 				<PGtoggle
 					className="font-medium text-slate-900 "
-					title={__("Typography", "post-grid")}
+					title={__("Typography", "woocommerce-products-slider")}
 					initialOpen={false}>
 					<div className="space-y-3">
 						<PgCSSFontSize
@@ -1038,7 +1038,7 @@ function Html(props) {
 				</PGtoggle>
 				<PGtoggle
 					className="font-medium text-slate-900 "
-					title={__("Layout", "post-grid")}
+					title={__("Layout", "woocommerce-products-slider")}
 					initialOpen={false}>
 					<div className="space-y-3">
 						<h2 className="!text-[18px] border-0 border-b-2 border-solid border-gray-700 pb-2 w-full">
@@ -1210,7 +1210,7 @@ function Html(props) {
 				</PGtoggle>
 				<PGtoggle
 					className="font-medium text-slate-900 "
-					title={__("Colors", "post-grid")}
+					title={__("Colors", "woocommerce-products-slider")}
 					initialOpen={false}>
 					<div className="space-y-3">
 						<PgCSSColor
@@ -1366,7 +1366,7 @@ function Html(props) {
 																		value={value[breakPointX]}
 																		options={[
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1484,7 +1484,7 @@ function Html(props) {
 																		if (key == "fontStyle") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1507,7 +1507,7 @@ function Html(props) {
 																		) {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1575,7 +1575,7 @@ function Html(props) {
 																		if (key === "alignSelf") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1639,7 +1639,7 @@ function Html(props) {
 																		if (key === "backfaceVisibility") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1671,7 +1671,7 @@ function Html(props) {
 																		if (key === "backgroundAttachment") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1707,7 +1707,7 @@ function Html(props) {
 																		if (key === "backgroundBlendMode") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1795,7 +1795,7 @@ function Html(props) {
 																		if (key === "backgroundClip") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1839,7 +1839,7 @@ function Html(props) {
 																		if (key === "backgroundOrigin") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1878,7 +1878,7 @@ function Html(props) {
 																		) {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1926,7 +1926,7 @@ function Html(props) {
 																		if (key === "borderCollapse") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1950,7 +1950,7 @@ function Html(props) {
 																		if (key === "boxSizing") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -1966,15 +1966,15 @@ function Html(props) {
 																		if (key === "captionSide") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
-																					label: __("Top", "post-grid"),
+																					label: __("Top", "woocommerce-products-slider"),
 																					value: "top",
 																				},
 																				{
-																					label: __("Bottom", "post-grid"),
+																					label: __("Bottom", "woocommerce-products-slider"),
 																					value: "bottom",
 																				},
 																				{
@@ -1990,7 +1990,7 @@ function Html(props) {
 																		if (key === "clear") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2022,7 +2022,7 @@ function Html(props) {
 																		if (key === "cursor") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2166,7 +2166,7 @@ function Html(props) {
 																		if (key == "direction") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2198,7 +2198,7 @@ function Html(props) {
 																		if (key === "display") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2306,7 +2306,7 @@ function Html(props) {
 																		if (key === "emptyCells") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2330,7 +2330,7 @@ function Html(props) {
 																		if (key === "flexDirection") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2354,7 +2354,7 @@ function Html(props) {
 																		if (key === "flexWrap") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2374,7 +2374,7 @@ function Html(props) {
 																		if (key === "float") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2418,7 +2418,7 @@ function Html(props) {
 																		if (key === "fontStretch") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2462,7 +2462,7 @@ function Html(props) {
 																		if (key === "fontVariantCaps") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2510,7 +2510,7 @@ function Html(props) {
 																		if (key === "gridAutoFlow") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{ label: "column", value: "column" },
@@ -2539,7 +2539,7 @@ function Html(props) {
 																		if (key === "justifyContent") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2615,7 +2615,7 @@ function Html(props) {
 																		if (key === "maskMode") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2647,7 +2647,7 @@ function Html(props) {
 																		if (key === "maskOrigin") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2691,7 +2691,7 @@ function Html(props) {
 																		if (key === "objectFit") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2723,7 +2723,7 @@ function Html(props) {
 																		) {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2751,7 +2751,7 @@ function Html(props) {
 																		if (key === "position") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2795,7 +2795,7 @@ function Html(props) {
 																		if (key === "tableLayout") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2819,7 +2819,7 @@ function Html(props) {
 																		if (key === "textAlign") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2843,7 +2843,7 @@ function Html(props) {
 																		if (key === "textJustify") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2867,7 +2867,7 @@ function Html(props) {
 																		if (key === "textOverflow") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2895,7 +2895,7 @@ function Html(props) {
 																		if (key === "textTransform") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2919,7 +2919,7 @@ function Html(props) {
 																		if (key === "transformStyle") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2947,7 +2947,7 @@ function Html(props) {
 																		if (key === "verticalAlign") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -2995,7 +2995,7 @@ function Html(props) {
 																		if (key === "visibility") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -3015,7 +3015,7 @@ function Html(props) {
 																		if (key === "wordBreak") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -3039,7 +3039,7 @@ function Html(props) {
 																		if (key === "wordWrap") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{
@@ -3063,7 +3063,7 @@ function Html(props) {
 																		if (key === "writingMode") {
 																			xyz = [
 																				{
-																					label: __("Choose", "post-grid"),
+																					label: __("Choose", "woocommerce-products-slider"),
 																					value: "",
 																				},
 																				{

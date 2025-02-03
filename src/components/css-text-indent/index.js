@@ -73,13 +73,13 @@ function Html(props) {
 					position="bottom"
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
-							title={__("Text Indent","post-grid")}
+							title={__("Text Indent", "woocommerce-products-slider")}
 							onClick={onToggle}
 							aria-expanded={isOpen}>
 							<div className=" ">
 								{props.val
 									? unitArgs[widthUnit].label
-									: __("Select...", "post-grid")}
+									: __("Select...", "woocommerce-products-slider")}
 							</div>
 						</Button>
 					)}
@@ -123,8 +123,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "woocommerce-products-slider")
+						: __("Important?", "woocommerce-products-slider")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

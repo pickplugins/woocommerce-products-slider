@@ -18,7 +18,7 @@ class PGinputSelect extends Component {
       val,
       options,
       multiple,
-
+      className,
       onChange,
 
 
@@ -33,10 +33,10 @@ class PGinputSelect extends Component {
 
       return (
 
-        <div className='w-full'>
+        <>
 
           {multiple == true && (<>
-            <select className='w-full'
+            <select className={` ${className}`}
               multiple
               onChange={(event) => {
 
@@ -54,12 +54,12 @@ class PGinputSelect extends Component {
                 onChange(selected);
               }}
             >
-              {options.map(x => {
+              {options.map((x,index) => {
 
                 var isSelected = val.includes(x.value)
 
                 return (
-                  <option value={x.value}
+                  <option value={x.value} key={index}
 
                     selected={isSelected}
 
@@ -72,17 +72,17 @@ class PGinputSelect extends Component {
 
           {multiple == false && (<>
             <select
-
+              className={` ${className}`}
               onChange={(event) => {
                 var currentVal = options[event.target.options.selectedIndex].value;
                 onChange(currentVal);
               }}
             >
-              {options.map(x => {
+              {options.map((x,index) => {
                 var selected = val.includes(x.value)
 
                 return (
-                  <option value={x.value} selected={selected}
+                  <option value={x.value} selected={selected} key={index}
                   >{x.label}</option>
                 )
               })}
@@ -92,7 +92,7 @@ class PGinputSelect extends Component {
 
 
 
-        </div>
+        </>
 
 
 

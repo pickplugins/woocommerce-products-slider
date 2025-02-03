@@ -16,8 +16,8 @@ function Html(props) {
       <ToggleControl
         help={
           isAuto
-            ? __('Auto',"post-grid")
-            : __('Auto?',"post-grid")
+            ? __('Auto', "woocommerce-products-slider")
+            : __('Auto?', "woocommerce-products-slider")
         }
         checked={isAuto}
         onChange={(arg) => {

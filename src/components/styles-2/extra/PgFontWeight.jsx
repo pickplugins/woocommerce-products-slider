@@ -67,8 +67,8 @@ const PgCSSFontWeight = ({ val, onChange, breakPoint, sudoSrc }) => {
 				<ToggleControl
 					help={
 						isImportant
-							? __("(Enabled)", "post-grid")
-							: __("Important?", "post-grid")
+							? __("(Enabled)", "woocommerce-products-slider")
+							: __("Important?", "woocommerce-products-slider")
 					}
 					checked={isImportant}
 					onChange={(arg) => {

@@ -49,7 +49,7 @@ function Html(props) {
 		// unset: { "label": "unset", "value": "unset" },
 	};
 	const [valArgs, setvalArgs] = useState(valParts);
-	useEffect(() => {}, [props.val]);
+	useEffect(() => { }, [props.val]);
 	return (
 		<div>
 			<div
@@ -59,7 +59,7 @@ function Html(props) {
 					setvalArgs(valArgsX);
 					props.onChange(valArgsX.join(" "), "gridTemplateRows");
 				}}>
-				{__("Add", "post-grid")}
+				{__("Add", "woocommerce-products-slider")}
 			</div>
 			{valArgs.map((part, index) => {
 				var valNumber =
@@ -98,7 +98,7 @@ function Html(props) {
 											<div className=" ">
 												{valUnit != undefined
 													? unitArgs[valUnit].label
-													: __("Select...", "post-grid")}
+													: __("Select...", "woocommerce-products-slider")}
 											</div>
 										</Button>
 									)}

@@ -23,7 +23,7 @@ function Html(props) {
 				renderToggle={({ isOpen, onToggle }) => (
 					<Button onClick={onToggle} aria-expanded={isOpen}>
 						<div className=" ">
-							{props.val ? args[props.val].label : __("Select...", "post-grid")}
+							{props.val ? args[props.val].label : __("Select...", "woocommerce-products-slider")}
 						</div>
 					</Button>
 				)}
@@ -40,7 +40,7 @@ function Html(props) {
 									onClick={(ev) => {
 										onChange(x.value, "textAlignLast");
 									}}>
-									{!x.value && <div>{__("Reset", "post-grid")}</div>}
+									{!x.value && <div>{__("Reset", "woocommerce-products-slider")}</div>}
 									{x.value && <>{x.label}</>}
 								</div>
 							);

@@ -88,7 +88,7 @@ function Html(props) {
 					position="bottom right"
 					variant="secondary"
 					options={propertyArgs}
-					buttonTitle={__("Choose","post-grid")}
+					buttonTitle={__("Choose", "woocommerce-products-slider")}
 					onChange={(option, index) => {
 						valArgs.push(option);
 						var str = "";
@@ -127,7 +127,7 @@ function Html(props) {
 								arg.id == "skewY" ||
 								arg.id == "perspective") && (
 									<>
-										<label htmlFor="">{__("Value","post-grid")}</label>
+										<label htmlFor="">{__("Value", "woocommerce-products-slider")}</label>
 										<PanelRow>
 											<InputControl
 												value={
@@ -234,7 +234,7 @@ function Html(props) {
 								arg.id == "skew") && (
 									<>
 										<div className="mt-2">
-											<label htmlFor="">{__("X Value","post-grid")}</label>
+											<label htmlFor="">{__("X Value", "woocommerce-products-slider")}</label>
 											<PanelRow>
 												<InputControl
 													value={
@@ -372,7 +372,7 @@ function Html(props) {
 											</PanelRow>
 										</div>
 										<div className="mt-2">
-											<label htmlFor="">{__("Y Value","post-grid")}</label>
+											<label htmlFor="">{__("Y Value", "woocommerce-products-slider")}</label>
 											<PanelRow>
 												<InputControl
 													value={
@@ -520,7 +520,7 @@ function Html(props) {
 								arg.id == "rotate3d") && (
 									<>
 										<PanelRow>
-											<label htmlFor="">{__("X Value","post-grid")}</label>
+											<label htmlFor="">{__("X Value", "woocommerce-products-slider")}</label>
 											<InputControl
 												value={
 													arg.val.split(",")[0].match(/-?\d+/g) == null
@@ -710,7 +710,7 @@ function Html(props) {
 											</span>
 										</PanelRow>
 										<PanelRow>
-											<label htmlFor="">{__("Y Value","post-grid")}</label>
+											<label htmlFor="">{__("Y Value", "woocommerce-products-slider")}</label>
 											<InputControl
 												value={
 													arg.val.split(",")[1].match(/-?\d+/g) == null
@@ -887,7 +887,7 @@ function Html(props) {
 											</span>
 										</PanelRow>
 										<PanelRow>
-											<label htmlFor="">{__("Z Value","post-grid")}</label>
+											<label htmlFor="">{__("Z Value", "woocommerce-products-slider")}</label>
 											<InputControl
 												value={
 													arg.val.split(",")[2].match(/-?\d+/g) == null
@@ -1080,7 +1080,7 @@ function Html(props) {
 										</PanelRow>
 										{arg.id == "rotate3d" && (
 											<PanelRow>
-												<label htmlFor="">{__("Angle","post-grid")}</label>
+												<label htmlFor="">{__("Angle", "woocommerce-products-slider")}</label>
 												<InputControl
 													value={
 														arg.val.split(",")[3].match(/-?\d+/g) == null

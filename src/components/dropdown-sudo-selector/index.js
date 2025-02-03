@@ -45,7 +45,7 @@ function Html(props) {
 				}}>
 				<Button
 					className="pg-font flex gap-2 justify-center cursor-pointer py-2 px-4 capitalize tracking-wide !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
-					// variant={variant}
+				// variant={variant}
 				>
 					{optionsX[value] != undefined ? optionsX[value].label : buttonTitle}
 				</Button>
@@ -148,7 +148,7 @@ function Html(props) {
 
 																// var sudoScourceArgsLocalX = localStorage.getItem('sudoScourceArgs');
 
-																//console.log(JSON.parse(sudoScourceArgsLocalX));
+
 																//localStorage.clear();
 
 																//options = JSON.parse(sudoScourceArgsLocalX);
@@ -167,7 +167,7 @@ function Html(props) {
 														}}>
 														<span>{x.label}</span>
 														{obj[index] != null &&
-														Object.entries(obj[index]).length > 0 ? (
+															Object.entries(obj[index]).length > 0 ? (
 															<span className="pg-text-color font-bold">*</span>
 														) : (
 															" "
@@ -192,7 +192,7 @@ function Html(props) {
 													<a
 														target="_blank"
 														href={
-															"https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
+															"https://pickplugins.com/woocommerce-products-slider/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
 															x.label
 														}
 														className="pg-bg-color rounded-sm px-3 inline-block cursor-pointer py-1 no-underline text-white hover:text-white">
@@ -236,7 +236,7 @@ function Html(props) {
 													<span className="flex items-center gap-2">
 														<span>{x.label}</span>
 														{obj[index] != null &&
-														Object.entries(obj[index]).length > 0 ? (
+															Object.entries(obj[index]).length > 0 ? (
 															<span className="pg-text-color font-bold">*</span>
 														) : (
 															" "
@@ -295,7 +295,7 @@ function Html(props) {
 														<span className="flex items-center gap-2">
 															<span>{x.label}</span>
 															{obj[index] != null &&
-															Object.entries(obj[index]).length > 0 ? (
+																Object.entries(obj[index]).length > 0 ? (
 																<span className="pg-text-color font-bold">
 																	*
 																</span>
@@ -353,7 +353,7 @@ function Html(props) {
 														<span className="flex items-center gap-2">
 															<span>{x.label}</span>
 															{obj[index] != null &&
-															Object.entries(obj[index]).length > 0 ? (
+																Object.entries(obj[index]).length > 0 ? (
 																<span className="pg-text-color font-bold">
 																	*
 																</span>
