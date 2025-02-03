@@ -25,161 +25,161 @@ import { link, linkOff } from "@wordpress/icons";
 import apiFetch from "@wordpress/api-fetch";
 import { Icon, close, arrowRight, settings, copy, check } from "@wordpress/icons";
 
-import PGDropdown from "../../components/dropdown";
-import PGDropdownSudoSelector from "../../components/dropdown-sudo-selector";
+import PGDropdown from "../dropdown";
+import PGDropdownSudoSelector from "../dropdown-sudo-selector";
 
-import PGcssAlignContent from "../../components/css-align-content";
-import PGcssAlignItems from "../../components/css-align-items";
-import PGcssAlignSelf from "../../components/css-align-self";
-import PGcssAspectRatio from "../../components/css-aspect-ratio";
+import PGcssAlignContent from "../css-align-content";
+import PGcssAlignItems from "../css-align-items";
+import PGcssAlignSelf from "../css-align-self";
+import PGcssAspectRatio from "../css-aspect-ratio";
 
-import PGcssBackfaceVisibility from "../../components/css-backface-visibility";
-import PGcssBackgroundAttachment from "../../components/css-background-attachment";
-import PGcssBackgroundBlendMode from "../../components/css-background-blend-mode";
-import PGcssBackgroundClip from "../../components/css-background-clip";
-import PGcssBackgroundColor from "../../components/css-background-color";
-import PGcssBgColor from "../../components/css-bg-color";
+import PGcssBackfaceVisibility from "../css-backface-visibility";
+import PGcssBackgroundAttachment from "../css-background-attachment";
+import PGcssBackgroundBlendMode from "../css-background-blend-mode";
+import PGcssBackgroundClip from "../css-background-clip";
+import PGcssBackgroundColor from "../css-background-color";
+import PGcssBgColor from "../css-bg-color";
 
-import PGcssBackgroundImage from "../../components/css-background-image";
-import PGcssBackgroundOrigin from "../../components/css-background-origin";
-import PGcssBackgroundPosition from "../../components/css-background-position";
-import PGcssBackgroundRepeat from "../../components/css-background-repeat";
-import PGcssBackgroundSize from "../../components/css-background-size";
-import PGcssBorder from "../../components/css-border";
-import PGcssBorderTop from "../../components/css-border-top";
-import PGcssBorderRight from "../../components/css-border-right";
-import PGcssBorderBottom from "../../components/css-border-bottom";
-import PGcssBorderLeft from "../../components/css-border-left";
-import PGcssBorderRadius from "../../components/css-border-radius";
-import PGcssBorderImage from "../../components/css-border-image";
+import PGcssBackgroundImage from "../css-background-image";
+import PGcssBackgroundOrigin from "../css-background-origin";
+import PGcssBackgroundPosition from "../css-background-position";
+import PGcssBackgroundRepeat from "../css-background-repeat";
+import PGcssBackgroundSize from "../css-background-size";
+import PGcssBorder from "../css-border";
+import PGcssBorderTop from "../css-border-top";
+import PGcssBorderRight from "../css-border-right";
+import PGcssBorderBottom from "../css-border-bottom";
+import PGcssBorderLeft from "../css-border-left";
+import PGcssBorderRadius from "../css-border-radius";
+import PGcssBorderImage from "../css-border-image";
 
-import PGcssBottom from "../../components/css-bottom";
-import PGcssBorderCollapse from "../../components/css-border-collapse";
-import PGcssBorderSpacing from "../../components/css-border-spacing";
+import PGcssBottom from "../css-bottom";
+import PGcssBorderCollapse from "../css-border-collapse";
+import PGcssBorderSpacing from "../css-border-spacing";
 
-import PGcssBackdropFilter from "../../components/css-backdrop-filter";
+import PGcssBackdropFilter from "../css-backdrop-filter";
 
-import PGcssBoxShadow from "../../components/css-box-shadow";
-import PGcssBoxSizing from "../../components/css-box-sizing";
-import PGcssClear from "../../components/css-clear";
+import PGcssBoxShadow from "../css-box-shadow";
+import PGcssBoxSizing from "../css-box-sizing";
+import PGcssClear from "../css-clear";
 // import PGcssClip from '../../components/css-clip'
 // import PGcssClipPath from '../../components/css-clip-path'
-import PGcssColor from "../../components/css-color";
-import PGcssCursor from "../../components/css-cursor";
-import PGcssContent from "../../components/css-content";
-import PGcssCounterIncrement from "../../components/css-counter-increment";
-import PGcssCounterReset from "../../components/css-counter-reset";
-import PGcssCounterSet from "../../components/css-counter-set";
-import PGcssColumnCount from "../../components/css-column-count";
-import PGcssColumnRule from "../../components/css-column-rule";
-import PGcssClip from "../../components/css-clip";
+import PGcssColor from "../css-color";
+import PGcssCursor from "../css-cursor";
+import PGcssContent from "../css-content";
+import PGcssCounterIncrement from "../css-counter-increment";
+import PGcssCounterReset from "../css-counter-reset";
+import PGcssCounterSet from "../css-counter-set";
+import PGcssColumnCount from "../css-column-count";
+import PGcssColumnRule from "../css-column-rule";
+import PGcssClip from "../css-clip";
 
-import PGcssDisplay from "../../components/css-display";
-import PGcssDirection from "../../components/css-direction";
+import PGcssDisplay from "../css-display";
+import PGcssDirection from "../css-direction";
 
-import PGcssFilter from "../../components/css-filter";
-import PGcssFloat from "../../components/css-float";
-import PGcssFontFamily from "../../components/css-font-family";
-import PGcssFontSize from "../../components/css-font-size";
-import PGcssFontStretch from "../../components/css-font-stretch";
-import PGcssFontStyle from "../../components/css-font-style";
-import PGcssFontWeight from "../../components/css-font-weight";
-import PGcssFontVariantCaps from "../../components/css-font-variant-caps";
-import PGcssFlexWrap from "../../components/css-flex-wrap";
-import PGcssFlexDirection from "../../components/css-flex-direction";
-import PGcssFlexShrink from "../../components/css-flex-shrink";
-import PGcssFlexBasis from "../../components/css-flex-basis";
+import PGcssFilter from "../css-filter";
+import PGcssFloat from "../css-float";
+import PGcssFontFamily from "../css-font-family";
+import PGcssFontSize from "../css-font-size";
+import PGcssFontStretch from "../css-font-stretch";
+import PGcssFontStyle from "../css-font-style";
+import PGcssFontWeight from "../css-font-weight";
+import PGcssFontVariantCaps from "../css-font-variant-caps";
+import PGcssFlexWrap from "../css-flex-wrap";
+import PGcssFlexDirection from "../css-flex-direction";
+import PGcssFlexShrink from "../css-flex-shrink";
+import PGcssFlexBasis from "../css-flex-basis";
 
-import PGcssUserSelect from "../../components/css-user-select";
+import PGcssUserSelect from "../css-user-select";
 
-import PGcssFlexGrow from "../../components/css-flex-grow";
-import PGcssFlexFlow from "../../components/css-flex-flow";
+import PGcssFlexGrow from "../css-flex-grow";
+import PGcssFlexFlow from "../css-flex-flow";
 
-import PGcssGridAutoFlow from "../../components/css-grid-auto-flow";
-import PGcssGridColumnEnd from "../../components/css-grid-column-end";
-import PGcssGridColumnStart from "../../components/css-grid-column-start";
-import PGcssGridRowEnd from "../../components/css-grid-row-end";
-import PGcssGridRowStart from "../../components/css-grid-row-start";
-import PGcssGridTemplateColumns from "../../components/css-grid-template-columns";
-import PGcssGridTemplateRows from "../../components/css-grid-template-rows";
-import PGcssGridAutoColumns from "../../components/css-grid-auto-columns";
+import PGcssGridAutoFlow from "../css-grid-auto-flow";
+import PGcssGridColumnEnd from "../css-grid-column-end";
+import PGcssGridColumnStart from "../css-grid-column-start";
+import PGcssGridRowEnd from "../css-grid-row-end";
+import PGcssGridRowStart from "../css-grid-row-start";
+import PGcssGridTemplateColumns from "../css-grid-template-columns";
+import PGcssGridTemplateRows from "../css-grid-template-rows";
+import PGcssGridAutoColumns from "../css-grid-auto-columns";
 
-import PGcssHeight from "../../components/css-height";
+import PGcssHeight from "../css-height";
 
-import PGcssJustifyContent from "../../components/css-justify-content";
+import PGcssJustifyContent from "../css-justify-content";
 
-import PGcssLeft from "../../components/css-left";
-import PGcssLetterSpacing from "../../components/css-letter-spacing";
-import PGcssLineHeight from "../../components/css-line-height";
-import PGcssListStyle from "../../components/css-list-style";
-import PGcssMargin from "../../components/css-margin";
-import PGcssMarginTop from "../../components/css-margin-top";
-import PGcssMarginRight from "../../components/css-margin-right";
-import PGcssMarginBottom from "../../components/css-margin-bottom";
-import PGcssMarginLeft from "../../components/css-margin-left";
+import PGcssLeft from "../css-left";
+import PGcssLetterSpacing from "../css-letter-spacing";
+import PGcssLineHeight from "../css-line-height";
+import PGcssListStyle from "../css-list-style";
+import PGcssMargin from "../css-margin";
+import PGcssMarginTop from "../css-margin-top";
+import PGcssMarginRight from "../css-margin-right";
+import PGcssMarginBottom from "../css-margin-bottom";
+import PGcssMarginLeft from "../css-margin-left";
 
-import PGcssMaxHeight from "../../components/css-max-height";
-import PGcssMaxWidth from "../../components/css-max-width";
+import PGcssMaxHeight from "../css-max-height";
+import PGcssMaxWidth from "../css-max-width";
 
-import PGcssMinHeight from "../../components/css-min-height";
-import PGcssMinWidth from "../../components/css-min-width";
+import PGcssMinHeight from "../css-min-height";
+import PGcssMinWidth from "../css-min-width";
 
-import PGcssPerspective from "../../components/css-perspective";
+import PGcssPerspective from "../css-perspective";
 
-import PGcssObjectFit from "../../components/css-object-fit";
-import PGcssOpacity from "../../components/css-opacity";
-import PGcssOutline from "../../components/css-outline";
-import PGcssOutlineOffset from "../../components/css-outline-offset";
-import PGcssOrder from "../../components/css-order";
+import PGcssObjectFit from "../css-object-fit";
+import PGcssOpacity from "../css-opacity";
+import PGcssOutline from "../css-outline";
+import PGcssOutlineOffset from "../css-outline-offset";
+import PGcssOrder from "../css-order";
 
-import PGcssOverflow from "../../components/css-overflow";
-import PGcssOverflowX from "../../components/css-overflow-x";
-import PGcssOverflowY from "../../components/css-overflow-y";
-import PGcssPadding from "../../components/css-padding";
+import PGcssOverflow from "../css-overflow";
+import PGcssOverflowX from "../css-overflow-x";
+import PGcssOverflowY from "../css-overflow-y";
+import PGcssPadding from "../css-padding";
 
-import PGcssPaddingTop from "../../components/css-padding-top";
-import PGcssPaddingRight from "../../components/css-padding-right";
-import PGcssPaddingBottom from "../../components/css-padding-bottom";
-import PGcssPaddingLeft from "../../components/css-padding-left";
-import PGcssPlaceItems from "../../components/css-place-items";
+import PGcssPaddingTop from "../css-padding-top";
+import PGcssPaddingRight from "../css-padding-right";
+import PGcssPaddingBottom from "../css-padding-bottom";
+import PGcssPaddingLeft from "../css-padding-left";
+import PGcssPlaceItems from "../css-place-items";
 
-import PGcssPosition from "../../components/css-position";
-import PGcssRight from "../../components/css-right";
-import PGcssGap from "../../components/css-gap";
-import PGcssColumnGap from "../../components/css-column-gap";
-import PGcssRowGap from "../../components/css-row-gap";
+import PGcssPosition from "../css-position";
+import PGcssRight from "../css-right";
+import PGcssGap from "../css-gap";
+import PGcssColumnGap from "../css-column-gap";
+import PGcssRowGap from "../css-row-gap";
 
-import PGcssTextAlign from "../../components/css-text-align";
+import PGcssTextAlign from "../css-text-align";
 
-import PGcssTransformOrigin from "../../components/css-transform-origin";
-import PGcssTextDecoration from "../../components/css-text-decoration";
-import PGcssTextIndent from "../../components/css-text-indent";
-import PGcssTextJustify from "../../components/css-text-justify";
-import PGcssTextOverflow from "../../components/css-text-overflow";
-import PGcssTextShadow from "../../components/css-text-shadow";
-import PGcssTextTransform from "../../components/css-text-transform";
-import PGcssTop from "../../components/css-top";
-import PGcssTextAlignLast from "../../components/css-text-align-last";
-import PGcssTableLayout from "../../components/css-table-layout";
-import PGcssEmptyCells from "../../components/css-empty-cells";
+import PGcssTransformOrigin from "../css-transform-origin";
+import PGcssTextDecoration from "../css-text-decoration";
+import PGcssTextIndent from "../css-text-indent";
+import PGcssTextJustify from "../css-text-justify";
+import PGcssTextOverflow from "../css-text-overflow";
+import PGcssTextShadow from "../css-text-shadow";
+import PGcssTextTransform from "../css-text-transform";
+import PGcssTop from "../css-top";
+import PGcssTextAlignLast from "../css-text-align-last";
+import PGcssTableLayout from "../css-table-layout";
+import PGcssEmptyCells from "../css-empty-cells";
 
-import PGcssTransform from "../../components/css-transform";
-import PGcssTransition from "../../components/css-transition";
-import PGcssVerticalAlign from "../../components/css-vertical-align";
-import PGcssVisibility from "../../components/css-visibility";
-import PGcssWidth from "../../components/css-width";
-import PGcssWhiteSpace from "../../components/css-white-space";
+import PGcssTransform from "../css-transform";
+import PGcssTransition from "../css-transition";
+import PGcssVerticalAlign from "../css-vertical-align";
+import PGcssVisibility from "../css-visibility";
+import PGcssWidth from "../css-width";
+import PGcssWhiteSpace from "../css-white-space";
 
-import PGcssWordBreak from "../../components/css-word-break";
-import PGcssWordSpacing from "../../components/css-word-spacing";
-import PGcssWritingMode from "../../components/css-writing-mode";
-import PGcssWordWrap from "../../components/css-word-wrap";
+import PGcssWordBreak from "../css-word-break";
+import PGcssWordSpacing from "../css-word-spacing";
+import PGcssWritingMode from "../css-writing-mode";
+import PGcssWordWrap from "../css-word-wrap";
 
-import PGcssZIndex from "../../components/css-z-index";
+import PGcssZIndex from "../css-z-index";
 
 var myStore = wp.data.select("postgrid-shop");
 import breakPoints from "../../breakpoints";
-import IconToggle from "../../components/icon-toggle";
+import IconToggle from "../icon-toggle";
 import PGcssAnimationName from "../css-animation-name";
 import PGcssWebkitTextFillColor from "../css-webkit-text-fill-color";
 import PGcssCaptionSide from "../css-caption-side";
@@ -961,8 +961,7 @@ function Html(props) {
 					props.obj[sudoScource] != undefined &&
 					Object.entries(props.obj[sudoScource])
 						.reverse()
-						.map(([key, value]) => {
-							return(
+						.map(([key, value]) => (
 							<>
 								{value[breakPointX] != undefined && (
 									<PanelBody
@@ -1808,7 +1807,7 @@ function Html(props) {
 									</PanelBody>
 								)}
 							</>
-						)})
+						))
 				}
 			</div>
 		</div>

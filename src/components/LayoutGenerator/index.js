@@ -41,7 +41,6 @@ const childSortableOptions = {
 };
 
 const elementTemplates = {
-
 	postTitle: {
 		type: "postTitle",
 		label: "Post Title",
@@ -51,12 +50,17 @@ const elementTemplates = {
 	postExcerpt: {
 		type: "postExcerpt",
 		label: "Post Excerpt",
-		options: { limitBy: "", limitCount: 20, readMoreText: "", readmoreLinkTo: "" },
+		options: {
+			limitBy: "",
+			limitCount: 20,
+			readMoreText: "",
+			readmoreLinkTo: "",
+		},
 		styles: {},
 		selectors: {
-			excerptText: { styles: {}, },
-			redmore: { styles: {}, }
-		}
+			excerptText: { styles: {} },
+			redmore: { styles: {} },
+		},
 	},
 	postThumbnail: {
 		type: "postThumbnail",
@@ -114,8 +118,6 @@ const elementTemplates = {
 		styles: {},
 	},
 
-
-
 	postTaxonomies: {
 		type: "postTaxonomies",
 		label: "Post Taxonomies",
@@ -153,7 +155,6 @@ const elementTemplates = {
 		options: { prefix: "" },
 		styles: {},
 	},
-
 
 	customText: {
 		type: "customText",
@@ -564,6 +565,22 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 							options: {},
 							styles: {},
 						},
+						{
+							id: "9",
+							type: "postExcerpt",
+							label: "Post Excerpt",
+							options: {
+								limitBy: "",
+								limitCount: 20,
+								readMoreText: "",
+								readmoreLinkTo: "",
+							},
+							styles: {},
+							selectors: {
+								excerptText: { styles: {} },
+								redmore: { styles: {} },
+							},
+						},
 					],
 					parent_id: 1,
 					styles: {},
@@ -582,8 +599,10 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 	useEffect(() => {
 		onChange(blocks);
 	}, [blocks]);
+	console.log(blocks);
 
 	const [selectedElement, setselectedElement] = useState(null);
+	console.log(selectedElement);
 	const [selectedElementId, setselectedElementId] = useState(null);
 	const [draggedTemplate, setDraggedTemplate] = useState(null);
 
@@ -789,6 +808,8 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 		setProperty(object);
 	}
 
+	
+
 	function onResetStyle(sudoSources, propertyType, setProperty) {
 		let obj = Object.assign({}, propertyType);
 		Object.entries(sudoSources).map((args) => {
@@ -796,10 +817,6 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 			if (obj[sudoScource] == undefined) {
 			} else {
 				obj[sudoScource] = {};
-				// var elementSelector = myStore.getElementSelector(
-				// 	sudoScource,
-				// 	contentSelector // Replace this selector if needed
-				// );
 			}
 		});
 		setProperty(obj);
@@ -1017,9 +1034,9 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 											// buttonTitle="Choose"
 											buttonTitle={
 												dateFormats[selectedElement.options.dateFormat] !=
-													undefined
+												undefined
 													? dateFormats[selectedElement.options.dateFormat]
-														.label
+															.label
 													: __("Choose", "post-grid")
 											}
 											onChange={(option) => {
@@ -1102,9 +1119,9 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 											// buttonTitle="Choose"
 											buttonTitle={
 												thumbSize[selectedElement.options.thumbnailSize] !=
-													undefined
+												undefined
 													? thumbSize[selectedElement.options.thumbnailSize]
-														.label
+															.label
 													: __("Choose", "post-grid")
 											}
 											onChange={(option) => {
@@ -1127,9 +1144,9 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 											// buttonTitle="Choose"
 											buttonTitle={
 												thumbSize[selectedElement.options.thumbnailSize] !=
-													undefined
+												undefined
 													? thumbSize[selectedElement.options.thumbnailSize]
-														.label
+															.label
 													: __("Choose", "post-grid")
 											}
 											onChange={(option) => {
@@ -1180,9 +1197,7 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 								</>
 							)}
 
-
-							<PanelBody title={"Styles"}
-								initialOpen={false}>
+							<PanelBody title={"Styles"} initialOpen={false}>
 								{selectedElement?.styles && (
 									<PGStyles
 										obj={selectedElement}
@@ -1230,84 +1245,221 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 								)}
 							</PanelBody>
 
-
-
-
 							{selectedElement?.selectors && (
-
 								<>
-									{Object.entries(selectedElement?.selectors).map(args => {
+									{Object.entries(selectedElement?.selectors).map(
+										([elementIndex, elementData]) => {
 
-										var elementIndex = args[0]
-										var elementData = args[1]
+											function onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												propertyType,
+												setProperty,
+												elementIndex = null
+											) {
+												let obj = structuredClone(propertyType); // Ensure deep copy
+												const path = [sudoScource, attr, breakPointX];
+												const updatedObject = myStore.updatePropertyDeep(obj, path, newVal);
 
+												setProperty((prev) => {
+													if (elementIndex === null) {
+														return {
+															...prev,
+															styles: updatedObject, // Update styles at the root level
+														};
+													} else {
+														return {
+															...prev,
+															selectors: {
+																...prev.selectors,
+																[elementIndex]: updatedObject, // Update styles inside selectors
+															},
+														};
+													}
+												});
+											}
 
-										return (
-											<PanelBody title={elementIndex}
-												initialOpen={false}>
-												<PGStyles
-													obj={selectedElement}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
+											function onAddStyle(
+												sudoScource,
+												key,
+												propertyType,
+												setProperty,
+												elementIndex
+											) {
+												let obj = structuredClone(propertyType);
+												const path = [sudoScource, key, breakPointX];
+												const updatedObject = myStore.addPropertyDeep(obj, path, "");
+												console.log(updatedObject,elementIndex)
+
+												setProperty((prev) => {
+													if (elementIndex === null) {
+														return {
+															...prev,
+															styles: updatedObject, // Update styles at the root level
+														};
+													} else {
+														return {
+															...prev,
+															selectors: {
+																...prev.selectors,
+																[elementIndex]: updatedObject, // Update styles inside selectors
+															},
+														};
+													}
+												});
+											}
+
+											function onResetStyle(
+												sudoSources,
+												propertyType,
+												setProperty,
+												elementIndex = null
+											) {
+												let obj = structuredClone(propertyType); // Deep copy to avoid mutations
+
+												Object.entries(sudoSources).forEach(([sudoSource]) => {
+													if (obj[sudoSource] !== undefined) {
+														obj[sudoSource] = {};
+													}
+												});
+
+												if (elementIndex === null) {
+													setProperty(obj); // Update root styles
+												} else {
+													setProperty((prev) => ({
+														...prev,
+														selectors: {
+															...prev.selectors,
+															[elementIndex]: obj, // Update styles inside a selector
+														},
+													}));
+												}
+											}
+
+											function onRemoveStyle(
+												sudoScource,
+												key,
+												propertyType,
+												setProperty,
+												elementIndex = null
+											) {
+												let obj = structuredClone(propertyType);
+
+												let updatedObject = myStore.deletePropertyDeep(obj, [
+													sudoScource,
+													key,
+													breakPointX,
+												]);
+												console.log(updatedObject);
+
+												let isEmpty =
+													Object.entries(updatedObject[sudoScource] || {})
+														.length === 0;
+												let finalObject = isEmpty
+													? myStore.deletePropertyDeep(updatedObject, [
 															sudoScource,
-															newVal,
-															attr,
-															elementData,
-															setselectedElement
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(
-															sudoScource,
-															key,
-															selectedElement,
-															setselectedElement
-														)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(
-															sudoScource,
-															key,
-															selectedElement,
-															setselectedElement
-														)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(
-															sudoSources,
-															selectedElement,
-															setselectedElement
-														)
-													}
-													onBulkAdd={(sudoSource, cssObj) =>
-														onBulkAddStyle(
-															sudoSource,
-															cssObj,
-															selectedElement,
-															setselectedElement
-														)
-													}
-												/>
-											</PanelBody>
-										)
+													  ])
+													: updatedObject;
 
-									})}
+												if (elementIndex === null) {
+													setProperty(finalObject);
+												} else {
+													setProperty((prev) => ({
+														...prev,
+														selectors: {
+															...prev.selectors,
+															[elementIndex]: finalObject,
+														},
+													}));
+												}
+											}
+
+											function onBulkAddStyle(
+												sudoSource,
+												cssObj,
+												propertyType,
+												setProperty,
+												elementIndex = null
+											) {
+												let obj = structuredClone(propertyType);
+
+												obj[sudoSource] = { ...obj[sudoSource], ...cssObj }; // Merge styles
+
+												if (elementIndex === null) {
+													setProperty(obj);
+												} else {
+													setProperty((prev) => ({
+														...prev,
+														selectors: {
+															...prev.selectors,
+															[elementIndex]: obj,
+														},
+													}));
+												}
+											}
+
+											return (
+												<PanelBody
+													title={elementIndex}
+													key={elementIndex}
+													initialOpen={false}>
+													{elementData?.styles && (
+														<PGStyles
+															obj={elementData}
+															onChange={(sudoScource, newVal, attr) =>
+																onChangeStyle(
+																	sudoScource,
+																	newVal,
+																	attr,
+																	elementData,
+																	setselectedElement,
+																	elementIndex
+																)
+															}
+															onAdd={(sudoScource, key) =>
+																onAddStyle(
+																	sudoScource,
+																	key,
+																	elementData,
+																	setselectedElement,
+																	elementIndex
+																)
+															}
+															onRemove={(sudoScource, key) =>
+																onRemoveStyle(
+																	sudoScource,
+																	key,
+																	elementData,
+																	setselectedElement,
+																	elementIndex
+																)
+															}
+															onReset={(sudoSources) =>
+																onResetStyle(
+																	sudoSources,
+																	elementData,
+																	setselectedElement,
+																	elementIndex
+																)
+															}
+															onBulkAdd={(sudoSource, cssObj) =>
+																onBulkAddStyle(
+																	sudoSource,
+																	cssObj,
+																	elementData,
+																	setselectedElement,
+																	elementIndex
+																)
+															}
+														/>
+													)}
+												</PanelBody>
+											);
+										}
+									)}
 								</>
-
-
 							)}
-
-
-
-
-
-
-
-
-
-
-
-
 						</div>
 					</PGtab>
 				</PGtabs>

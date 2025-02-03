@@ -9383,6 +9383,25 @@ function LayoutGenerator({
         content: "Creative Director",
         options: {},
         styles: {}
+      }, {
+        id: "9",
+        type: "postExcerpt",
+        label: "Post Excerpt",
+        options: {
+          limitBy: "",
+          limitCount: 20,
+          readMoreText: "",
+          readmoreLinkTo: ""
+        },
+        styles: {},
+        selectors: {
+          excerptText: {
+            styles: {}
+          },
+          redmore: {
+            styles: {}
+          }
+        }
       }],
       parent_id: 1,
       styles: {}
@@ -9395,7 +9414,9 @@ function LayoutGenerator({
   useEffect(() => {
     onChange(blocks);
   }, [blocks]);
+  console.log(blocks);
   const [selectedElement, setselectedElement] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  console.log(selectedElement);
   const [selectedElementId, setselectedElementId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [draggedTemplate, setDraggedTemplate] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   console.log(selectedElement);
@@ -9596,10 +9617,6 @@ function LayoutGenerator({
       var sudoScource = args[0];
       if (obj[sudoScource] == undefined) {} else {
         obj[sudoScource] = {};
-        // var elementSelector = myStore.getElementSelector(
-        // 	sudoScource,
-        // 	contentSelector // Replace this selector if needed
-        // );
       }
     });
     setProperty(obj);
@@ -9948,19 +9965,118 @@ function LayoutGenerator({
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, selectedElement, setselectedElement),
     onReset: sudoSources => onResetStyle(sudoSources, selectedElement, setselectedElement),
     onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, selectedElement, setselectedElement)
-  })), selectedElement?.selectors && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, Object.entries(selectedElement?.selectors).map(args => {
-    var elementIndex = args[0];
-    var elementData = args[1];
+  })), selectedElement?.selectors && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, Object.entries(selectedElement?.selectors).map(([elementIndex, elementData]) => {
+    function onChangeStyle(sudoScource, newVal, attr, propertyType, setProperty, elementIndex = null) {
+      let obj = structuredClone(propertyType); // Ensure deep copy
+      const path = [sudoScource, attr, breakPointX];
+      const updatedObject = myStore.updatePropertyDeep(obj, path, newVal);
+      setProperty(prev => {
+        if (elementIndex === null) {
+          return {
+            ...prev,
+            styles: updatedObject // Update styles at the root level
+          };
+        } else {
+          return {
+            ...prev,
+            selectors: {
+              ...prev.selectors,
+              [elementIndex]: updatedObject // Update styles inside selectors
+            }
+          };
+        }
+      });
+    }
+    function onAddStyle(sudoScource, key, propertyType, setProperty, elementIndex) {
+      let obj = structuredClone(propertyType);
+      const path = [sudoScource, key, breakPointX];
+      const updatedObject = myStore.addPropertyDeep(obj, path, "");
+      console.log(updatedObject, elementIndex);
+      setProperty(prev => {
+        if (elementIndex === null) {
+          return {
+            ...prev,
+            styles: updatedObject // Update styles at the root level
+          };
+        } else {
+          return {
+            ...prev,
+            selectors: {
+              ...prev.selectors,
+              [elementIndex]: updatedObject // Update styles inside selectors
+            }
+          };
+        }
+      });
+    }
+    function onResetStyle(sudoSources, propertyType, setProperty, elementIndex = null) {
+      let obj = structuredClone(propertyType); // Deep copy to avoid mutations
+
+      Object.entries(sudoSources).forEach(([sudoSource]) => {
+        if (obj[sudoSource] !== undefined) {
+          obj[sudoSource] = {};
+        }
+      });
+      if (elementIndex === null) {
+        setProperty(obj); // Update root styles
+      } else {
+        setProperty(prev => ({
+          ...prev,
+          selectors: {
+            ...prev.selectors,
+            [elementIndex]: obj // Update styles inside a selector
+          }
+        }));
+      }
+    }
+    function onRemoveStyle(sudoScource, key, propertyType, setProperty, elementIndex = null) {
+      let obj = structuredClone(propertyType);
+      let updatedObject = myStore.deletePropertyDeep(obj, [sudoScource, key, breakPointX]);
+      console.log(updatedObject);
+      let isEmpty = Object.entries(updatedObject[sudoScource] || {}).length === 0;
+      let finalObject = isEmpty ? myStore.deletePropertyDeep(updatedObject, [sudoScource]) : updatedObject;
+      if (elementIndex === null) {
+        setProperty(finalObject);
+      } else {
+        setProperty(prev => ({
+          ...prev,
+          selectors: {
+            ...prev.selectors,
+            [elementIndex]: finalObject
+          }
+        }));
+      }
+    }
+    function onBulkAddStyle(sudoSource, cssObj, propertyType, setProperty, elementIndex = null) {
+      let obj = structuredClone(propertyType);
+      obj[sudoSource] = {
+        ...obj[sudoSource],
+        ...cssObj
+      }; // Merge styles
+
+      if (elementIndex === null) {
+        setProperty(obj);
+      } else {
+        setProperty(prev => ({
+          ...prev,
+          selectors: {
+            ...prev.selectors,
+            [elementIndex]: obj
+          }
+        }));
+      }
+    }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
       title: elementIndex,
+      key: elementIndex,
       initialOpen: false
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      obj: selectedElement,
-      onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, elementData, setselectedElement),
-      onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, selectedElement, setselectedElement),
-      onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, selectedElement, setselectedElement),
-      onReset: sudoSources => onResetStyle(sudoSources, selectedElement, setselectedElement),
-      onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, selectedElement, setselectedElement)
+    }, elementData?.styles && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      obj: elementData,
+      onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, elementData, setselectedElement, elementIndex),
+      onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, elementData, setselectedElement, elementIndex),
+      onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, elementData, setselectedElement, elementIndex),
+      onReset: sudoSources => onResetStyle(sudoSources, elementData, setselectedElement, elementIndex),
+      onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, elementData, setselectedElement, elementIndex)
     }));
   })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex-1 justify-between max-w-[450px] w-full min-h-full "
@@ -49408,384 +49524,386 @@ function Html(props) {
     className: "my-5 pg-setting-input-text "
   },
   //Object.entries(cssAtts).map(([key, value]) => (
-  props.obj[sudoScource] != undefined && Object.entries(props.obj[sudoScource]).reverse().map(([key, value]) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, value[breakPointX] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-    title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RemoveQueryPram, {
-      title: cssProps[key] != undefined ? cssProps[key].label : key,
-      sudoScource: sudoScource,
-      keyX: key
-    }),
-    initialOpen: false,
-    key: key
-  }, key == "alignContent" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_align_content__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "alignItems" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_align_items__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "animationName" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_css_animation_name__WEBPACK_IMPORTED_MODULE_130__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "alignSelf" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_align_self__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "aspectRatio" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_aspect_ratio__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backfaceVisibility" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_backface_visibility__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundAttachment" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_attachment__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundBlendMode" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_blend_mode__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundImage" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_image__WEBPACK_IMPORTED_MODULE_17__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundClip" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_clip__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "bgColor" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_color__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundColor" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_color__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundOrigin" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_origin__WEBPACK_IMPORTED_MODULE_18__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundRepeat" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_repeat__WEBPACK_IMPORTED_MODULE_20__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundSize" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_size__WEBPACK_IMPORTED_MODULE_21__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backgroundPosition" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_position__WEBPACK_IMPORTED_MODULE_19__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "boxShadow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_box_shadow__WEBPACK_IMPORTED_MODULE_33__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "border" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border__WEBPACK_IMPORTED_MODULE_22__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "borderTop" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_top__WEBPACK_IMPORTED_MODULE_23__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "borderRight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_right__WEBPACK_IMPORTED_MODULE_24__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "borderBottom" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_bottom__WEBPACK_IMPORTED_MODULE_25__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "borderLeft" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_left__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "borderRadius" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_radius__WEBPACK_IMPORTED_MODULE_27__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "borderCollapse" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_collapse__WEBPACK_IMPORTED_MODULE_30__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "borderSpacing" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_spacing__WEBPACK_IMPORTED_MODULE_31__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "borderImage" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_image__WEBPACK_IMPORTED_MODULE_28__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "backdropFilter" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_backdrop_filter__WEBPACK_IMPORTED_MODULE_32__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "bottom" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_bottom__WEBPACK_IMPORTED_MODULE_29__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "cursor" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_cursor__WEBPACK_IMPORTED_MODULE_37__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "content" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_content__WEBPACK_IMPORTED_MODULE_38__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "counterIncrement" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_counter_increment__WEBPACK_IMPORTED_MODULE_39__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "counterReset" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_counter_reset__WEBPACK_IMPORTED_MODULE_40__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "counterSet" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_counter_set__WEBPACK_IMPORTED_MODULE_41__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "columnCount" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_column_count__WEBPACK_IMPORTED_MODULE_42__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "columnRule" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_column_rule__WEBPACK_IMPORTED_MODULE_43__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "clip" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_clip__WEBPACK_IMPORTED_MODULE_44__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "top" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_top__WEBPACK_IMPORTED_MODULE_113__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "left" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_left__WEBPACK_IMPORTED_MODULE_72__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "right" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_right__WEBPACK_IMPORTED_MODULE_101__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "boxSizing" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_box_sizing__WEBPACK_IMPORTED_MODULE_34__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "clear" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_clear__WEBPACK_IMPORTED_MODULE_35__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "direction" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_direction__WEBPACK_IMPORTED_MODULE_46__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "color" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_color__WEBPACK_IMPORTED_MODULE_36__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "filter" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_filter__WEBPACK_IMPORTED_MODULE_47__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "float" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_float__WEBPACK_IMPORTED_MODULE_48__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "fontFamily" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_family__WEBPACK_IMPORTED_MODULE_49__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "fontSize" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_size__WEBPACK_IMPORTED_MODULE_50__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "fontStyle" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_style__WEBPACK_IMPORTED_MODULE_52__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "userSelect" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_user_select__WEBPACK_IMPORTED_MODULE_59__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "fontStretch" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_stretch__WEBPACK_IMPORTED_MODULE_51__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "fontWeight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_weight__WEBPACK_IMPORTED_MODULE_53__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "fontVariantCaps" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_variant_caps__WEBPACK_IMPORTED_MODULE_54__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "flexWrap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_wrap__WEBPACK_IMPORTED_MODULE_55__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "flexDirection" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_direction__WEBPACK_IMPORTED_MODULE_56__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "flexShrink" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_shrink__WEBPACK_IMPORTED_MODULE_57__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "flexBasis" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_basis__WEBPACK_IMPORTED_MODULE_58__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "flexFlow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_flow__WEBPACK_IMPORTED_MODULE_61__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "flexGrow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_grow__WEBPACK_IMPORTED_MODULE_60__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "gridAutoFlow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_auto_flow__WEBPACK_IMPORTED_MODULE_62__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "gridColumnEnd" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_column_end__WEBPACK_IMPORTED_MODULE_63__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "gridColumnStart" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_column_start__WEBPACK_IMPORTED_MODULE_64__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "gridRowEnd" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_row_end__WEBPACK_IMPORTED_MODULE_65__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "gridRowStart" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_row_start__WEBPACK_IMPORTED_MODULE_66__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "gridTemplateColumns" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_template_columns__WEBPACK_IMPORTED_MODULE_67__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "gridTemplateRows" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_template_rows__WEBPACK_IMPORTED_MODULE_68__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "letterSpacing" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_letter_spacing__WEBPACK_IMPORTED_MODULE_73__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "lineHeight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_line_height__WEBPACK_IMPORTED_MODULE_74__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "listStyle" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_list_style__WEBPACK_IMPORTED_MODULE_75__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "justifyContent" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_justify_content__WEBPACK_IMPORTED_MODULE_71__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "objectFit" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_object_fit__WEBPACK_IMPORTED_MODULE_86__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "opacity" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_opacity__WEBPACK_IMPORTED_MODULE_87__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "outline" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_outline__WEBPACK_IMPORTED_MODULE_88__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "outlineOffset" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_outline_offset__WEBPACK_IMPORTED_MODULE_89__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "position" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_position__WEBPACK_IMPORTED_MODULE_100__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "tableLayout" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_table_layout__WEBPACK_IMPORTED_MODULE_115__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "emptyCells" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_empty_cells__WEBPACK_IMPORTED_MODULE_116__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "captionSide" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_css_caption_side__WEBPACK_IMPORTED_MODULE_132__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "gap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_gap__WEBPACK_IMPORTED_MODULE_102__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "columnGap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_column_gap__WEBPACK_IMPORTED_MODULE_103__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "rowGap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_row_gap__WEBPACK_IMPORTED_MODULE_104__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "transition" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_transition__WEBPACK_IMPORTED_MODULE_118__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "transform" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_transform__WEBPACK_IMPORTED_MODULE_117__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "transformOrigin" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_transform_origin__WEBPACK_IMPORTED_MODULE_106__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "textIndent" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_indent__WEBPACK_IMPORTED_MODULE_108__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "textJustify" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_justify__WEBPACK_IMPORTED_MODULE_109__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "textOverflow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_overflow__WEBPACK_IMPORTED_MODULE_110__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "textTransform" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_transform__WEBPACK_IMPORTED_MODULE_112__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "textDecoration" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_decoration__WEBPACK_IMPORTED_MODULE_107__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "textShadow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_shadow__WEBPACK_IMPORTED_MODULE_111__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "textAlign" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_105__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "textAlignLast" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_align_last__WEBPACK_IMPORTED_MODULE_114__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "visibility" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_visibility__WEBPACK_IMPORTED_MODULE_120__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "wordBreak" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_word_break__WEBPACK_IMPORTED_MODULE_123__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "wordSpacing" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_word_spacing__WEBPACK_IMPORTED_MODULE_124__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "zIndex" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_z_index__WEBPACK_IMPORTED_MODULE_127__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "padding" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding__WEBPACK_IMPORTED_MODULE_94__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "paddingTop" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding_top__WEBPACK_IMPORTED_MODULE_95__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "paddingRight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding_right__WEBPACK_IMPORTED_MODULE_96__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "paddingBottom" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding_bottom__WEBPACK_IMPORTED_MODULE_97__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "paddingLeft" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding_left__WEBPACK_IMPORTED_MODULE_98__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "placeItems" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_place_items__WEBPACK_IMPORTED_MODULE_99__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "marginTop" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin_top__WEBPACK_IMPORTED_MODULE_77__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "marginRight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin_right__WEBPACK_IMPORTED_MODULE_78__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "marginBottom" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin_bottom__WEBPACK_IMPORTED_MODULE_79__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "marginLeft" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin_left__WEBPACK_IMPORTED_MODULE_80__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "margin" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin__WEBPACK_IMPORTED_MODULE_76__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "maxHeight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_max_height__WEBPACK_IMPORTED_MODULE_81__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "maxWidth" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_max_width__WEBPACK_IMPORTED_MODULE_82__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "minHeight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_min_height__WEBPACK_IMPORTED_MODULE_83__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "minWidth" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_min_width__WEBPACK_IMPORTED_MODULE_84__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "display" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_45__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "width" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_width__WEBPACK_IMPORTED_MODULE_121__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "height" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_height__WEBPACK_IMPORTED_MODULE_70__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "verticalAlign" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_vertical_align__WEBPACK_IMPORTED_MODULE_119__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "overflow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_overflow__WEBPACK_IMPORTED_MODULE_91__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "order" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_order__WEBPACK_IMPORTED_MODULE_90__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "overflowX" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_overflow_x__WEBPACK_IMPORTED_MODULE_92__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "overflowY" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_overflow_y__WEBPACK_IMPORTED_MODULE_93__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "writingMode" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_writing_mode__WEBPACK_IMPORTED_MODULE_125__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "wordWrap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_word_wrap__WEBPACK_IMPORTED_MODULE_126__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "perspective" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_perspective__WEBPACK_IMPORTED_MODULE_85__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "whiteSpace" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_white_space__WEBPACK_IMPORTED_MODULE_122__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }), key == "-webkit-text-fill-color" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_css_webkit_text_fill_color__WEBPACK_IMPORTED_MODULE_131__["default"], {
-    val: value[breakPointX],
-    onChange: onChangeCssVal
-  }))))));
+  props.obj[sudoScource] != undefined && Object.entries(props.obj[sudoScource]).reverse().map(([key, value]) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, value[breakPointX] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+      title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RemoveQueryPram, {
+        title: cssProps[key] != undefined ? cssProps[key].label : key,
+        sudoScource: sudoScource,
+        keyX: key
+      }),
+      initialOpen: false,
+      key: key
+    }, key == "alignContent" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_align_content__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "alignItems" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_align_items__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "animationName" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_css_animation_name__WEBPACK_IMPORTED_MODULE_130__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "alignSelf" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_align_self__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "aspectRatio" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_aspect_ratio__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backfaceVisibility" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_backface_visibility__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundAttachment" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_attachment__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundBlendMode" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_blend_mode__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundImage" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_image__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundClip" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_clip__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "bgColor" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_color__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundColor" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_color__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundOrigin" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_origin__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundRepeat" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_repeat__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundSize" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_size__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backgroundPosition" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_background_position__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "boxShadow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_box_shadow__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "border" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "borderTop" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_top__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "borderRight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_right__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "borderBottom" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_bottom__WEBPACK_IMPORTED_MODULE_25__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "borderLeft" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_left__WEBPACK_IMPORTED_MODULE_26__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "borderRadius" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_radius__WEBPACK_IMPORTED_MODULE_27__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "borderCollapse" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_collapse__WEBPACK_IMPORTED_MODULE_30__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "borderSpacing" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_spacing__WEBPACK_IMPORTED_MODULE_31__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "borderImage" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_border_image__WEBPACK_IMPORTED_MODULE_28__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "backdropFilter" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_backdrop_filter__WEBPACK_IMPORTED_MODULE_32__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "bottom" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_bottom__WEBPACK_IMPORTED_MODULE_29__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "cursor" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_cursor__WEBPACK_IMPORTED_MODULE_37__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "content" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_content__WEBPACK_IMPORTED_MODULE_38__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "counterIncrement" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_counter_increment__WEBPACK_IMPORTED_MODULE_39__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "counterReset" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_counter_reset__WEBPACK_IMPORTED_MODULE_40__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "counterSet" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_counter_set__WEBPACK_IMPORTED_MODULE_41__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "columnCount" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_column_count__WEBPACK_IMPORTED_MODULE_42__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "columnRule" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_column_rule__WEBPACK_IMPORTED_MODULE_43__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "clip" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_clip__WEBPACK_IMPORTED_MODULE_44__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "top" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_top__WEBPACK_IMPORTED_MODULE_113__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "left" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_left__WEBPACK_IMPORTED_MODULE_72__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "right" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_right__WEBPACK_IMPORTED_MODULE_101__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "boxSizing" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_box_sizing__WEBPACK_IMPORTED_MODULE_34__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "clear" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_clear__WEBPACK_IMPORTED_MODULE_35__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "direction" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_direction__WEBPACK_IMPORTED_MODULE_46__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "color" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_color__WEBPACK_IMPORTED_MODULE_36__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "filter" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_filter__WEBPACK_IMPORTED_MODULE_47__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "float" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_float__WEBPACK_IMPORTED_MODULE_48__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "fontFamily" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_family__WEBPACK_IMPORTED_MODULE_49__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "fontSize" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_size__WEBPACK_IMPORTED_MODULE_50__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "fontStyle" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_style__WEBPACK_IMPORTED_MODULE_52__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "userSelect" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_user_select__WEBPACK_IMPORTED_MODULE_59__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "fontStretch" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_stretch__WEBPACK_IMPORTED_MODULE_51__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "fontWeight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_weight__WEBPACK_IMPORTED_MODULE_53__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "fontVariantCaps" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_font_variant_caps__WEBPACK_IMPORTED_MODULE_54__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "flexWrap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_wrap__WEBPACK_IMPORTED_MODULE_55__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "flexDirection" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_direction__WEBPACK_IMPORTED_MODULE_56__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "flexShrink" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_shrink__WEBPACK_IMPORTED_MODULE_57__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "flexBasis" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_basis__WEBPACK_IMPORTED_MODULE_58__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "flexFlow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_flow__WEBPACK_IMPORTED_MODULE_61__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "flexGrow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_flex_grow__WEBPACK_IMPORTED_MODULE_60__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "gridAutoFlow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_auto_flow__WEBPACK_IMPORTED_MODULE_62__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "gridColumnEnd" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_column_end__WEBPACK_IMPORTED_MODULE_63__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "gridColumnStart" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_column_start__WEBPACK_IMPORTED_MODULE_64__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "gridRowEnd" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_row_end__WEBPACK_IMPORTED_MODULE_65__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "gridRowStart" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_row_start__WEBPACK_IMPORTED_MODULE_66__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "gridTemplateColumns" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_template_columns__WEBPACK_IMPORTED_MODULE_67__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "gridTemplateRows" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_grid_template_rows__WEBPACK_IMPORTED_MODULE_68__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "letterSpacing" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_letter_spacing__WEBPACK_IMPORTED_MODULE_73__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "lineHeight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_line_height__WEBPACK_IMPORTED_MODULE_74__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "listStyle" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_list_style__WEBPACK_IMPORTED_MODULE_75__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "justifyContent" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_justify_content__WEBPACK_IMPORTED_MODULE_71__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "objectFit" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_object_fit__WEBPACK_IMPORTED_MODULE_86__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "opacity" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_opacity__WEBPACK_IMPORTED_MODULE_87__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "outline" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_outline__WEBPACK_IMPORTED_MODULE_88__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "outlineOffset" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_outline_offset__WEBPACK_IMPORTED_MODULE_89__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "position" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_position__WEBPACK_IMPORTED_MODULE_100__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "tableLayout" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_table_layout__WEBPACK_IMPORTED_MODULE_115__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "emptyCells" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_empty_cells__WEBPACK_IMPORTED_MODULE_116__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "captionSide" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_css_caption_side__WEBPACK_IMPORTED_MODULE_132__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "gap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_gap__WEBPACK_IMPORTED_MODULE_102__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "columnGap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_column_gap__WEBPACK_IMPORTED_MODULE_103__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "rowGap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_row_gap__WEBPACK_IMPORTED_MODULE_104__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "transition" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_transition__WEBPACK_IMPORTED_MODULE_118__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "transform" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_transform__WEBPACK_IMPORTED_MODULE_117__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "transformOrigin" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_transform_origin__WEBPACK_IMPORTED_MODULE_106__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "textIndent" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_indent__WEBPACK_IMPORTED_MODULE_108__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "textJustify" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_justify__WEBPACK_IMPORTED_MODULE_109__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "textOverflow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_overflow__WEBPACK_IMPORTED_MODULE_110__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "textTransform" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_transform__WEBPACK_IMPORTED_MODULE_112__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "textDecoration" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_decoration__WEBPACK_IMPORTED_MODULE_107__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "textShadow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_shadow__WEBPACK_IMPORTED_MODULE_111__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "textAlign" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_105__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "textAlignLast" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_text_align_last__WEBPACK_IMPORTED_MODULE_114__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "visibility" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_visibility__WEBPACK_IMPORTED_MODULE_120__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "wordBreak" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_word_break__WEBPACK_IMPORTED_MODULE_123__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "wordSpacing" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_word_spacing__WEBPACK_IMPORTED_MODULE_124__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "zIndex" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_z_index__WEBPACK_IMPORTED_MODULE_127__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "padding" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding__WEBPACK_IMPORTED_MODULE_94__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "paddingTop" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding_top__WEBPACK_IMPORTED_MODULE_95__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "paddingRight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding_right__WEBPACK_IMPORTED_MODULE_96__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "paddingBottom" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding_bottom__WEBPACK_IMPORTED_MODULE_97__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "paddingLeft" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_padding_left__WEBPACK_IMPORTED_MODULE_98__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "placeItems" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_place_items__WEBPACK_IMPORTED_MODULE_99__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "marginTop" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin_top__WEBPACK_IMPORTED_MODULE_77__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "marginRight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin_right__WEBPACK_IMPORTED_MODULE_78__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "marginBottom" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin_bottom__WEBPACK_IMPORTED_MODULE_79__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "marginLeft" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin_left__WEBPACK_IMPORTED_MODULE_80__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "margin" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_margin__WEBPACK_IMPORTED_MODULE_76__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "maxHeight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_max_height__WEBPACK_IMPORTED_MODULE_81__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "maxWidth" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_max_width__WEBPACK_IMPORTED_MODULE_82__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "minHeight" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_min_height__WEBPACK_IMPORTED_MODULE_83__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "minWidth" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_min_width__WEBPACK_IMPORTED_MODULE_84__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "display" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_45__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "width" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_width__WEBPACK_IMPORTED_MODULE_121__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "height" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_height__WEBPACK_IMPORTED_MODULE_70__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "verticalAlign" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_vertical_align__WEBPACK_IMPORTED_MODULE_119__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "overflow" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_overflow__WEBPACK_IMPORTED_MODULE_91__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "order" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_order__WEBPACK_IMPORTED_MODULE_90__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "overflowX" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_overflow_x__WEBPACK_IMPORTED_MODULE_92__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "overflowY" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_overflow_y__WEBPACK_IMPORTED_MODULE_93__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "writingMode" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_writing_mode__WEBPACK_IMPORTED_MODULE_125__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "wordWrap" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_word_wrap__WEBPACK_IMPORTED_MODULE_126__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "perspective" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_perspective__WEBPACK_IMPORTED_MODULE_85__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "whiteSpace" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_css_white_space__WEBPACK_IMPORTED_MODULE_122__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == "-webkit-text-fill-color" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_css_webkit_text_fill_color__WEBPACK_IMPORTED_MODULE_131__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    })));
+  })));
 }
 class PGStyles extends Component {
   constructor(props) {
@@ -65560,7 +65678,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = '4.74.0'; // x-release-please-version
+const VERSION = '4.76.0'; // x-release-please-version
 //# sourceMappingURL=version.mjs.map
 
 /***/ })
