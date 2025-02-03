@@ -8943,8 +8943,12 @@ const elementTemplates = {
     },
     styles: {},
     selectors: {
-      excerptText: {},
-      redmore: {}
+      excerptText: {
+        styles: {}
+      },
+      redmore: {
+        styles: {}
+      }
     }
   },
   postThumbnail: {
@@ -9934,21 +9938,24 @@ function LayoutGenerator({
     onChange: newVal => {
       handleChange("target", newVal);
     }
-  }))), JSON.stringify(selectedElement), selectedElement?.styles && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: "Styles",
+    initialOpen: false
+  }, selectedElement?.styles && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_7__["default"], {
     obj: selectedElement,
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, selectedElement, setselectedElement),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, selectedElement, setselectedElement),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, selectedElement, setselectedElement),
     onReset: sudoSources => onResetStyle(sudoSources, selectedElement, setselectedElement),
     onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, selectedElement, setselectedElement)
-  }), JSON.stringify(selectedElement?.selectors), selectedElement?.selectors && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, Object.entries(selectedElement?.selectors).map(args => {
+  })), selectedElement?.selectors && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, Object.entries(selectedElement?.selectors).map(args => {
     var elementIndex = args[0];
     var elementData = args[1];
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
       title: elementIndex,
       initialOpen: false
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      obj: elementData,
+      obj: selectedElement,
       onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, elementData, setselectedElement),
       onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, selectedElement, setselectedElement),
       onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, selectedElement, setselectedElement),

@@ -54,8 +54,8 @@ const elementTemplates = {
 		options: { limitBy: "", limitCount: 20, readMoreText: "", readmoreLinkTo: "" },
 		styles: {},
 		selectors: {
-			excerptText: {},
-			redmore: {}
+			excerptText: { styles: {}, },
+			redmore: { styles: {}, }
 		}
 	},
 	postThumbnail: {
@@ -1180,56 +1180,57 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 								</>
 							)}
 
-							{JSON.stringify(selectedElement)}
+
+							<PanelBody title={"Styles"}
+								initialOpen={false}>
+								{selectedElement?.styles && (
+									<PGStyles
+										obj={selectedElement}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												selectedElement,
+												setselectedElement
+											)
+										}
+										onAdd={(sudoScource, key) =>
+											onAddStyle(
+												sudoScource,
+												key,
+												selectedElement,
+												setselectedElement
+											)
+										}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(
+												sudoScource,
+												key,
+												selectedElement,
+												setselectedElement
+											)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(
+												sudoSources,
+												selectedElement,
+												setselectedElement
+											)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(
+												sudoSource,
+												cssObj,
+												selectedElement,
+												setselectedElement
+											)
+										}
+									/>
+								)}
+							</PanelBody>
 
 
-							{selectedElement?.styles && (
-								<PGStyles
-									obj={selectedElement}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											selectedElement,
-											setselectedElement
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(
-											sudoScource,
-											key,
-											selectedElement,
-											setselectedElement
-										)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(
-											sudoScource,
-											key,
-											selectedElement,
-											setselectedElement
-										)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(
-											sudoSources,
-											selectedElement,
-											setselectedElement
-										)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(
-											sudoSource,
-											cssObj,
-											selectedElement,
-											setselectedElement
-										)
-									}
-								/>
-							)}
-
-							{JSON.stringify(selectedElement?.selectors)}
 
 
 							{selectedElement?.selectors && (
@@ -1245,7 +1246,7 @@ export default function LayoutGenerator({ onChange, layouts, postData }) {
 											<PanelBody title={elementIndex}
 												initialOpen={false}>
 												<PGStyles
-													obj={elementData}
+													obj={selectedElement}
 													onChange={(sudoScource, newVal, attr) =>
 														onChangeStyle(
 															sudoScource,
