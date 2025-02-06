@@ -39,6 +39,7 @@ import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
+import TestimonialItems from "../items";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -596,293 +597,14 @@ function Html(props) {
 
 			{props.postData.post_content != null && (
 				<>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Items"
-						initialOpen={true}>
-						<div className="my-4 flex items-center justify-between ">
-							<div className=" flex items-center  gap-2">
-								<PGDropdown
-									position="bottom right"
-									variant="secondary"
-									buttonTitle={
-										globalOptions?.itemSource == undefined
-											? "Item Source"
-											: itemSources[globalOptions?.itemSource]?.label
-									}
-									options={itemSources}
-									onChange={(option, index) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.itemSource = option.value;
-										setglobalOptions(globalOptionsX);
-									}}
-									values=""></PGDropdown>
-							</div>
-
-							<div className="flex items-center  gap-2">
-								{globalOptions?.itemSource == "posts" && (
-									<>
-										<span
-											className="cursor-pointer"
-											title="Click to know more"
-											onClick={() => {
-												setHelp({
-													id: "addPostQuery",
-													enable: true,
-												});
-											}}>
-											<Icon icon={help} />
-										</span>
-										<PGDropdown
-											position="bottom right"
-											variant="secondary"
-											buttonTitle={"Add Query"}
-											options={postQueryArgs}
-											onChange={(option, index) => {
-												var itemQueryArgsX = { ...itemQueryArgs };
-												itemQueryArgsX[option.id] = {
-													id: option.id,
-													value: option.value,
-												};
-												setitemQueryArgs(itemQueryArgsX);
-											}}
-											values=""></PGDropdown>
-									</>
-								)}
-
-
-							</div>
-						</div>
-						{globalOptions?.itemSource == "posts" && (
-							<div>
-								{Object.entries(itemQueryArgs)?.map((prams) => {
-									var index = prams[0];
-									var item = prams[1];
-
-									return (
-										<div key={index} className="my-4 flex gap-2 items-center">
-											<span
-												className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white"
-												onClick={() => handleDelete(item.id)}>
-												<Icon fill={"#fff"} icon={close} size="20" />
-											</span>
-											{item.id == "postType" && (
-												<div className="flex items-center justify-between flex-1">
-													<label htmlFor="">Post Type</label>
-													<PGinputSelect
-														val={item.value}
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														options={postTypes}
-														multiple={true}
-														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, item.id);
-														}}
-													/>
-												</div>
-											)}
-											{item.id == "postStatus" && (
-												<div
-													className={
-														item.id == "postStatus"
-															? "flex items-center justify-between flex-1"
-															: "hidden"
-													}>
-													<label htmlFor="">Post Status</label>
-													<PGinputSelect
-														val={item.value}
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														options={[
-															{ label: "Publish", value: "publish" },
-															{ label: "Pending", value: "pending" },
-															{ label: "Draft", value: "draft" },
-															{ label: "Auto draft", value: "auto-draft" },
-															{ label: "Future", value: "future" },
-															{ label: "Private", value: "private" },
-															{ label: "Inherit", value: "inherit" },
-															{ label: "Trash", value: "trash" },
-															{ label: "Any", value: "any" },
-														]}
-														multiple={true}
-														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, item.id);
-														}}
-													/>
-												</div>
-											)}
-											{item.id == "order" && (
-												<div
-													className={
-														item.id == "order"
-															? "flex items-center justify-between flex-1"
-															: "hidden"
-													}>
-													<label htmlFor="">Order</label>
-													<PGinputSelect
-														label=""
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														val={item.value}
-														options={[
-															{ label: "Ascending", value: "ASC" },
-															{ label: "Descending", value: "DESC" },
-														]}
-														multiple={false}
-														onChange={(newVal) =>
-															updatePostQueryArgs(newVal, index)
-														}
-													/>
-												</div>
-											)}
-											{item.id == "orderby" && (
-												<div
-													className={
-														item.id == "orderby"
-															? "flex items-center justify-between flex-1"
-															: "hidden"
-													}>
-													<label htmlFor="">Order By</label>
-													<PGinputSelect
-														val={item.value}
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														options={[
-															{
-																label: __("None", "woocommerce-products-slider"),
-																value: "none",
-															},
-															{ label: "ID", value: "ID" },
-															{ label: "Author", value: "author" },
-															{ label: "Title", value: "title" },
-															{ label: "Name", value: "name" },
-															{ label: "Type", value: "type" },
-															{ label: "Date", value: "date" },
-															{ label: "Modified", value: "modified" },
-															{ label: "Parent", value: "parent" },
-															{ label: "Random", value: "rand" },
-															{
-																label: "Comment Count",
-																value: "comment_count",
-															},
-															{ label: "Relevance", value: "relevance" },
-															{ label: "Menu Order", value: "menu_order" },
-															{
-																label: "Meta Value(String)",
-																value: "meta_value",
-															},
-															{
-																label: "Meta Value(Number)",
-																value: "meta_value_num",
-															},
-															{ label: "post__in", value: "post__in" },
-															{
-																label: "post_name__in",
-																value: "post_name__in",
-															},
-															{
-																label: "post_parent__in",
-																value: "post_parent__in",
-															},
-														]}
-														multiple={true}
-														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, item.id);
-														}}
-													/>
-												</div>
-											)}
-											{item.id == "metaKey" && (
-												<div className="flex items-center justify-between flex-1">
-													<label htmlFor="">Meta Key</label>
-													<PGinputText
-														label=""
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														value={item.value}
-														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, item.id);
-														}}
-													/>
-												</div>
-											)}
-											{item.id == "metaValue" && (
-												<div className="flex items-center justify-between flex-1">
-													<label htmlFor="">Meta Value</label>
-													<PGinputText
-														label=""
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														value={item.value}
-														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, item.id);
-														}}
-													/>
-												</div>
-											)}
-											{item.id == "metaValueNum" && (
-												<div className="flex items-center justify-between flex-1">
-													<label htmlFor="">Meta Value Number</label>
-													<PGinputText
-														label=""
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														value={item.value}
-														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, item.id);
-														}}
-													/>
-												</div>
-											)}
-											{item.id == "s" && (
-												<div className="flex items-center justify-between flex-1">
-													<label htmlFor="">Keyword</label>
-													<PGinputText
-														label=""
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														value={item.value}
-														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, item.id);
-														}}
-													/>
-												</div>
-											)}
-											{item.id == "metaCompare" && (
-												<div
-													className={
-														item.id == "metaCompare"
-															? "flex items-center justify-between flex-1"
-															: "hidden"
-													}>
-													<label htmlFor="">Meta Compare</label>
-													<PGinputSelect
-														val={item.value}
-														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
-														options={[
-															{ label: "=", value: "=" },
-															{ label: "!=", value: "!=" },
-															{ label: ">", value: ">" },
-															{ label: ">=", value: ">=" },
-															{ label: "<", value: "<" },
-															{ label: "<=", value: "<=" },
-															{ label: "LIKE", value: "LIKE" },
-															{ label: "NOT LIKE", value: "NOT LIKE" },
-															{ label: "IN", value: "IN" },
-															{ label: "NOT IN", value: "NOT IN" },
-															{ label: "BETWEEN", value: "BETWEEN" },
-															{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
-															{ label: "NOT EXISTS", value: "NOT EXISTS" },
-															{ label: "REGEXP", value: "REGEXP" },
-															{ label: "NOT REGEXP", value: "NOT REGEXP" },
-															{ label: "RLIKE", value: "RLIKE" },
-														]}
-														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, item.id);
-														}}
-													/>
-												</div>
-											)}
-										</div>
-									);
-								})}
-							</div>
-						)}
-
-
-					</PanelBody>
+					<TestimonialItems
+						itemsState={{ items, setitems }}
+						globalOptionsState={{ globalOptions, setglobalOptions }}
+						itemQueryState={{ itemQueryArgs, setitemQueryArgs }}
+						customerData={customerData}
+						setHelp={setHelp}
+						addNotifications={addNotifications}
+					/>
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="WCPS Settings"
@@ -1002,7 +724,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1075,7 +797,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1148,7 +870,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1223,7 +945,7 @@ function Html(props) {
 									activeTab="options"
 									orientation="horizontal"
 									activeClass="active-tab"
-									onSelect={(tabName) => { }}
+									onSelect={(tabName) => {}}
 									tabs={[
 										{
 											name: "options",
@@ -1249,7 +971,7 @@ function Html(props) {
 												options={paginationTypes}
 												buttonTitle={
 													paginationTypes[paginationWrap.options.type] !=
-														undefined
+													undefined
 														? paginationTypes[paginationWrap.options.type].label
 														: __("Choose", "post-grid")
 												}
@@ -1341,7 +1063,7 @@ function Html(props) {
 									activeTab="options"
 									orientation="horizontal"
 									activeClass="active-tab"
-									onSelect={(tabName) => { }}
+									onSelect={(tabName) => {}}
 									tabs={[
 										{
 											name: "options",
@@ -1433,7 +1155,7 @@ function Html(props) {
 									activeTab="options"
 									orientation="horizontal"
 									activeClass="active-tab"
-									onSelect={(tabName) => { }}
+									onSelect={(tabName) => {}}
 									tabs={[
 										{
 											name: "options",
