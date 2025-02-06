@@ -41218,16 +41218,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/help.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/page.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/copy.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/add-card.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/menu.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/calendar.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/star-empty.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/star-filled.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/page.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
 /* harmony import */ var _dropdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../dropdown */ "./src/components/dropdown/index.js");
 /* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
@@ -41710,10 +41705,6 @@ function Html(props) {
     setitemQueryArgs(updatedItems);
   };
   var itemSources = {
-    manual: {
-      label: "Manual",
-      value: "manual"
-    },
     posts: {
       label: "Posts",
       value: "posts",
@@ -41832,234 +41823,7 @@ function Html(props) {
       setitemQueryArgs(itemQueryArgsX);
     },
     values: ""
-  })), globalOptions?.itemSource == "manual" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600",
-    title: "Click to paste",
-    onClick: async () => {
-      try {
-        // Read text from clipboard
-        const clipboardText = await navigator.clipboard.readText();
-
-        // Parse the JSON string back to an object
-        const pastedItems = JSON.parse(clipboardText);
-
-        // Here you need to handle the pasted items
-        // For example, if you have a state setter:
-        setitems(pastedItems);
-        addNotifications({
-          title: "Items Pasted",
-          content: "You just pasted items, Now go to edit.",
-          type: "success"
-        });
-      } catch (error) {}
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
-    fill: "#fff",
-    size: "20"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600",
-    title: "Click to copy",
-    onClick: () => {
-      try {
-        const itemsString = JSON.stringify(items, null, 2);
-        navigator.clipboard.writeText(itemsString).then(() => {
-          addNotifications({
-            title: "Items Copied",
-            content: "You just copied items, Now go to edit.",
-            type: "success"
-          });
-        }).catch(err => {});
-      } catch (error) {}
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
-    fill: "#fff",
-    size: "20"
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600",
-    onClick: ev => {
-      var itemsX = [...items];
-      itemsX.push({
-        isActive: false,
-        person: {
-          name: "",
-          avatar: {
-            id: "",
-            srcUrl: ""
-          },
-          jobTitle: "",
-          comapny: {
-            name: "",
-            website: "",
-            logoUrl: ""
-          }
-        },
-        rating: 5,
-        date: "11/01/2025",
-        videoUrl: {
-          type: "",
-          link: ""
-        },
-        title: "What is Lorem Ipsum?",
-        content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        tags: []
-      });
-      setitems(itemsX);
-      addNotifications({
-        title: "Item Added",
-        content: "You just added an item, Now go to edit.",
-        type: "success"
-      });
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
-    fill: "#fff",
-    size: "20"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: " tracking-wide "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "py-2 px-4 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600",
-    onClick: ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      if (isProFeature) {
-        addNotifications({
-          title: "Opps its pro!",
-          content: "This feature only avilable in premium version",
-          type: "error"
-        });
-        return;
-      }
-      setAIWriter(!AIWriter);
-    }
-  }, "AI"), AIWriter && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Popover, {
-    position: "bottom right"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-[800px] p-3 relative"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0",
-    onClick: ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      setAIWriter(!AIWriter);
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-    fill: "#fff",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"]
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_openai_prompts__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    value: "",
-    formattedPrompt: formattedPrompt,
-    promptsAgs: {
-      action: "write",
-      aiModel: "gpt-4-turbo",
-      objective: "generateFAQ"
-    },
-    autoUpdate: AIautoUpdate,
-    onResponseLoaded: (value, autoUpdate) => {
-      // if (autoUpdate) {
-      // 	var options = { ...text.options, content: value };
-      // 	setAttributes({ text: { ...text, options: options } });
-      // }
-    },
-    clickHandle: (value, action) => {
-      var valueObj = JSON.parse(value);
-      if (action == "prepend") {
-        var itemsX = [...items];
-        var faqX = [];
-        valueObj.map(item => {
-          var answer = item.answer;
-          var question = item.question;
-          faqX.push({
-            active: 0,
-            hideOnSchema: 0,
-            headerLabelText: question,
-            headerLabelSlug: "",
-            headerLabelToggledText: "",
-            contentText: answer,
-            labelIcon: {
-              options: {
-                library: "fontAwesome",
-                srcType: "class",
-                iconSrc: ""
-              },
-              styles: {}
-            }
-          });
-        });
-        setitems([...faqX, ...itemsX]);
-        addNotifications({
-          title: "Items append",
-          content: "Items append, You can customize now.",
-          type: "success"
-        });
-      }
-      if (action == "append") {
-        var itemsX = [...items];
-        var faqX = [];
-        valueObj.map(item => {
-          var answer = item.answer;
-          var question = item.question;
-          faqX.push({
-            active: 0,
-            hideOnSchema: 0,
-            headerLabelText: question,
-            headerLabelSlug: "",
-            headerLabelToggledText: "",
-            contentText: answer,
-            labelIcon: {
-              options: {
-                library: "fontAwesome",
-                srcType: "class",
-                iconSrc: ""
-              },
-              styles: {}
-            }
-          });
-        });
-        setitems([...itemsX, ...faqX]);
-        addNotifications({
-          title: "Items Append",
-          content: "Items append, You can customize now.",
-          type: "success"
-        });
-      }
-      if (action == "replace") {
-        var itemsX = [...items];
-        var faqX = [];
-        valueObj.map(item => {
-          var answer = item.answer;
-          var question = item.question;
-          faqX.push({
-            active: 0,
-            hideOnSchema: 0,
-            headerLabelText: question,
-            headerLabelSlug: "",
-            headerLabelToggledText: "",
-            contentText: answer,
-            labelIcon: {
-              options: {
-                library: "fontAwesome",
-                srcType: "class",
-                iconSrc: ""
-              },
-              styles: {}
-            }
-          });
-        });
-        setitems(faqX);
-        addNotifications({
-          title: "Items Added",
-          content: "You just added an item, Now go to edit.",
-          type: "success"
-        });
-      }
-
-      //setAttributes({ itemsX: { ...itemsX, items: itemx } });
-    }
-  }))))))), globalOptions?.itemSource == "posts" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, Object.entries(itemQueryArgs)?.map(prams => {
+  })))), globalOptions?.itemSource == "posts" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, Object.entries(itemQueryArgs)?.map(prams => {
     var index = prams[0];
     var item = prams[1];
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -42070,7 +41834,7 @@ function Html(props) {
       onClick: () => handleDelete(item.id)
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
       fill: "#fff",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
       size: "20"
     })), item.id == "postType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center justify-between flex-1"
@@ -42310,468 +42074,7 @@ function Html(props) {
         updatePostQueryArgs(newVal, item.id);
       }
     })));
-  })), globalOptions?.itemSource == "manual" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_sortablejs__WEBPACK_IMPORTED_MODULE_5__.ReactSortable, {
-    list: items,
-    handle: ".handle",
-    setList: itemsSorted => {
-      setTimeout(() => {
-        setitems(itemsSorted);
-      }, 200);
-      addNotifications({
-        title: "Items Sorted",
-        content: "You just sorted items",
-        type: "success"
-      });
-    }
-  }, items?.map((item, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "",
-      key: index
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "bg-slate-300 flex justify-between items-center p-3 py-2 my-2 cursor-pointer hover:bg-slate-400",
-      onClick: ev => {
-        setitemActive(index == itemActive ? 999 : index);
-      }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, item?.title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "handle  cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-      size: "20",
-      fill: "#fff",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"]
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1",
-      onClick: ev => {
-        ev.stopPropagation();
-        var itemsX = [...items];
-        var itemToDup = {
-          ...itemsX[index]
-        };
-        itemsX.splice(index + 1, 0, itemToDup);
-        setitems(itemsX);
-        addNotifications({
-          title: "Item Duplicated",
-          content: "You just duplicate an item",
-          type: "success"
-        });
-      }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-      size: "20",
-      fill: "#fff",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"]
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "cursor-pointer bg-red-700 hover:bg-red-600 hover:text-white px-1 py-1",
-      onClick: ev => {
-        ev.stopPropagation();
-        var itemsX = [...items];
-        itemsX.splice(index, 1);
-        setitems(itemsX);
-        addNotifications({
-          title: "Item Removed",
-          content: "You just removed an item",
-          type: "success"
-        });
-      }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-      size: "20",
-      fill: "#fff",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"]
-    })))), itemActive == index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "py-2 w-full"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "mb-3"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.RichText, {
-      placeholder: "Write Header Text...",
-      className: "bg-slate-100 p-3 ",
-      tagName: "div",
-      value: item?.title,
-      onChange: content => {
-        setitems(prevItems => {
-          // 																			console.log(item?.headerLabelSlug)
-
-          // if(!item?.headerLabelSlugLock){
-
-          // }
-
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            title: content
-          };
-          return updatedItems;
-        });
-      }
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "mb-3"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_wp_editor__WEBPACK_IMPORTED_MODULE_13__["default"], {
-      placeholder: "Write Header Text...",
-      editorId: `content-${index}-${generate3Digit()}`,
-      className: `bg-slate-100 p-3 min-h-24 w-full`,
-      value: unescapeHTML(item?.content),
-      onChange: content => {
-        content = content.replace(/[\r\n]+/g, "");
-        content = escapeHTML(content);
-
-        //var content = JSON.stringify(content);
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            content: content
-          };
-          return updatedItems;
-        });
-      }
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "mb-3 space-y-3"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-full flex justify-between items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "mb-2"
-    }, "Date"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600",
-      title: "Date Picker",
-      onClick: () => {
-        setdatePicker(index);
-      }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
-      fill: "#fff",
-      size: "20"
-    })), datePicker == index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Popover, {
-      position: "bottom right"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "p-2 rounded-md"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.DateTimePicker, {
-      currentDate: item?.date,
-      onChange: newDate => {
-        const timestamp = newDate;
-        const date = timestamp.split("T")[0];
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            date: date
-          };
-          return updatedItems;
-        });
-      },
-      is12Hour: true
-    }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-full flex justify-between items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "mb-2"
-    }, "Rating"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, [1, 2, 3, 4, 5].map(star => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "size-5",
-      key: star,
-      onClick: () => {
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            rating: star
-          };
-          return updatedItems;
-        });
-      }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-      icon: star > item?.rating ? _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"] : _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__["default"],
-      fill: "gold",
-      size: "24"
-    }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-full flex justify-between items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "mb-2"
-    }, "Video Type"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      position: "bottom right",
-      variant: "secondary",
-      buttonTitle: videoType[item?.videoUrl.type] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "woocommerce-products-slider") : videoType[item?.videoUrl.type].label,
-      options: videoType,
-      onChange: newVal => {
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            videoUrl: {
-              ...updatedItems[index].videoUrl,
-              type: newVal.value
-            }
-          };
-          return updatedItems;
-        });
-      },
-      values: ""
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-full flex justify-between items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "mb-2"
-    }, "Video Url"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
-      label: "",
-      value: item?.videoUrl.link,
-      onChange: newVal => {
-        // if (isProFeature) {
-        // 	addNotifications({
-        // 		title: "Opps its pro!",
-        // 		content:
-        // 			"This feature only avilable in premium version",
-        // 		type: "error",
-        // 	});
-        // 	return;
-        // }
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            videoUrl: {
-              ...updatedItems[index].videoUrl,
-              link: newVal
-            }
-          };
-          return updatedItems;
-        });
-      }
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-full flex justify-between items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: ""
-    }, "Person Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
-      label: "",
-      value: item?.person.name,
-      onChange: newVal => {
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            person: {
-              ...updatedItems[index].person,
-              name: newVal
-            }
-          };
-          return updatedItems;
-        });
-      }
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-full flex justify-between items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: ""
-    }, "Job Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
-      label: "",
-      value: item?.person.jobTitle,
-      onChange: newVal => {
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            person: {
-              ...updatedItems[index].person,
-              jobTitle: newVal
-            }
-          };
-          return updatedItems;
-        });
-      }
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex my-5 justify-between items-center "
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-      className: "w-[400px]",
-      htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Avatar", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.MediaUpload, {
-      onSelect: media => {
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            person: {
-              ...updatedItems[index].person,
-              avatar: {
-                id: media.id,
-                srcUrl: media.url
-              }
-            }
-          };
-          return updatedItems;
-        });
-      },
-      onClose: () => {},
-      allowedTypes: ALLOWED_MEDIA_TYPES,
-      value: item?.person.avatar.id,
-      render: ({
-        open
-      }) => {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "flex flex-col items-center gap-2"
-        }, item?.person.avatar.srcUrl && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-          src: item?.person.avatar.srcUrl,
-          alt: "",
-          className: "cursor-pointer rounded-md max-w-[160px] max-h-[160px] object-contain border border-solid border-gray-300 p-1",
-          onClick: () => {
-            open();
-          }
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "flex items-center gap-2"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-          onClick: open,
-          className: "no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white"
-        }, "Open Media Library"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-          onClick: () => {
-            setitems(prevItems => {
-              const updatedItems = [...prevItems];
-              updatedItems[index] = {
-                ...updatedItems[index],
-                person: {
-                  ...updatedItems[index].person,
-                  avatar: {
-                    id: "",
-                    srcUrl: ""
-                  }
-                }
-              };
-              return updatedItems;
-            });
-          },
-          className: "no-underline size-[38px] flex items-center justify-center text-[30px] rounded-sm !border !bg-transparent !border-solid !border-gray-700 hover:!border-red-700 text-gray-700   hover:text-red-700",
-          title: "Clear Logo"
-        }, "\xD7")));
-      }
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-full flex justify-between items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: ""
-    }, "Company Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
-      label: "",
-      value: item?.person.company.name,
-      onChange: newVal => {
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            person: {
-              ...updatedItems[index].person,
-              company: {
-                ...updatedItems[index].person.company,
-                name: newVal
-              }
-            }
-          };
-          return updatedItems;
-        });
-      }
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-full flex justify-between items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: ""
-    }, "Company Website"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
-      label: "",
-      value: item?.person.company.website,
-      onChange: newVal => {
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            person: {
-              ...updatedItems[index].person,
-              company: {
-                ...updatedItems[index].person.company,
-                website: newVal
-              }
-            }
-          };
-          return updatedItems;
-        });
-      }
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex my-5 justify-between items-center "
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-      className: "w-[400px]",
-      htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Company logo", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.MediaUpload, {
-      onSelect: media => {
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            person: {
-              ...updatedItems[index].person,
-              company: {
-                ...updatedItems[index].person.company,
-                logoUrl: {
-                  id: media.id,
-                  srcUrl: media.url
-                }
-              }
-            }
-          };
-          return updatedItems;
-        });
-      },
-      onClose: () => {},
-      allowedTypes: ALLOWED_MEDIA_TYPES,
-      value: item?.person.company.logoUrl.id,
-      render: ({
-        open
-      }) => {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "flex flex-col items-center gap-2"
-        }, item?.person.company.logoUrl.srcUrl && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-          src: item?.person.company.logoUrl.srcUrl,
-          alt: "",
-          className: "cursor-pointer rounded-md max-w-[160px] max-h-[160px] object-contain border border-solid border-gray-300 p-1",
-          onClick: () => {
-            open();
-          }
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "flex items-center gap-2"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-          onClick: open,
-          className: "no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white"
-        }, "Open Media Library"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-          onClick: () => {
-            setitems(prevItems => {
-              const updatedItems = [...prevItems];
-              updatedItems[index] = {
-                ...updatedItems[index],
-                person: {
-                  ...updatedItems[index].person,
-                  company: {
-                    ...updatedItems[index].person.company,
-                    logoUrl: {
-                      id: "",
-                      srcUrl: ""
-                    }
-                  }
-                }
-              };
-              return updatedItems;
-            });
-          },
-          className: "no-underline size-[38px] flex items-center justify-center text-[30px] rounded-sm !border !bg-transparent !border-solid !border-gray-700 hover:!border-red-700 text-gray-700   hover:text-red-700",
-          title: "Clear Logo"
-        }, "\xD7")));
-      }
-    }))))));
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "WCPS Settings",
     initialOpen: false
@@ -42844,7 +42147,7 @@ function Html(props) {
       }
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
     size: 14,
     fill: "#fff"
   }), "Paste"), editLayouts && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Popover, {
@@ -42867,12 +42170,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -42916,12 +42219,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -42965,12 +42268,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -43014,12 +42317,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -43083,12 +42386,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -43132,12 +42435,12 @@ function Html(props) {
     tabs: [{
       name: "options",
       title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
       className: "tab-settings"
     }, {
       name: "styles",
       title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -59348,12 +58651,12 @@ class APIPromise extends Promise {
 }
 class APIClient {
     constructor({ baseURL, maxRetries = 2, timeout = 600000, // 10 minutes
-    httpAgent, fetch: overridenFetch, }) {
+    httpAgent, fetch: overriddenFetch, }) {
         this.baseURL = baseURL;
         this.maxRetries = validatePositiveInteger('maxRetries', maxRetries);
         this.timeout = validatePositiveInteger('timeout', timeout);
         this.httpAgent = httpAgent;
-        this.fetch = overridenFetch ?? _shims_index_mjs__WEBPACK_IMPORTED_MODULE_0__.fetch;
+        this.fetch = overriddenFetch ?? _shims_index_mjs__WEBPACK_IMPORTED_MODULE_0__.fetch;
     }
     authHeaders(opts) {
         return {};
@@ -59427,6 +58730,7 @@ class APIClient {
         return null;
     }
     buildRequest(options, { retryCount = 0 } = {}) {
+        options = { ...options };
         const { method, path, query, headers: headers = {} } = options;
         const body = ArrayBuffer.isView(options.body) || (options.__binaryRequest && typeof options.body === 'string') ?
             options.body
@@ -59437,9 +58741,9 @@ class APIClient {
         const url = this.buildURL(path, query);
         if ('timeout' in options)
             validatePositiveInteger('timeout', options.timeout);
-        const timeout = options.timeout ?? this.timeout;
+        options.timeout = options.timeout ?? this.timeout;
         const httpAgent = options.httpAgent ?? this.httpAgent ?? (0,_shims_index_mjs__WEBPACK_IMPORTED_MODULE_0__.getDefaultAgent)(url);
-        const minAgentTimeout = timeout + 1000;
+        const minAgentTimeout = options.timeout + 1000;
         if (typeof httpAgent?.options?.timeout === 'number' &&
             minAgentTimeout > (httpAgent.options.timeout ?? 0)) {
             // Allow any given request to bump our agent active socket timeout.
@@ -59463,7 +58767,7 @@ class APIClient {
             // not compatible with standard web types
             signal: options.signal ?? null,
         };
-        return { req, url, timeout };
+        return { req, url, timeout: options.timeout };
     }
     buildHeaders({ options, headers, contentLength, retryCount, }) {
         const reqHeaders = {};
@@ -59477,12 +58781,17 @@ class APIClient {
         if ((0,_uploads_mjs__WEBPACK_IMPORTED_MODULE_1__.isMultipartBody)(options.body) && _shims_index_mjs__WEBPACK_IMPORTED_MODULE_0__.kind !== 'node') {
             delete reqHeaders['content-type'];
         }
-        // Don't set the retry count header if it was already set or removed through default headers or by the
-        // caller. We check `defaultHeaders` and `headers`, which can contain nulls, instead of `reqHeaders` to
-        // account for the removal case.
+        // Don't set theses headers if they were already set or removed through default headers or by the caller.
+        // We check `defaultHeaders` and `headers`, which can contain nulls, instead of `reqHeaders` to account
+        // for the removal case.
         if (getHeader(defaultHeaders, 'x-stainless-retry-count') === undefined &&
             getHeader(headers, 'x-stainless-retry-count') === undefined) {
             reqHeaders['x-stainless-retry-count'] = String(retryCount);
+        }
+        if (getHeader(defaultHeaders, 'x-stainless-timeout') === undefined &&
+            getHeader(headers, 'x-stainless-timeout') === undefined &&
+            options.timeout) {
+            reqHeaders['x-stainless-timeout'] = String(options.timeout);
         }
         this.validateHeaders(reqHeaders, headers);
         return reqHeaders;
@@ -59590,15 +58899,20 @@ class APIClient {
         if (signal)
             signal.addEventListener('abort', () => controller.abort());
         const timeout = setTimeout(() => controller.abort(), ms);
-        return (this.getRequestClient()
-            // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
-            .fetch.call(undefined, url, { signal: controller.signal, ...options })
-            .finally(() => {
+        const fetchOptions = {
+            signal: controller.signal,
+            ...options,
+        };
+        if (fetchOptions.method) {
+            // Custom methods like 'patch' need to be uppercased
+            // See https://github.com/nodejs/undici/issues/2294
+            fetchOptions.method = fetchOptions.method.toUpperCase();
+        }
+        return (
+        // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
+        this.fetch.call(undefined, url, fetchOptions).finally(() => {
             clearTimeout(timeout);
         }));
-    }
-    getRequestClient() {
-        return { fetch: this.fetch };
     }
     shouldRetry(response) {
         // Note this is not a standard header.
@@ -59768,6 +59082,7 @@ const requestOptionsKeys = {
     httpAgent: true,
     signal: true,
     idempotencyKey: true,
+    __metadata: true,
     __binaryRequest: true,
     __binaryResponse: true,
     __streamClass: true,
@@ -59915,8 +59230,8 @@ const safeJSON = (text) => {
         return undefined;
     }
 };
-// https://stackoverflow.com/a/19709846
-const startsWithSchemeRegexp = new RegExp('^(?:[a-z]+:)?//', 'i');
+// https://url.spec.whatwg.org/#url-scheme-string
+const startsWithSchemeRegexp = /^[a-z][a-z0-9+.-]*:/i;
 const isAbsoluteURL = (url) => {
     return startsWithSchemeRegexp.test(url);
 };
@@ -60035,9 +59350,36 @@ function applyHeadersMut(targetHeaders, newHeaders) {
         }
     }
 }
+const SENSITIVE_HEADERS = new Set(['authorization', 'api-key']);
 function debug(action, ...args) {
     if (typeof process !== 'undefined' && process?.env?.['DEBUG'] === 'true') {
-        console.log(`OpenAI:DEBUG:${action}`, ...args);
+        const modifiedArgs = args.map((arg) => {
+            if (!arg) {
+                return arg;
+            }
+            // Check for sensitive headers in request body 'headers' object
+            if (arg['headers']) {
+                // clone so we don't mutate
+                const modifiedArg = { ...arg, headers: { ...arg['headers'] } };
+                for (const header in arg['headers']) {
+                    if (SENSITIVE_HEADERS.has(header.toLowerCase())) {
+                        modifiedArg['headers'][header] = 'REDACTED';
+                    }
+                }
+                return modifiedArg;
+            }
+            let modifiedArg = null;
+            // Check for sensitive headers in headers object
+            for (const header in arg) {
+                if (SENSITIVE_HEADERS.has(header.toLowerCase())) {
+                    // avoid making a copy until we need to
+                    modifiedArg ?? (modifiedArg = { ...arg });
+                    modifiedArg[header] = 'REDACTED';
+                }
+            }
+            return modifiedArg ?? arg;
+        });
+        console.log(`OpenAI:DEBUG:${action}`, ...modifiedArgs);
     }
 }
 /**
@@ -60152,8 +59494,8 @@ class APIError extends OpenAIError {
         this.status = status;
         this.headers = headers;
         this.request_id = headers?.['x-request-id'];
+        this.error = error;
         const data = error;
-        this.error = data;
         this.code = data?.['code'];
         this.param = data?.['param'];
         this.type = data?.['type'];
@@ -60177,7 +59519,7 @@ class APIError extends OpenAIError {
         return '(no status code or body)';
     }
     static generate(status, errorResponse, message, headers) {
-        if (!status) {
+        if (!status || !headers) {
             return new APIConnectionError({ message, cause: (0,_core_mjs__WEBPACK_IMPORTED_MODULE_0__.castToError)(errorResponse) });
         }
         const error = errorResponse?.['error'];
@@ -60211,13 +59553,11 @@ class APIError extends OpenAIError {
 class APIUserAbortError extends APIError {
     constructor({ message } = {}) {
         super(undefined, undefined, message || 'Request was aborted.', undefined);
-        this.status = undefined;
     }
 }
 class APIConnectionError extends APIError {
     constructor({ message, cause }) {
         super(undefined, undefined, message || 'Connection error.', undefined);
-        this.status = undefined;
         // in some environments the 'cause' property is already declared
         // @ts-ignore
         if (cause)
@@ -60230,46 +59570,18 @@ class APIConnectionTimeoutError extends APIConnectionError {
     }
 }
 class BadRequestError extends APIError {
-    constructor() {
-        super(...arguments);
-        this.status = 400;
-    }
 }
 class AuthenticationError extends APIError {
-    constructor() {
-        super(...arguments);
-        this.status = 401;
-    }
 }
 class PermissionDeniedError extends APIError {
-    constructor() {
-        super(...arguments);
-        this.status = 403;
-    }
 }
 class NotFoundError extends APIError {
-    constructor() {
-        super(...arguments);
-        this.status = 404;
-    }
 }
 class ConflictError extends APIError {
-    constructor() {
-        super(...arguments);
-        this.status = 409;
-    }
 }
 class UnprocessableEntityError extends APIError {
-    constructor() {
-        super(...arguments);
-        this.status = 422;
-    }
 }
 class RateLimitError extends APIError {
-    constructor() {
-        super(...arguments);
-        this.status = 429;
-    }
 }
 class InternalServerError extends APIError {
 }
@@ -60518,19 +59830,19 @@ class AzureOpenAI extends OpenAI {
         this.apiVersion = '';
         this._azureADTokenProvider = azureADTokenProvider;
         this.apiVersion = apiVersion;
-        this._deployment = deployment;
+        this.deploymentName = deployment;
     }
-    buildRequest(options) {
+    buildRequest(options, props = {}) {
         if (_deployments_endpoints.has(options.path) && options.method === 'post' && options.body !== undefined) {
             if (!_core_mjs__WEBPACK_IMPORTED_MODULE_0__.isObj(options.body)) {
                 throw new Error('Expected request body to be an object');
             }
-            const model = this._deployment || options.body['model'];
+            const model = this.deploymentName || options.body['model'] || options.__metadata?.['model'];
             if (model !== undefined && !this.baseURL.includes('/deployments')) {
                 options.path = `/deployments/${model}${options.path}`;
             }
         }
-        return super.buildRequest(options);
+        return super.buildRequest(options, props);
     }
     async _getAzureADToken() {
         if (typeof this._azureADTokenProvider === 'function') {
@@ -61239,6 +60551,55 @@ function maybe_map(val, fn) {
     return fn(val);
 }
 //# sourceMappingURL=utils.mjs.map
+
+/***/ }),
+
+/***/ "./node_modules/openai/internal/stream-utils.mjs":
+/*!*******************************************************!*\
+  !*** ./node_modules/openai/internal/stream-utils.mjs ***!
+  \*******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ReadableStreamToAsyncIterable: () => (/* binding */ ReadableStreamToAsyncIterable)
+/* harmony export */ });
+/**
+ * Most browsers don't yet have async iterable support for ReadableStream,
+ * and Node has a very different way of reading bytes from its "ReadableStream".
+ *
+ * This polyfill was pulled from https://github.com/MattiasBuelens/web-streams-polyfill/pull/122#issuecomment-1627354490
+ */
+function ReadableStreamToAsyncIterable(stream) {
+    if (stream[Symbol.asyncIterator])
+        return stream;
+    const reader = stream.getReader();
+    return {
+        async next() {
+            try {
+                const result = await reader.read();
+                if (result?.done)
+                    reader.releaseLock(); // release lock when stream becomes closed
+                return result;
+            }
+            catch (e) {
+                reader.releaseLock(); // release lock when stream becomes errored
+                throw e;
+            }
+        },
+        async return() {
+            const cancelPromise = reader.cancel();
+            reader.releaseLock();
+            await cancelPromise;
+            return { done: true, value: undefined };
+        },
+        [Symbol.asyncIterator]() {
+            return this;
+        },
+    };
+}
+//# sourceMappingURL=stream-utils.mjs.map
 
 /***/ }),
 
@@ -63429,7 +62790,12 @@ class Speech extends _resource_mjs__WEBPACK_IMPORTED_MODULE_0__.APIResource {
      * Generates audio from the input text.
      */
     create(body, options) {
-        return this._client.post('/audio/speech', { body, ...options, __binaryResponse: true });
+        return this._client.post('/audio/speech', {
+            body,
+            ...options,
+            headers: { Accept: 'application/octet-stream', ...options?.headers },
+            __binaryResponse: true,
+        });
     }
 }
 //# sourceMappingURL=speech.mjs.map
@@ -63454,7 +62820,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Transcriptions extends _resource_mjs__WEBPACK_IMPORTED_MODULE_0__.APIResource {
     create(body, options) {
-        return this._client.post('/audio/transcriptions', _core_mjs__WEBPACK_IMPORTED_MODULE_1__.multipartFormRequestOptions({ body, ...options }));
+        return this._client.post('/audio/transcriptions', _core_mjs__WEBPACK_IMPORTED_MODULE_1__.multipartFormRequestOptions({ body, ...options, __metadata: { model: body.model } }));
     }
 }
 //# sourceMappingURL=transcriptions.mjs.map
@@ -63479,7 +62845,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Translations extends _resource_mjs__WEBPACK_IMPORTED_MODULE_0__.APIResource {
     create(body, options) {
-        return this._client.post('/audio/translations', _core_mjs__WEBPACK_IMPORTED_MODULE_1__.multipartFormRequestOptions({ body, ...options }));
+        return this._client.post('/audio/translations', _core_mjs__WEBPACK_IMPORTED_MODULE_1__.multipartFormRequestOptions({ body, ...options, __metadata: { model: body.model } }));
     }
 }
 //# sourceMappingURL=translations.mjs.map
@@ -63628,11 +62994,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Beta: () => (/* binding */ Beta)
 /* harmony export */ });
 /* harmony import */ var _resource_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../resource.mjs */ "./node_modules/openai/resource.mjs");
-/* harmony import */ var _assistants_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./assistants.mjs */ "./node_modules/openai/resources/beta/assistants.mjs");
-/* harmony import */ var _chat_chat_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chat/chat.mjs */ "./node_modules/openai/resources/beta/chat/chat.mjs");
-/* harmony import */ var _threads_threads_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./threads/threads.mjs */ "./node_modules/openai/resources/beta/threads/threads.mjs");
-/* harmony import */ var _vector_stores_vector_stores_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vector-stores/vector-stores.mjs */ "./node_modules/openai/resources/beta/vector-stores/vector-stores.mjs");
+/* harmony import */ var _assistants_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./assistants.mjs */ "./node_modules/openai/resources/beta/assistants.mjs");
+/* harmony import */ var _chat_chat_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chat/chat.mjs */ "./node_modules/openai/resources/beta/chat/chat.mjs");
+/* harmony import */ var _realtime_realtime_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./realtime/realtime.mjs */ "./node_modules/openai/resources/beta/realtime/realtime.mjs");
+/* harmony import */ var _threads_threads_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./threads/threads.mjs */ "./node_modules/openai/resources/beta/threads/threads.mjs");
+/* harmony import */ var _vector_stores_vector_stores_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vector-stores/vector-stores.mjs */ "./node_modules/openai/resources/beta/vector-stores/vector-stores.mjs");
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+
 
 
 
@@ -63645,17 +63014,19 @@ __webpack_require__.r(__webpack_exports__);
 class Beta extends _resource_mjs__WEBPACK_IMPORTED_MODULE_0__.APIResource {
     constructor() {
         super(...arguments);
-        this.vectorStores = new _vector_stores_vector_stores_mjs__WEBPACK_IMPORTED_MODULE_1__.VectorStores(this._client);
-        this.chat = new _chat_chat_mjs__WEBPACK_IMPORTED_MODULE_2__.Chat(this._client);
-        this.assistants = new _assistants_mjs__WEBPACK_IMPORTED_MODULE_3__.Assistants(this._client);
-        this.threads = new _threads_threads_mjs__WEBPACK_IMPORTED_MODULE_4__.Threads(this._client);
+        this.realtime = new _realtime_realtime_mjs__WEBPACK_IMPORTED_MODULE_1__.Realtime(this._client);
+        this.vectorStores = new _vector_stores_vector_stores_mjs__WEBPACK_IMPORTED_MODULE_2__.VectorStores(this._client);
+        this.chat = new _chat_chat_mjs__WEBPACK_IMPORTED_MODULE_3__.Chat(this._client);
+        this.assistants = new _assistants_mjs__WEBPACK_IMPORTED_MODULE_4__.Assistants(this._client);
+        this.threads = new _threads_threads_mjs__WEBPACK_IMPORTED_MODULE_5__.Threads(this._client);
     }
 }
-Beta.VectorStores = _vector_stores_vector_stores_mjs__WEBPACK_IMPORTED_MODULE_1__.VectorStores;
-Beta.VectorStoresPage = _vector_stores_vector_stores_mjs__WEBPACK_IMPORTED_MODULE_1__.VectorStoresPage;
-Beta.Assistants = _assistants_mjs__WEBPACK_IMPORTED_MODULE_3__.Assistants;
-Beta.AssistantsPage = _assistants_mjs__WEBPACK_IMPORTED_MODULE_3__.AssistantsPage;
-Beta.Threads = _threads_threads_mjs__WEBPACK_IMPORTED_MODULE_4__.Threads;
+Beta.Realtime = _realtime_realtime_mjs__WEBPACK_IMPORTED_MODULE_1__.Realtime;
+Beta.VectorStores = _vector_stores_vector_stores_mjs__WEBPACK_IMPORTED_MODULE_2__.VectorStores;
+Beta.VectorStoresPage = _vector_stores_vector_stores_mjs__WEBPACK_IMPORTED_MODULE_2__.VectorStoresPage;
+Beta.Assistants = _assistants_mjs__WEBPACK_IMPORTED_MODULE_4__.Assistants;
+Beta.AssistantsPage = _assistants_mjs__WEBPACK_IMPORTED_MODULE_4__.AssistantsPage;
+Beta.Threads = _threads_threads_mjs__WEBPACK_IMPORTED_MODULE_5__.Threads;
 //# sourceMappingURL=beta.mjs.map
 
 /***/ }),
@@ -63754,6 +63125,70 @@ class Completions extends _resource_mjs__WEBPACK_IMPORTED_MODULE_4__.APIResource
     }
 }
 //# sourceMappingURL=completions.mjs.map
+
+/***/ }),
+
+/***/ "./node_modules/openai/resources/beta/realtime/realtime.mjs":
+/*!******************************************************************!*\
+  !*** ./node_modules/openai/resources/beta/realtime/realtime.mjs ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Realtime: () => (/* binding */ Realtime)
+/* harmony export */ });
+/* harmony import */ var _resource_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../resource.mjs */ "./node_modules/openai/resource.mjs");
+/* harmony import */ var _sessions_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sessions.mjs */ "./node_modules/openai/resources/beta/realtime/sessions.mjs");
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+
+
+class Realtime extends _resource_mjs__WEBPACK_IMPORTED_MODULE_0__.APIResource {
+    constructor() {
+        super(...arguments);
+        this.sessions = new _sessions_mjs__WEBPACK_IMPORTED_MODULE_1__.Sessions(this._client);
+    }
+}
+Realtime.Sessions = _sessions_mjs__WEBPACK_IMPORTED_MODULE_1__.Sessions;
+//# sourceMappingURL=realtime.mjs.map
+
+/***/ }),
+
+/***/ "./node_modules/openai/resources/beta/realtime/sessions.mjs":
+/*!******************************************************************!*\
+  !*** ./node_modules/openai/resources/beta/realtime/sessions.mjs ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Sessions: () => (/* binding */ Sessions)
+/* harmony export */ });
+/* harmony import */ var _resource_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../resource.mjs */ "./node_modules/openai/resource.mjs");
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+class Sessions extends _resource_mjs__WEBPACK_IMPORTED_MODULE_0__.APIResource {
+    /**
+     * Create an ephemeral API token for use in client-side applications with the
+     * Realtime API. Can be configured with the same session parameters as the
+     * `session.update` client event.
+     *
+     * It responds with a session object, plus a `client_secret` key which contains a
+     * usable ephemeral API token that can be used to authenticate browser clients for
+     * the Realtime API.
+     */
+    create(body, options) {
+        return this._client.post('/realtime/sessions', {
+            body,
+            ...options,
+            headers: { 'OpenAI-Beta': 'assistants=v2', ...options?.headers },
+        });
+    }
+}
+//# sourceMappingURL=sessions.mjs.map
 
 /***/ }),
 
@@ -64703,7 +64138,11 @@ class Files extends _resource_mjs__WEBPACK_IMPORTED_MODULE_0__.APIResource {
      * Returns the contents of the specified file.
      */
     content(fileId, options) {
-        return this._client.get(`/files/${fileId}/content`, { ...options, __binaryResponse: true });
+        return this._client.get(`/files/${fileId}/content`, {
+            ...options,
+            headers: { Accept: 'application/binary', ...options?.headers },
+            __binaryResponse: true,
+        });
     }
     /**
      * Returns the contents of the specified file.
@@ -64711,10 +64150,7 @@ class Files extends _resource_mjs__WEBPACK_IMPORTED_MODULE_0__.APIResource {
      * @deprecated The `.content()` method should be used instead
      */
     retrieveContent(fileId, options) {
-        return this._client.get(`/files/${fileId}/content`, {
-            ...options,
-            headers: { Accept: 'application/json', ...options?.headers },
-        });
+        return this._client.get(`/files/${fileId}/content`, options);
     }
     /**
      * Waits for the given file to be processed, default timeout is 30 mins.
@@ -65131,12 +64567,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Stream: () => (/* binding */ Stream),
 /* harmony export */   _decodeChunks: () => (/* binding */ _decodeChunks),
-/* harmony export */   _iterSSEMessages: () => (/* binding */ _iterSSEMessages),
-/* harmony export */   readableStreamAsyncIterable: () => (/* binding */ readableStreamAsyncIterable)
+/* harmony export */   _iterSSEMessages: () => (/* binding */ _iterSSEMessages)
 /* harmony export */ });
 /* harmony import */ var _shims_index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_shims/index.mjs */ "./node_modules/openai/_shims/index.mjs");
 /* harmony import */ var _error_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error.mjs */ "./node_modules/openai/error.mjs");
 /* harmony import */ var _internal_decoders_line_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./internal/decoders/line.mjs */ "./node_modules/openai/internal/decoders/line.mjs");
+/* harmony import */ var _internal_stream_utils_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./internal/stream-utils.mjs */ "./node_modules/openai/internal/stream-utils.mjs");
+
 
 
 
@@ -65218,7 +64655,7 @@ class Stream {
         let consumed = false;
         async function* iterLines() {
             const lineDecoder = new _internal_decoders_line_mjs__WEBPACK_IMPORTED_MODULE_2__.LineDecoder();
-            const iter = readableStreamAsyncIterable(readableStream);
+            const iter = (0,_internal_stream_utils_mjs__WEBPACK_IMPORTED_MODULE_3__.ReadableStreamToAsyncIterable)(readableStream);
             for await (const chunk of iter) {
                 for (const line of lineDecoder.decode(chunk)) {
                     yield line;
@@ -65323,7 +64760,7 @@ async function* _iterSSEMessages(response, controller) {
     }
     const sseDecoder = new SSEDecoder();
     const lineDecoder = new _internal_decoders_line_mjs__WEBPACK_IMPORTED_MODULE_2__.LineDecoder();
-    const iter = readableStreamAsyncIterable(response.body);
+    const iter = (0,_internal_stream_utils_mjs__WEBPACK_IMPORTED_MODULE_3__.ReadableStreamToAsyncIterable)(response.body);
     for await (const sseChunk of iterSSEChunks(iter)) {
         for (const line of lineDecoder.decode(sseChunk)) {
             const sse = sseDecoder.decode(line);
@@ -65446,40 +64883,6 @@ function partition(str, delimiter) {
         return [str.substring(0, index), delimiter, str.substring(index + delimiter.length)];
     }
     return [str, '', ''];
-}
-/**
- * Most browsers don't yet have async iterable support for ReadableStream,
- * and Node has a very different way of reading bytes from its "ReadableStream".
- *
- * This polyfill was pulled from https://github.com/MattiasBuelens/web-streams-polyfill/pull/122#issuecomment-1627354490
- */
-function readableStreamAsyncIterable(stream) {
-    if (stream[Symbol.asyncIterator])
-        return stream;
-    const reader = stream.getReader();
-    return {
-        async next() {
-            try {
-                const result = await reader.read();
-                if (result?.done)
-                    reader.releaseLock(); // release lock when stream becomes closed
-                return result;
-            }
-            catch (e) {
-                reader.releaseLock(); // release lock when stream becomes errored
-                throw e;
-            }
-        },
-        async return() {
-            const cancelPromise = reader.cancel();
-            reader.releaseLock();
-            await cancelPromise;
-            return { done: true, value: undefined };
-        },
-        [Symbol.asyncIterator]() {
-            return this;
-        },
-    };
 }
 //# sourceMappingURL=streaming.mjs.map
 
@@ -65678,7 +65081,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = '4.76.0'; // x-release-please-version
+const VERSION = '4.83.0'; // x-release-please-version
 //# sourceMappingURL=version.mjs.map
 
 /***/ })
